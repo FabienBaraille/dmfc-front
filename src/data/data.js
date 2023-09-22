@@ -84,7 +84,7 @@ export default {
     "League name": "La ligue des gentlemen extraordinaires",
     "League description": "Le titre n'est pas assez explicite ?"
   },
-  "Match": [
+  "Game": [
     {
       "Date and time of Match": "25/10/2023 - 20:00",
       "Visitor score": null,

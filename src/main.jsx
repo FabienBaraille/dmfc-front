@@ -1,10 +1,13 @@
-import React from 'react'
+// import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import Connexion from './components/Connexion/Connexion.jsx'
+import Creation from './components/Creation/Creation.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <>
+    <Connexion />
+    <Creation />
+  </>
+  // </React.StrictMode>,
 )

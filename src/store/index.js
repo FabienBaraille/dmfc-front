@@ -10,10 +10,8 @@ const enhancer = composeWithDevTools(
 );
 
 const store = createStore(
-  // reducer
   reducer,
-  // enhancer
-  enhancer
+  enhancer,
 );
 
 export default store;

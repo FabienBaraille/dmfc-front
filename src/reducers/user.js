@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action = {}) => {
-  switch (action) {
+  switch (action.type) {
     case SET_INPUT_VALUE:
       return {
         ...state,

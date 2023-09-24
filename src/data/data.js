@@ -45,7 +45,7 @@ export default {
       "Trigram": "PHX",
       "Name": "Phoenix Suns",
       "Conference": "East",
-      "Logo": "./logo.jpg",
+      "Logo": "./PHX_1968.png",
       "Nb selected home": 2,
       "Nb selected away": 0,
       "Ranking" : 2
@@ -54,7 +54,7 @@ export default {
       "Trigram": "NOP",
       "Name": "New Orleans Pelicans",
       "Conference": "West",
-      "Logo": "./logo.jpg",
+      "Logo": "./NOP_2013.png",
       "Nb selected home": 1,
       "Nb selected away": 1,
       "Ranking" : 3
@@ -63,7 +63,7 @@ export default {
       "Trigram": "LAL",
       "Name": "Los Angeles Lakers",
       "Conference": "East",
-      "Logo": "./logo.jpg",
+      "Logo": "./LAL_1960.png",
       "Nb selected home": 0,
       "Nb selected away": 2,
       "Ranking" : 1

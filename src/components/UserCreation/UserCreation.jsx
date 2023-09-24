@@ -1,6 +1,7 @@
-import data from "../../data/data"
+/* eslint-disable react/no-unescaped-entities */
+import data from "../../data/data";
 
-const Creation = () => {
+const UserCreation = () => {
   const leagueOptions = data.League.map(league => {
     return(
       <option key={league["League name"]} value={league["League name"]}>{league["League name"]}</option>
@@ -33,4 +34,4 @@ const Creation = () => {
   )
 }
 
-export default Creation
+export default UserCreation;

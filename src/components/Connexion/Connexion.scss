@@ -1,0 +1,37 @@
+@use '/src/styles/variables' as v;
+
+#connexion {
+  display: flex;
+  flex-direction: column;
+  div {
+    margin: 0.7rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  label, button {
+    font-family: 'Bangers';
+    margin-right: 0.7rem;
+    font-size: 1.1rem;
+  }
+  button, input {
+    border: unset;
+    padding: 0.3rem;
+  }
+  input, select {
+    background: v.$cell-back;
+    box-shadow: 0 0 2px 2px v.$shadow;
+  }
+  .form-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button {
+      width: 70%;
+      margin: 0.3rem 0;
+      background: v.$nav-back;
+      color: v.$orange;
+      border: unset;
+    }
+  }
+}

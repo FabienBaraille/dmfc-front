@@ -1,9 +1,11 @@
 import Wrapper from "../Wrapper/Wrapper";
 
+import './Rules.scss';
+
 /* eslint-disable react/no-unescaped-entities */
 const SimpleRules = () => {
   return (
-    <Wrapper name="simple_rules" >
+    <Wrapper name="rules" >
       <h2>Bienvenue dans le DMFC Game</h2>
       <p>Ici on pronostique sur les saisons de NBA en groupe d'amis (ou ennemis) sans enjeux autre que la bonne humeur, la convivialité et une pointe de moquerie...</p>
       <p>Le jeu s'organise en ligues (groupe d'amis) constituées d'un DMFC (maître du jeu) et de joueurs, choisissez qui dirigera votre ligue et rejoignez vous !</p>

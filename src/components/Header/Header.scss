@@ -1,0 +1,27 @@
+@use '../../styles/variables' as v;
+
+
+.header {
+  background: v.$back;
+  text-align: center;
+  color: v.$titles;
+  display: flex;
+  align-items: center;
+  height: 2em;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-family: v.$main-font;
+  font-size: 4em;
+}
+.logo-one img {
+  max-width: 15%; 
+  height: auto; 
+  margin-top: 0.2em;
+
+}
+.logo-two img {
+  max-width: 25%; 
+  height: auto; 
+  margin-top: 0.2em;
+}
+

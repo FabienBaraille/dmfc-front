@@ -1,0 +1,17 @@
+@use '../../styles/variables' as v;
+
+
+.footer{
+  background: v.$back;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: v.$titles;
+  padding: 0.5em;
+  text-align: center;
+  font-family: v.$main-font;
+}
+.footer a {
+  display: inline-block; /* Display links as blocks to create space between them */
+  margin: 0 10px; /* Add margin to create space between links */
+}

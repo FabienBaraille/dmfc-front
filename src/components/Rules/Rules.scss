@@ -1,0 +1,44 @@
+@use '/src/styles/variables' as v;
+
+#rules {
+  h2, h3, h4 {
+    text-align: center;
+    font-family: 'Bangers';
+    text-shadow: 0 0 2px v.$orange;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    padding: 1rem 0 0 1rem;
+    text-align: unset;
+    font-size: 1.2rem;
+  }
+  p {
+    font-family: 'Roboto';
+    margin: 0.7rem 0;
+    font-size: 0.9rem;
+    text-align: justify;
+  }
+  ul {
+    li {
+      margin: 0 1.2rem 0.5rem;
+      text-align: justify;
+      &::before {
+        content: "• ";
+        font-size: 1.5rem;
+        color: v.$orange;
+        text-shadow: 0 0 3px v.$shadow;
+      }
+    }
+  }
+}
+
+@media screen and (min-width : 600px) {
+  #rules {
+    max-width: 40%;
+  }
+}

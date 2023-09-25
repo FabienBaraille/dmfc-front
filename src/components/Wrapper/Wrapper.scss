@@ -1,0 +1,8 @@
+@use '/src/styles/variables' as v;
+
+.wrapper {
+  background: v.$cell-back;
+  margin: 2rem;
+  padding: 1rem;
+  box-shadow: 0 0 5px 5px v.$shadow;
+}

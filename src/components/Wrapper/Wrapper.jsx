@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './Wrapper.scss';
 
 const Wrapper = ({children, name}) => {
-  console.log(name)
   return (
     <section className="wrapper" id={name}>
       {children}

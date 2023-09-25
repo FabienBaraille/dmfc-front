@@ -48,7 +48,7 @@ const Connexion = () => {
             <>
               <input type="checkbox" id="DMFC" onChange={handleInputCheckbox} value={DMFC}/>
               <label htmlFor="dmfc">DMFC</label>
-              <label htmlFor="league_name">Ligue :</label>
+              <label htmlFor="league">Ligue :</label>
               <select id="league" placeholder="Nom de la ligue" onChange={handleInput} value={league}>
               <option>Choisis ta ligue</option>
               {leagueOptions}

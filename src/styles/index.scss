@@ -1,5 +1,5 @@
 @use 'reset';
-@use 'variables';
+@use 'variables' as v;
 
 /* bangers-regular - latin */
 @font-face {
@@ -29,4 +29,24 @@
 body {
   background-image: url('/src/assets/design/wood-floor2.jpg');
   background-size: cover;
+}
+
+#root {
+  font-family: 'Roboto';
+  h2, h3, h4 {
+    text-align: center;
+    font-family: 'Bangers';
+    text-shadow: 0 0 2px v.$orange;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    padding: 1rem 0 0 1rem;
+    text-align: unset;
+    font-size: 1.2rem;
+  }
 }

@@ -1,15 +1,19 @@
-import ExtendedRules from '../Rules/ExtendedRules.jsx';
+// import ExtendedRules from '../Rules/ExtendedRules.jsx';
 import UpButton from './UpButton/UpButton.jsx';
-import Connexion from '../Connexion/Connexion.jsx';
-// import SimpleRules from '../Rules/SimpleRules.jsx';
+import SimpleRules from '../Rules/ExtendedRules.jsx';
+import Connexion from '../Connexion/Connexion.jsx'
+import { Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
-    <>
-      <Connexion />
-      {/* <Creation /> */}
-      {/* <SimpleRules /> */}
-      {/* <ExtendedRules /> */}
+    <>  
+      <Routes>
+        <Route path='/' element={
+          <>
+            <Connexion />
+            <SimpleRules />
+          </>} />
+      </Routes>
       <UpButton />
     </>
   )

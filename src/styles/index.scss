@@ -1,5 +1,5 @@
 @use 'reset';
-@use 'variables';
+@use 'variables' as v;
 
 /* bangers-regular - latin */
 @font-face {
@@ -7,5 +7,46 @@
   font-family: 'Bangers';
   font-style: normal;
   font-weight: 400;
-  src: url('../assets/fonts/bangers-v24-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/src/assets/fonts/bangers-v24-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/src/assets/fonts/roboto-v30-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* roboto-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/src/assets/fonts/roboto-v30-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+body {
+  background-image: url('/src/assets/design/wood-floor2.jpg');
+  background-size: cover;
+}
+
+#root {
+  font-family: 'Roboto';
+  h2, h3, h4 {
+    text-align: center;
+    font-family: 'Bangers';
+    text-shadow: 0 0 2px v.$orange;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    padding: 1rem 0 0 1rem;
+    text-align: unset;
+    font-size: 1.2rem;
+  }
 }

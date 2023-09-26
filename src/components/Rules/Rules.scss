@@ -1,0 +1,27 @@
+@use '/src/styles/variables' as v;
+
+#rules {
+  p {
+    margin: 0.7rem 0;
+    font-size: 0.9rem;
+    text-align: justify;
+  }
+  ul {
+    li {
+      margin: 0 1.2rem 0.5rem;
+      text-align: justify;
+      &::before {
+        content: "• ";
+        font-size: 1.5rem;
+        color: v.$orange;
+        text-shadow: 0 0 3px v.$shadow;
+      }
+    }
+  }
+}
+
+@media screen and (min-width : 600px) {
+  #rules {
+    max-width: 40%;
+  }
+}

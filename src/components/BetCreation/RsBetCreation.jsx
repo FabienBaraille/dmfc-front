@@ -2,27 +2,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../Wrapper/Wrapper"
 import data from "../../data/data";
-import { addBetToList, betToRemove } from "../../actions/bet";
-import { betTpl } from "./betMatch"
+import { addBetToList } from "../../actions/bet";
+import BetTpl  from "./betMatch"
+import { toggleCreationMode } from "../../actions/bet";
 
 
 const RsBetCreation = () => {
   const dispatch = useDispatch();
 
   const betList = useSelector((state) => state.bet.betList);
-
-  const handleDelete = (event) => {
-    event.preventDefault()
-    const idToRemove = event.currentTarget.id
-    dispatch(betToRemove(idToRemove))
-    console.log(idToRemove);
-  }
-
-  const betListed = betList.map((bet, index) => (
-    <form key={index} id={index} onSubmit={handleDelete}>
-      {betTpl}
-    </form>
-  ));
+  const roundCreationMode = useSelector((state) => state.bet.roundCreationMode)
 
   const roundOptions = data.Round.map(round => {
     return (
@@ -30,32 +19,47 @@ const RsBetCreation = () => {
     )
   });
 
+  const betTpl = BetTpl()
+
   const handleAddBet = () => {
     dispatch(addBetToList(betTpl))
+  }
+
+  const handleRoundCreation = () => {
+    roundCreationMode ? dispatch(toggleCreationMode(false)) : dispatch(toggleCreationMode(true))
   }
 
   return (
     <Wrapper name="rsbetcreation">
       <div>
         <p>Pronostique saison régulire</p>
-        <select>
+        {roundCreationMode ||
+          <select>
           <option>Choisir le Round</option>
           {roundOptions}
-        </select>
+          </select>
+        }
       </div>
+      <form>
+        <button type="button" onClick={handleRoundCreation}>Création d'un nouveau round</button>
+        {roundCreationMode &&
+          <>
+              <input id="round_creation" type="text" placeholder="Nom du round"/>
+            <select>
+              <option>SR</option>
+              <option disabled>PO</option>
+            </select>
+          </>
+        }
+      </form>
+        {betList}
       <div>
-        <label htmlFor="round_creation">Création d'un nouveau round</label>
-        <input id="round_creation" type="text" placeholder="Nom du round"/>
-        <select>
-          <option>SR</option>
-          <option disabled>PO</option>
-        </select>
-      </div>
-        {betListed}
-      <div>
-        <button className="addBet" onClick={handleAddBet}>+</button>
-        <button type="submit">Validez mes choix</button>
-        <button type="button">Annulez</button>
+        <button type="button" className="addBet" onClick={handleAddBet}>+</button>
+        {betList.length !== 0 ?
+          <>
+            <button type="submit">Validez mes choix</button>
+          </>
+        : null}
       </div>
     </Wrapper>
   )

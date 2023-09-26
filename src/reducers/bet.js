@@ -1,23 +1,31 @@
-import { ADD_BET_TO_LIST, BET_TO_REMOVE } from "../actions/bet";
-import { betTpl } from "../components/BetCreation/betMatch";
+import { ADD_BET_TO_LIST, BET_TO_REMOVE, TOGGLE_CREATION_MODE } from "../actions/bet";
 
 const initialState = {
-  'betList': [betTpl],
+  'betList': [],
+  'betNumber': 0,
+  'roundCreationMode': false
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ADD_BET_TO_LIST:
+      console.log(state.betNumber);
       return {
         ...state,
-        'betList': [...state.betList, action.betTpl]
+        'betList': [...state.betList, action.betTpl],
+        'betNumber': state.betNumber + 1
       }
-
-    case BET_TO_REMOVE:
-      console.log(state.betList);
+      
+    case BET_TO_REMOVE: 
       return {
         ...state,
-        'betList': null
+        'betList': [...state.betList.filter(bet => bet.key !== action.idToRemove)]
+      }
+    
+    case TOGGLE_CREATION_MODE:
+      return {
+        ...state,
+        'roundCreationMode': action.roundCreationMode
       }
 
     default:

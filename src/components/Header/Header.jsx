@@ -8,7 +8,7 @@ function Header() {
     <div className="logo-one">
       <img src={dmfcLogo} alt="logo-1" />
     </div>
-      <h1 className='header-title'>DMFC</h1>
+      <h1 className='header-title'>DMFC - Game</h1>
     <div className="logo-two">
       <img src={clipartLogo} alt="logo-2" />
     </div>

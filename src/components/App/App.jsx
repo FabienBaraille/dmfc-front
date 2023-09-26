@@ -22,6 +22,7 @@ const App = () => {
     <>
       <Header />
       {isLogged && <Navbar />}
+      <Navbar />
       <main>
         <Routes>
           <Route path='/' element={

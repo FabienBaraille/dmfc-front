@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setInputValue, toggleCreationMode } from "../../actions/user";
 import Wrapper from "../Wrapper/Wrapper";
+import Input from "../Utils/Input";
 
 import data from "../../data/data";
 
@@ -47,13 +48,7 @@ const Connexion = () => {
           {isCreationMode &&
             <>
               <div className="dmfc-opt">
-                <label htmlFor="dmfc">DMFC</label>
-                <input 
-                  type="checkbox" 
-                  id="DMFC" 
-                  onChange={handleInputCheckbox} 
-                  value={DMFC}
-                />
+                <Input label="DMFC" htmlFor="dmfc" type="checkbox" id="DMFC" onChange={handleInputCheckbox} value={DMFC} />
               </div>
               <div>
                 <label htmlFor="league_name">Ligue :</label>
@@ -68,35 +63,16 @@ const Connexion = () => {
                 </select>
               </div>
               <div>
-                <label htmlFor="mail">Mail :</label>
-                <input 
-                  id="email" 
-                  type="email" 
-                  placeholder="exemple@email.com" 
-                  onChange={handleInput} 
-                  value={email}
-                />
+                <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com"/>
               </div>
             </>
           }
           {/* Fin de création */}
           <div>
-            <label htmlFor="pseudo">Login :</label>
-            <input 
-              id="pseudo" 
-              placeholder="Pseudo" 
-              type="text" 
-              onChange={handleInput} 
-              value={pseudo} />
+            <Input label="Login :" htmlFor="pseudo" id="pseudo" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo"/>
           </div>
           <div>
-            <label htmlFor="password">Mot de Passe :</label>
-            <input 
-              id="password" 
-              placeholder="Mot de passe" 
-              type="password" 
-              onChange={handleInput} 
-              value={password} />
+            <Input label="Mot de Passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe"/>
           </div>
           <div className="form-btn">
             <button type="submit">{isCreationMode ? "Créer" : "Connexion"} </button>

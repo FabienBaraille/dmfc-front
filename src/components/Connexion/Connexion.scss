@@ -11,9 +11,6 @@
   label {
     width: 120px;
   }
-  input {
-    width: 300px
-  }
   label, button {
     font-family: 'Bangers';
     margin-right: 0.7rem;
@@ -54,7 +51,7 @@
   }
 }
 
-@media screen and (min-width : 800px) {
+@media screen and (min-width : 768px) {
   #connexion {
     width: 45%;
     align-items: center;
@@ -63,6 +60,9 @@
 
 @media screen and (min-width : 1050px) {
   #connexion {
+    input {
+      width: 300px
+    }
     form {
       width: 70%;
     }

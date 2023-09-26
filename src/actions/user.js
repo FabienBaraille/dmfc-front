@@ -16,4 +16,3 @@ export const setInputValue = (inputName, inputValue) => ({
 export const checkLogin = () => ({
   type: CHECK_LOGIN,
 });
-

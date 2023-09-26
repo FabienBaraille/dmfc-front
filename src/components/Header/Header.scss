@@ -1,6 +1,5 @@
 @use '../../styles/variables' as v;
 
-
 .header {
   background: v.$back;
   text-align: center;
@@ -8,20 +7,22 @@
   display: flex;
   align-items: center;
   height: 2em;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 20px;
   font-family: v.$main-font;
-  font-size: 4em;
-}
-.logo-one img {
-  max-width: 15%; 
-  height: auto; 
-  margin-top: 0.2em;
+  font-size: 2em;
+  h1 {
+    margin: 0 20px;
+  }
+  img {
+    height: 1.8em; 
+    margin-top: 0.1em;
+  }
 
+  @media (min-width: 768px) {
+    font-size: 4em;
+    justify-content: space-around;
+  }
 }
-.logo-two img {
-  max-width: 25%; 
-  height: auto; 
-  margin-top: 0.2em;
-}
+
 

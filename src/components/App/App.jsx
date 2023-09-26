@@ -9,12 +9,14 @@ import SimpleRules from "../Rules/SimpleRules";
 import Connexion from '../Connexion/Connexion.jsx';
 import Error from '../Error/Error.jsx';
 import Terms from '../Terms/Terms.jsx';
+import RsBetCreation from '../BetCreation/RsBetCreation';
 
 import Footer from '../Footer/Footer';
 
 import './App.scss';
 import { useSelector } from "react-redux";
 import Home from "../Home/Home";
+import Rankings from "../Rankings/Rankings";
 
 const App = () => {
   const isLogged = useSelector((state) => state.user.isLogged); 
@@ -31,6 +33,8 @@ const App = () => {
               <SimpleRules />
             </>} />
           <Route path='/infos' element={<Home />} />
+          <Route path='/creation/SR' element={<RsBetCreation />} />
+          <Route path='/rankings' element={<Rankings />} />
           <Route path='/rules' element={<ExtendedRules />} />
           <Route path='/terms-and-conditions' element={<Terms />} />
           <Route path='*' element={<Error />} />

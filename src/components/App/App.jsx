@@ -16,6 +16,8 @@ import './App.scss';
 import { useSelector } from "react-redux";
 import Home from "../Home/Home";
 
+import BetResult from "../BetResult/BetResult";
+
 const App = () => {
   const isLogged = useSelector((state) => state.user.isLogged); 
   return (
@@ -27,9 +29,11 @@ const App = () => {
         <Routes>
           <Route path='/' element={
             <>
-              <Connexion />
-              <SimpleRules />
-            </>} />
+              <BetResult />
+              {/* <Connexion />
+              <SimpleRules /> */}
+            </>
+          } />
           <Route path='/infos' element={<Home />} />
           <Route path='/rules' element={<ExtendedRules />} />
           <Route path='/terms-and-conditions' element={<Terms />} />

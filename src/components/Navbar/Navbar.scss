@@ -10,9 +10,12 @@
   height: 2em;
   font-family: v.$main-font;
   font-size: 2em;
-
-a {
-  margin-left: 0.6em;
-  margin-right: 1.6em;
-}
+  box-shadow: 0 5px 4px 0 v.$light-orange;
+  a {
+    margin-left: 0.6em;
+    margin-right: 1.6em;
+    &:hover {
+      color: v.$orange;
+    }
+  }
 }

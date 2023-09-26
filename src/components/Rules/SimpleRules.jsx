@@ -12,7 +12,7 @@ const SimpleRules = () => {
       <h3>Le DMFC :</h3>
       <p>En tant que responsable de la ligue, tu auras pour rôle de choisir (créer) les matchs sur lesquels pronostiquer suivant le calendrier officiel de la saison, de renseigner les résultats des matchs mais également d'animer le groupe avec notamment la possibilité d'alimenter un fil d'actualités.</p>
       <h3>Le joueur :</h3>
-      <p>En tant que participant, tu auras pourras pronostiquer sur les matchs choisis par ton DMFC, consulter le classement général, tes statistiques et celles de tes amis.</p>
+      <p>En tant que participant, tu pourras pronostiquer sur les matchs choisis par ton DMFC, consulter le classement général, tes statistiques et celles de tes amis.</p>
     </Wrapper>
   )
 }

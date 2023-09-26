@@ -14,9 +14,10 @@ import Footer from '../Footer/Footer';
 
 import './App.scss';
 import { useSelector } from "react-redux";
+import Home from "../Home/Home";
 
 const App = () => {
-  const isLogged = useSelector((state) => state.user.isLogged);
+  const isLogged = useSelector((state) => state.user.isLogged); 
   return (
     <>
       <Header />
@@ -28,6 +29,7 @@ const App = () => {
               <Connexion />
               <SimpleRules />
             </>} />
+          <Route path='/infos' element={<Home />} />
           <Route path='/rules' element={<ExtendedRules />} />
           <Route path='/terms-and-conditions' element={<Terms />} />
           <Route path='*' element={<Error />} />

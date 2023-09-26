@@ -1,0 +1,12 @@
+@use '/src/styles/variables' as v;
+
+table {
+  width: 100%;
+  thead {
+    font-family: 'Bangers';
+    font-size: 1.2rem;
+  }
+  th {
+    padding: 0.5rem;
+  }
+}

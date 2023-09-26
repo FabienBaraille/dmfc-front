@@ -4,13 +4,13 @@ import { Link } from "react-router-dom"
 function Navbar() {
   return (
     <>
-      <div className="navbar">
-        <Link to="/">Accueil</Link>
-        <Link to="/">Match SR</Link>
-        <Link to="/">Top 10</Link>
-        <Link to="/">Playoff</Link>
-        <Link to="/">Pronostic en Cours</Link>
-      </div>
+        <div className="navbar">
+          <Link to="/">Profil</Link>
+          <Link to="/">Bet</Link>
+          <Link to="/">Général Ranking</Link>
+          <Link to="/">Général Stats</Link>
+          <Link to="/">NBA Cheat Sheet</Link>
+        </div>
     </>
   )
 }

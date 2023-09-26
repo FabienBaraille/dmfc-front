@@ -37,7 +37,7 @@ const Connexion = () => {
   }
 
   const handleConnexion = () => {
-    isCreationMode === true ? dispatch(toggleCreationMode(false)) : dispatch(toggleCreationMode(true))
+    isCreationMode ? dispatch(toggleCreationMode(false)) : dispatch(toggleCreationMode(true))
   }
   
   return (
@@ -47,7 +47,7 @@ const Connexion = () => {
           {/* Création de compte */}
           {isCreationMode &&
             <>
-              <div>
+              <div className="dmfc-opt">
                 <Input label="DMFC" htmlFor="dmfc" type="checkbox" id="DMFC" onChange={handleInputCheckbox} value={DMFC} />
               </div>
               <div>

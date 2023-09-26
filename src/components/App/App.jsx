@@ -2,6 +2,7 @@
 import UpButton from './UpButton/UpButton.jsx';
 import SimpleRules from '../Rules/ExtendedRules.jsx';
 import Connexion from '../Connexion/Connexion.jsx'
+
 import { Route, Routes } from "react-router-dom";
 
 const App = () => {

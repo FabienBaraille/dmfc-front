@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../Wrapper/Wrapper"
 import data from "../../data/data";
 import { addBetToList } from "../../actions/bet";
-import BetTpl  from "./betMatch"
+import BetTpl  from "./BetMatch";
 import { toggleCreationMode } from "../../actions/bet";
 
 

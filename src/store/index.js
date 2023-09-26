@@ -4,9 +4,10 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 
 import reducer from '../reducers';
 import authMiddleware from '../middlewares/authMiddleware';
+import statsMiddleware from '../middlewares/statsMiddleware';
 
 const enhancer = composeWithDevTools(
-  applyMiddleware(authMiddleware)
+  applyMiddleware(authMiddleware, statsMiddleware)
 );
 
 const store = createStore(

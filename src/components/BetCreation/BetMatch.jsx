@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import data from "../../data/data"
 import { betToRemove } from "../../actions/bet";
+import Input from "../Utils/Input"
 
 const BetTpl = () => {
   const dispatch = useDispatch();
@@ -25,9 +26,7 @@ const BetTpl = () => {
       <select>
         {teamsOptions}
       </select>
-      <label htmlFor="pronostic_limit">Date limite de pronostique :</label>
-      <input id="pronostic_limit" type="datetime-local" />
-      <button>Supprimer</button>
+      <Input label="Date limite de pronostique :" htmlFor="pronostic_limit" id="pronostic_limit" type="datetime-local" />
     </form>
   )
 };

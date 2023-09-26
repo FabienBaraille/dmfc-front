@@ -11,8 +11,54 @@
   font-family: v.$main-font;
   font-size: 2em;
 
-a {
-  margin-left: 0.6em;
-  margin-right: 1.6em;
+  a {
+    margin-left: 0.6em;
+    margin-right: 1.6em;
+  }
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
 }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2em;
+  height: 2em;
+
+  .bar {
+    width: 100%;
+    height: 100%; 
+    background-color: v.$orange; 
+    border-radius: 10em; 
+ 
+  }
+
+  @media (max-width: 1000px) {
+    display: flex;
+  }
 }
+
+.show-menu {
+  display: block;
+  padding: 20px; 
+  text-align: left; 
+  background-color: v.$transparent;
+  max-width: fit-content;
+
+  
+  a {
+    color: v.$titles; 
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px; 
+  }
+}
+
+
+
+
+
+

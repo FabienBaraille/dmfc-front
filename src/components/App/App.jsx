@@ -6,6 +6,7 @@ import Navbar from '../Navbar/Navbar'
 import SimpleRules from '../Rules/ExtendedRules.jsx';
 import Connexion from '../Connexion/Connexion.jsx'
 import Profil from '../../Pages/Profil/Profil.jsx'
+
 import { Route, Routes } from "react-router-dom";
 
 const App = () => {

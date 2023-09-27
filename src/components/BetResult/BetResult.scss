@@ -7,7 +7,7 @@ button {
   border: unset;
   padding: 0.3rem;
   border-radius: 5px;
-  font-family: 'Bangers';
+  font-family: v.$main-font;
   margin: 0.7rem;
   font-size: 1.1rem;
     &:hover {
@@ -28,7 +28,7 @@ form {
     margin: 0.7rem 0;
   }
   label {
-    font-family: 'Bangers';
+    font-family: v.$main-font;
     margin: 0.7rem;
     font-size: 1.1rem;
   }

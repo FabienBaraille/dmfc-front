@@ -19,11 +19,12 @@ import Error from '../Error/Error.jsx';
 import Terms from '../Terms/Terms.jsx';
 import RsBetCreation from '../BetCreation/RsBetCreation';
 import BetResult from "../BetResult/BetResult";
+import PlayerBet from "../PlayerBet/PlayerBet";
 import Loader from '../Loader/Loader';
+import Profil from "../Profil/Profil";
 import Footer from '../Footer/Footer';
 
 import './App.scss';
-
 
 const App = () => {
   const navigate = useNavigate();
@@ -67,11 +68,17 @@ const App = () => {
           <Route path='/player/:playerId' element={<GeneralStats />} />
           <Route path='/rules' element={<ExtendedRules />} />
           <Route path='/terms-and-conditions' element={<Terms />} />
+          <Route path='/player-bet' element={<PlayerBet />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </main>
       <UpButton />
       <Footer />
+      <Routes>
+        <Route path="/profil" element={<Profil />} />
+        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/rules" element={<SimpleRules />} />
+      </Routes>
     </>
   )
 }

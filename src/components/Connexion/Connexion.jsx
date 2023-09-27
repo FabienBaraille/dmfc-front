@@ -76,7 +76,7 @@ const Connexion = () => {
               </div>
               {!DMFC ? 
               <div>
-                <label htmlFor="league_name">Ligue :</label>
+                <label htmlFor="league">Ligue :</label>
                 <select 
                   id="league" 
                   placeholder="Nom de la ligue" 

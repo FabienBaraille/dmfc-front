@@ -31,12 +31,12 @@ function Navbar() {
       </div>
 
       <div className={`navbar ${showMenu ? 'show-menu' : ''}`}>
-        <Link to="/">Profil</Link>
+        <Link to="/profil">Profil</Link>
         <Link to="/player-bet">Bet</Link>
         <Link to="/rankings">Général Ranking</Link>
         <Link to="/">Général Stats</Link>
         <Link to="/">NBA Cheat Sheet</Link>
-      </div>
+      </div>      
     </>
   );
 }

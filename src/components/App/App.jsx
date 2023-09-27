@@ -10,7 +10,7 @@ import Connexion from '../Connexion/Connexion.jsx';
 import Error from '../Error/Error.jsx';
 import Terms from '../Terms/Terms.jsx';
 import RsBetCreation from '../BetCreation/RsBetCreation';
-
+import Profil from "../Profil/Profil";
 import Footer from '../Footer/Footer';
 
 import './App.scss';
@@ -47,6 +47,11 @@ const App = () => {
       </main>
       <UpButton />
       <Footer />
+      <Routes>
+        <Route path="/profil" element={<Profil />} />
+        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/rules" element={<SimpleRules />} />
+      </Routes>
     </>
   )
 }

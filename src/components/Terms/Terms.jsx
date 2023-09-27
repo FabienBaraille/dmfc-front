@@ -5,7 +5,7 @@ import './Terms.scss';
 
 const Terms = () => {
   return (
-    <Wrapper name={Terms}>
+    <Wrapper name='Terms'>
       <h2>Conditions générales d'utilisations</h2>
       <p>Le présent document a pour objet de définir les modalités et conditions dans lesquelles d’une part, DMFC-GAME, ci-après dénommé l’EDITEUR, met à la disposition de ses utilisateurs le site, et les services disponibles sur le site et d’autre part, la manière par laquelle l’utilisateur accède au site et utilise ses services.</p>
       <p>Toute connexion au site est subordonnée au respect des présentes conditions.</p>

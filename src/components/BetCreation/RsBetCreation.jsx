@@ -32,7 +32,7 @@ const RsBetCreation = () => {
   return (
     <Wrapper name="rsbetcreation">
       <div>
-        <p>Pronostique saison régulire</p>
+        <p>Pronostique saison régulière</p>
         {roundCreationMode ||
           <select>
             <option>Choisir le Round</option>
@@ -43,7 +43,7 @@ const RsBetCreation = () => {
       <form>
         {betList.length ==0 ?
           <>
-            <button type="button" onClick={handleRoundCreation}>Création d'un nouveau round</button>
+            <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Création d'un nouveau round" : "Round existant"}</button>
             {roundCreationMode &&
               <>
                 <input id="round_creation" type="text" placeholder="Nom du round"/>

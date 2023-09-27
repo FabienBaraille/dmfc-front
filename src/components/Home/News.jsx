@@ -7,7 +7,7 @@ const News = () => {
   const isDMFC = useSelector((state) => state.user.DMFC);
   // Récupérer le fil d'actu dans la BDD
   return (
-    <Wrapper>
+    <Wrapper name='news'>
       <h2>Fil d'actus</h2>
       {isDMFC && <button type="button">Edit</button>}
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos exercitationem minus earum nulla odio blanditiis unde velit impedit, magnam asperiores numquam error laborum rem id at doloribus praesentium quod totam!</p>

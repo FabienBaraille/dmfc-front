@@ -32,13 +32,13 @@ const App = () => {
         <Routes>
           <Route path='/' element={
             <>
-              <BetResult />
-              {/* <Connexion />
-              <SimpleRules /> */}
+              <Connexion />
+              <SimpleRules />
             </>
           } />
           <Route path='/infos' element={<Home />} />
           <Route path='/creation/SR' element={<RsBetCreation />} />
+          <Route path='/scores/SR' element={<BetResult />} />
           <Route path='/rankings' element={<Rankings />} />
           <Route path='/player/:playerName' element={<GeneralStats />} />
           <Route path='/rules' element={<ExtendedRules />} />

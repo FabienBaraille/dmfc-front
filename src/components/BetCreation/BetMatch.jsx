@@ -18,7 +18,7 @@ const BetMatch = () => {
   }
 
   return (
-    <form key={betListNumber} id={betListNumber} onSubmit={handleDelete}>
+    <form className="match-line" key={betListNumber} id={betListNumber} onSubmit={handleDelete}>
       <select>
         {teamsOptions}
       </select>

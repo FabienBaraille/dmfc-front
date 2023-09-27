@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../Wrapper/Wrapper"
 import data from "../../data/data";
 import { addBetToList } from "../../actions/bet";
-import BetTpl  from "./BetMatch";
 import { toggleCreationMode } from "../../actions/bet";
+import BetTpl  from "./BetMatch";
 
 
 const RsBetCreation = () => {
@@ -35,32 +35,37 @@ const RsBetCreation = () => {
         <p>Pronostique saison régulire</p>
         {roundCreationMode ||
           <select>
-          <option>Choisir le Round</option>
-          {roundOptions}
+            <option>Choisir le Round</option>
+            {roundOptions}
           </select>
         }
       </div>
       <form>
-        <button type="button" onClick={handleRoundCreation}>Création d'un nouveau round</button>
-        {roundCreationMode &&
+        {betList.length ==0 ?
           <>
-              <input id="round_creation" type="text" placeholder="Nom du round"/>
-            <select>
-              <option>SR</option>
-              <option disabled>PO</option>
-            </select>
+            <button type="button" onClick={handleRoundCreation}>Création d'un nouveau round</button>
+            {roundCreationMode &&
+              <>
+                <input id="round_creation" type="text" placeholder="Nom du round"/>
+                <select>
+                  <option>SR</option>
+                  <option disabled>PO</option>
+                </select>
+              </>
+            }
           </>
-        }
-      </form>
+        : null }
         {betList}
-      <div>
-        <button type="button" className="addBet" onClick={handleAddBet}>+</button>
+        {roundCreationMode ?
+          <button type="button" className="addRound">Validez</button> :
+          <button type="button" className="addBet" onClick={handleAddBet}>+</button>
+        }
         {betList.length !== 0 ?
           <>
             <button type="submit">Validez mes choix</button>
           </>
         : null}
-      </div>
+      </form>
     </Wrapper>
   )
 };

@@ -18,6 +18,9 @@ import { useSelector } from "react-redux";
 import Home from "../Home/Home";
 import Rankings from "../Rankings/Rankings";
 
+import BetResult from "../BetResult/BetResult";
+import PlayerBet from "../PlayerBet/PlayerBet";
+
 const App = () => {
   const isLogged = useSelector((state) => state.user.isLogged); 
   return (
@@ -31,12 +34,14 @@ const App = () => {
             <>
               <Connexion />
               <SimpleRules />
-            </>} />
+            </>
+          } />
           <Route path='/infos' element={<Home />} />
           <Route path='/creation/SR' element={<RsBetCreation />} />
           <Route path='/rankings' element={<Rankings />} />
           <Route path='/rules' element={<ExtendedRules />} />
           <Route path='/terms-and-conditions' element={<Terms />} />
+          <Route path='/player-bet' element={<PlayerBet />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </main>

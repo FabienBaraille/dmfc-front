@@ -10,6 +10,10 @@
   height: 2em;
   font-family: v.$main-font;
   font-size: 2em;
+  width: 100%;
+  position: relative;
+  right: 0;
+  top: 20;
 
   a {
     margin-left: 0.6em;
@@ -21,6 +25,7 @@
   }
 }
 
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -31,6 +36,7 @@
   top: 3em;
   right: 1em;
   gap: 0.5em;
+  
 
   @media (max-width: 768px) {
     margin-top: -1.5em;
@@ -45,7 +51,7 @@
  
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     display: flex;
   }
 }
@@ -54,12 +60,12 @@
   display: block;
   padding: 1em; 
   text-align: right; 
-  background-color: v.$transparent;
+  background-color: v.$nav-back;
+  height: 40%;
   max-width: fit-content;
   margin-left: auto;
+  position: fixed;
 
-
-  
   a {
     color: v.$titles; 
     text-decoration: none;
@@ -67,7 +73,6 @@
     margin-bottom: 10px; 
   }
 }
-
 
 
 

@@ -26,6 +26,10 @@
     font-size: 4em;
     justify-content: space-around;
   }
+
+  @media (max-width: 667px) {
+  .logo-two{  display: none;}  
+  }
 }
 
 

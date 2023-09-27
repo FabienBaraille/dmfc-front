@@ -1,1 +1,78 @@
 @use '../../styles/variables' as v;
+
+.profil {
+  line-height: 2em;
+  p {
+    font-family: 'Bangers';
+    text-align: center;
+  }
+}
+.change-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  div {
+    margin-top: 0.3em;
+    margin: 0.2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+
+    label {
+      font-family: 'Bangers';
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem; 
+    }
+
+    button, input, select {
+      border: unset;
+      padding: 0.3rem;
+      border-radius: 5px;
+    }
+
+    input, select {
+      background: v.$cell-back;
+      box-shadow: 0 0 2px 2px v.$shadow;
+      width: 200px;
+    }
+
+    .form-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      button {
+        margin: 0.3rem 0;
+        background: v.$nav-back;
+        color: v.$orange;
+        border: unset;
+        &:hover {
+          background: v.$orange;
+          color: v.$nav-back;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .change-info {
+    div {
+      flex-direction: row;
+      align-items: center; 
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .profil-page {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 100vh;
+  }
+}

@@ -26,14 +26,29 @@
     box-shadow: 0 0 2px 2px v.$shadow;
     width: 200px;
   }
+
   .dmfc-opt {
-    input {
-    width: auto;
-    }
+    align-items: center;
     input[type="checkbox"] {
-      accent-color: v.$orange;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      height: 15px;
+      width: 15px;
+      border-radius: 100%;
+    }
+    input[type="checkbox"]:checked {
+      background: v.$orange;
+      &:before {
+        content: url(/src/assets/design/basketball-solid.svg);
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        margin: -5px;
+      }
     }
   }
+  
   .form-btn {
     display: flex;
     flex-direction: column;

@@ -1,7 +1,8 @@
 import Rankings from '../Rankings/Rankings';
-import './Home.scss';
 import News from './News';
 import SeasonInfos from './SeasonInfos';
+
+import './Home.scss';
 
 const Home = () => {
   return (

@@ -11,7 +11,7 @@ const Wrapper = ({children, name}) => {
 };
 
 Wrapper.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   name: PropTypes.string,
 };
 

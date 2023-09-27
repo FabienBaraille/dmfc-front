@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Wrapper from '../Wrapper/Wrapper';
 
-import { userByName } from '../../filters/usersFilter';
+import { userById } from '../../filters/usersFilter';
 import { teamByTrigram } from '../../filters/teamFilter';
 
 import data from '../../data/data';
@@ -12,10 +12,10 @@ import './GeneralStats.scss';
 
 const GeneralStats = () => {
 
-  const {playerName} = useParams();
-  const usersList = useSelector((state) => state.stats.allUsers);
+  const { playerId } = useParams();
+  const usersList = useSelector((state) => state.datas.allUsers);
 
-  const {0 : {Username, Title, Score, Team}} = userByName(usersList, playerName);
+  const {0 : {Username, Title, Score, Team}} = userById(usersList, playerId);
   const {0: {Trigram, Name, Logo}} = teamByTrigram(data.Team, Team)
 
   return (

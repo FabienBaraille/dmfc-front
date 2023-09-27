@@ -11,8 +11,12 @@
   text-align: center;
   font-family: v.$main-font;
   margin-top: 1rem;
+  box-shadow: 0 -5px 4px 0 v.$light-orange;
 }
 .footer a {
-  display: inline-block; 
-  margin: 0 10px;
+  display: inline-block; /* Display links as blocks to create space between them */
+  margin: 0 10px; /* Add margin to create space between links */
+  &:hover {
+    color: v.$orange;
+  }
 }

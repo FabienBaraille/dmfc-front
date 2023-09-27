@@ -4,8 +4,8 @@ function Footer() {
   return (
     <>
       <div className="footer">
-        <Link to="/">DMFC Rules</Link>
-        <Link to="/">Conditions Générales</Link>
+        <Link to="/rules">DMFC Rules</Link>
+        <Link to="/terms-and-conditions">Conditions Générales</Link>
       </div>
     </>
   )

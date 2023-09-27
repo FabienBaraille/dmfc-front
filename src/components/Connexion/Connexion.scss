@@ -3,24 +3,36 @@
 #connexion {
   display: flex;
   flex-direction: column;
+  align-items: center;
   div {
     margin: 0.7rem 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+  }
+  label {
+    width: 100px;
   }
   label, button {
     font-family: 'Bangers';
-    margin-right: 0.7rem;
+    margin-right: 0.3rem;
     font-size: 1.1rem;
   }
-  button, input {
+  button, input, select {
     border: unset;
     padding: 0.3rem;
+    border-radius: 5px;
   }
   input, select {
     background: v.$cell-back;
     box-shadow: 0 0 2px 2px v.$shadow;
+    width: 200px;
+  }
+  .dmfc-opt {
+    input {
+    width: auto;
+    }
+    input[type="checkbox"] {
+      accent-color: v.$orange;
+    }
   }
   .form-btn {
     display: flex;
@@ -32,6 +44,28 @@
       background: v.$nav-back;
       color: v.$orange;
       border: unset;
+      &:hover {
+        background: v.$orange;
+        color: v.$nav-back;
+      }
+    }
+  }
+}
+
+@media screen and (min-width : 768px) {
+  #connexion {
+    width: 45%;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width : 1050px) {
+  #connexion {
+    input, select {
+      width: 300px
+    }
+    form {
+      width: 70%;
     }
   }
 }

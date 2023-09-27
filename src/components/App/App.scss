@@ -1,0 +1,9 @@
+@use '/src/styles/variables' as v;
+
+@media screen and (min-width : 768px) {
+  main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

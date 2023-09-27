@@ -9,7 +9,7 @@ import  './styles/index.scss';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router >
     <Provider store={store} >
-    <App />
+      <App />
     </Provider>
   </Router>
 )

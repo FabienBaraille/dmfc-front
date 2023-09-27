@@ -8,9 +8,8 @@ export default {
       "Role": "DMFC",
       "Title": "DMFC of the beginning",
       "Score": null,
-      "Old position": null,
-      "Position": null,
-      "Season played": 2,
+      "OldPosition": null,
+      "SeasonPlayed": 2,
       "Team": "NOP"
     },
     {
@@ -21,9 +20,8 @@ export default {
       "Role": "Joueur",
       "Title": null,
       "Score": 22,
-      "Old position": 1,
-      "Position": 2,
-      "Season played": 2,
+      "OldPosition": 1,
+      "SeasonPlayed": 2,
       "Team": "LAL"
     },
     {
@@ -34,11 +32,22 @@ export default {
       "Role": "Joueur",
       "Title": "MVP",
       "Score": 40,
-      "Old position": 2,
-      "Position": 1,
-      "Season played": 2,
+      "OldPosition": 2,
+      "SeasonPlayed": 2,
       "Team": "PHX"
-    }
+    },
+    {
+      "Username": "Tony",
+      "Password": "abcdef",
+      "Email": "tony@gmail.com",
+      "League": "La ligue des gentlemens extraordinaires",
+      "Role": "Joueur",
+      "Title": null,
+      "Score": 35,
+      "OldPosition": 3,
+      "SeasonPlayed": 2,
+      "Team": "LAL"
+    },
   ],
   "Team":[
     {

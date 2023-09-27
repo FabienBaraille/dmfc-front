@@ -6,7 +6,12 @@ import './BetResult.scss';
 const BetResult = () => {
   return (
     <Wrapper name="bet_result">
-      <GameBetResult />
+      <form>
+        <GameBetResult />
+        <GameBetResult />
+        <GameBetResult />
+        <button>Envoyer les résultats</button>
+      </form>
     </Wrapper>
   )
 };

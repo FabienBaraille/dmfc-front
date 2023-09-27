@@ -8,7 +8,7 @@ const GameBetResult = () => {
   ));  
 
   return (
-    <form className="bet_result">
+    <div className="bet_result">
       <div>
         <select>
           {teamsOptions}
@@ -18,7 +18,6 @@ const GameBetResult = () => {
           <Input label="Cote bookie" placeholder="0.00" htmlFor="bookie1" id="bookie1"/>
         </div>
       </div>
-      <p> @ </p>
       <div>
         <select>
           {teamsOptions}
@@ -32,8 +31,7 @@ const GameBetResult = () => {
         <p>Sélection auto "winning team"</p>
         <p>Diff : "calcul auto"</p>
       </div>
-      <button>Envoyer les résultats</button>
-    </form>
+    </div>
   )
 };
 

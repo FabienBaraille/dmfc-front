@@ -3,7 +3,7 @@ import data from "../../data/data"
 import { betToRemove } from "../../actions/bet";
 import Input from "../Utils/Input"
 
-const BetTpl = () => {
+const BetMatch = () => {
   const dispatch = useDispatch();
   const betListNumber = useSelector((state) => state.bet.betNumber);
 
@@ -31,4 +31,4 @@ const BetTpl = () => {
   )
 };
 
-export default BetTpl;
+export default BetMatch;

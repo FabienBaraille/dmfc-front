@@ -32,10 +32,8 @@ const App = () => {
         <Routes>
           <Route path='/' element={
             <>
-              <PlayerBet />
-              {/* <BetResult /> */}
-              {/* <Connexion /> */}
-              {/* <SimpleRules /> */}
+              <Connexion />
+              <SimpleRules />
             </>
           } />
           <Route path='/infos' element={<Home />} />
@@ -43,6 +41,7 @@ const App = () => {
           <Route path='/rankings' element={<Rankings />} />
           <Route path='/rules' element={<ExtendedRules />} />
           <Route path='/terms-and-conditions' element={<Terms />} />
+          <Route path='/player-bet' element={<PlayerBet />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </main>

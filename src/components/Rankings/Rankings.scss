@@ -17,11 +17,13 @@
   th {
     padding: 0.5rem;
   }
-  .table-row {
-    display: table-row;
+  .users-row {
     &:hover {
       background: v.$light-orange;
       color: v.$nav-back;
+    }
+    a {
+      display: block;
     }
   }
   tr {

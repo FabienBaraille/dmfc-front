@@ -14,7 +14,7 @@ const GameBetResult = () => {
           {teamsOptions}
         </select>
         <div>
-          <Input label="Score" htmlFor="score" id="score" placeholder="000" />
+          <Input label="Score" htmlFor="score" id="score" placeholder="000" type="number"/>
           <Input label="Cote bookie" placeholder="0.00" htmlFor="bookie1" id="bookie1"/>
         </div>
       </div>
@@ -23,7 +23,7 @@ const GameBetResult = () => {
           {teamsOptions}
         </select>
         <div>
-          <Input label="Score" htmlFor="score" id="score" placeholder="000" />
+          <Input label="Score" htmlFor="score" id="score" placeholder="000" type="number" />
           <Input label="Cote bookie" placeholder="0.00" htmlFor="bookie2" id="bookie2"/>
         </div>
       </div>

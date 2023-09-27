@@ -35,9 +35,10 @@
     border-radius: 100%;
   }
   input[type="checkbox"]:checked {
-    background: v.$orange;
+    background: black;
     &:before {
       content: url(../../assets/design/basketball-solid.svg);
+      filter: invert(43%) sepia(15%) saturate(5000%) hue-rotate(346deg) ;
     }
   }
 }

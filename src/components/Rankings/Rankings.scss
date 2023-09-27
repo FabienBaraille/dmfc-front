@@ -1,12 +1,38 @@
 @use '/src/styles/variables' as v;
 
-table {
+#rankings {
+  width: 90%;
+}
+.ranking-table {
   width: 100%;
+  margin: 20px 0;
+  box-shadow: 0 0 2px 2px v.$shadow;
+  border: 1px solid v.$shadow;
   thead {
     font-family: 'Bangers';
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    background-color: v.$nav-back;
+    color: v.$orange;
   }
   th {
     padding: 0.5rem;
+  }
+  .table-row {
+    display: table-row;
+    &:hover {
+      background: v.$light-orange;
+      color: v.$nav-back;
+    }
+  }
+  tr {
+    &:nth-of-type(even) {
+      background: v.$cell-back;
+    }
+  }
+  .green {
+    background-color: rgba(50, 205, 50, 0.5);
+  }
+  .red {
+    background-color: rgba(255, 0, 0, 0.5);
   }
 }

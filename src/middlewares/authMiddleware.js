@@ -1,23 +1,49 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, setIsLogged } from "../actions/user";
+import { CHECK_LOGIN, CREATE_USER, setIsCreated, setIsLogged } from "../actions/user";
+import { leagueByName } from '../Utils/filters/leagueFilter';
+import { roleName } from '../Utils/filters/usersFilter';
 
 const authMiddelware = (store) => (next) => async (action) => {
   switch (action.type) {
     case CHECK_LOGIN: {
       try {
-        // http://quentin-riviere.vpnuser.lan:8001/api/login
-        const { data } = await axios.post('http://quentin-riviere.vpnuser.lan:8001/api/login_check', {
+        const { data } = await axios.post(
+          // adresse pour Charli et Quentin remplacer 0.0.0.0 par fabien-baraille.vpnuser.lan
+          // Demandez moi pour que je démarre le serveur ;) 
+          'http://0.0.0.0:8080/api/login_check',
+          {
           username: store.getState().user.pseudo,
           password: store.getState().user.password,
         });
-        console.log(data)
-        document.cookie = `isLogged=${data.logged};max-age=60*60*24*15`;
-        // document.cookie = `role=${data.Role};max-age=60*60*24*15`;
-        // document.cookie = `token=${data.token};max-age=60*60*24*15`;
-        store.dispatch(setIsLogged(data.logged));
+        document.cookie = `isLogged=true;max-age=60*60*24*15`;
+        document.cookie = `userName=${store.getState().user.pseudo};max-age=60*60*24*15`;
+        document.cookie = `token=${data.token};max-age=60*60*24*15`;
+        store.dispatch(setIsLogged(true));
       } catch (error) {
-        console.log(error)
+        console.log(error.data.errors);
+      }
+    }
+    break;
+    case CREATE_USER: {
+      console.log(store.getState().datas.allLeague)
+      const leagueId = leagueByName(store.getState().datas.allLeague, store.getState().user.league);
+      const roles = roleName(store.getState().user.DMFC);
+      try {
+        const response = await axios.post(
+          'http://0.0.0.0:8080/api/login',
+          {
+            username: store.getState().user.pseudo,
+            email: store.getState().user.email,
+            password: store.getState().user.password,
+            roles: roles,
+            league: leagueId,
+          }
+        )
+        store.dispatch(setIsCreated(true));
+        console.log('response', response);
+      } catch (error) {
+        console.log(error.data.errors);
       }
     }
     break;
@@ -27,3 +53,15 @@ const authMiddelware = (store) => (next) => async (action) => {
 };
 
 export default authMiddelware;
+
+
+// Création de compte
+// http://0.0.0.0:8080/api/login
+/* body {
+  username:
+  password:
+  email:
+  roles: []
+  league_id:
+
+} */

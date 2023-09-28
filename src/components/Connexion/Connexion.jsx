@@ -35,7 +35,11 @@ const Connexion = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    isCreationMode ? dispatch(createUser()) : dispatch(checkLogin());
+    if (isCreationMode) {
+      dispatch(createUser());
+    } else {
+      dispatch(checkLogin());
+    }
   }
   
   return (

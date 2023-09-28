@@ -11,7 +11,7 @@ import './Profil.scss';
 
 function Profil() {
   const dispatch = useDispatch();
- const pseudo = useSelector((state) => state.user.pseudo);
+  const pseudo = useSelector((state) => state.user.pseudo);
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);
   const league = useSelector((state) => state.user.league);
@@ -75,14 +75,6 @@ function Profil() {
             <div className="form-btn">
             <button type="submit">Soumettre</button>
             </div>
-        </div>
-        <div>
-          <label>Équipe Préférée: </label>
-          <select type="team" name="team" value={team} onChange={handleInputChange}>
-          <option value="">Sélectionnez une équipe</option>{teamOptions}</select>
-          <div className="form-btn">
-          <button type="submit">Soumettre</button>
-          </div>
         </div>
       </form>
     </Wrapper>

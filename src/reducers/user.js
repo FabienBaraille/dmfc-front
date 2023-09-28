@@ -1,4 +1,4 @@
-import { SET_INPUT_VALUE, SET_IS_LOGGED, TOGGLE_CREATION_MODE } from "../actions/user";
+import { SET_INPUT_VALUE, SET_IS_CREATED, SET_IS_LOGGED, TOGGLE_CREATION_MODE } from "../actions/user";
 
 const initialState = {
   'pseudo': '',
@@ -9,6 +9,8 @@ const initialState = {
   'league_name': '',
   'isCreationMode': false,
   'isLogged': false,
+  'role': '',
+  'created': false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -27,6 +29,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: action.isLogged,
+      }
+    case SET_IS_CREATED:
+      return {
+        ...state,
+        created: action.isCreated,
       }
     default:
       return state;

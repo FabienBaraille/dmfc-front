@@ -33,7 +33,7 @@ const PlayerBetMatch = ({ number }) => {
 };
 
 PlayerBetMatch.propTypes = {
-  number: PropTypes.number,
+  number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }
 
 export default PlayerBetMatch;

@@ -15,8 +15,8 @@ const GeneralStats = () => {
   const { playerId } = useParams();
   const usersList = useSelector((state) => state.datas.allUsers);
 
-  const {0 : {username, title, score, team}} = userById(usersList, playerId);
-  const {0: {Trigram, Name, Logo}} = teamByTrigram(data.team, team)
+  const {0 : {username, title, score}} = userById(usersList, playerId);
+  const {0: {Trigram, Name, Logo}} = teamByTrigram(data.team, 'LAL');
 
   return (
     <Wrapper name='GeneralStats'>

@@ -8,9 +8,8 @@ export const setUsersList = (list) => ({
   type: SET_USERS_LIST,
   list,
 });
-export const getUsersList = (id) => ({
+export const getUsersList = () => ({
   type: GET_USERS_LIST,
-  id
 });
 export const setIsLoading = () => ({
   type: SET_IS_LOADING,

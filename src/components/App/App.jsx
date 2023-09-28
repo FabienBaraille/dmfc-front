@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
-import { setIsLogged } from "../../actions/user";
+import { setInputValue, setIsLogged } from "../../actions/user";
 import { getAllLeague, getUsersList } from "../../actions/datas";
 
 import Header from '../Header/Header';
@@ -37,22 +37,25 @@ const App = () => {
   
   useEffect(() => {
     dispatch(setIsLogged(logStatus));
+    if (logStatus) {
+      dispatch(setInputValue('pseudo', getCookies('userName')));
+      dispatch(setInputValue('role', getCookies('role')));
+    }
   }, []);
 
   const isLoading = useSelector((state) => state.datas.isLoading);
   const isLogged = useSelector((state) => state.user.isLogged);
+  const isCreated = useSelector((state) => state.user.isCreated);
 
   useEffect(() => {
     dispatch(getAllLeague());
     if (isLogged) {
       navigate('/');
-      dispatch(getUsersList(1));
+      dispatch(getUsersList());
     } else {
       navigate('/login');
     }
-  }, [isLogged]);
-
-  const userRole = getCookies('role');
+  }, [isLogged, isCreated]);
 
   if (isLoading) {
     return (
@@ -63,7 +66,7 @@ const App = () => {
   return (
     <>
       <Header />
-      {isLogged && <Navbar userRole={userRole} />}
+      {isLogged && <Navbar />}
       <main>
         <Routes>
           <Route path='/login' element={

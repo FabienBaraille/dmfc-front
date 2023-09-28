@@ -1,35 +1,21 @@
-import './Profil.scss';
-import { useState } from 'react';
-import data from "../../data/data";
+import { useDispatch, useSelector } from "react-redux";
 import Wrapper from '../Wrapper/Wrapper';
+import { setInputValue } from '../../actions/user';
+import { saveFavoriteTeams } from '../../actions/teams';
+import Input from "../Utils/Input";
+
+import data from "../../data/data";
+
+import './Profil.scss';
 
 
 function Profil() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [pseudo, setPseudo] = useState('');
-  const [team, setFavoriteTeam] = useState('');
-
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      case 'pseudo':
-        setPseudo(value);
-        break;
-      case 'team':
-        setFavoriteTeam(value);
-        break;
-      default:
-        break;
-    }
-  };
+  const dispatch = useDispatch();
+ const pseudo = useSelector((state) => state.user.pseudo);
+  const email = useSelector((state) => state.user.email);
+  const password = useSelector((state) => state.user.password);
+  const league = useSelector((state) => state.user.league);
+  const favoriteTeams = useSelector((state) => state.teams.favoriteTeams);
 
   const teamOptions = data.team.map((team) => (
     <option key={team.Trigram} value={team.Trigram}>
@@ -37,55 +23,67 @@ function Profil() {
     </option>
   ));
 
-  const handleSubmit =(event) => {
-    event.preventDefault();
-    setEmail('');
-    setPassword('');
-    setPseudo('');
-    setFavoriteTeam('');
+  const handleInput = (event) => {
+    const inputName = event.target.name;
+    const inputValue = event.target.value;
+    dispatch(setInputValue(inputName, inputValue));
+    dispatch(saveFavoriteTeams(inputName, inputValue));
   };
+ 
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
 
   return (
     <Wrapper className="profil-page">
-       <div className ="profil">
+      <div className ="profil">
         <h3>Profil</h3>
         <p>Email: {email}</p>
         <p>Pseudo: {pseudo}</p>
-        <p>Équipe Préférée: {team}</p>
-        <p>Ma Ligue: </p>
+        <p>Équipe Préférée: {favoriteTeams}</p>
+        <p>Ma Ligue: {league}</p>
       </div>
-        <h2>Changer mes paramètres</h2>
         <form className="change-info" onSubmit={handleSubmit}>
+        <h2>Changer mes paramètres</h2>
           <div>
             <label>Email: </label>
-            <input type="email" placeholder="change ton email" name="email" value={email} onChange={handleInputChange}/>
+            <Input type="email" placeholder="change ton email" name="email" value={email} onChange={handleInput}/>
             <div className="form-btn">
             <button type="submit">Soumettre</button>
             </div>
           </div>
           <div>
             <label>Mot de Passe: </label>
-            <input type="password" placeholder = "change ton mot de passe" name="password" value={password} onChange={handleInputChange}/>
+            <Input type="password" placeholder = "change ton mot de passe" name="password" value={password} onChange={handleInput}/>
             <div className="form-btn">
             <button type="submit">Soumettre</button>
             </div>
           </div>
           <div>
             <label>Pseudo: </label>
-            <input
-              type="text" placeholder="change ton pseudo" name="pseudo" value={pseudo} onChange={handleInputChange}/>
+            <Input htmlFor="pseudo" id="pseudo" type="text" onChange={handleInput} value={pseudo} placeholder="change ton pseudo"/>
               <div className="form-btn"> 
               <button type="submit">Soumettre</button>
               </div>
           </div>
           <div>
             <label>Équipe Préférée: </label>
-            <select type="team" name="team" value={team} onChange={handleInputChange}>
-            <option value="">Sélectionnez une équipe</option>{teamOptions}</select>
+            <select type="team" name="team" onChange={handleInput}>
+            <option value="">changer ta équipe préférée</option>{teamOptions}</select>
             <div className="form-btn">
             <button type="submit">Soumettre</button>
             </div>
+        </div>
+        <div>
+          <label>Équipe Préférée: </label>
+          <select type="team" name="team" value={team} onChange={handleInputChange}>
+          <option value="">Sélectionnez une équipe</option>{teamOptions}</select>
+          <div className="form-btn">
+          <button type="submit">Soumettre</button>
           </div>
+        </div>
       </form>
     </Wrapper>
   );

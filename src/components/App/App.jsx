@@ -75,6 +75,7 @@ const App = () => {
               <SimpleRules />
             </>
           } />
+
           <Route path='/' element={<Home />} />
           <Route path='/profil' element={<Profil />} />
           <Route path='/creation/SR' element={<RsBetCreation />} />

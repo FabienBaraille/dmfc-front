@@ -3,7 +3,7 @@ import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_USERS_LIST } from '../actions/datas
 const initialState = {
   'allUsers': [],
   'allLeague': [],
-  'isLoading': false,
+  'isLoading': true,
 };
 
 const reducer = (state = initialState, action = {}) => {

@@ -3,7 +3,7 @@ import data from "../../data/data";
 import Input from "../Utils/Input";
 
 const GameBetResult = () => {
-  const teamsOptions = data.Team.map((team) => (
+  const teamsOptions = data.team.map((team) => (
     <option key={team["Name"]}>{team["Trigram"]} - {team["Name"]}</option>
   ));  
 

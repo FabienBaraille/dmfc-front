@@ -1,7 +1,7 @@
 import data from "../../data/data";
 import Input from "../Utils/Input";
 
-const teamsOptions = data.Team.map((team) => {
+const teamsOptions = data.team.map((team) => {
   return (team["Trigram"])
 });
 

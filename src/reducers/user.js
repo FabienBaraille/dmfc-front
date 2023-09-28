@@ -8,7 +8,7 @@ const initialState = {
   'league': '',
   'league_name': '',
   'isCreationMode': false,
-  'isLogged': true,
+  'isLogged': false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -32,5 +32,4 @@ const reducer = (state = initialState, action = {}) => {
       return state;
   }
 };
-
 export default reducer;

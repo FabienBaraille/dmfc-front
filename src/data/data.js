@@ -7,11 +7,11 @@ export default {
       "Email": "tocard@gmail.com",
       "League": "La ligue des gentlemens extraordinaires",
       "role": ["ROLE_DMFC"],
-      "Title": "DMFC of the beginning",
+      "title": "DMFC of the beginning",
       "score": null,
       "position": null,
       "SeasonPlayed": 2,
-      "Team": "NOP"
+      "team": "NOP"
     },
     {
       "id": 2,
@@ -20,11 +20,11 @@ export default {
       "Email": "quentin@gmail.com",
       "League": "La ligue des gentlemens extraordinaires",
       "role": "Joueur",
-      "Title": null,
+      "title": null,
       "score": 22,
       "position": 1,
       "SeasonPlayed": 2,
-      "Team": "LAL"
+      "team": "LAL"
     },
     {
       "id": 3,
@@ -33,11 +33,11 @@ export default {
       "Email": "charli@gmail.com",
       "League": "La ligue des gentlemens extraordinaires",
       "role": "Joueur",
-      "Title": "MVP",
+      "title": "MVP",
       "score": 40,
       "position": 2,
       "SeasonPlayed": 2,
-      "Team": "PHX"
+      "team": "PHX"
     },
     {
       "id": 4,
@@ -46,14 +46,14 @@ export default {
       "Email": "tony@gmail.com",
       "League": "La ligue des gentlemens extraordinaires",
       "role": "Joueur",
-      "Title": null,
+      "title": null,
       "score": 35,
       "position": 3,
       "SeasonPlayed": 2,
-      "Team": "LAL"
+      "team": "LAL"
     },
   ],
-  "Team":[
+  "team":[
     {
       "Trigram": "PHX",
       "Name": "Phoenix Suns",
@@ -95,12 +95,14 @@ export default {
   ],
   "League": [
     {
-      "League name": "La ligue des gentlemen extraordinaires",
-      "League description": "Le titre n'est pas assez explicite ?"
+      "id": 1,
+      "leagueName": "La ligue des gentlemen extraordinaires",
+      "leaguDescription": "Le titre n'est pas assez explicite ?"
     },
     {
-      "League name": "La ligue des justiciers",
-      "League description": "Tu sais les mecs un peu balèze en cape"
+      "id": 2,
+      "leagueName": "La ligue des justiciers",
+      "leaguDescrition": "Tu sais les mecs un peu balèze en cape"
     },
   ],
   "Game": [

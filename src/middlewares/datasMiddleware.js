@@ -1,4 +1,6 @@
-import axios from 'redaxios';
+// import axios from 'redaxios';
+
+// import { getCookies } from "../Utils/cookies/getCookies";
 
 import { 
   GET_USERS_LIST,
@@ -11,6 +13,7 @@ import {
 import data from '../data/data';
 
 const datasMiddleware = (store) => (next) => async (action) => {
+  // const token = getCookies('token');
   switch (action.type) {
     case GET_USERS_LIST:
       store.dispatch(setIsLoading())

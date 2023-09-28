@@ -10,8 +10,11 @@ const authMiddelware = (store) => (next) => async (action) => {
           username: store.getState().user.pseudo,
           password: store.getState().user.password,
         });
-        console.log(data);
-        store.dispatch(setIsLogged(true));
+        console.log(data)
+        document.cookie = `isLogged=${data.logged};max-age=60*60*24*15`;
+        document.cookie = `role=${data.Role};max-age=60*60*24*15`;
+        document.cookie = `token=${data.token};max-age=60*60*24*15`;
+        store.dispatch(setIsLogged(data.logged));
       } catch (error) {
         console.log(error)
       }

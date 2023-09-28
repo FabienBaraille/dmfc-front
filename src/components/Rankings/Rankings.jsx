@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { usersSortByScore } from '../../filters/usersFilter';
+import { usersSortByScore } from '../../Utils/filters/usersFilter';
 
 import Wrapper from '../Wrapper/Wrapper';
 
 import './Rankings.scss';
-import { positionDisplay } from '../../display/positionDisplay';
+import { positionDisplay } from '../../Utils/display/positionDisplay';
 
 const Rankings = () => {
 

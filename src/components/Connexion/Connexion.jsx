@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useDispatch, useSelector } from "react-redux";
+
 import { checkLogin, createUser, setInputValue, toggleCreationMode } from "../../actions/user";
 
 import Wrapper from "../Wrapper/Wrapper";
@@ -28,35 +29,19 @@ const Connexion = () => {
   });
 
   const handleInput = (event) => {
-    const inputName = event.target.id;
-    const inputValue = event.target.value;
-    dispatch(setInputValue(inputName, inputValue));
+    const inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    dispatch(setInputValue(event.target.id, inputValue));
   }
 
-  const handleInputCheckbox = (event) => {
-    const inputName = event.target.id;
-    const inputValue = event.target.checked;
-    dispatch(setInputValue(inputName, inputValue));
-  }
-
-  const toggleMode = () => {
-    isCreationMode ? dispatch(toggleCreationMode(false)) : dispatch(toggleCreationMode(true))
-  }
-
-  const handleCreation = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createUser());
-  }
-
-  const handleConnexion = (event) => {
-    event.preventDefault();
-    dispatch(checkLogin());
+    isCreationMode ? dispatch(createUser()) : dispatch(checkLogin());
   }
   
   return (
     <Wrapper name="connexion">
       <h2>Connexion</h2>
-      <form onSubmit={isCreationMode ? handleCreation : handleConnexion}>
+      <form onSubmit={handleSubmit}>
           <Input label="Login :" htmlFor="pseudo" id="pseudo" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo"/>
           {isCreationMode &&
             <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com"/>
@@ -69,7 +54,7 @@ const Connexion = () => {
                 <input 
                   type="checkbox" 
                   id="DMFC" 
-                  onChange={handleInputCheckbox}
+                  onChange={handleInput}
                   value={DMFC}
                   checked={DMFC}
                 />
@@ -83,8 +68,8 @@ const Connexion = () => {
                   onChange={handleInput} 
                   value={league}
                 >
-                <option>Choisis ta ligue</option>
-                {leagueOptions}
+                  <option>Choisis ta ligue</option>
+                  {leagueOptions}
                 </select>
               </div> :
               <Input label="Créer ma ligue :" htmlFor="league_name" id="league_name" type="league_name" onChange={handleInput} value={league_name} placeholder="Nom de la league"/>}
@@ -94,11 +79,11 @@ const Connexion = () => {
             <button type="submit">{isCreationMode ? "Créer" : "Connexion"} </button>
             <button 
               type="button" 
-              onClick={toggleMode}
+              onClick={() => dispatch(toggleCreationMode(!isCreationMode))}
             >
               {isCreationMode ? "J'ai déjà un compte" : "Créer un compte"}
             </button>
-            {!isCreationMode && <button type="button">J'ai oublié mon mot de passe</button>}
+            {/* {!isCreationMode && <button type="button">J'ai oublié mon mot de passe</button>} */}
             {/* Faire formulaire rappel identifiant */}
           </div>
       </form>

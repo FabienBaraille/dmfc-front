@@ -21,5 +21,5 @@ export const toggleCreationMode = (isCreationMode) => ({
 });
 export const setIsLogged = (isLogged) => ({
   type: SET_IS_LOGGED,
-  isLogged
+  isLogged 
 });

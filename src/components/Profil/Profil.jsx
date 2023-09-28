@@ -31,7 +31,7 @@ function Profil() {
     }
   };
 
-  const teamOptions = data.Team.map((team) => (
+  const teamOptions = data.team.map((team) => (
     <option key={team.Trigram} value={team.Trigram}>
       {team.Name}
     </option>

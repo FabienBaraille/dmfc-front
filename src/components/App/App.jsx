@@ -39,11 +39,13 @@ const App = () => {
     dispatch(setIsLogged(logStatus));
     if (logStatus) {
       dispatch(setInputValue('pseudo', getCookies('userName')));
+      dispatch(setInputValue('role', getCookies('role')));
     }
   }, []);
 
   const isLoading = useSelector((state) => state.datas.isLoading);
   const isLogged = useSelector((state) => state.user.isLogged);
+  const isCreated = useSelector((state) => state.user.isCreated);
 
   useEffect(() => {
     dispatch(getAllLeague());
@@ -53,9 +55,7 @@ const App = () => {
     } else {
       navigate('/login');
     }
-  }, [isLogged]);
-
-  const userRole = getCookies('role');
+  }, [isLogged, isCreated]);
 
   if (isLoading) {
     return (
@@ -66,7 +66,7 @@ const App = () => {
   return (
     <>
       <Header />
-      {isLogged && <Navbar userRole={userRole} />}
+      {isLogged && <Navbar />}
       <main>
         <Routes>
           <Route path='/login' element={

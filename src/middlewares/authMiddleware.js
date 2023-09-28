@@ -1,6 +1,6 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, CREATE_USER, setIsLogged } from "../actions/user";
+import { CHECK_LOGIN, CREATE_USER, setIsCreated, setIsLogged } from "../actions/user";
 import { leagueByName } from '../Utils/filters/leagueFilter';
 import { roleName } from '../Utils/filters/usersFilter';
 
@@ -9,6 +9,8 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CHECK_LOGIN: {
       try {
         const { data } = await axios.post(
+          // adresse pour Charli et Quentin remplacer 0.0.0.0 par fabien-baraille.vpnuser.lan
+          // Demandez moi pour que je démarre le serveur ;) 
           'http://0.0.0.0:8080/api/login_check',
           {
           username: store.getState().user.pseudo,
@@ -38,6 +40,7 @@ const authMiddelware = (store) => (next) => async (action) => {
             league: leagueId,
           }
         )
+        store.dispatch(setIsCreated(true));
         console.log('response', response);
       } catch (error) {
         console.log(error.data.errors);

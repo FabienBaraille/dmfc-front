@@ -22,7 +22,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(data)
         const userRole = findUserRole(data, store.getState().user.pseudo);
         const usersOfLeague = usersFromLeague(data, store.getState().user.pseudo);
         document.cookie = `role=${userRole};max-age=60*60*24*15`;

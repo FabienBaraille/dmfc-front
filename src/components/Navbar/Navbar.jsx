@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import './Navbar.scss';
+import { useSelector } from 'react-redux';
 
-const Navbar = ({ userRole }) => {
+const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
+
+  const userRole = useSelector((state) => state.user.role);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -51,10 +53,6 @@ const Navbar = ({ userRole }) => {
       </div>      
     </nav>
   );
-}
-
-Navbar.propTypes = {
-  userRole: PropTypes.string,
 }
 
 export default Navbar;

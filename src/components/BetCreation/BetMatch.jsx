@@ -7,7 +7,7 @@ const BetMatch = () => {
   const dispatch = useDispatch();
   const betListNumber = useSelector((state) => state.bet.betNumber);
 
-  const teamsOptions = data.Team.map((team) => (
+  const teamsOptions = data.team.map((team) => (
     <option key={team["Name"]}>{team["Trigram"]} - {team["Name"]}</option>
   ));  
 
@@ -18,7 +18,7 @@ const BetMatch = () => {
   }
 
   return (
-    <form key={betListNumber} id={betListNumber} onSubmit={handleDelete}>
+    <form className="match-line" key={betListNumber} id={betListNumber} onSubmit={handleDelete}>
       <select>
         {teamsOptions}
       </select>

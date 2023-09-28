@@ -1,5 +1,38 @@
 @use '/src/styles/variables' as v;
 
+#landscape-message {
+  display: none;
+}
+
+#bet_result {
+  font-family: v.$main-font;
+  text-align: center;
+  h2 {
+    padding-bottom: 8px;
+  }
+}
+form {
+  display: flex;
+  flex-flow: column wrap;
+}
+.home-team, .odd-team {
+  margin: 5px 0px;
+  div {
+    margin: 5px 0px;
+  }
+}
+.at {
+  margin: 3px 0px 10px 0px;
+  font-size: large;
+}
+.bet_result {
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+  padding: 10px 0px;
+  input {
+    margin-left: 10px;
+    width: 25%;
+  }
+}
 button {
   width: 70%;
   background: v.$nav-back;
@@ -7,44 +40,81 @@ button {
   border: unset;
   padding: 0.3rem;
   border-radius: 5px;
-  font-family: v.$main-font;
   margin: 0.7rem;
   font-size: 1.1rem;
-    &:hover {
-      background: v.$orange;
-      color: v.$nav-back;
-    }
-  }
-
-form {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
+  align-self: center;
 }
-.bet_result {
+input, select {
+  border: unset;
+  padding: 0.2rem;
+  border-radius: 5px;
+  background: v.$cell-back;
+  box-shadow: 0 0 2px 2px v.$shadow;
+}
+select {
+  width: 100%;
+}
+.score {
   display: flex;
-  align-items: center;
-  div {
-    margin: 0.7rem 0;
-  }
-  label {
-    font-family: v.$main-font;
-    margin: 0.7rem;
-    font-size: 1.1rem;
-  }
-  input, select {
+  text-align: center;
+}
+
+
+@media screen and (min-width : 768px) {
+  button {
+    width: 70%;
+    background: v.$nav-back;
+    color: v.$orange;
     border: unset;
     padding: 0.3rem;
     border-radius: 5px;
+    margin: 0.7rem;
+    font-size: 1.1rem;
+      &:hover {
+        background: v.$orange;
+        color: v.$nav-back;
+      }
   }
-  input, select {
-    background: v.$cell-back;
-    box-shadow: 0 0 2px 2px v.$shadow;
+  
+  form {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
   }
-  input{
-    width: 25%
+
+  .bet_result {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px 0px;
+    div {
+      margin: 0.7rem 0;
+    }
+    label {
+      font-family: v.$main-font;
+      margin: 0.7rem;
+      font-size: 1.1rem;
+    }
+    input, select {
+      border: unset;
+      padding: 0.3rem;
+      border-radius: 5px;
+      background: v.$cell-back;
+      box-shadow: 0 0 2px 2px v.$shadow;
+    }
+    input{
+      width: 25%
+    }
+    select {
+      width: 80%
+    }
   }
-  select {
-    width: 25.8rem
+}
+
+@media screen and (max-height: 399px) {
+  .at {
+    padding-left: 20px;
+  }
+  .bet_result select {
+    margin-left: 20px;
   }
 }

@@ -3,35 +3,36 @@ import data from "../../data/data";
 import Input from "../Utils/Input";
 
 const GameBetResult = () => {
-  const teamsOptions = data.Team.map((team) => (
+  const teamsOptions = data.team.map((team) => (
     <option key={team["Name"]}>{team["Trigram"]} - {team["Name"]}</option>
   ));  
 
   return (
-    <div className="bet_result">
-      <div>
-        <select>
-          {teamsOptions}
-        </select>
+      <div className="bet_result">
+        <div className="home-team">
+          <select>
+            {teamsOptions}
+          </select>
+          <div className="score">
+            <Input label="Score" htmlFor="score" id="score" placeholder="000" type="number"/>
+            <Input label="Cote bookie" placeholder="0.00" htmlFor="bookie1" id="bookie1"/>
+          </div>
+        </div>
+        <div className="at">@</div>
+        <div className="odd-team">
+          <select>
+            {teamsOptions}
+          </select>
+          <div className="score">
+            <Input label="Score" htmlFor="score" id="score" placeholder="000" type="number" />
+            <Input label="Cote bookie" placeholder="0.00" htmlFor="bookie2" id="bookie2"/>
+          </div>
+        </div>
         <div>
-          <Input label="Score" htmlFor="score" id="score" placeholder="000" type="number"/>
-          <Input label="Cote bookie" placeholder="0.00" htmlFor="bookie1" id="bookie1"/>
+          <p>Sélection auto "winning team"</p>
+          <p>Diff : "calcul auto"</p>
         </div>
       </div>
-      <div>
-        <select>
-          {teamsOptions}
-        </select>
-        <div>
-          <Input label="Score" htmlFor="score" id="score" placeholder="000" type="number" />
-          <Input label="Cote bookie" placeholder="0.00" htmlFor="bookie2" id="bookie2"/>
-        </div>
-      </div>
-      <div>
-        <p>Sélection auto "winning team"</p>
-        <p>Diff : "calcul auto"</p>
-      </div>
-    </div>
   )
 };
 

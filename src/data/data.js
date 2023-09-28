@@ -1,55 +1,59 @@
 export default {
   "User": [
     {  
-      "Username": "Fabien",
+      "id": 1,
+      "username": "Fabien",
       "Password": "123456",
       "Email": "tocard@gmail.com",
       "League": "La ligue des gentlemens extraordinaires",
-      "Role": "DMFC",
-      "Title": "DMFC of the beginning",
-      "Score": null,
-      "OldPosition": null,
+      "role": ["ROLE_DMFC"],
+      "title": "DMFC of the beginning",
+      "score": null,
+      "position": null,
       "SeasonPlayed": 2,
-      "Team": "NOP"
+      "team": "NOP"
     },
     {
-      "Username": "Quentin",
+      "id": 2,
+      "username": "Quentin",
       "Password": "abcdef",
       "Email": "quentin@gmail.com",
       "League": "La ligue des gentlemens extraordinaires",
-      "Role": "Joueur",
-      "Title": null,
-      "Score": 22,
-      "OldPosition": 1,
+      "role": "Joueur",
+      "title": null,
+      "score": 22,
+      "position": 1,
       "SeasonPlayed": 2,
-      "Team": "LAL"
+      "team": "LAL"
     },
     {
-      "Username": "Charli",
+      "id": 3,
+      "username": "Charli",
       "Password": "123456",
       "Email": "charli@gmail.com",
       "League": "La ligue des gentlemens extraordinaires",
-      "Role": "Joueur",
-      "Title": "MVP",
-      "Score": 40,
-      "OldPosition": 2,
+      "role": "Joueur",
+      "title": "MVP",
+      "score": 40,
+      "position": 2,
       "SeasonPlayed": 2,
-      "Team": "PHX"
+      "team": "PHX"
     },
     {
-      "Username": "Tony",
+      "id": 4,
+      "username": "Tony",
       "Password": "abcdef",
       "Email": "tony@gmail.com",
       "League": "La ligue des gentlemens extraordinaires",
-      "Role": "Joueur",
-      "Title": null,
-      "Score": 35,
-      "OldPosition": 3,
+      "role": "Joueur",
+      "title": null,
+      "score": 35,
+      "position": 3,
       "SeasonPlayed": 2,
-      "Team": "LAL"
+      "team": "LAL"
     },
   ],
-  "Team":[
+  "team":[
     {
       "Trigram": "PHX",
       "Name": "Phoenix Suns",
@@ -91,12 +95,14 @@ export default {
   ],
   "League": [
     {
-      "League name": "La ligue des gentlemen extraordinaires",
-      "League description": "Le titre n'est pas assez explicite ?"
+      "id": 1,
+      "leagueName": "La ligue des gentlemen extraordinaires",
+      "leaguDescription": "Le titre n'est pas assez explicite ?"
     },
     {
-      "League name": "La ligue des justiciers",
-      "League description": "Tu sais les mecs un peu balèze en cape"
+      "id": 2,
+      "leagueName": "La ligue des justiciers",
+      "leaguDescrition": "Tu sais les mecs un peu balèze en cape"
     },
   ],
   "Game": [

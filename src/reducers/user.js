@@ -1,4 +1,4 @@
-import { SET_INPUT_VALUE, TOGGLE_CREATION_MODE } from "../actions/user";
+import { SET_INPUT_VALUE, SET_IS_LOGGED, TOGGLE_CREATION_MODE } from "../actions/user";
 
 const initialState = {
   'pseudo': '',
@@ -6,9 +6,9 @@ const initialState = {
   'password': '',
   'DMFC': false,
   'league': '',
-  'token': '',
-  'isLogged': false,
+  'league_name': '',
   'isCreationMode': false,
+  'isLogged': false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -21,11 +21,15 @@ const reducer = (state = initialState, action = {}) => {
     case TOGGLE_CREATION_MODE:
       return {
         ...state,
-        'isCreationMode': action.isCreationMode,
+        isCreationMode: action.isCreationMode,
+      }
+    case SET_IS_LOGGED:
+      return {
+        ...state,
+        isLogged: action.isLogged,
       }
     default:
       return state;
   }
 };
-
 export default reducer;

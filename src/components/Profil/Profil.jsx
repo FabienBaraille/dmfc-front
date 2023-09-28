@@ -17,7 +17,7 @@ function Profil() {
   const league = useSelector((state) => state.user.league);
   const favoriteTeams = useSelector((state) => state.teams.favoriteTeams);
 
-  const teamOptions = data.Team.map((team) => (
+  const teamOptions = data.team.map((team) => (
     <option key={team.Trigram} value={team.Trigram}>
       {team.Name}
     </option>
@@ -38,7 +38,7 @@ function Profil() {
 
   return (
     <Wrapper className="profil-page">
-       <div className ="profil">
+      <div className ="profil">
         <h3>Profil</h3>
         <p>Email: {email}</p>
         <p>Pseudo: {pseudo}</p>
@@ -75,7 +75,15 @@ function Profil() {
             <div className="form-btn">
             <button type="submit">Soumettre</button>
             </div>
+        </div>
+        <div>
+          <label>Équipe Préférée: </label>
+          <select type="team" name="team" value={team} onChange={handleInputChange}>
+          <option value="">Sélectionnez une équipe</option>{teamOptions}</select>
+          <div className="form-btn">
+          <button type="submit">Soumettre</button>
           </div>
+        </div>
       </form>
     </Wrapper>
   );

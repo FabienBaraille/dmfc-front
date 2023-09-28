@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import './Navbar.scss';
 
-function Navbar() {
+const Navbar = ({ userRole }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -37,14 +39,22 @@ function Navbar() {
       </div>
 
       <div className={`navbar ${showMenu ? 'show-menu' : ''}`}>
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/" onClick={handleLinkClick}>Home</NavLink>
         <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/profil" onClick={handleLinkClick}>Profil</NavLink>
-        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/creation/SR"onClick={handleLinkClick}>Bet</NavLink>
+        {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/creation/SR" onClick={handleLinkClick}>Création matchs</NavLink> }
+        {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/scores/SR" onClick={handleLinkClick}>Résultats</NavLink> }
+        {userRole === 'ROLE_JOUEUR' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/player-bet"onClick={handleLinkClick}>Bet</NavLink> }
         <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/rankings"onClick={handleLinkClick}>Général Ranking</NavLink>
-        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/stats"onClick={handleLinkClick}>Général Stats</NavLink>
-        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/nba-infos"onClick={handleLinkClick}>NBA Cheat Sheet</NavLink>
+        {userRole === 'ROLE_JOUEUR' &&  <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/stats"onClick={handleLinkClick}>Général Stats</NavLink> }
+        {/* <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/nba-infos"onClick={handleLinkClick}>NBA Cheat Sheet</NavLink> */}
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/logout"onClick={handleLinkClick}>Déconnexion</NavLink>
       </div>      
-      </nav>
+    </nav>
   );
+}
+
+Navbar.propTypes = {
+  userRole: PropTypes.string,
 }
 
 export default Navbar;

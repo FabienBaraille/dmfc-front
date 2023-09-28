@@ -11,13 +11,12 @@ import { positionDisplay } from '../../Utils/display/positionDisplay';
 const Rankings = () => {
 
   const usersList = useSelector((state) => state.datas.allUsers);
-
   const sortedPlayersList = usersSortByScore(usersList);
+  const userPlaying = sortedPlayersList.filter(({roles}) => !roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_DMFC'));
 
-  const playerList = sortedPlayersList.map(({id, username, role, score, position} , index) => {
-    const userRole = role[0];
-    if (userRole !== "ROLE_DMFC" && userRole !== "ROLE_ADMIN") {
-      const changePos = parseInt(position) - (index + 1);
+  const playerList = userPlaying.map(({id, username, score, oldPosition} , index) => {
+      
+      const changePos = parseInt(oldPosition) - (index + 1);
       const posMark = positionDisplay(changePos);
 
       return (
@@ -32,7 +31,6 @@ const Rankings = () => {
             <th><Link to={`/player/${id}`}>{score}</Link></th>
         </tr>
       )
-    }
   })
 
   return (

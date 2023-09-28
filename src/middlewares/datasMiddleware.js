@@ -1,6 +1,6 @@
-// import axios from 'redaxios';
+import axios from 'redaxios';
 
-// import { getCookies } from "../Utils/cookies/getCookies";
+import { getCookies } from "../Utils/cookies/getCookies";
 
 import { 
   GET_USERS_LIST,
@@ -9,18 +9,24 @@ import {
   setAllLeague,
   setIsLoading 
 } from "../actions/datas";
-
-import data from '../data/data';
+import { findUserRole, usersFromLeague } from '../Utils/filters/usersFilter';
 
 const datasMiddleware = (store) => (next) => async (action) => {
-  // const token = getCookies('token');
+  const token = getCookies('token');
   switch (action.type) {
     case GET_USERS_LIST:
       store.dispatch(setIsLoading())
       try {
-        // const { data } = await axios.get(`http://maxime-lemarchand.vpnuser.lan:8001/api/league/${action.id}/users`);
-        // store.dispatch(setUsersList(data));
-        store.dispatch(setUsersList(data.User));
+        const { data } = await axios.get(`http://0.0.0.0:8080/api/users`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(data)
+        const userRole = findUserRole(data, store.getState().user.pseudo);
+        const usersOfLeague = usersFromLeague(data, store.getState().user.pseudo);
+        document.cookie = `role=${userRole};max-age=60*60*24*15`;
+        store.dispatch(setUsersList(usersOfLeague));
       } catch (error) {
         console.log(error);
       }
@@ -28,9 +34,12 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_ALL_LEAGUE:
       store.dispatch(setIsLoading())
       try {
-        // const { data } = await axios.get('http://maxime-lemarchand.vpnuser.lan:8001/api/leagues');
-        // store.dispatch(setAllLeague(data));
-        store.dispatch(setAllLeague(data.League));
+        const { data } = await axios.get(`http://0.0.0.0:8080/api/leagues`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        store.dispatch(setAllLeague(data));
       } catch (error) {
         console.log(error);
       }

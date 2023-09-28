@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
-import { setIsLogged } from "../../actions/user";
+import { setInputValue, setIsLogged } from "../../actions/user";
 import { getAllLeague, getUsersList } from "../../actions/datas";
 
 import Header from '../Header/Header';
@@ -37,6 +37,9 @@ const App = () => {
   
   useEffect(() => {
     dispatch(setIsLogged(logStatus));
+    if (logStatus) {
+      dispatch(setInputValue('pseudo', getCookies('userName')));
+    }
   }, []);
 
   const isLoading = useSelector((state) => state.datas.isLoading);
@@ -46,7 +49,7 @@ const App = () => {
     dispatch(getAllLeague());
     if (isLogged) {
       navigate('/');
-      dispatch(getUsersList(1));
+      dispatch(getUsersList());
     } else {
       navigate('/login');
     }

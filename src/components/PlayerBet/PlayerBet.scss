@@ -2,6 +2,7 @@
 
 .player_bet {
   text-align: center;
+  justify-content: center;
 }
 .match {
   font-family: "Bangers";
@@ -13,13 +14,11 @@
   font-size: larger;
   border-collapse: collapse;
 }
-
 .match_timer {
   align-self: center;
   margin-top: 10px;
   font-size: medium;
 }
-
 .teams {
   display: flex;
   justify-content: space-evenly;
@@ -73,8 +72,7 @@ button {
     padding: 20px 10px;
   }
   .match {
-    width: 25%;
-    padding: 20px 0px;
+    padding: 20px 10px;
     margin: 10px 0px;
   }
 }

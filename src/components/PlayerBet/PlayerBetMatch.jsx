@@ -24,8 +24,8 @@ const PlayerBetMatch = () => {
           </label>
           <input type="checkbox" />
         </div>
-        <Input label="Diff" htmlFor="diff" id="diff" type="number" />
       </div>
+      <Input label="Diff" htmlFor="diff" id="diff" type="number" />
       <div className="match_timer">{matchTime}</div>
     </div>
   )

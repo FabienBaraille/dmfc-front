@@ -8,11 +8,6 @@ const PlayerBet = () => {
     <h2>Pronostique SR : Round 2</h2>
       <div className="player_bet">
         <PlayerBetMatch />
-        <PlayerBetMatch />
-        <PlayerBetMatch />
-        <PlayerBetMatch />
-        <PlayerBetMatch />
-        <PlayerBetMatch />
       </div>
       <button type="submit">Valider mes choix</button>
     </Wrapper>

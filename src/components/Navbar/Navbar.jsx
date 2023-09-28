@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './Navbar.scss';
@@ -24,8 +24,14 @@ const Navbar = ({ userRole }) => {
     };
   }, []);
 
+  const handleLinkClick = () => {
+    if (window.innerWidth <= 1000) {
+      setShowMenu(false);
+    }
+  };
+
   return (
-    <>
+    <nav>
       <div className="hamburger" onClick={toggleMenu}>
         <div className="bar"></div>
         <div className="bar"></div>
@@ -33,17 +39,17 @@ const Navbar = ({ userRole }) => {
       </div>
 
       <div className={`navbar ${showMenu ? 'show-menu' : ''}`}>
-        <Link to="/">Home</Link>
-        <Link to="/profil">Profil</Link>
-        {userRole === 'ROLE_JOUEUR' && <Link to="/player-bet">Bet</Link>}
-        {userRole === 'ROLE_DMFC' && <Link to="/creation/SR">Création matchs</Link>}
-        {userRole === 'ROLE_DMFC' && <Link to="/scores/SR">Score matchs</Link>}
-        <Link to="/rankings">Général Ranking</Link>
-        {userRole === 'ROLE_JOUEUR' && <Link to="/">Général Stats</Link>}
-        {/* <Link to="/">NBA Cheat Sheet</Link> */}
-        <Link to="/logout">Déconnexion</Link>
-      </div>
-    </>
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/" onClick={handleLinkClick}>Home</NavLink>
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/profil" onClick={handleLinkClick}>Profil</NavLink>
+        {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/creation/SR" onClick={handleLinkClick}>Création matchs</NavLink> }
+        {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/scores/SR" onClick={handleLinkClick}>Résultats</NavLink> }
+        {userRole === 'ROLE_JOUEUR' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/player-bet"onClick={handleLinkClick}>Bet</NavLink> }
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/rankings"onClick={handleLinkClick}>Général Ranking</NavLink>
+        {userRole === 'ROLE_JOUEUR' &&  <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/stats"onClick={handleLinkClick}>Général Stats</NavLink> }
+        {/* <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/nba-infos"onClick={handleLinkClick}>NBA Cheat Sheet</NavLink> */}
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/logout"onClick={handleLinkClick}>Déconnexion</NavLink>
+      </div>      
+    </nav>
   );
 }
 

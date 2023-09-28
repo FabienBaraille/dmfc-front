@@ -15,14 +15,20 @@
   right: 0;
   top: 20;
 
-  a {
-    padding: 0.5em 1.1em;
-    display: block;
+  .menu {
+    margin-left: 0.6em;
+    margin-right: 1.6em;
+    color: v.$titles;
+
+    &--active{ 
+    color: v.$orange;
+    }
+    
     &:hover {
       background: v.$orange;
       color: v.$nav-back;
     }
-  }
+}
 
   @media (max-width: 1000px) {
     display: none;
@@ -39,7 +45,7 @@
   top: 3em;
   right: 1em;
   gap: 0.5em;
-  
+
 
   @media (max-width: 768px) {
     margin-top: -1.5em;
@@ -62,7 +68,7 @@
   padding: 0.5em; 
   text-align: right; 
   background-color: v.$nav-back;
-  height: fit-content;
+  height: 100%;
   max-width: fit-content;
   margin-left: auto;
   position: fixed;

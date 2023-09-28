@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-const Input = ({label, htmlFor, type, value, id = null, onChange = null, placeholder = null}) => {
+const Input = ({label, htmlFor, type, value, id, className = null, onChange = null, placeholder = null}) => {
   return (
-    <>
+    <div className={className}>
       <label htmlFor={htmlFor}>{label}</label>
       <input 
         type={type} 
@@ -11,16 +11,17 @@ const Input = ({label, htmlFor, type, value, id = null, onChange = null, placeho
         value={value}
         placeholder={placeholder}
       />
-    </>
+    </div>
   )
 };
 
 Input.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   htmlFor: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  className: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
 };

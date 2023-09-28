@@ -47,11 +47,9 @@ const Connexion = () => {
           {/* Création de compte */}
           {isCreationMode &&
             <>
-              <div className="dmfc-opt">
-                <Input label="DMFC" htmlFor="dmfc" type="checkbox" id="DMFC" onChange={handleInputCheckbox} value={DMFC} />
-              </div>
+              <Input className="dmfc-opt" label="DMFC" htmlFor="dmfc" type="checkbox" id="DMFC" onChange={handleInputCheckbox} value={DMFC} />
               <div>
-                <label htmlFor="league_name">Ligue :</label>
+                <label htmlFor="league">Ligue :</label>
                 <select 
                   id="league" 
                   placeholder="Nom de la ligue" 
@@ -62,18 +60,12 @@ const Connexion = () => {
                 {leagueOptions}
                 </select>
               </div>
-              <div>
                 <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com"/>
-              </div>
             </>
           }
           {/* Fin de création */}
-          <div>
             <Input label="Login :" htmlFor="pseudo" id="pseudo" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo"/>
-          </div>
-          <div>
             <Input label="Mot de Passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe"/>
-          </div>
           <div className="form-btn">
             <button type="submit">{isCreationMode ? "Créer" : "Connexion"} </button>
             <button type="button" onClick={handleConnexion}>{isCreationMode ? "J'ai déjà un compte" : "Créer un compte"}</button>

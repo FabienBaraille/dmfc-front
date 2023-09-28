@@ -1,0 +1,50 @@
+@use '/src/styles/variables' as v;
+
+button {
+  width: 70%;
+  background: v.$nav-back;
+  color: v.$orange;
+  border: unset;
+  padding: 0.3rem;
+  border-radius: 5px;
+  font-family: v.$main-font;
+  margin: 0.7rem;
+  font-size: 1.1rem;
+    &:hover {
+      background: v.$orange;
+      color: v.$nav-back;
+    }
+  }
+
+form {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+.bet_result {
+  display: flex;
+  align-items: center;
+  div {
+    margin: 0.7rem 0;
+  }
+  label {
+    font-family: v.$main-font;
+    margin: 0.7rem;
+    font-size: 1.1rem;
+  }
+  input, select {
+    border: unset;
+    padding: 0.3rem;
+    border-radius: 5px;
+  }
+  input, select {
+    background: v.$cell-back;
+    box-shadow: 0 0 2px 2px v.$shadow;
+  }
+  input{
+    width: 25%
+  }
+  select {
+    width: 25.8rem
+  }
+}

@@ -1,7 +1,7 @@
 @use '/src/styles/variables' as v;
 
 .to-the-top {
-  font-family: 'Bangers';
+  font-family: v.$main-font;
   font-size: 1rem;
   display: none;
   border: none;

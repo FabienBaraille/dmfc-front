@@ -36,10 +36,10 @@ const App = () => {
   useEffect(() => {
     dispatch(getAllLeague());
     if (isLogged) {
-      navigate('/infos');
+      navigate('/');
       dispatch(getUsersList(1));
     } else {
-      navigate('/');
+      navigate('/login');
     }
   }, [isLogged]);
 
@@ -55,13 +55,14 @@ const App = () => {
       {isLogged && <Navbar />}
       <main>
         <Routes>
-          <Route path='/' element={
+          <Route path='/login' element={
             <>
               <Connexion />
               <SimpleRules />
             </>
           } />
-          <Route path='/infos' element={<Home />} />
+          <Route path='/' element={<Home />} />
+          <Route path="/profil" element={<Profil />} />
           <Route path='/creation/SR' element={<RsBetCreation />} />
           <Route path='/scores/SR' element={<BetResult />} />
           <Route path='/rankings' element={<Rankings />} />
@@ -69,16 +70,12 @@ const App = () => {
           <Route path='/rules' element={<ExtendedRules />} />
           <Route path='/terms-and-conditions' element={<Terms />} />
           <Route path='/player-bet' element={<PlayerBet />} />
+          <Route path="/rules" element={<SimpleRules />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </main>
       <UpButton />
       <Footer />
-      <Routes>
-        <Route path="/profil" element={<Profil />} />
-        <Route path="/connexion" element={<Connexion />} />
-        <Route path="/rules" element={<SimpleRules />} />
-      </Routes>
     </>
   )
 }

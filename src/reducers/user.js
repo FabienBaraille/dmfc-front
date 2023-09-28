@@ -8,7 +8,7 @@ const initialState = {
   'league': '',
   'league_name': '',
   'isCreationMode': false,
-  'isLogged': false,
+  'isLogged': true,
 };
 
 const reducer = (state = initialState, action = {}) => {

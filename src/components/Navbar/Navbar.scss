@@ -15,16 +15,20 @@
   right: 0;
   top: 20;
 
-  a {
+  .menu {
     margin-left: 0.6em;
     margin-right: 1.6em;
+    color: v.$titles;
+
+    &--active{ 
+    color: v.$orange;
   }
+}
 
   @media (max-width: 1000px) {
     display: none;
   }
 }
-
 
 .hamburger {
   display: none;
@@ -36,7 +40,7 @@
   top: 3em;
   right: 1em;
   gap: 0.5em;
-  
+
 
   @media (max-width: 768px) {
     margin-top: -1.5em;
@@ -61,7 +65,7 @@
   padding: 1em; 
   text-align: right; 
   background-color: v.$nav-back;
-  height: 40%;
+  height: 100%;
   max-width: fit-content;
   margin-left: auto;
   position: fixed;

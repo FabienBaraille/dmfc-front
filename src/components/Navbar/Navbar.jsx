@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navbar.scss';
 
 function Navbar() {
@@ -22,8 +22,14 @@ function Navbar() {
     };
   }, []);
 
+  const handleLinkClick = () => {
+    if (window.innerWidth <= 1000) {
+      setShowMenu(false);
+    }
+  };
+
   return (
-    <>
+    <nav>
       <div className="hamburger" onClick={toggleMenu}>
         <div className="bar"></div>
         <div className="bar"></div>
@@ -31,13 +37,13 @@ function Navbar() {
       </div>
 
       <div className={`navbar ${showMenu ? 'show-menu' : ''}`}>
-        <Link to="/profil">Profil</Link>
-        <Link to="/">Bet</Link>
-        <Link to="/rankings">Général Ranking</Link>
-        <Link to="/">Général Stats</Link>
-        <Link to="/">NBA Cheat Sheet</Link>
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/profil" onClick={handleLinkClick}>Profil</NavLink>
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/creation/SR"onClick={handleLinkClick}>Bet</NavLink>
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/rankings"onClick={handleLinkClick}>Général Ranking</NavLink>
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/stats"onClick={handleLinkClick}>Général Stats</NavLink>
+        <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/nba-infos"onClick={handleLinkClick}>NBA Cheat Sheet</NavLink>
       </div>      
-    </>
+      </nav>
   );
 }
 

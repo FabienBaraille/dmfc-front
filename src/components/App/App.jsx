@@ -37,16 +37,14 @@ const App = () => {
           <Route path='/rankings' element={<Rankings />} />
           <Route path='/rules' element={<ExtendedRules />} />
           <Route path='/terms-and-conditions' element={<Terms />} />
+          <Route path='/profil' element={<Profil />} />
+          <Route path='/connexion' element={<Connexion />} />
+          <Route path='/rules' element={<SimpleRules />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </main>
       <UpButton />
       <Footer />
-      <Routes>
-        <Route path="/profil" element={<Profil />} />
-        <Route path="/connexion" element={<Connexion />} />
-        <Route path="/rules" element={<SimpleRules />} />
-      </Routes>
     </>
   )
 }

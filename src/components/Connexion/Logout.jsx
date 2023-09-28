@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { setIsLogged } from "../../actions/user";
+import { setInputValue, setIsLogged } from "../../actions/user";
 
 import Wrapper from "../Wrapper/Wrapper";
 
@@ -12,6 +12,8 @@ const Logout = () => {
     document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
     document.cookie = `role=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
     document.cookie = `token=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+    dispatch(setInputValue('pseudo', ''));
+    dispatch(setInputValue('password', ''));
     dispatch(setIsLogged(false));
   }
 

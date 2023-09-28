@@ -4,13 +4,17 @@ import './PlayerBet.scss'
 
 const PlayerBet = () => {
   return (
-    <Wrapper>
+    <Wrapper name="player_bet">
+    <h2>Pronostique SR : Round 2</h2>
       <div className="player_bet">
-        <h2>Pronostique SR : Round 2</h2>
         <PlayerBetMatch />
         <PlayerBetMatch />
-        <button type="submit">Valider mes choix</button>
+        <PlayerBetMatch />
+        <PlayerBetMatch />
+        <PlayerBetMatch />
+        <PlayerBetMatch />
       </div>
+      <button type="submit">Valider mes choix</button>
     </Wrapper>
   )
 };

@@ -10,6 +10,7 @@ import {
   setIsLoading 
 } from "../actions/datas";
 import { findUserRole, usersFromLeague } from '../Utils/filters/usersFilter';
+import { setInputValue } from '../actions/user';
 
 const datasMiddleware = (store) => (next) => async (action) => {
   const token = getCookies('token');
@@ -24,7 +25,8 @@ const datasMiddleware = (store) => (next) => async (action) => {
         });
         const userRole = findUserRole(data, store.getState().user.pseudo);
         const usersOfLeague = usersFromLeague(data, store.getState().user.pseudo);
-        document.cookie = `role=${userRole};max-age=60*60*24*15`;
+        document.cookie = `role=${userRole[0]};max-age=60*60*24*15`;
+        store.dispatch(setInputValue('role', userRole[0]));
         store.dispatch(setUsersList(usersOfLeague));
       } catch (error) {
         console.log(error);

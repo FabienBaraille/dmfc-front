@@ -11,7 +11,7 @@ const authMiddelware = (store) => (next) => async (action) => {
         const { data } = await axios.post(
           // adresse pour Charli et Quentin remplacer 0.0.0.0 par fabien-baraille.vpnuser.lan
           // Demandez moi pour que je démarre le serveur ;) 
-          'http://0.0.0.0:8080/api/login_check',
+          'http://fabien-baraille.vpnuser.lan:8080/api/login_check',
           {
           username: store.getState().user.pseudo,
           password: store.getState().user.password,

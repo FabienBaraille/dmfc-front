@@ -17,7 +17,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_USERS_LIST:
       store.dispatch(setIsLoading())
       try {
-        const { data } = await axios.get(`http://0.0.0.0:8080/api/users`, {
+        const { data } = await axios.get(`http://fabien-baraille.vpnuser.lan:8080/api/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -33,7 +33,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_ALL_LEAGUE:
       store.dispatch(setIsLoading())
       try {
-        const { data } = await axios.get(`http://0.0.0.0:8080/api/leagues`, {
+        const { data } = await axios.get(`http://fabien-baraille.vpnuser.lan:8080/api/leagues`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

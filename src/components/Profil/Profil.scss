@@ -1,6 +1,6 @@
 @use '../../styles/variables' as v;
 
-.wrapper {
+#profil-page {
   margin-top: 3em;
 }
 
@@ -11,7 +11,9 @@
     text-align: center;
   }
 }
-
+.strong {
+  color:v.$orange;
+}
 .change-info {
   display: flex;
   flex-direction: column;
@@ -34,6 +36,7 @@
       border: unset;
       padding: 0.3rem;
       border-radius: 5px;
+      width: 100%;
     }
 
     input, select {
@@ -75,7 +78,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .profil-page {
+  #profil-page {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -83,7 +86,7 @@
     align-items: center;
     max-height: 100vh;
   }
-  .wrapper {
+  .profil-page {
     width: 80%;
     display: flex;
     justify-content: space-between;

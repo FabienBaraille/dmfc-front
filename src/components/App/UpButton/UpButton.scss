@@ -14,6 +14,8 @@
   cursor: cell;
   box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.6);
   padding: 0.5rem;
+  width: fit-content;
+  
   &:hover {
     background: v.$orange;
     color: v.$nav-back;

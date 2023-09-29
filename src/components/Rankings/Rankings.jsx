@@ -15,22 +15,22 @@ const Rankings = () => {
   const userPlaying = sortedPlayersList.filter(({roles}) => !roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_DMFC'));
 
   const playerList = userPlaying.map(({id, username, score, oldPosition} , index) => {
-      
-      const changePos = parseInt(oldPosition) - (index + 1);
-      const posMark = positionDisplay(changePos);
+    const position = oldPosition === null ? userPlaying.length : oldPosition;
+    const changePos = parseInt(position) - (index + 1);
+    const posMark = positionDisplay(changePos);
 
-      return (
-        <tr key={id} className='users-row'>
-            <th><Link to={`/player/${id}`}>{`#${index + 1}`}</Link></th>
-            {<th className={changePos > 0 ? "green" : changePos < 0 ? "red" : ""}>
-              <Link to={`/player/${id}`}>
-                {posMark}
-              </Link>
-            </th>}
-            <th className="player"><Link to={`/player/${id}`}>{username}</Link></th>
-            <th><Link to={`/player/${id}`}>{score}</Link></th>
-        </tr>
-      )
+    return (
+      <tr key={id} className='users-row'>
+          <th><Link to={`/player/${id}`}>{`#${index + 1}`}</Link></th>
+          {<th className={changePos > 0 ? "green" : changePos < 0 ? "red" : ""}>
+            <Link to={`/player/${id}`}>
+              {posMark}
+            </Link>
+          </th>}
+          <th className="player"><Link to={`/player/${id}`}>{username}</Link></th>
+          <th><Link to={`/player/${id}`}>{score}</Link></th>
+      </tr>
+    )
   })
 
   return (

@@ -1,0 +1,11 @@
+@use '/src/styles/variables' as v;
+
+#GeneralStats {
+  h3 {
+    display: flex;
+    align-items: center;
+  }
+  .logo {
+    width: 80px;
+  }
+}

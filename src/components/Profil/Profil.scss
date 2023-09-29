@@ -55,6 +55,7 @@
         background: v.$nav-back;
         color: v.$orange;
         border: unset;
+        width: fit-content;
         &:hover {
           background: v.$orange;
           color: v.$nav-back;
@@ -86,7 +87,7 @@
     align-items: center;
     max-height: 100vh;
   }
-  .profil-page {
+  #profil-page {
     width: 80%;
     display: flex;
     justify-content: space-between;

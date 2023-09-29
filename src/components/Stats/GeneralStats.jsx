@@ -23,7 +23,7 @@ const GeneralStats = () => {
       <h2>Statistiques saison en cours</h2>
       <h3>{username}</h3>
       <h3>{title}</h3>
-      <h3>{Trigram} - {Name} - <img src={`/src/assets/logos/${Logo}`} alt="" /></h3>
+      <h3>{Trigram} - {Name} - <img className='logo' src={`/src/assets/logos/${Logo}`} alt="" /></h3>
       <h4>{`Score : ${score}`}</h4>
       <div>
         <h4>Classement acuel</h4>

@@ -10,7 +10,8 @@ const authMiddelware = (store) => (next) => async (action) => {
       try {
         const { data } = await axios.post(
           // adresse pour Charli et Quentin remplacer 0.0.0.0 par fabien-baraille.vpnuser.lan
-          // Demandez moi pour que je démarre le serveur ;) 
+          // Demandez moi pour que je démarre le serveur ;)
+          // login : QuentinR  mdp : test
           'http://0.0.0.0:8080/api/login_check',
           {
           username: store.getState().user.pseudo,
@@ -41,9 +42,9 @@ const authMiddelware = (store) => (next) => async (action) => {
           }
         )
         store.dispatch(setIsCreated(true));
-        console.log('response', response);
+        // console.log('response', response);
       } catch (error) {
-        console.log(error.data.errors);
+        console.log(error);
       }
     }
     break;

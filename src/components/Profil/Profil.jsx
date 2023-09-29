@@ -37,7 +37,7 @@ function Profil() {
 
 
   return (
-    <Wrapper className="profil-page">
+    <Wrapper name="profil-page">
       <div className ="profil">
         <h3>Profil</h3>
         <p>Email: {email}</p>

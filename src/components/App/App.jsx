@@ -75,7 +75,6 @@ const App = () => {
               <SimpleRules />
             </>
           } />
-
           <Route path='/' element={<Home />} />
           <Route path='/profil' element={<Profil />} />
           <Route path='/creation/SR' element={<RsBetCreation />} />
@@ -86,7 +85,7 @@ const App = () => {
           <Route path='/terms-and-conditions' element={<Terms />} />
           <Route path='/player-bet' element={<PlayerBet />} />
           <Route path='/rules' element={<SimpleRules />} />
-          <Route path='logout' element={<Logout />} />
+          <Route path='/logout' element={<Logout />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </main>

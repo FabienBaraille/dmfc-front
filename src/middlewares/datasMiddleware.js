@@ -1,5 +1,6 @@
 import axios from 'redaxios';
 
+// Import de la fonction permettant de récupérer les cookies
 import { getCookies } from "../Utils/cookies/getCookies";
 
 import { 
@@ -13,6 +14,7 @@ import { findUserRole, usersFromLeague } from '../Utils/filters/usersFilter';
 import { setInputValue } from '../actions/user';
 
 const datasMiddleware = (store) => (next) => async (action) => {
+  // Récupérer le token stocké dans le cookies en passant la clé du cookies à récupérer à la fonction
   const token = getCookies('token');
   switch (action.type) {
     case GET_USERS_LIST:

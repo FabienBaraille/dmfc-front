@@ -1,18 +1,19 @@
 @use '../../styles/variables' as v;
 
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   background: v.$back;
   text-align: center;
   color: v.$titles;
   display: flex;
   align-items: center;
   height: 2em;
-  justify-content: center;
+  justify-content: left;
   padding: 0 20px;
   font-family: v.$main-font;
-  font-size: 2em;
-  font-size: 4em;
-  position: relative;
+  font-size: 3em;
   
   h1 {
     margin: 0 20px;
@@ -21,14 +22,18 @@
     height: 1.8em; 
     margin-top: 0.1em;
   }
-
-  @media (min-width: 768px) {
-    font-size: 4em;
-    justify-content: space-around;
+  .logo-two{
+    display: none;
   }
 
-  @media (max-width: 667px) {
-  .logo-two{  display: none;}  
+  @media (min-width: 768px) {
+    justify-content: space-evenly;
+    .logo-two{
+      display: unset;
+    }
+    .logo-one, .logo-two {
+      width: 116px;
+    }
   }
 }
 

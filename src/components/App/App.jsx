@@ -59,7 +59,11 @@ const App = () => {
 
   if (isLoading) {
     return (
-      <Loader />
+      <>
+        <Header />
+        <Loader />
+        <Footer />
+      </>
     )
   }
 

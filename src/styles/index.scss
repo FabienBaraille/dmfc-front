@@ -27,8 +27,7 @@
 }
 
 body {
-  background-image: url('/src/assets/design/wood-floor2v2.png');
-  background-size: cover;
+  background-image: url('/src/assets/design/wood-floor.png');
 }
 
 #root {
@@ -49,5 +48,8 @@ body {
     padding: 1rem 0 0 1rem;
     text-align: unset;
     font-size: 1.2rem;
+  }
+  main {
+    margin-top: 8em;
   }
 }

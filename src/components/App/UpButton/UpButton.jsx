@@ -26,7 +26,7 @@ const UpButton = () => {
       className="to-the-top"
       onClick={toTheTop}
     >
-      up
+      <div className='up-logo'></div>
     </button>
   );
 };

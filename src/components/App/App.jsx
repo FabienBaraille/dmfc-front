@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
-import { setInputValue, setIsLogged, toggleCreationMode } from "../../actions/user";
+import { setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getUsersList } from "../../actions/datas";
 
 import Header from '../Header/Header';
@@ -38,8 +38,7 @@ const App = () => {
   useEffect(() => {
     dispatch(setIsLogged(logStatus));
     if (logStatus) {
-      dispatch(setInputValue('pseudo', getCookies('userName')));
-      dispatch(setInputValue('role', getCookies('role')));
+      dispatch(setUserInfos(getCookies('userName'), getCookies('role')))
     }
   }, []);
 

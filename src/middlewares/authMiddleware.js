@@ -1,40 +1,20 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, setIsCreated, setIsLogged } from "../actions/user";
+import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setIsCreated, setIsLogged, setUserInfos } from "../actions/user";
 import { leagueByName } from '../Utils/filters/leagueFilter';
 import { roleName } from '../Utils/filters/usersFilter';
+import { getCookies } from '../Utils/cookies/getCookies';
 
 const authMiddelware = (store) => (next) => async (action) => {
+  const url = 'http://0.0.0.0:8080';
+  const token = getCookies('token');
   switch (action.type) {
-    case CHECK_LOGIN: {
-      try {
-        const { data } = await axios.post(
-          // adresse pour Charli et Quentin remplacer 0.0.0.0 par fabien-baraille.vpnuser.lan
-          // adresse QuentinR quentin-riviere.vpnuser.lan
-          // adresse Maxime maxime-lemarchand.vpnuser.lan
-          // Demandez moi pour que je démarre le serveur ;)
-          // login : QuentinR  mdp : test
-          'http://fabien-baraille.vpnuser.lan:8080/api/login_check',
-          {
-          username: store.getState().user.pseudo,
-          password: store.getState().user.password,
-        });
-        document.cookie = `isLogged=true;max-age=60*60*24*15`;
-        document.cookie = `userName=${store.getState().user.pseudo};max-age=60*60*24*15`;
-        document.cookie = `token=${data.token};max-age=60*60*24*15`;
-        store.dispatch(setIsLogged(true));
-        console.log(data);
-      } catch (error) {
-        console.log(error.data.errors);
-      }
-    }
-    break;
-    case CREATE_USER: {
+        case CREATE_USER: {
       const leagueId = action.leagueId ? action.leagueId : leagueByName(store.getState().datas.allLeague, store.getState().user.league);
       const roles = roleName(store.getState().user.DMFC);
       try {
         const { data } = await axios.post(
-          'http://0.0.0.0:8080/api/user/new',
+          `${url}/api/user/new`,
           {
             username: store.getState().user.pseudo,
             email: store.getState().user.email,
@@ -52,7 +32,7 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CREATE_LEAGUE: {
       try {
         const { data } = await axios.post(
-          'http://0.0.0.0:8080/api/leagues/new',
+          `${url}//api/leagues/new`,
           {
             leagueName: store.getState().user.league_name,
           }
@@ -62,6 +42,45 @@ const authMiddelware = (store) => (next) => async (action) => {
         console.log(error);
       }
     }
+    break;
+    case CHECK_LOGIN: {
+      try {
+        const { data } = await axios.post(
+          // Perso http://0.0.0.0:8080
+          // adresse pour Charli et Quentin remplacer http://fabien-baraille.vpnuser.lan:8080
+          // adresse QuentinR http://quentin-riviere.vpnuser.lan:8000
+          // adresse Maxime maxime-lemarchand.vpnuser.lan
+          // Demandez moi pour que je démarre le serveur ;)
+          // login : QuentinR  mdp : test
+          `${url}/api/login_check`,
+          {
+          username: store.getState().user.pseudo,
+          password: store.getState().user.password,
+        });
+        // document.cookie = `token=${data.token};max-age=60*60*24`;
+        store.dispatch(getUser(store.getState().user.pseudo), data.token);
+        store.dispatch(setIsLogged(true));
+      } catch (error) {
+        console.log(error.data.errors);
+      }
+    }
+    break;
+    case GET_USER:
+      try {
+        const { data } = await axios.get(`${url}/api/users/${action.username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        document.cookie = `isLogged=true;max-age=60*60*24`;
+        document.cookie = `userName=${data.username};max-age=60*60*24`;
+        document.cookie = `role=${data.role};max-age=60*60*24`;
+        store.dispatch(setUserInfos(data.username, data.role));
+        console.log(data)
+      } catch (error) {
+        console.log(error);
+      }
     break;
     default:
   }

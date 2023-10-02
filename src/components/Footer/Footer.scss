@@ -2,7 +2,7 @@
 
 
 .footer{
-  background: v.$back;
+  background: url('/src/assets/design/wood-black.png');
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -14,8 +14,8 @@
   box-shadow: 0 -5px 4px 0 v.$light-orange;
 }
 .footer a {
-  display: inline-block; /* Display links as blocks to create space between them */
-  margin: 0 10px; /* Add margin to create space between links */
+  display: inline-block;
+  width: 125px;
   &:hover {
     color: v.$orange;
   }

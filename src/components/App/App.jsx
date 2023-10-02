@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
-import { setInputValue, setIsLogged } from "../../actions/user";
+import { setInputValue, setIsLogged, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getUsersList } from "../../actions/datas";
 
 import Header from '../Header/Header';
@@ -45,7 +45,7 @@ const App = () => {
 
   const isLoading = useSelector((state) => state.datas.isLoading);
   const isLogged = useSelector((state) => state.user.isLogged);
-  const isCreated = useSelector((state) => state.user.isCreated);
+  const isCreated = useSelector((state) => state.user.created);
 
   useEffect(() => {
     dispatch(getAllLeague());
@@ -54,6 +54,7 @@ const App = () => {
       dispatch(getUsersList());
     } else {
       navigate('/login');
+      dispatch(toggleCreationMode(false));
     }
   }, [isLogged, isCreated]);
 

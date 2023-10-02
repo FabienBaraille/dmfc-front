@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useDispatch, useSelector } from "react-redux";
 
-import { checkLogin, createUser, setInputValue, toggleCreationMode } from "../../actions/user";
+import { checkLogin, createLeague, createUser, setInputValue, toggleCreationMode } from "../../actions/user";
 
 import Wrapper from "../Wrapper/Wrapper";
 import Input from "../Utils/Input";
@@ -35,7 +35,9 @@ const Connexion = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (isCreationMode) {
+    if (isCreationMode && DMFC) {
+      dispatch(createLeague());
+    } else if (isCreationMode) {
       dispatch(createUser());
     } else {
       dispatch(checkLogin());

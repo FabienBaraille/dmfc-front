@@ -1,6 +1,6 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, CREATE_USER, setIsCreated, setIsLogged } from "../actions/user";
+import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, setIsCreated, setIsLogged } from "../actions/user";
 import { leagueByName } from '../Utils/filters/leagueFilter';
 import { roleName } from '../Utils/filters/usersFilter';
 
@@ -14,7 +14,7 @@ const authMiddelware = (store) => (next) => async (action) => {
           // adresse Maxime maxime-lemarchand.vpnuser.lan
           // Demandez moi pour que je démarre le serveur ;)
           // login : QuentinR  mdp : test
-          'http://0.0.0.0:8080/api/login_check',
+          'http://fabien-baraille.vpnuser.lan:8080/api/login_check',
           {
           username: store.getState().user.pseudo,
           password: store.getState().user.password,
@@ -30,10 +30,10 @@ const authMiddelware = (store) => (next) => async (action) => {
     }
     break;
     case CREATE_USER: {
-      const leagueId = leagueByName(store.getState().datas.allLeague, store.getState().user.league);
+      const leagueId = action.leagueId ? action.leagueId : leagueByName(store.getState().datas.allLeague, store.getState().user.league);
       const roles = roleName(store.getState().user.DMFC);
       try {
-        const response = await axios.post(
+        const { data } = await axios.post(
           'http://0.0.0.0:8080/api/user/new',
           {
             username: store.getState().user.pseudo,
@@ -44,7 +44,20 @@ const authMiddelware = (store) => (next) => async (action) => {
           }
         )
         store.dispatch(setIsCreated(true));
-        // console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    break;
+    case CREATE_LEAGUE: {
+      try {
+        const { data } = await axios.post(
+          'http://0.0.0.0:8080/api/leagues/new',
+          {
+            leagueName: store.getState().user.league_name,
+          }
+        )
+        store.dispatch(createUser(data.id));
       } catch (error) {
         console.log(error);
       }

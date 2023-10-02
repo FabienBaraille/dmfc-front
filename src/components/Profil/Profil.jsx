@@ -10,11 +10,12 @@ import './Profil.scss';
 
 
 function Profil() {
+  
   const dispatch = useDispatch();
   const pseudo = useSelector((state) => state.user.pseudo);
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);
-  const league = useSelector((state) => state.user.league);
+  const league = useSelector((state) => state.user.league_name);
   const favoriteTeams = useSelector((state) => state.teams.favoriteTeams);
 
   const teamOptions = data.team.map((team) => (
@@ -29,7 +30,7 @@ function Profil() {
     dispatch(setInputValue(inputName, inputValue));
     dispatch(saveFavoriteTeams(inputName, inputValue));
   };
- 
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -40,12 +41,12 @@ function Profil() {
     <Wrapper name="profil-page">
       <div className ="profil">
         <h3>Profil</h3>
-        <p>Email: {email}</p>
-        <p>Pseudo: {pseudo}</p>
-        <p>Équipe Préférée: {favoriteTeams}</p>
-        <p>Ma Ligue: {league}</p>
+        <p>Email: <span className="perso">{email}</span></p>
+        <p>Pseudo: <span className="perso">{pseudo}</span></p>
+        <p>Équipe Préférée: <span className="perso">{favoriteTeams}</span></p>
+        <p>Ma Ligue: <span className="perso">{league}</span></p>
       </div>
-        <form className="change-info" onSubmit={handleSubmit}>
+      <form className="change-info" onSubmit={handleSubmit}>
         <h2>Changer mes paramètres</h2>
           <div>
             <label>Email: </label>
@@ -70,7 +71,7 @@ function Profil() {
           </div>
           <div>
             <label>Équipe Préférée: </label>
-            <select type="team" name="team" onChange={handleInput}>
+            <select name="favoriteTeams" onChange={handleInput} value={favoriteTeams}>
             <option value="">changer ta équipe préférée</option>{teamOptions}</select>
             <div className="form-btn">
             <button type="submit">Soumettre</button>

@@ -33,7 +33,7 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const logStatus = getCookies('isLogged');
+  const logStatus = getCookies('isLogged') === 'true';
   
   useEffect(() => {
     dispatch(setIsLogged(logStatus));
@@ -81,8 +81,8 @@ const App = () => {
           <Route path='/scores/SR' element={<BetResult />} />
           <Route path='/rankings' element={<Rankings />} />
           <Route path='/player/:playerId' element={<GeneralStats />} />
-          <Route path='/rules' element={<ExtendedRules />} />
-          <Route path='/terms-and-conditions' element={<Terms />} />
+          <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
+          <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
           <Route path='/player-bet' element={<PlayerBet />} />
           <Route path='/rules' element={<SimpleRules />} />
           <Route path='/logout' element={<Logout />} />

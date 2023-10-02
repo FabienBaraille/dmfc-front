@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 
-import './ConfirmationPopup.scss'
+import './Modal.scss'
 import { useDispatch } from 'react-redux';
-import { toggleConfirmationPopup } from '../../../actions/league';
+import { toggleConfirmationModal } from '../../../actions/league';
 
-const ConfirmationPopup = ({player}) => {
+const Modal = ({player}) => {
   const dispatch = useDispatch();
 
   const handleCancel = () => {
-    dispatch(toggleConfirmationPopup(false))
+    dispatch(toggleConfirmationModal(false))
   }
 
   return (
-    <div className="confirmation-box_container" onClick={handleCancel}>
-      <div className="confirmation-box_content">
+    <div className="modal-box_container" onClick={handleCancel}>
+      <div className="modal-box_content">
       <p>Voulez-vous vraiment sortir {player} de la ligue ?</p>
       <button className="confirm-button" id="confirmRefuser">Oui</button>
       <button className="cancel-button" id="cancelRefuser" onClick={handleCancel}>Annuler</button>
@@ -22,8 +22,8 @@ const ConfirmationPopup = ({player}) => {
   )
 };
 
-ConfirmationPopup.propTypes = {
+Modal.propTypes = {
   player: PropTypes.string.isRequired,
 };
 
-export default ConfirmationPopup;
+export default Modal;

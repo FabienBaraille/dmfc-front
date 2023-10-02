@@ -1,6 +1,6 @@
-export const TOGGLE_CONFIRMATION_POPUP = 'TOGGLE_CONFIRMATION_POPUP';
+export const TOGGLE_CONFIRMATION_MODAL = 'TOGGLE_CONFIRMATION_MODAL';
 
-export const toggleConfirmationPopup = (isConfirmationVisible) => ({
-  type: TOGGLE_CONFIRMATION_POPUP,
+export const toggleConfirmationModal = (isConfirmationVisible) => ({
+  type: TOGGLE_CONFIRMATION_MODAL,
   isConfirmationVisible,
 });

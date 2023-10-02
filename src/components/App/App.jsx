@@ -30,7 +30,7 @@ import LeagueManagement from "../LeagueManagement/LeagueManagement";
 
 import './App.scss';
 
-import ConfirmationPopup from "../Utils/ConfirmationPopup/ConfirmationPopup";
+import ConfirmationPopup from "../Utils/Modal/Modal";
 
 
 const App = () => {

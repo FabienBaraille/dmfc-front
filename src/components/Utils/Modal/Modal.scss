@@ -1,4 +1,4 @@
-.confirmation-box_container {
+.modal-box_container {
   z-index: 99;
   position: absolute;
   width: 99%;
@@ -12,7 +12,7 @@
     margin-top: 10%;
   }
 }
-.confirmation-box_content {
+.modal-box_content {
   background-color: rgba(255, 255, 255, 1);
   padding: 3rem;
   display: flex;

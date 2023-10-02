@@ -1,7 +1,7 @@
 import Wrapper from "../Wrapper/Wrapper";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleConfirmationPopup } from "../../actions/league";
+import { toggleConfirmationModal } from "../../actions/league";
 
 import './LeagueManagement.scss'
 
@@ -12,7 +12,7 @@ const LeagueManagement = () => {
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible)
 
   const handleReject = () => {
-    dispatch(toggleConfirmationPopup(true))
+    dispatch(toggleConfirmationModal(true))
     console.log(isConfirmationVisible);
   }
 

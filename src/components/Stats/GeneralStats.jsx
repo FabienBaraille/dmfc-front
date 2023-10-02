@@ -8,6 +8,7 @@ import { teamByTrigram } from '../../Utils/filters/teamFilter';
 
 import data from '../../data/data';
 import './GeneralStats.scss';
+import { Link } from 'react-router-dom';
 
 
 const GeneralStats = () => {
@@ -27,6 +28,9 @@ const GeneralStats = () => {
       <h4>{`Score : ${score}`}</h4>
       <div>
         <h4>Classement acuel</h4>
+        <button className="return" type="button">
+          <Link to="/">Retour</Link>
+        </button>
       </div>
     </Wrapper>
   )

@@ -40,10 +40,10 @@ function Profil() {
     <Wrapper name="profil-page">
       <div className ="profil">
         <h3>Profil</h3>
-        <p>Email: {email}</p>
-        <p>Pseudo: {pseudo}</p>
-        <p>Équipe Préférée: {favoriteTeams}</p>
-        <p>Ma Ligue: {league}</p>
+        <p>Email: <span className="perso">{email}</span></p>
+        <p>Pseudo: <span className="perso">{pseudo}</span></p>
+        <p>Équipe Préférée: <span className="perso">{favoriteTeams}</span></p>
+        <p>Ma Ligue: <span className="perso">{league}</span></p>
       </div>
         <form className="change-info" onSubmit={handleSubmit}>
         <h2>Changer mes paramètres</h2>

@@ -11,8 +11,9 @@
     text-align: center;
   }
 }
-.strong {
+.perso {
   color:v.$orange;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);;
 }
 .change-info {
   display: flex;
@@ -91,6 +92,7 @@
     width: 80%;
     display: flex;
     justify-content: space-between;
+    margin-top: 3em;
   }
   
   .profil {
@@ -100,5 +102,6 @@
   
   .change-info {
     align-self: flex-end;
+    margin-top: -15em;
   }
 }

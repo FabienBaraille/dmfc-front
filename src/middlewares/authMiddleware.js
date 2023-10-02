@@ -12,7 +12,7 @@ const authMiddelware = (store) => (next) => async (action) => {
           // adresse pour Charli et Quentin remplacer 0.0.0.0 par fabien-baraille.vpnuser.lan
           // Demandez moi pour que je démarre le serveur ;)
           // login : QuentinR  mdp : test
-          'http://0.0.0.0:8080/api/login_check',
+          'http://fabien-baraille.vpnuser.lan:8080/api/login_check',
           {
           username: store.getState().user.pseudo,
           password: store.getState().user.password,
@@ -32,7 +32,7 @@ const authMiddelware = (store) => (next) => async (action) => {
       const roles = roleName(store.getState().user.DMFC);
       try {
         const response = await axios.post(
-          'http://0.0.0.0:8080/api/login',
+          'http://fabien-baraille.vpnuser.lan:8080/api/login',
           {
             username: store.getState().user.pseudo,
             email: store.getState().user.email,

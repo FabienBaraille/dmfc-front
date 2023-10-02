@@ -21,14 +21,14 @@ const Rankings = () => {
 
     return (
       <tr key={id} className='users-row'>
-          <th><Link to={`/player/${id}`}>{`#${index + 1}`}</Link></th>
+          <th><Link to={`/player/${username}`}>{`#${index + 1}`}</Link></th>
           {<th className={changePos > 0 ? "green" : changePos < 0 ? "red" : ""}>
-            <Link to={`/player/${id}`}>
+            <Link to={`/player/${username}`}>
               {posMark}
             </Link>
           </th>}
-          <th className="player"><Link to={`/player/${id}`}>{username}</Link></th>
-          <th><Link to={`/player/${id}`}>{score}</Link></th>
+          <th className="player"><Link to={`/player/${username}`}>{username}</Link></th>
+          <th><Link to={`/player/${username}`}>{score}</Link></th>
       </tr>
     )
   })

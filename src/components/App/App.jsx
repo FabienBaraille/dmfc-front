@@ -38,7 +38,7 @@ const App = () => {
   useEffect(() => {
     dispatch(setIsLogged(logStatus));
     if (logStatus) {
-      dispatch(setUserInfos(getCookies('userName'), getCookies('role')))
+      dispatch(setUserInfos(getCookies('userInfos')))
     }
   }, []);
 
@@ -84,7 +84,7 @@ const App = () => {
           <Route path='/creation/SR' element={<RsBetCreation />} />
           <Route path='/scores/SR' element={<BetResult />} />
           <Route path='/rankings' element={<Rankings />} />
-          <Route path='/player/:playerId' element={<GeneralStats />} />
+          <Route path='/player/:playerName' element={<GeneralStats />} />
           <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
           <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
           <Route path='/player-bet' element={<PlayerBet />} />

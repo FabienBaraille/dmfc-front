@@ -1,6 +1,7 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setIsCreated, setIsLogged, setUserInfos } from "../actions/user";
+import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos } from "../actions/user";
+
 import { leagueByName } from '../Utils/filters/leagueFilter';
 import { roleName } from '../Utils/filters/usersFilter';
 import { getCookies } from '../Utils/cookies/getCookies';
@@ -9,7 +10,7 @@ const authMiddelware = (store) => (next) => async (action) => {
   const url = 'http://0.0.0.0:8080';
   const token = getCookies('token');
   switch (action.type) {
-        case CREATE_USER: {
+      case CREATE_USER: {
       const leagueId = action.leagueId ? action.leagueId : leagueByName(store.getState().datas.allLeague, store.getState().user.league);
       const roles = roleName(store.getState().user.DMFC);
       try {
@@ -25,7 +26,7 @@ const authMiddelware = (store) => (next) => async (action) => {
         )
         store.dispatch(setIsCreated(true));
       } catch (error) {
-        console.log(error);
+        store.dispatch(setErrorMessage(error.data.error));
       }
     }
     break;
@@ -39,7 +40,7 @@ const authMiddelware = (store) => (next) => async (action) => {
         )
         store.dispatch(createUser(data.id));
       } catch (error) {
-        console.log(error);
+        store.dispatch(setErrorMessage(error.data.error));
       }
     }
     break;
@@ -57,11 +58,10 @@ const authMiddelware = (store) => (next) => async (action) => {
           username: store.getState().user.pseudo,
           password: store.getState().user.password,
         });
-        // document.cookie = `token=${data.token};max-age=60*60*24`;
+        document.cookie = `token=${data.token};max-age=60*60*24`;
         store.dispatch(getUser(store.getState().user.pseudo), data.token);
-        store.dispatch(setIsLogged(true));
       } catch (error) {
-        console.log(error.data.errors);
+        store.dispatch(setErrorMessage('Pseudo ou Mot de passe erroné'));
       }
     }
     break;
@@ -74,10 +74,9 @@ const authMiddelware = (store) => (next) => async (action) => {
           }
         });
         document.cookie = `isLogged=true;max-age=60*60*24`;
-        document.cookie = `userName=${data.username};max-age=60*60*24`;
-        document.cookie = `role=${data.role};max-age=60*60*24`;
-        store.dispatch(setUserInfos(data.username, data.role));
-        console.log(data)
+        document.cookie = `userInfos=${data};max-age=60*60*24`;
+        store.dispatch(setUserInfos(data));
+        store.dispatch(setIsLogged(true));
       } catch (error) {
         console.log(error);
       }

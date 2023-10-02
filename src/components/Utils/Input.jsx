@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Input = ({label, htmlFor, type, value, id, className = null, onChange = null, placeholder = null}) => {
+const Input = ({label, htmlFor, type, value, id, className = null, onChange = null, placeholder = null, isRequired = false}) => {
   return (
     <div className={className}>
       <label htmlFor={htmlFor}>{label}</label>
@@ -10,6 +10,7 @@ const Input = ({label, htmlFor, type, value, id, className = null, onChange = nu
         onChange={onChange} 
         value={value}
         placeholder={placeholder}
+        required={isRequired}
       />
     </div>
   )
@@ -24,6 +25,7 @@ Input.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
+  isRequired: PropTypes.bool,
 };
 
 export default Input;

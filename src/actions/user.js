@@ -10,6 +10,7 @@ export const GET_USER = 'GET_USER';
 export const SET_IS_LOGGED = 'SET_IS_LOGGED';
 export const SET_IS_CREATED = 'SET_IS_CREATED';
 export const SET_USER_INFOS = 'SET_USER_INFOS';
+export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE'
 
 export const setInputValue = (inputName, inputValue) => ({
   type: SET_INPUT_VALUE,
@@ -44,8 +45,11 @@ export const setIsCreated = (isCreated) => ({
   type: SET_IS_CREATED,
   isCreated
 });
-export const setUserInfos = (realusername, role) => ({
+export const setUserInfos = (loggedUser) => ({
   type: SET_USER_INFOS,
-  realusername,
-  role
+  loggedUser
+});
+export const setErrorMessage = (message) => ({
+  type: SET_ERROR_MESSAGE,
+  message,
 });

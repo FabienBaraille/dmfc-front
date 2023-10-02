@@ -1,4 +1,4 @@
-import { SET_INPUT_VALUE, SET_IS_CREATED, SET_IS_LOGGED, SET_USER_INFOS, TOGGLE_CREATION_MODE } from "../actions/user";
+import { SET_ERROR_MESSAGE, SET_INPUT_VALUE, SET_IS_CREATED, SET_IS_LOGGED, SET_USER_INFOS, TOGGLE_CREATION_MODE } from "../actions/user";
 
 const initialState = {
   'pseudo': '',
@@ -11,7 +11,8 @@ const initialState = {
   'isLogged': false,
   'role': '',
   'created': false,
-  'realusername': '',
+  'loggedUser': {},
+  'errorMessage': '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -39,8 +40,12 @@ const reducer = (state = initialState, action = {}) => {
     case SET_USER_INFOS:
       return {
         ...state,
-        realusername: action.realusername,
-        role: action.role,
+        loggedUser: action.loggedUser,
+      }
+    case SET_ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: action.message,
       }
     default:
       return state;

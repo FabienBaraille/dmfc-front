@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
-  const userRole = useSelector((state) => state.user.role);
+  const userRole = useSelector((state) => state.user.loggedUser.role[0]);
+  const username = useSelector((state) => state.user.loggedUser.username);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -45,7 +46,7 @@ const Navbar = () => {
         {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/scores/SR" onClick={handleLinkClick}>Résultats</NavLink> }
         {userRole === 'ROLE_JOUEUR' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/player-bet"onClick={handleLinkClick}>Bet</NavLink> }
         <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/rankings"onClick={handleLinkClick}>Général Ranking</NavLink>
-        {/* {userRole === 'ROLE_JOUEUR' &&  <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/stats"onClick={handleLinkClick}>Général Stats</NavLink> } */}
+        {userRole === 'ROLE_JOUEUR' &&  <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to={`/player/${username}`} onClick={handleLinkClick}>Général Stats</NavLink> }
         {/* <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/nba-infos"onClick={handleLinkClick}>NBA Cheat Sheet</NavLink> */}
         <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/logout"onClick={handleLinkClick}>Déconnexion</NavLink>
       </div>

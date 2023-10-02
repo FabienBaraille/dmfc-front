@@ -45,6 +45,7 @@ const Navbar = () => {
         <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/profil" onClick={handleLinkClick}>Profil</NavLink>
         {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/creation/SR" onClick={handleLinkClick}>Création matchs</NavLink> }
         {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/scores/SR" onClick={handleLinkClick}>Résultats</NavLink> }
+        {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/league-management" onClick={handleLinkClick}>Gestion Ligue</NavLink> }
         {userRole === 'ROLE_JOUEUR' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/player-bet"onClick={handleLinkClick}>Bet</NavLink> }
         <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/rankings"onClick={handleLinkClick}>Général Ranking</NavLink>
         {/* {userRole === 'ROLE_JOUEUR' &&  <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/stats"onClick={handleLinkClick}>Général Stats</NavLink> } */}

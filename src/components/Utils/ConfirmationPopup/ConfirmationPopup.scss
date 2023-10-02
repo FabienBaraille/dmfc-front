@@ -1,0 +1,22 @@
+.confirmation-box_container {
+  z-index: 99;
+  position: absolute;
+  width: 99%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  button {
+    margin-top: 10%;
+  }
+}
+.confirmation-box_content {
+  background-color: rgba(255, 255, 255, 1);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

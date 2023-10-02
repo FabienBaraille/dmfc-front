@@ -1,4 +1,4 @@
-import { ADD_BET_TO_LIST, BET_TO_REMOVE, TOGGLE_CREATION_MODE } from "../actions/bet";
+import { ADD_BET_TO_LIST, BET_TO_REMOVE, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
 
 const initialState = {
   'betList': [],
@@ -22,7 +22,7 @@ const reducer = (state = initialState, action = {}) => {
         'betList': [...state.betList.filter(bet => bet.key !== action.idToRemove)]
       }
     
-    case TOGGLE_CREATION_MODE:
+    case TOGGLE_CREATION_MODE_BET:
       return {
         ...state,
         'roundCreationMode': action.roundCreationMode

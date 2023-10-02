@@ -97,12 +97,12 @@ export default {
     {
       "id": 1,
       "leagueName": "La ligue des gentlemen extraordinaires",
-      "leaguDescription": "Le titre n'est pas assez explicite ?"
+      "leagueDescription": "Le titre n'est pas assez explicite ?"
     },
     {
       "id": 2,
       "leagueName": "La ligue des justiciers",
-      "leaguDescrition": "Tu sais les mecs un peu balèze en cape"
+      "leagueDescription": "Tu sais les mecs un peu balèze en cape"
     },
   ],
   "Game": [

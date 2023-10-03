@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
-  const userRole = useSelector((state) => state.user.loggedUser.role[0]);
+  const userRole = useSelector((state) => state.user.loggedUser.roles[0]);
   const username = useSelector((state) => state.user.loggedUser.username);
 
   const toggleMenu = () => {

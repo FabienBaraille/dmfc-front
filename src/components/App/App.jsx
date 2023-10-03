@@ -76,8 +76,8 @@ const App = () => {
       {isLogged && <Navbar />}
       <main>
       {isConfirmationVisible && <ConfirmationPopup />}
-      <LeagueManagement />
-        {/* <Routes>
+      {/* <LeagueManagement /> */}
+        <Routes>
           <Route path='/login' element={
             <>
               <Connexion />
@@ -97,7 +97,7 @@ const App = () => {
           <Route path='/rules' element={<SimpleRules />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='*' element={<Error />} />
-        </Routes> */}
+        </Routes>
       </main>
       <UpButton />
       <Footer />

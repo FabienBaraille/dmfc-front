@@ -30,7 +30,7 @@ import LeagueManagement from "../LeagueManagement/LeagueManagement";
 
 import './App.scss';
 
-import ConfirmationPopup from "../Utils/Modal/Modal";
+import Modal from "../Utils/Modal/Modal";
 
 
 const App = () => {
@@ -73,14 +73,12 @@ const App = () => {
     )
   }
 
-  
-
   return (
     <>
       <Header />
       {isLogged && <Navbar />}
       <main>
-      {isConfirmationVisible && <ConfirmationPopup />}
+      {isConfirmationVisible && <Modal player="Tocard" />}
       {/* <LeagueManagement /> */}
         <Routes>
           <Route path='/login' element={

@@ -1,89 +1,70 @@
 @use '../../styles/variables' as v;
 
-
 .navbar {
   background: v.$nav-back;
   color: v.$titles;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: 2em;
   font-family: v.$main-font;
   font-size: 1.6em;
+  height: 52px;
   width: 100%;
-  position: relative;
+  position: fixed;
+  top: 3.7em;
   right: 0;
-  top: 20;
   z-index: 99;
-  
+  box-shadow: 0 5px 4px 0 v.$light-orange;
   .menu {
-    margin-left: 0.6em;
-    margin-right: 1.6em;
+    padding: 0.5em;
     color: v.$titles;
-
     &--active{ 
-    color: v.$orange;
+      color: v.$orange;
     }
-    
     &:hover {
       background: v.$orange;
       color: v.$nav-back;
     }
-}
-
-  @media (max-width: 1000px) {
-    display: none;
   }
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 2em;
-  height: 2em;
-  position: absolute; 
-  top: 3em;
-  right: 1em;
-  gap: 0.5em;
-
-
   @media (max-width: 768px) {
-    margin-top: -1.5em;
-  }
-  .bar {
-    width: 100%;
-    height: 100%; 
-    background-color: v.$orange; 
-    border-radius: 10em; 
- 
-  }
-
-  @media (max-width: 1024px) {
-    display: flex;
+    display: block;
+    box-shadow: none;
+    width: 0.5px;
+    height: fit-content;
+    // transition: linear 1s;
+    a {
+      color: v.$titles; 
+      display: block;
+      margin: 0;
+      padding: 0.5em;
+    }
   }
 }
 
 .show-menu {
-  display: block;
-  padding: 0.5em; 
-  text-align: right; 
+  padding: 0.5em;
+  text-align: right;
   background-color: v.$nav-back;
-  height: 100%;
-  max-width: fit-content;
-  margin-left: auto;
-  position: fixed;
-
-  a {
-    color: v.$titles; 
-    text-decoration: none;
-    display: block;
-    margin: 0;
-    padding: 0.5em;
-  }
+  width: fit-content;
 }
 
-
-
-
-
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  top: 28px;
+  right: 13px;
+  .icone-burger {
+    filter: invert(43%) sepia(15%) saturate(5000%) hue-rotate(346deg);
+  }
+  .close {
+    content: url('/src/assets/design/x.svg');
+  }
+  .open {
+    content: url('/src/assets/design/menu.svg');
+  }
+  @media (max-width: 768px) {
+    display: flex;
+  }
+}

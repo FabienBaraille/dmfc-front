@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
-import { setInputValue, setIsLogged } from "../../actions/user";
+import { setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getUsersList } from "../../actions/datas";
 
 import Header from '../Header/Header';
@@ -37,13 +37,13 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const logStatus = getCookies('isLogged');
+  const logStatus = getCookies('isLogged') === 'true';
   
   useEffect(() => {
     dispatch(setIsLogged(logStatus));
     if (logStatus) {
-      dispatch(setInputValue('pseudo', getCookies('userName')));
-      dispatch(setInputValue('role', getCookies('role')));
+      const userInfos = getCookies('userInfos');
+      dispatch(setUserInfos(JSON.parse(userInfos)))
     }
   }, []);
 
@@ -59,12 +59,17 @@ const App = () => {
       dispatch(getUsersList());
     } else {
       navigate('/login');
+      dispatch(toggleCreationMode(false));
     }
   }, [isLogged, isCreated]);
 
   if (isLoading) {
     return (
-      <Loader />
+      <>
+        <Header />
+        <Loader />
+        <Footer />
+      </>
     )
   }
 
@@ -90,9 +95,9 @@ const App = () => {
           <Route path='/creation/SR' element={<RsBetCreation />} />
           <Route path='/scores/SR' element={<BetResult />} />
           <Route path='/rankings' element={<Rankings />} />
-          <Route path='/player/:playerId' element={<GeneralStats />} />
-          <Route path='/rules' element={<ExtendedRules />} />
-          <Route path='/terms-and-conditions' element={<Terms />} />
+          <Route path='/player/:playerName' element={<GeneralStats />} />
+          <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
+          <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
           <Route path='/player-bet' element={<PlayerBet />} />
           <Route path='/rules' element={<SimpleRules />} />
           <Route path='/logout' element={<Logout />} />

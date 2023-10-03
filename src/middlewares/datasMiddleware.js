@@ -20,12 +20,13 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_USERS_LIST:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`${url}/api/leagues/${store.getState().user.loggedUser.league}/users`, {
+        const { data } = await axios.get(`${url}/api/leagues/${store.getState().user.loggedUser.league_id.id}/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         store.dispatch(setUsersList(data));
+        console.log(data)
       } catch (error) {
         console.log(error);
       }

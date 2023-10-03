@@ -67,14 +67,14 @@ const authMiddelware = (store) => (next) => async (action) => {
     break;
     case GET_USER:
       try {
-        const { data } = await axios.get(`${url}/api/users/${action.username}`,
+        const { data } = await axios.get(`${url}/api/user/${action.username}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           }
         });
         document.cookie = `isLogged=true;max-age=60*60*24`;
-        document.cookie = `userInfos=${data};max-age=60*60*24`;
+        document.cookie = `userInfos=${JSON.stringify(data)};max-age=60*60*24`;
         store.dispatch(setUserInfos(data));
         store.dispatch(setIsLogged(true));
       } catch (error) {

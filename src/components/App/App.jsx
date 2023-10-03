@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
-import { setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
+import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getUsersList } from "../../actions/datas";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
@@ -12,7 +12,7 @@ import PlayerRoute from "./ProtectedRoute/PlayerRoute";
 
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
-import Loader from '../Loader/Loader';
+import LoadElmt from '../Loader/LoadElmt';
 
 import Home from "../Home/Home";
 import Rankings from "../Rankings/Rankings";
@@ -31,11 +31,9 @@ import Error404 from '../Error/Error404.jsx';
 import Error403 from '../Error/Error403.jsx';
 import Footer from '../Footer/Footer';
 import LeagueManagement from "../LeagueManagement/LeagueManagement";
-
-import './App.scss';
-
 import ConfirmationPopup from "../Utils/Modal/Modal";
 
+import './App.scss';
 
 const App = () => {
   const navigate = useNavigate();
@@ -44,6 +42,7 @@ const App = () => {
   const logStatus = getCookies('isLogged') === 'true';
   
   useEffect(() => {
+    dispatch(setIsCreated(false));
     dispatch(setIsLogged(logStatus));
     if (logStatus) {
       const userInfos = getCookies('userInfos');
@@ -53,7 +52,7 @@ const App = () => {
 
   const isLoading = useSelector((state) => state.datas.isLoading);
   const isLogged = useSelector((state) => state.user.isLogged);
-  const isCreated = useSelector((state) => state.user.isCreated);
+  const isCreated = useSelector((state) => state.user.created);
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible)
 
   useEffect(() => {
@@ -69,15 +68,9 @@ const App = () => {
 
   if (isLoading) {
     return (
-      <>
-        <Header />
-        <Loader />
-        <Footer />
-      </>
+      <LoadElmt />
     )
   }
-
-  
 
   return (
     <>

@@ -8,7 +8,10 @@ import {
   setUsersList,
   GET_ALL_LEAGUE,
   setAllLeague,
-  setIsLoading 
+  setIsLoading, 
+  GET_SR_PREDICTION,
+  setSRPrediction,
+  setIsLoadingSR
 } from "../actions/datas";
 
 const datasMiddleware = (store) => (next) => async (action) => {
@@ -16,11 +19,11 @@ const datasMiddleware = (store) => (next) => async (action) => {
   const token = getCookies('token');
   const url = 'http://0.0.0.0:8080';
   switch (action.type) {
-    // Possible d'avoir une route qui récupère les users filtrés suivant l'ID d'une league ?
+    // Action qui va faire la requête pour récupérer tous les utilisateurs d'une ligue suivant un id
     case GET_USERS_LIST:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`${url}/api/leagues/${store.getState().user.loggedUser.league_id.id}/users`, {
+        const { data } = await axios.get(`${url}/api/league/${store.getState().user.loggedUser.league_id.id}/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -30,8 +33,9 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    // Action qui va faire la requête pour récupérer toutes les leagues
     case GET_ALL_LEAGUE:
-      store.dispatch(setIsLoading())
+      store.dispatch(setIsLoading());
       try {
         const { data } = await axios.get(`${url}/api/leagues`, {
           headers: {
@@ -39,6 +43,21 @@ const datasMiddleware = (store) => (next) => async (action) => {
           },
         });
         store.dispatch(setAllLeague(data));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    // Action qui va faire la requête pour récupérer toutes les prédictions d'un joueur suivant son id
+    case GET_SR_PREDICTION:
+      store.dispatch(setIsLoadingSR());
+      try {
+        const { data } = await axios.get(`${url}/api/srprediction/user/${action.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        store.dispatch(setSRPrediction(data));
+        console.log(data);
       } catch (error) {
         console.log(error);
       }

@@ -12,8 +12,6 @@ const Connexion = () => {
 
   const dispatch = useDispatch();
   const leaguesList = useSelector((state) => state.datas.allLeague);
-
-  // Get all inputs content for controlled inputs
   const pseudo = useSelector((state) => state.user.pseudo);
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);

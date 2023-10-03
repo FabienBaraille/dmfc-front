@@ -1,9 +1,11 @@
-import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_USERS_LIST } from '../actions/datas';
+import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_IS_LOADING_SR, SET_SR_PREDICTION, SET_USERS_LIST } from '../actions/datas';
 
 const initialState = {
   'allUsers': [],
   'allLeague': [],
   'isLoading': true,
+  'SRPrediction': [],
+  'isLoadingSR': true,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -24,6 +26,17 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: true,
+      }
+    case SET_IS_LOADING_SR:
+      return {
+        ...state,
+        isLoadingSR: true,
+      }
+    case SET_SR_PREDICTION:
+      return {
+        ...state,
+        SRPrediction: action.prediction,
+        isLoadingSR: false,
       }
     default:
       return state;

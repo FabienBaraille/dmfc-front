@@ -2,20 +2,19 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Retour.scss';
 
-function Retour ({ isLogged }) {
+function Retour ({ where, link }) {
   return (
     <div>
-      {!isLogged && (
-        <button className="return-btn" type="button">
-          <Link to="/login">Retour à la page de connexion</Link>
-        </button>
-         )}
+      <button className="return-btn" type="button">
+        <Link to={link}>{`Retour ${where}`}</Link>
+      </button>
     </div>
   );
 }
 
 Retour.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
+  where: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
 };
 
 export default Retour;

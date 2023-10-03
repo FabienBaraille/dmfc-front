@@ -3,6 +3,13 @@
 .league-management {
   text-align: center;
   font-family: v.$main-font;
+  margin-bottom: 3rem;
+}
+#league-management_actual {
+    padding: 0.5rem;
+    #changeTitleBtn {
+      width: 1.5rem;
+    }
 }
 #league-management_name textarea {
   font-family: v.$main-font;

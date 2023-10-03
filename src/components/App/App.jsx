@@ -31,7 +31,7 @@ import Error404 from '../Error/Error404.jsx';
 import Error403 from '../Error/Error403.jsx';
 import Footer from '../Footer/Footer';
 import LeagueManagement from "../LeagueManagement/LeagueManagement";
-import ConfirmationPopup from "../Utils/Modal/Modal";
+import Modal from "../Utils/Modal/Modal";
 
 import './App.scss';
 
@@ -77,7 +77,7 @@ const App = () => {
       <Header />
       {isLogged && <Navbar />}
       <main>
-      {isConfirmationVisible && <ConfirmationPopup />}
+      {isConfirmationVisible && <Modal player="Tocard" />}
       {/* <LeagueManagement /> */}
         <Routes>
           <Route path='/login' element={

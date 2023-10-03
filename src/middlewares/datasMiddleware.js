@@ -17,7 +17,7 @@ import {
 const datasMiddleware = (store) => (next) => async (action) => {
   // Récupérer le token stocké dans le cookies en passant la clé du cookies à récupérer à la fonction
   const token = getCookies('token');
-  const url = 'http://0.0.0.0:8080';
+  const url = 'http://localhost:8000';
   switch (action.type) {
     // Action qui va faire la requête pour récupérer tous les utilisateurs d'une ligue suivant un id
     case GET_USERS_LIST:

@@ -16,6 +16,12 @@ const LeagueManagement = () => {
     console.log(isConfirmationVisible);
   }
 
+  if (isConfirmationVisible) {
+    document.body.classList.add('modal-open');
+  } else {
+    document.body.classList.remove('modal-open');
+  }
+
   const playerInLigue = ( 
     <table className="ranking-table">
     <thead>
@@ -29,8 +35,8 @@ const LeagueManagement = () => {
       {data.User.map(({id, username, title}) => 
         <tr key={id} className='users-row'>
           <th><Link to={`/player/${id}`}>{username}</Link></th>
-          <th><input defaultValue={title}></input> &#9745;</th>
-          <th>&#128473;</th>
+          <th><input defaultValue={title}></input><button id="changeTitleBtn" onClick={handleReject}>V</button></th>
+          <th><button id="kickBtn" onClick={handleReject}>X</button></th>
         </tr>)}
     </tbody>
   </table>
@@ -50,8 +56,8 @@ const LeagueManagement = () => {
           {data.User.map(({id, username}) => 
           <tr key={id} className='users-row'>
             <th><Link to={`/player/${id}`}>{username}</Link></th>
-            <th>&#9989;</th>
-            <th><button id="refuseBtn" onClick={handleReject}>Refuser</button></th>
+            <th><button id="acceptBtn" onClick={handleReject}>V</button></th>
+            <th><button id="refuseBtn" onClick={handleReject}>X</button></th>
           </tr>)}
         </tbody>
     </table>

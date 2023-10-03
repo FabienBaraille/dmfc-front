@@ -7,7 +7,7 @@ import { roleName } from '../Utils/filters/usersFilter';
 import { getCookies } from '../Utils/cookies/getCookies';
 
 const authMiddelware = (store) => (next) => async (action) => {
-  const url = 'http://0.0.0.0:8080';
+  const url = 'http://localhost:8000';
   const token = getCookies('token');
   switch (action.type) {
       case CREATE_USER: {
@@ -33,7 +33,7 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CREATE_LEAGUE: {
       try {
         const { data } = await axios.post(
-          `${url}/api/leagues/new`,
+          `${url}/api/league/new`,
           {
             leagueName: store.getState().user.league_name,
           }
@@ -47,11 +47,6 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CHECK_LOGIN: {
       try {
         const { data } = await axios.post(
-          // Perso http://0.0.0.0:8080
-          // adresse pour Charli et Quentin remplacer http://fabien-baraille.vpnuser.lan:8080
-          // adresse QuentinR http://quentin-riviere.vpnuser.lan:8000
-          // adresse Maxime maxime-lemarchand.vpnuser.lan
-          // Demandez moi pour que je démarre le serveur ;)
           `${url}/api/login_check`,
           {
           username: store.getState().user.pseudo,

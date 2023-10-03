@@ -25,7 +25,7 @@ const ExtendedRules = ({ isLogged }) => {
           <li>Une fois le match terminé, le DMFC devra renseigner les scores finaux afin que les points de chaques joueurs puissent voir leurs points calculés 10pts pour le bon vainqueur et 20pts bonus si la différence de point est également la bonne.</li>
         </ul>
           <div className='return-btn'>
-            {!isLogged && <Retour />}
+            {!isLogged && <Retour where="à la page de connexion" link="/login" />}
           </div>
       </Wrapper>
   )}

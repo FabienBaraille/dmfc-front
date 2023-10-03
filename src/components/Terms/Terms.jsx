@@ -25,7 +25,7 @@ const Terms = ({ isLogged }) => {
         <p>La responsabilité de l’éditeur ne saurait être engagée en cas d’impossibilité d’accès à ce site et/ou d’utilisation des services.</p>
         <p>Par ailleurs, l’EDITEUR peut être amené à interrompre le site ou une partie des services, à tout moment sans préavis, le tout sans droit à indemnités. L’utilisateur reconnaît et accepte que l’EDITEUR ne soit pas responsable des interruptions, et des conséquences qui peuvent en découler pour l’utilisateur ou tout tiers.</p>
           <div className='return-btn'>
-            {!isLogged && <Retour />}
+            {!isLogged && <Retour where="à la page de connexion" link="/login" />}
           </div>
       </Wrapper>
   )}

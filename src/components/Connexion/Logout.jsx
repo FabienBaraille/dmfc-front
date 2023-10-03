@@ -10,12 +10,10 @@ const Logout = () => {
 
   const handleLogout = () => {
     document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-    document.cookie = `role=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+    document.cookie = `userInfos=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
     document.cookie = `token=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-    document.cookie = `userName=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-    dispatch(setInputValue('pseudo', ''));
+    dispatch(setInputValue('loggedUser', ''));
     dispatch(setInputValue('password', ''));
-    dispatch(setInputValue('role', ''));
     dispatch(setIsLogged(false));
   }
 

@@ -7,6 +7,9 @@ import { getCookies } from "../../Utils/cookies/getCookies";
 import { setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getUsersList } from "../../actions/datas";
 
+import DMFCRoute from "./ProtectedRoute/DMFCRoute";
+import PlayerRoute from "./ProtectedRoute/PlayerRoute";
+
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 import Loader from '../Loader/Loader';
@@ -24,7 +27,8 @@ import BetResult from "../BetResult/BetResult";
 import PlayerBet from "../PlayerBet/PlayerBet";
 import Profil from "../Profil/Profil";
 import Logout from "../Connexion/Logout";
-import Error from '../Error/Error.jsx';
+import Error404 from '../Error/Error404.jsx';
+import Error403 from '../Error/Error403.jsx';
 import Footer from '../Footer/Footer';
 import LeagueManagement from "../LeagueManagement/LeagueManagement";
 
@@ -43,7 +47,7 @@ const App = () => {
     dispatch(setIsLogged(logStatus));
     if (logStatus) {
       const userInfos = getCookies('userInfos');
-      dispatch(setUserInfos(JSON.parse(userInfos)))
+      dispatch(setUserInfos(JSON.parse(userInfos)));
     }
   }, []);
 
@@ -91,17 +95,24 @@ const App = () => {
           } />
           <Route path='/' element={<Home />} />
           <Route path='/profil' element={<Profil />} />
-          <Route path='/league-management' element={<LeagueManagement />} />
-          <Route path='/creation/SR' element={<RsBetCreation />} />
-          <Route path='/scores/SR' element={<BetResult />} />
           <Route path='/rankings' element={<Rankings />} />
           <Route path='/player/:playerName' element={<GeneralStats />} />
           <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
           <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
-          <Route path='/player-bet' element={<PlayerBet />} />
+          <Route element={<PlayerRoute />}>
+            {/* Rajouter ici les routes concernant que le joueur */}
+            <Route path='/player-bet' element={<PlayerBet />} />
+          </Route>
+          <Route element={<DMFCRoute />}>
+            {/* Rajouter ici les routes concernant uniquement le DMFC */}
+            <Route path='/creation/SR' element={<RsBetCreation />} />
+            <Route path='/scores/SR' element={<BetResult />} />
+            <Route path='/league-management' element={<LeagueManagement />} />
+          </Route>
           <Route path='/rules' element={<SimpleRules />} />
           <Route path='/logout' element={<Logout />} />
-          <Route path='*' element={<Error />} />
+          <Route path='/Error403' element={<Error403 />} />
+          <Route path='*' element={<Error404 />} />
         </Routes>
       </main>
       <UpButton />

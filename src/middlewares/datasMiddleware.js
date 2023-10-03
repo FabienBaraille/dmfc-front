@@ -26,7 +26,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
           },
         });
         store.dispatch(setUsersList(data));
-        console.log(data)
       } catch (error) {
         console.log(error);
       }

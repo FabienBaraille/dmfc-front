@@ -52,7 +52,6 @@ const authMiddelware = (store) => (next) => async (action) => {
           // adresse QuentinR http://quentin-riviere.vpnuser.lan:8000
           // adresse Maxime maxime-lemarchand.vpnuser.lan
           // Demandez moi pour que je démarre le serveur ;)
-          // login : QuentinR  mdp : test
           `${url}/api/login_check`,
           {
           username: store.getState().user.pseudo,

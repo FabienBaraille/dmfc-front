@@ -2,13 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Wrapper from '../Wrapper/Wrapper';
+import Retour from '../Retour/Retour';
 
 import { userByUsername } from '../../Utils/filters/usersFilter';
 import { teamByTrigram } from '../../Utils/filters/teamFilter';
 
 import data from '../../data/data';
 import './GeneralStats.scss';
-import { Link } from 'react-router-dom';
 
 
 const GeneralStats = () => {
@@ -28,9 +28,9 @@ const GeneralStats = () => {
       <h4>{`Score : ${score}`}</h4>
       <div>
         <h4>Classement acuel</h4>
-        <button className="return" type="button">
-          <Link to="/">Retour</Link>
-        </button>
+      </div>
+      <div className='return-btn'>
+        <Retour where="au classement" link="/rankings" />
       </div>
     </Wrapper>
   )

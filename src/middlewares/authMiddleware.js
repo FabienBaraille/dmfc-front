@@ -33,7 +33,7 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CREATE_LEAGUE: {
       try {
         const { data } = await axios.post(
-          `${url}//api/leagues/new`,
+          `${url}/api/leagues/new`,
           {
             leagueName: store.getState().user.league_name,
           }

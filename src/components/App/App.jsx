@@ -38,7 +38,8 @@ const App = () => {
   useEffect(() => {
     dispatch(setIsLogged(logStatus));
     if (logStatus) {
-      dispatch(setUserInfos(getCookies('userInfos')))
+      const userInfos = getCookies('userInfos');
+      dispatch(setUserInfos(JSON.parse(userInfos)))
     }
   }, []);
 

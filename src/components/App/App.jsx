@@ -26,8 +26,12 @@ import Profil from "../Profil/Profil";
 import Logout from "../Connexion/Logout";
 import Error from '../Error/Error.jsx';
 import Footer from '../Footer/Footer';
+import LeagueManagement from "../LeagueManagement/LeagueManagement";
 
 import './App.scss';
+
+import ConfirmationPopup from "../Utils/Modal/Modal";
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -45,7 +49,8 @@ const App = () => {
 
   const isLoading = useSelector((state) => state.datas.isLoading);
   const isLogged = useSelector((state) => state.user.isLogged);
-  const isCreated = useSelector((state) => state.user.created);
+  const isCreated = useSelector((state) => state.user.isCreated);
+  const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible)
 
   useEffect(() => {
     dispatch(getAllLeague());
@@ -68,11 +73,15 @@ const App = () => {
     )
   }
 
+  
+
   return (
     <>
       <Header />
       {isLogged && <Navbar />}
       <main>
+      {isConfirmationVisible && <ConfirmationPopup />}
+      {/* <LeagueManagement /> */}
         <Routes>
           <Route path='/login' element={
             <>
@@ -82,6 +91,7 @@ const App = () => {
           } />
           <Route path='/' element={<Home />} />
           <Route path='/profil' element={<Profil />} />
+          <Route path='/league-management' element={<LeagueManagement />} />
           <Route path='/creation/SR' element={<RsBetCreation />} />
           <Route path='/scores/SR' element={<BetResult />} />
           <Route path='/rankings' element={<Rankings />} />

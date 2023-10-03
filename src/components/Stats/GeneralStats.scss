@@ -1,17 +1,27 @@
 @use '/src/styles/variables' as v;
 
 #GeneralStats {
-  h3 {
-    display: flex;
-    align-items: center;
-  }
-  .logo {
-    width: 80px;
-  }
-}
-.return {
+  width: 90%;
+  .title-stats {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: auto;
+    .team-infos {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      h4 {
+        padding: 0;
+      }
+      .logo {
+        width: 80px;
+        margin: 10px;
+      }
+    }
+  }
+  .prediction-stats {
+    p {
+      margin-bottom: 0.5rem;
+    }
+  }
 }

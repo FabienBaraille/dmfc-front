@@ -57,7 +57,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
           },
         });
         store.dispatch(setSRPrediction(data));
-        console.log(data);
       } catch (error) {
         console.log(error);
       }

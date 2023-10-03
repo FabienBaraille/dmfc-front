@@ -1,0 +1,42 @@
+@use '/src/styles/variables' as v;
+
+.league-management {
+  text-align: center;
+  font-family: v.$main-font;
+}
+#league-management_name textarea {
+  font-family: v.$main-font;
+  text-align: center;
+  border: unset;
+  padding: 0.2rem;
+  border-radius: 5px;
+  background: rgba(217, 217, 217, 0.5);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+  max-width: 95%;
+  min-width: 70%;
+  max-height: 400px;
+  min-height: 20px;
+}
+
+
+@media screen and (min-width : 768px) {
+  .league-management {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 80%;
+  }
+  #league-management_name {
+    width: 40%;
+    h2, h3 {
+      margin: 10px 0;
+    }
+  }
+  .league-management_player {
+    display: flex;
+    justify-content: center;
+  }
+  #league-management_actual, #league-management_pending {
+    height: fit-content;
+  }
+}

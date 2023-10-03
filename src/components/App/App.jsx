@@ -30,8 +30,12 @@ import Logout from "../Connexion/Logout";
 import Error404 from '../Error/Error404.jsx';
 import Error403 from '../Error/Error403.jsx';
 import Footer from '../Footer/Footer';
+import LeagueManagement from "../LeagueManagement/LeagueManagement";
 
 import './App.scss';
+
+import ConfirmationPopup from "../Utils/Modal/Modal";
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -49,7 +53,8 @@ const App = () => {
 
   const isLoading = useSelector((state) => state.datas.isLoading);
   const isLogged = useSelector((state) => state.user.isLogged);
-  const isCreated = useSelector((state) => state.user.created);
+  const isCreated = useSelector((state) => state.user.isCreated);
+  const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible)
 
   useEffect(() => {
     dispatch(getAllLeague());
@@ -72,11 +77,15 @@ const App = () => {
     )
   }
 
+  
+
   return (
     <>
       <Header />
       {isLogged && <Navbar />}
       <main>
+      {isConfirmationVisible && <ConfirmationPopup />}
+      {/* <LeagueManagement /> */}
         <Routes>
           <Route path='/login' element={
             <>
@@ -98,6 +107,7 @@ const App = () => {
             {/* Rajouter ici les routes concernant uniquement le DMFC */}
             <Route path='/creation/SR' element={<RsBetCreation />} />
             <Route path='/scores/SR' element={<BetResult />} />
+            <Route path='/league-management' element={<LeagueManagement />} />
           </Route>
           <Route path='/rules' element={<SimpleRules />} />
           <Route path='/logout' element={<Logout />} />

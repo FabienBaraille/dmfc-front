@@ -4,7 +4,7 @@ import userReducer from './user';
 import betReducer from './bet';
 import teamsReducer from './teams';
 import datasReducer from './datas';
-import leagueReducer from './league'
+import leagueReducer from './league';
 
 const rootReducer = combineReducers({
   user: userReducer,

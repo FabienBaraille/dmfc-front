@@ -34,6 +34,7 @@ import LeagueManagement from "../LeagueManagement/LeagueManagement";
 import Modal from "../Utils/Modal/Modal";
 
 import './App.scss';
+import { getNews } from "../../actions/news";
 
 const App = () => {
   const navigate = useNavigate();
@@ -60,6 +61,7 @@ const App = () => {
     if (isLogged) {
       navigate('/');
       dispatch(getUsersList());
+      dispatch(getNews());
     } else {
       navigate('/login');
       dispatch(toggleCreationMode(false));
@@ -78,7 +80,6 @@ const App = () => {
       {isLogged && <Navbar />}
       <main>
       {isConfirmationVisible && <Modal player="Tocard" />}
-      {/* <LeagueManagement /> */}
         <Routes>
           <Route path='/login' element={
             <>

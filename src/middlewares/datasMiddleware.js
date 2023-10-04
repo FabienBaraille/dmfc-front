@@ -11,19 +11,21 @@ import {
   setIsLoading, 
   GET_SR_PREDICTION,
   setSRPrediction,
-  setIsLoadingSR
+  setIsLoadingSR,
+  GET_ROUNDS,
+  setRounds
 } from "../actions/datas";
 
 const datasMiddleware = (store) => (next) => async (action) => {
   // Récupérer le token stocké dans le cookies en passant la clé du cookies à récupérer à la fonction
   const token = getCookies('token');
-  const url = 'http://localhost:8000';
   switch (action.type) {
     // Action qui va faire la requête pour récupérer tous les utilisateurs d'une ligue suivant un id
     case GET_USERS_LIST:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`${url}/api/league/${store.getState().user.loggedUser.league_id.id}/users`, {
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -37,7 +39,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_ALL_LEAGUE:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`${url}/api/leagues`, {
+        const { data } = await axios.get(`/api/leagues`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -51,12 +53,25 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_SR_PREDICTION:
       store.dispatch(setIsLoadingSR());
       try {
-        const { data } = await axios.get(`${url}/api/srprediction/user/${action.id}`, {
+        const { data } = await axios.get(`/api/srprediction/${action.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         store.dispatch(setSRPrediction(data));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    case GET_ROUNDS:
+      store.dispatch(setIsLoadingSR());
+      try {
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/round`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      store.dispatch(setRounds(data));
       } catch (error) {
         console.log(error);
       }

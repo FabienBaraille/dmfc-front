@@ -1,13 +1,14 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos } from "../actions/user";
+import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos, UPDATE_USER_PROFILE, updateUserProfile } from "../actions/user";
 
 import { leagueByName } from '../Utils/filters/leagueFilter';
 import { roleName } from '../Utils/filters/usersFilter';
 import { getCookies } from '../Utils/cookies/getCookies';
 
+axios.defaults.baseURL = 'http://localhost:8000';
+
 const authMiddelware = (store) => (next) => async (action) => {
-  const url = 'http://0.0.0.0:8080';
   const token = getCookies('token');
   switch (action.type) {
       case CREATE_USER: {
@@ -15,7 +16,7 @@ const authMiddelware = (store) => (next) => async (action) => {
       const roles = roleName(store.getState().user.DMFC);
       try {
         const { data } = await axios.post(
-          `${url}/api/user/new`,
+          `/api/user/new`,
           {
             username: store.getState().user.pseudo,
             email: store.getState().user.email,
@@ -33,7 +34,7 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CREATE_LEAGUE: {
       try {
         const { data } = await axios.post(
-          `${url}/api/leagues/new`,
+          `/api/league/new`,
           {
             leagueName: store.getState().user.league_name,
           }
@@ -47,13 +48,7 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CHECK_LOGIN: {
       try {
         const { data } = await axios.post(
-          // Perso http://0.0.0.0:8080
-          // adresse pour Charli et Quentin remplacer http://fabien-baraille.vpnuser.lan:8080
-          // adresse QuentinR http://quentin-riviere.vpnuser.lan:8000
-          // adresse Maxime maxime-lemarchand.vpnuser.lan
-          // Demandez moi pour que je démarre le serveur ;)
-          // login : QuentinR  mdp : test
-          `${url}/api/login_check`,
+          `/api/login_check`,
           {
           username: store.getState().user.pseudo,
           password: store.getState().user.password,
@@ -67,22 +62,42 @@ const authMiddelware = (store) => (next) => async (action) => {
     break;
     case GET_USER:
       try {
-        const { data } = await axios.get(`${url}/api/user/${action.username}`,
+        const { data } = await axios.get(`/api/user/${action.username}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           }
         });
-        document.cookie = `isLogged=true;max-age=60*60*24`;
-        document.cookie = `userInfos=${JSON.stringify(data)};max-age=60*60*24`;
+
         store.dispatch(setUserInfos(data));
         store.dispatch(setIsLogged(true));
       } catch (error) {
         console.log(error);
       }
     break;
+
+    case UPDATE_USER_PROFILE: 
+    try {
+      const id = store.getState().user.loggedUser.id;
+      console.log(id);
+      const { data } = await axios.put(`/api/user/${id}`, {
+        username: store.getState().user.pseudo,
+        email: store.getState().user.email,
+        password: store.getState().user.password,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      store.dispatch(updateUserProfile(data));
+    } catch (error) {
+      console.log(error);
+    }
+    break;
+
     default:
   }
+
   next(action);
 };
 

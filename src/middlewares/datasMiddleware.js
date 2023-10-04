@@ -8,19 +8,19 @@ import {
   setUsersList,
   GET_ALL_LEAGUE,
   setAllLeague,
-  setIsLoading 
+  setIsLoading
 } from "../actions/datas";
 
 const datasMiddleware = (store) => (next) => async (action) => {
   // Récupérer le token stocké dans le cookies en passant la clé du cookies à récupérer à la fonction
   const token = getCookies('token');
-  const url = 'http://0.0.0.0:8080';
+
   switch (action.type) {
     // Possible d'avoir une route qui récupère les users filtrés suivant l'ID d'une league ?
     case GET_USERS_LIST:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`${url}/api/leagues/${store.getState().user.loggedUser.league_id.id}/users`, {
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -34,7 +34,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_ALL_LEAGUE:
       store.dispatch(setIsLoading())
       try {
-        const { data } = await axios.get(`${url}/api/leagues`, {
+        const { data } = await axios.get(`/api/leagues`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -44,6 +44,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+
     default:
 }
   next(action);

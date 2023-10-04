@@ -6,8 +6,9 @@ import { leagueByName } from '../Utils/filters/leagueFilter';
 import { roleName } from '../Utils/filters/usersFilter';
 import { getCookies } from '../Utils/cookies/getCookies';
 
+axios.defaults.baseURL = 'http://localhost:8000';
+
 const authMiddelware = (store) => (next) => async (action) => {
-  const url = 'http://localhost:8000';
   const token = getCookies('token');
   switch (action.type) {
       case CREATE_USER: {
@@ -15,7 +16,7 @@ const authMiddelware = (store) => (next) => async (action) => {
       const roles = roleName(store.getState().user.DMFC);
       try {
         const { data } = await axios.post(
-          `${url}/api/user/new`,
+          `/api/user/new`,
           {
             username: store.getState().user.pseudo,
             email: store.getState().user.email,
@@ -33,7 +34,7 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CREATE_LEAGUE: {
       try {
         const { data } = await axios.post(
-          `${url}/api/league/new`,
+          `/api/league/new`,
           {
             leagueName: store.getState().user.league_name,
           }
@@ -47,7 +48,7 @@ const authMiddelware = (store) => (next) => async (action) => {
     case CHECK_LOGIN: {
       try {
         const { data } = await axios.post(
-          `${url}/api/login_check`,
+          `/api/login_check`,
           {
           username: store.getState().user.pseudo,
           password: store.getState().user.password,
@@ -61,7 +62,7 @@ const authMiddelware = (store) => (next) => async (action) => {
     break;
     case GET_USER:
       try {
-        const { data } = await axios.get(`${url}/api/user/${action.username}`,
+        const { data } = await axios.get(`/api/user/${action.username}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

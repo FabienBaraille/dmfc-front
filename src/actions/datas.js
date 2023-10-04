@@ -6,6 +6,8 @@ export const GET_ALL_LEAGUE = 'GET_ALL_LEAGUE';
 export const SET_ALL_LEAGUE = 'SET_ALL_LEAGUE';
 export const GET_SR_PREDICTION = 'GET_SR_PREDICTION';
 export const SET_SR_PREDICTION = 'SET_SR_PREDICTION';
+export const GET_ROUNDS = 'GET_ROUNDS';
+export const SET_ROUNDS = 'SET_ROUNDS';
 
 export const setUsersList = (list) => ({
   type: SET_USERS_LIST,
@@ -34,4 +36,11 @@ export const getSRPrediction = (id) => ({
 export const setSRPrediction = (prediction) => ({
   type: SET_SR_PREDICTION,
   prediction
+});
+export const getRounds = () => ({
+  type: GET_ROUNDS,
+});
+export const setRounds = (roundsInfos) => ({
+  type: SET_ROUNDS,
+  roundsInfos 
 });

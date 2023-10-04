@@ -1,6 +1,9 @@
 export const ADD_BET_TO_LIST = 'ADD_BET_TO_LIST';
 export const BET_TO_REMOVE = 'BET_TO_REMOVE';
 export const TOGGLE_CREATION_MODE_BET = 'TOGGLE_CREATION_MODE_BET';
+export const SET_IS_LOADING_BET = 'SET_IS_LOADING_BET';
+export const GET_GAMES_ROUND = 'GET_GAMES_ROUND';
+export const SET_GAMES_ROUND = 'SET_GAMES_ROUND'
 
 export const addBetToList = (betTpl) => ({
   type: ADD_BET_TO_LIST,
@@ -15,4 +18,15 @@ export const betToRemove = (idToRemove) => ({
 export const toggleCreationMode = (roundCreationMode) => ({
   type: TOGGLE_CREATION_MODE_BET,
   roundCreationMode,
+});
+export const setIsLoadingBet = () => ({
+  type: SET_IS_LOADING_BET,
+});
+export const getGamesRound = (roundId) => ({
+  type: GET_GAMES_ROUND,
+  roundId
+});
+export const setGamesRound = (gamesList) => ({
+  type: SET_GAMES_ROUND,
+  gamesList 
 });

@@ -1,9 +1,11 @@
-import { ADD_BET_TO_LIST, BET_TO_REMOVE, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
+import { ADD_BET_TO_LIST, BET_TO_REMOVE, SET_GAMES_ROUND, SET_IS_LOADING_BET, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
 
 const initialState = {
   'betList': [],
   'betNumber': 0,
-  'roundCreationMode': false
+  'roundCreationMode': false,
+  'isLoading': true,
+  'games': [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -27,7 +29,17 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         'roundCreationMode': action.roundCreationMode
       }
-
+    case SET_IS_LOADING_BET:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case SET_GAMES_ROUND:
+      return {
+        ...state,
+        games: action.gamesList,
+        isLoading: false,
+      }
     default:
       return state;
   }

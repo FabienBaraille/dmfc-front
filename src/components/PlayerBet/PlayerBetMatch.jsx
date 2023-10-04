@@ -1,39 +1,37 @@
 import PropTypes from 'prop-types';
-import data from "../../data/data";
 import Input from "../Utils/Input";
 
-const teamsOptions = data.team.map((team) => {
-  return (team["Trigram"])
-});
 
-const matchTime = data.Game[0]["Date and time of Match"]
+const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team }) => {
 
-const PlayerBetMatch = ({ number }) => {
   return (
-    <div className="match">
+    <form className="match">
       <div className="teams">
         <div className="team1">
-          <input type="radio" id="team1" name={`matchnumber${number}`} />
+          <input type="radio" id="team1" name={`matchnumber${id}`} />
           <label htmlFor="team1" >
-            {teamsOptions[0]}
+            {team[0].trigram}
           </label>
         </div>
         @ 
         <div className="team2">
           <label htmlFor="team2" >
-            {teamsOptions[1]}
+            {team[1].trigram}
           </label>
-          <input type="radio" id="team2" name={`matchnumber${number}`} />
+          <input type="radio" id="team2" name={`matchnumber${id}`} />
         </div>
       </div>
       <Input label="Diff" htmlFor="diff" id="diff" type="number" />
-      <div className="match_timer">{matchTime}</div>
-    </div>
+      <div className="match_timer">{dateAndTimeOfMatch}</div>
+      <button type="submit">Valider mon choix</button>
+    </form>
   )
 };
 
 PlayerBetMatch.propTypes = {
-  number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  id: PropTypes.number,
+  dateAndTimeOfMatch: PropTypes.string,
+  team: PropTypes.array,
 }
 
 export default PlayerBetMatch;

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 const PlayerRoute = ({ children }) => {
   const userRole = useSelector((state) => state.user.loggedUser.roles[0]);
-  console.log(children);
   return userRole !== "ROLE_JOUEUR" ? <Navigate to="/Error403" replace /> : children ? children : <Outlet />;
 }
 

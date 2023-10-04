@@ -7,22 +7,33 @@ import PlayerBetMatch from "./PlayerBetMatch";
 import './PlayerBet.scss';
 import { useEffect } from "react";
 import { getGamesRound } from "../../actions/bet";
+import { getSRPrediction } from "../../actions/datas";
+import { predictedGame } from "../../Utils/filters/gamesFilter";
+import { predictionByGameId } from "../../Utils/filters/predictionFilter";
 
 const PlayerBet = () => {
 
   const dispatch = useDispatch();
 
+  const loggedUserId = useSelector((state) => state.user.loggedUser.id);
   const rounds = useSelector((state) => state.datas.rounds);
-  const isLoading = useSelector((state) => state.bet.isLoading);
+  const isLoadingBet = useSelector((state) => state.bet.isLoading);
+  const isLoadingSR = useSelector((state) => state.datas.isLoadingSR);
   const gamesOfRound = useSelector((state) => state.bet.games);
+  const predictionsList = useSelector((state) => state.datas.SRPrediction);
 
-  const betList = gamesOfRound.map(({ id, ...rest}) => <PlayerBetMatch key={id} id={id} {...rest} />)
+  const betList = gamesOfRound.map(({ id, ...rest}) => {
+    const predictStatus = predictedGame(id, predictionsList);
+    const prediction = predictionsList.length !== 0 ? predictionByGameId(id, predictionsList) : {};
+    return <PlayerBetMatch key={id} id={id} {...rest} predictStatus={predictStatus} userId={loggedUserId} prediction={prediction} />;
+  })
 
   useEffect(() => {
     dispatch(getGamesRound(rounds.length));
+    dispatch(getSRPrediction(loggedUserId));
   }, [])
 
-  if (isLoading) {
+  if (isLoadingSR || isLoadingBet) {
     return <LoadElmt />
   }
   return (

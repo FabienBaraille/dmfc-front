@@ -11,7 +11,9 @@ import {
   setIsLoading, 
   GET_SR_PREDICTION,
   setSRPrediction,
-  setIsLoadingSR
+  setIsLoadingSR,
+  GET_ROUNDS,
+  setRounds
 } from "../actions/datas";
 
 import {
@@ -30,7 +32,8 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_USERS_LIST:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`, {
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`,
+          {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -58,7 +61,8 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_SR_PREDICTION:
       store.dispatch(setIsLoadingSR());
       try {
-        const { data } = await axios.get(`/api/srprediction/user/${action.id}`, {
+
+        const { data } = await axios.get(`/api/srprediction/${action.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -124,6 +128,17 @@ const datasMiddleware = (store) => (next) => async (action) => {
           }
         );
         store.dispatch(getNews());
+
+    case GET_ROUNDS:
+      store.dispatch(setIsLoadingSR());
+      try {
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/round`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      store.dispatch(setRounds(data));
+
       } catch (error) {
         console.log(error);
       }

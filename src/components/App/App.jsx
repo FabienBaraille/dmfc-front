@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "../../Utils/cookies/getCookies";
 
 import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
-import { getAllLeague, getUsersList } from "../../actions/datas";
+import { getAllLeague, getRounds, getUsersList } from "../../actions/datas";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
 import PlayerRoute from "./ProtectedRoute/PlayerRoute";
@@ -54,7 +54,7 @@ const App = () => {
   const isLoading = useSelector((state) => state.datas.isLoading);
   const isLogged = useSelector((state) => state.user.isLogged);
   const isCreated = useSelector((state) => state.user.created);
-  const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible)
+  const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible);
 
   useEffect(() => {
     dispatch(getAllLeague());
@@ -62,6 +62,7 @@ const App = () => {
       navigate('/');
       dispatch(getUsersList());
       dispatch(getNews());
+      dispatch(getRounds());
     } else {
       navigate('/login');
       dispatch(toggleCreationMode(false));

@@ -1,5 +1,5 @@
-import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_IS_LOADING_SR, SET_SR_PREDICTION, SET_USERS_LIST } from '../actions/datas';
 import { NEWS_CREATION, NEWS_CREATION_MODE, SET_NEWS } from "../actions/news";
+import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_IS_LOADING_SR, SET_ROUNDS, SET_SR_PREDICTION, SET_USERS_LIST } from '../actions/datas';
 
 const initialState = {
   'allUsers': [],
@@ -13,6 +13,7 @@ const initialState = {
   'news': '',
   'newsId': 0,
   // End news
+  'rounds': [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -50,13 +51,19 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         newsCreation: action.newsCreation,
         isLoading: false,
-    }
+      }
     case SET_NEWS:
       return {
         ...state,
         [action.inputName]: action.inputValue,
         isLoading: false,
-    }
+      }
+    case SET_ROUNDS:
+      return {
+        ...state,
+        rounds: action.roundsInfos,
+        isLoading: false,
+      }
     default:
       return state;
   }

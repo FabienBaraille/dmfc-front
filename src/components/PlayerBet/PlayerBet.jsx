@@ -22,17 +22,18 @@ const PlayerBet = () => {
   const gamesOfRound = useSelector((state) => state.bet.games);
   const predictionsList = useSelector((state) => state.datas.SRPrediction);
 
-  const betList = gamesOfRound.map(({ id, ...rest}) => {
-    const predictStatus = predictedGame(id, predictionsList);
-    const prediction = predictionsList.length !== 0 ? predictionByGameId(id, predictionsList) : {};
-    return <PlayerBetMatch key={id} id={id} {...rest} predictStatus={predictStatus} userId={loggedUserId} prediction={prediction} />;
-  })
-
+  
   useEffect(() => {
     dispatch(getGamesRound(rounds.length));
     dispatch(getSRPrediction(loggedUserId));
   }, [])
-
+  
+  const betList = gamesOfRound.map(({ id, ...rest}) => {
+    const predictStatus = predictedGame(id, predictionsList);
+    const prediction = predictionByGameId(id, predictionsList);
+    return <PlayerBetMatch key={id} id={id} {...rest} predictStatus={predictStatus} prediction={prediction} />;
+  })
+  
   if (isLoadingSR || isLoadingBet) {
     return <LoadElmt />
   }

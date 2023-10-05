@@ -32,7 +32,7 @@ const reducer = (state = initialState, action = {}) => {
     case SET_IS_LOADING_BET:
       return {
         ...state,
-        isLoading: true
+        isLoading: action.isLoading,
       }
     case SET_GAMES_ROUND:
       return {

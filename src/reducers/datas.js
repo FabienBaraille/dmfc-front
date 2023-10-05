@@ -1,4 +1,4 @@
-import { NEWS_CREATION, NEWS_CREATION_MODE, SET_NEWS } from "../actions/news";
+import { NEWS_CREATION_MODE, SET_NEWS } from "../actions/news";
 import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_IS_LOADING_SR, SET_ROUNDS, SET_SR_PREDICTION, SET_USERS_LIST } from '../actions/datas';
 
 const initialState = {

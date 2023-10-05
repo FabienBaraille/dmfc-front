@@ -9,7 +9,6 @@ const initialState = {
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ADD_BET_TO_LIST:
-      console.log(state.betNumber);
       return {
         ...state,
         'betList': [...state.betList, action.betTpl],

@@ -13,7 +13,6 @@ const LeagueManagement = () => {
 
   const handleReject = () => {
     dispatch(toggleConfirmationModal(true))
-    console.log(isConfirmationVisible);
   }
 
   if (isConfirmationVisible) {

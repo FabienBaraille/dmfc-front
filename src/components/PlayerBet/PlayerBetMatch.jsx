@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { createBet, updateBet } from '../../actions/bet';
+import { unableBet } from '../../Utils/filters/predictionFilter';
 
 
 const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, prediction }) => {
@@ -11,6 +14,11 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
   const [button, setButton] = useState('');
   const [winTeam, setWinTeam] = useState(predictStatus !== 'Not done' ? prediction.predictedWinnigTeam : '');
   const [winDif, setWinDif] = useState(predictStatus !== 'Not done' ? prediction.predictedPointDifference : '');
+
+  const matchDate = new Date(dateAndTimeOfMatch);
+  const currentDate = new Date();
+
+  const unableMessage = unableBet(currentDate, matchDate, predictStatus);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -55,7 +63,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
             id="1" 
             name='winning-team' 
             defaultChecked={predictStatus !== 'Not done' ? prediction.predictedWinnigTeam === team[1].name : false} 
-            disabled={(predictStatus === 'Published' || predictStatus === 'Validated')} 
+            disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} 
             onChange={(event) => setWinTeam(event.target.id)}
           />
         </div>
@@ -67,15 +75,18 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
           id="diff" 
           onChange={(event) => setWinDif(event.target.value)} 
           defaultValue={winDif} 
-          disabled={(predictStatus === 'Published' || predictStatus === 'Validated')} />
+          disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} />
       </div>
-      <div className="match_timer">{dateAndTimeOfMatch}</div>
-      {(predictStatus !== 'Validated' && predictStatus !== 'Published') && 
+      <div className="match_timer">
+        <p>{`Match time : ${matchDate.getMonth()+1} / ${matchDate.getDate()} / ${matchDate.getFullYear()} - ${matchDate.getHours()}:${matchDate.getMinutes()}`}</p>
+        {dateAndTimeOfMatch}
+      </div>
+      {currentDate < matchDate && predictStatus !== 'Validated' && predictStatus !== 'Published' && 
         <div>
           <button type="submit" onClick={() => setButton('Saved')} >Sauvegarder</button>
           <button type="submit" onClick={() => setButton('Validated')} >Valider</button>
         </div>}
-      {(predictStatus == 'Validated' || predictStatus == 'Published') && <h5>Pronostique déjà validé</h5>}
+      {(currentDate > matchDate || predictStatus == 'Validated' || predictStatus == 'Published') && <h5>{unableMessage}</h5>}
     </form>
   )
 };

@@ -128,7 +128,10 @@ const datasMiddleware = (store) => (next) => async (action) => {
           }
         );
         store.dispatch(getNews());
-
+      } catch (error) {
+        console.log(error);
+      }
+      break;
     case GET_ROUNDS:
       store.dispatch(setIsLoadingSR());
       try {

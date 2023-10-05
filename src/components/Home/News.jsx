@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useDispatch, useSelector } from 'react-redux';
 import Wrapper from '../Wrapper/Wrapper';
-import { postNewsCreation, setNews, setNewsCreationMode } from '../../actions/news';
+import { postNewsChange, postNewsCreation, setNews, setNewsCreationMode } from '../../actions/news';
 import Input from '../Utils/Input';
 
 
@@ -11,6 +11,7 @@ const News = () => {
   const newsCreation = useSelector((state) => state.datas.newsCreation);
   const news = useSelector((state) => state.datas.news);
   const newsTitle = useSelector((state) => state.datas.newsTitle);
+  const newsId = useSelector((state) => state.datas.newsId);
 
   const handleCreationMode = () => {
     newsCreation ? dispatch(setNewsCreationMode(false)) : dispatch(setNewsCreationMode(true));
@@ -18,7 +19,7 @@ const News = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(postNewsCreation(event.target.id, event.target.value))
+    newsId === 0 ? dispatch(postNewsCreation()) : dispatch(postNewsChange());    
     dispatch(setNewsCreationMode(false));
   };
 
@@ -29,13 +30,14 @@ const News = () => {
   return (
     <Wrapper name='news'>
       <h2>Fil d'actus</h2>
-      {userRole === 'ROLE_DMFC' && <button type="button" onClick={handleCreationMode}>{newsTitle == '' ? "Créer" : "Editer"}</button>}
+      {(userRole === 'ROLE_DMFC' && !newsCreation) && <button type="button" onClick={handleCreationMode}>{newsTitle == '' ? "Créer" : "Editer"}</button>}
       {newsCreation ?
         <form onSubmit={handleSubmit}>
           <Input htmlFor={"newsTitle"} id={"newsTitle"} label='Titre :' value={newsTitle} className={"newsTitle-container"} onChange={handleNewsChange}/>
           <Input htmlFor={"news"} type={"textarea"} id={"news"} label='Actus :' value={news} className={"news-container"} onChange={handleNewsChange}/>
           <button type='submit'>Valider</button>
-        </form> 
+          <p>Pensez à validez vos changements !</p>
+        </form>         
         :
         <>
           <h3>{newsTitle}</h3>

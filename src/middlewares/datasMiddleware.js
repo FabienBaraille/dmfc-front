@@ -16,7 +16,9 @@ import {
 
 import {
   GET_NEWS,
+  POST_NEWS_CHANGE,
   POST_NEWS_CREATION,
+  getNews,
   setNews,
 } from '../actions/news';
 
@@ -88,7 +90,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-    // Action pour récuperer les news en BDD
+    // Action pour récuperer une news
     case GET_NEWS:
       store.dispatch(setIsLoading());
       try {
@@ -97,8 +99,31 @@ const datasMiddleware = (store) => (next) => async (action) => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
-        store.dispatch(setNews(data[0].title, data[0].description));
+        });        
+        store.dispatch(setNews('newsTitle', data[0].title));
+        store.dispatch(setNews('news', data[0].description));
+        store.dispatch(setNews('newsId', data[0].id));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    // Action qui permet de modifier une news
+    case POST_NEWS_CHANGE:
+      store.dispatch(setIsLoading());
+      try {
+        const { data } = await axios.put(`/api/news/${store.getState().datas.newsId}`,
+          {
+            league: store.getState().user.loggedUser.league_id.id,
+            title: store.getState().datas.newsTitle,
+            description: store.getState().datas.news,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+        store.dispatch(getNews());
       } catch (error) {
         console.log(error);
       }

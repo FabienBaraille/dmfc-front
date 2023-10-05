@@ -11,6 +11,7 @@ const initialState = {
   'newsCreation': false,
   'newsTitle': '',
   'news': '',
+  'newsId': 0,
   // End news
 };
 
@@ -50,19 +51,12 @@ const reducer = (state = initialState, action = {}) => {
         newsCreation: action.newsCreation,
         isLoading: false,
     }
-    case NEWS_CREATION:
+    case SET_NEWS:
       return {
         ...state,
         [action.inputName]: action.inputValue,
         isLoading: false,
     }
-    case SET_NEWS:
-      return {
-        ...state,
-        newsTitle: action.newsTitle,
-        news: action.news,
-        isLoading: false,
-      }
     default:
       return state;
   }

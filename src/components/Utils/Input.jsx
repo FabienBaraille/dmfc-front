@@ -8,7 +8,7 @@ const Input = ({label, htmlFor, type, value, id, className = null, onChange = nu
         type={type} 
         id={id} 
         onChange={onChange} 
-        value={value}
+        defaultValue={value}
         placeholder={placeholder}
         required={isRequired}
       />

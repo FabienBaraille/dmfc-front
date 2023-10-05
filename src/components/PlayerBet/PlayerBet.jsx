@@ -1,20 +1,48 @@
+import { useDispatch, useSelector } from "react-redux";
+
+import LoadElmt from "../Loader/LoadElmt";
 import Wrapper from "../Wrapper/Wrapper";
-import PlayerBetMatch from "./PlayerBetMatch"
-import './PlayerBet.scss'
+import PlayerBetMatch from "./PlayerBetMatch";
+
+import './PlayerBet.scss';
+import { useEffect } from "react";
+import { getGamesRound } from "../../actions/bet";
+import { getSRPrediction } from "../../actions/datas";
+import { predictedGame } from "../../Utils/filters/gamesFilter";
+import { predictionByGameId } from "../../Utils/filters/predictionFilter";
 
 const PlayerBet = () => {
+
+  const dispatch = useDispatch();
+
+  const loggedUserId = useSelector((state) => state.user.loggedUser.id);
+  const rounds = useSelector((state) => state.datas.rounds);
+  const isLoadingBet = useSelector((state) => state.bet.isLoading);
+  const isLoadingSR = useSelector((state) => state.datas.isLoadingSR);
+  const gamesOfRound = useSelector((state) => state.bet.games);
+  const predictionsList = useSelector((state) => state.datas.SRPrediction);
+
+  
+  useEffect(() => {
+    dispatch(getGamesRound(rounds.length));
+    dispatch(getSRPrediction(loggedUserId));
+  }, [])
+  
+  const betList = gamesOfRound.map(({ id, ...rest}) => {
+    const predictStatus = predictedGame(id, predictionsList);
+    const prediction = predictionByGameId(id, predictionsList);
+    return <PlayerBetMatch key={id} id={id} {...rest} predictStatus={predictStatus} prediction={prediction} />;
+  })
+  
+  if (isLoadingSR || isLoadingBet) {
+    return <LoadElmt />
+  }
   return (
     <Wrapper name="player_bet">
-    <h2>Pronostique SR : Round 2</h2>
+    <h2>{`Pronostique SR : Round ${rounds.length}`}</h2>
       <div className="player_bet">
-        <PlayerBetMatch number="1" />
-        <PlayerBetMatch number="2" />
-        <PlayerBetMatch number="3" />
-        <PlayerBetMatch number="4" />
-        <PlayerBetMatch number="5" />
-        <PlayerBetMatch number="6" />
+        {betList}
       </div>
-      <button type="submit">Valider mes choix</button>
     </Wrapper>
   )
 };

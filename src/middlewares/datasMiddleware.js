@@ -19,7 +19,7 @@ import {
   GET_LEAGUE,
   setLeague,
   POST_LEAGUE_CHANGE,
-  getLeague
+  getLeague,
   GET_SEASON,
   setSeason
 } from "../actions/datas";

@@ -16,6 +16,10 @@ import {
   setIsLoadingSR,
   GET_ROUNDS,
   setRounds,
+  GET_LEAGUE,
+  setLeague,
+  POST_LEAGUE_CHANGE,
+  getLeague
   GET_SEASON,
   setSeason
 } from "../actions/datas";
@@ -147,7 +151,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
       } catch (error) {
         console.log(error);
       }
-      break;
+    break;
     case GET_ROUNDS:
       store.dispatch(setIsLoadingSR());
       try {
@@ -157,6 +161,21 @@ const datasMiddleware = (store) => (next) => async (action) => {
           },
         });
       store.dispatch(setRounds(data));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    // Action qui permet de récuperer toutes les infos d'une league avec son id
+    case GET_LEAGUE:
+      store.dispatch(setIsLoading());
+      try {
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      store.dispatch(setLeague('leagueName', data.leagueName));
+      store.dispatch(setLeague('leagueDescription', data.leagueDescription))
       } catch (error) {
         console.log(error);
       }
@@ -171,6 +190,26 @@ const datasMiddleware = (store) => (next) => async (action) => {
           },
         });
         store.dispatch(setSeason(data));
+        } catch (error) {
+          console.log(error);
+        }
+      break;
+    // Action qui permet de modifier une league
+    case POST_LEAGUE_CHANGE:
+      store.dispatch(setIsLoading());
+      try {
+        const { data } = await axios.put(`/api/leagues/${store.getState().user.loggedUser.league_id.id}`,
+          {
+            leagueName: store.getState().datas.leagueName,
+            leagueDescription: store.getState().datas.leagueDescription,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+        store.dispatch(getLeague());
       } catch (error) {
         console.log(error);
       }

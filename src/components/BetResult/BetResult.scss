@@ -10,6 +10,7 @@
   h2 {
     padding-bottom: 8px;
   }
+  
 }
 form {
   display: flex;
@@ -34,7 +35,6 @@ form {
   }
 }
 button {
-  width: 70%;
   background: v.$nav-back;
   color: v.$orange;
   border: unset;

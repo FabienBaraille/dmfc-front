@@ -51,6 +51,10 @@ body {
   }
   main {
     margin-top: 6em;
+    .at-logo {
+      content: url('/src/assets/design/at-sign.svg');
+      margin: 0 15px;
+    }
   }
 }
 

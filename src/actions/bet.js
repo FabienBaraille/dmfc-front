@@ -8,6 +8,27 @@ export const CREATE_BET = 'CREATE_BET';
 export const UPDATE_BET = 'UPDATE_BET';
 export const CREATE_ROUND = 'CREATE_ROUND';
 export const SET_INPUT_VALUE_BET = 'SET_INPUT_VALUE_BET';
+export const CREATE_GAME = 'CREATE_GAME';
+export const SET_IS_LOADING_GAME = 'SET_IS_LOADING_GAME';
+export const SET_IS_CREATED_MATCH = 'SET_IS_CREATED_MATCH';
+
+export const setIsLoadingBet = (isLoading) => ({
+  type: SET_IS_LOADING_BET,
+  isLoading
+});
+export const setIsLoadingGame = (isLoading) => ({
+  type: SET_IS_LOADING_GAME,
+  isLoading
+});
+export const setIsCreatedMatch = (isCreated) => ({
+  type: SET_IS_CREATED_MATCH,
+  isCreated
+});
+export const setInputValueBet = (inputName, inputValue) => ({
+  type: SET_INPUT_VALUE_BET,
+  inputName,
+  inputValue,
+});
 
 export const addBetToList = (betTpl) => ({
   type: ADD_BET_TO_LIST,
@@ -23,10 +44,7 @@ export const toggleCreationMode = (roundCreationMode) => ({
   type: TOGGLE_CREATION_MODE_BET,
   roundCreationMode,
 });
-export const setIsLoadingBet = (isLoading) => ({
-  type: SET_IS_LOADING_BET,
-  isLoading
-});
+
 export const getGamesRound = (roundId) => ({
   type: GET_GAMES_ROUND,
   roundId
@@ -42,18 +60,19 @@ export const createBet = (winningTeam, winningDif, matchId, status) => ({
   matchId,
   status,
 });
+export const createRound = () => ({
+  type: CREATE_ROUND,
+});
+export const createGame = (date, teams) => ({
+  type: CREATE_GAME,
+  date,
+  teams
+});
+
 export const updateBet = (winningTeam, winningDif, betId, status) => ({
   type: UPDATE_BET,
   winningTeam,
   winningDif,
   betId,
   status
-});
-export const createRound = () => ({
-  type: CREATE_ROUND,
-});
-export const setInputValueBet = (inputName, inputValue) => ({
-  type: SET_INPUT_VALUE_BET,
-  inputName,
-  inputValue,
 });

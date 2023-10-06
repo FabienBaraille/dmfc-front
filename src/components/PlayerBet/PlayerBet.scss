@@ -29,8 +29,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
     background: v.$cell-back;
     box-shadow: 0 0 2px 2px v.$shadow;
     border-radius: 100%;
@@ -46,13 +46,13 @@
 button {
   font-family: v.$main-font;
 }
-.team1 label {
+.visitor label {
   margin-left: 1rem;
 }
-.team2 label {
+.home-team label {
   margin-right: 1rem;
 }
-.team1, .team2 {
+.visitor, .home-team {
   align-items: center;
   display: flex;
 }
@@ -71,10 +71,10 @@ button {
   .player_bet {
     display: flex;
     flex-flow: row wrap;
-    padding: 20px 10px;
+    padding: 10px;
+    gap: 10px;
   }
   .match {
-    padding: 20px 10px;
-    margin: 10px 0px;
+    min-width: 20%;
   }
 }

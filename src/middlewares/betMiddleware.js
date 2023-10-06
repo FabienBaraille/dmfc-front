@@ -2,7 +2,7 @@ import axios from 'redaxios';
 
 // Import de la fonction permettant de récupérer les cookies
 import { getCookies } from "../Utils/cookies/getCookies";
-import { CREATE_BET, CREATE_ROUND, GET_GAMES_ROUND, UPDATE_BET, setGamesRound, setIsLoadingBet } from '../actions/bet';
+import { CREATE_BET, CREATE_GAME, CREATE_ROUND, GET_GAMES_ROUND, UPDATE_BET, setGamesRound, setIsCreatedMatch, setIsLoadingBet, setIsLoadingGame, toggleCreationMode } from '../actions/bet';
 import { getRounds, getSRPrediction } from '../actions/datas';
 
 const betMiddleware = (store) => (next) => async (action) => {
@@ -87,6 +87,28 @@ const betMiddleware = (store) => (next) => async (action) => {
         });
         store.dispatch(setIsLoadingBet(false));
         store.dispatch(getRounds());
+        store.dispatch(toggleCreationMode(false));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    break;
+    case CREATE_GAME:{
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.post(`/api/game/new`,
+        {
+          dateAndTimeOfMatch : action.date,
+          round : store.getState().bet.roundNumber,
+          teams : action.teams,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        store.dispatch(setIsLoadingGame(false));
+        store.dispatch(setIsCreatedMatch(true));
       } catch (error) {
         console.log(error);
       }

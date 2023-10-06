@@ -64,7 +64,7 @@ const App = () => {
       dispatch(getUsersList());
       dispatch(getNews());
       dispatch(getRounds());
-      dispatch(getLeague())
+      dispatch(getLeague());
       dispatch(getSeason());
     } else {
       navigate('/login');

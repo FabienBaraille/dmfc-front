@@ -29,6 +29,11 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      }
     case SET_USERS_LIST:
       return {
         ...state,
@@ -41,17 +46,12 @@ const reducer = (state = initialState, action = {}) => {
         allLeague: action.leaguesList,
         isLoading: false,
       }
-    case SET_IS_LOADING:
+    case SET_ALL_TEAMS:
       return {
         ...state,
-        isLoading: true,
+        allTeams: action.teamsList,
+        isLoading: false,
       }
-      case SET_ALL_TEAMS:
-        return {
-          ...state,
-          allTeams: action.teamsList,
-          isLoading: false,
-        }
     case SET_IS_LOADING_SR:
       return {
         ...state,

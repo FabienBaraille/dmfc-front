@@ -1,32 +1,23 @@
-import { SAVE_FAVORITE_TEAMS, SAVE_TEAMS } from '../actions/teams';
+// export const initialState = {
+//   favoriteTeams: [],
+// };
 
-export const initialState = {
-  list: [],
+// const reducer = (state = initialState, action = {}) => {
+// switch (action.type) {
+//     case 'SAVE_FAVORITE_TEAMS':
+//       return {
+//         ...state,
+//         favoriteTeams: action.favoriteTeams,
+//       };
 
-  favorites: [],
+//       case 'SAVE_TEAMS':
+//         return {
+//           ...state,
+//           teamsList: action.teamsList,
+//        };
+//     default:
+//       return state;
+//   }
+// };
 
-  isTeamsLoaded: false,
-};
-
-const reducer = (state = initialState, action = {}) => {
-  switch (action.type) {
-    case SAVE_TEAMS:
-      return {
-        ...state,
-        list: action.teams,
-     
-        isTeamsLoaded: true,
-      };
-
-    case SAVE_FAVORITE_TEAMS:
-      return {
-        ...state,
-        favorites: action.favoriteTeams,
-      };
-
-    default:
-      return state;
-  }
-};
-
-export default reducer;
+// export default reducer;

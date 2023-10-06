@@ -8,6 +8,8 @@ import {
   setUsersList,
   GET_ALL_LEAGUE,
   setAllLeague,
+  GET_ALL_TEAMS,
+  setAllTeams,
   setIsLoading, 
   GET_SR_PREDICTION,
   setSRPrediction,
@@ -59,6 +61,19 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    case GET_ALL_TEAMS:
+      store.dispatch(setIsLoading())
+      try {
+        const { data } = await axios.get(`/api/teams`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        store.dispatch(setAllTeams(data));
+        } catch (error) {
+          console.log(error);
+        }
+      break;
     // Action qui va faire la requête pour récupérer toutes les prédictions d'un joueur suivant son id
     case GET_SR_PREDICTION:
       store.dispatch(setIsLoadingSR());
@@ -74,7 +89,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-
     // News
     // Action qui permet de mettre les news en BDD
     case POST_NEWS_CREATION:
@@ -143,7 +157,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
           },
         });
       store.dispatch(setRounds(data));
-
       } catch (error) {
         console.log(error);
       }

@@ -13,7 +13,8 @@
 }
 .perso {
   color:v.$orange;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-text-stroke: 0.03em black;
 }
 .change-info {
   display: flex;

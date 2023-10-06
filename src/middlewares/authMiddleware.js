@@ -1,6 +1,6 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos } from "../actions/user";
+import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos, UPDATE_USER_PROFILE, updateUserProfile } from "../actions/user";
 
 import { leagueByName } from '../Utils/filters/leagueFilter';
 import { roleName } from '../Utils/filters/usersFilter';
@@ -68,16 +68,36 @@ const authMiddelware = (store) => (next) => async (action) => {
             Authorization: `Bearer ${token}`,
           }
         });
-        document.cookie = `isLogged=true;max-age=60*60*24`;
-        document.cookie = `userInfos=${JSON.stringify(data)};max-age=60*60*24`;
+
         store.dispatch(setUserInfos(data));
         store.dispatch(setIsLogged(true));
       } catch (error) {
         console.log(error);
       }
     break;
+
+    case UPDATE_USER_PROFILE: 
+    try {
+      const id = store.getState().user.loggedUser.id;
+      console.log(id);
+      const { data } = await axios.put(`/api/user/${id}`, {
+        username: store.getState().user.pseudo,
+        email: store.getState().user.email,
+        password: store.getState().user.password,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      store.dispatch(updateUserProfile(data));
+    } catch (error) {
+      console.log(error);
+    }
+    break;
+
     default:
   }
+
   next(action);
 };
 

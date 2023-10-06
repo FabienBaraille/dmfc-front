@@ -2,8 +2,8 @@ import axios from 'redaxios';
 
 // Import de la fonction permettant de récupérer les cookies
 import { getCookies } from "../Utils/cookies/getCookies";
-import { CREATE_BET, GET_GAMES_ROUND, UPDATE_BET, setGamesRound, setIsLoadingBet } from '../actions/bet';
-import { getSRPrediction } from '../actions/datas';
+import { CREATE_BET, CREATE_ROUND, GET_GAMES_ROUND, UPDATE_BET, setGamesRound, setIsLoadingBet } from '../actions/bet';
+import { getRounds, getSRPrediction } from '../actions/datas';
 
 const betMiddleware = (store) => (next) => async (action) => {
   const token = getCookies('token');
@@ -64,6 +64,32 @@ const betMiddleware = (store) => (next) => async (action) => {
       store.dispatch(getSRPrediction(store.getState().user.loggedUser.id));
     } catch (error) {
       console.log(error);
+    }
+    break;
+    case CREATE_ROUND:{
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.post(`/api/round/new`,
+        {
+          season: {
+            id: store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].id,
+            year:store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].year,
+          },
+          name: store.getState().bet.roundName,
+          category: store.getState().bet.roundCat,
+          user_id: store.getState().user.loggedUser.id,
+          league_id: store.getState().user.loggedUser.league_id.id
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        store.dispatch(setIsLoadingBet(false));
+        store.dispatch(getRounds());
+      } catch (error) {
+        console.log(error);
+      }
     }
     break;
     default:

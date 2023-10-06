@@ -1,10 +1,22 @@
 import { NEWS_CREATION_MODE, SET_NEWS } from "../actions/news";
-import { LEAGUE_CREATION_MODE, SET_ALL_LEAGUE, SET_IS_LOADING, SET_IS_LOADING_SR, SET_LEAGUE, SET_ROUNDS, SET_SR_PREDICTION, SET_USERS_LIST } from '../actions/datas';
+import { 
+  LEAGUE_CREATION_MODE,
+  SET_LEAGUE,
+  SET_ALL_LEAGUE,
+  SET_IS_LOADING,
+  SET_IS_LOADING_SR,
+  SET_ROUNDS,
+  SET_SEASON,
+  SET_SR_PREDICTION,
+  SET_USERS_LIST,
+  SET_ALL_TEAMS 
+} from '../actions/datas';
 
 const initialState = {
   'allUsers': [],
   'allLeague': [],
   'isLoading': true,
+  'allTeams':[],
   'SRPrediction': [],
   'isLoadingSR': true,
   // News
@@ -20,6 +32,7 @@ const initialState = {
   'leagueName': '',
   // End League management
   'rounds': [],
+  'allSeasons': []
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -41,6 +54,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: true,
       }
+      case SET_ALL_TEAMS:
+        return {
+          ...state,
+          allTeams: action.teamsList,
+          isLoading: false,
+        }
     case SET_IS_LOADING_SR:
       return {
         ...state,
@@ -82,7 +101,12 @@ const reducer = (state = initialState, action = {}) => {
         leagueCreation: action.leagueCreation,
         isLoading: false,
       }
-      
+    case SET_SEASON:
+      return {
+        ...state,
+        allSeasons: action.seasonInfos,
+        isLoading: false,
+      }
     default:
     return state;
   }

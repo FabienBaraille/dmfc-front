@@ -39,6 +39,7 @@ export const getAllTeams = () => ({
 export const setAllTeams = (teamsList) => ({
   type: SET_ALL_TEAMS,
   teamsList
+});
 export const getSRPrediction = (id) => ({
   type: GET_SR_PREDICTION,
   id

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "../../Utils/cookies/getCookies";
 
 import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
-import { getAllLeague, getRounds, getUsersList } from "../../actions/datas";
+import { getAllLeague, getRounds, getAllTeams, getUsersList } from "../../actions/datas";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
 import PlayerRoute from "./ProtectedRoute/PlayerRoute";
@@ -59,6 +59,7 @@ const App = () => {
   useEffect(() => {
     dispatch(getAllLeague());
     if (isLogged) {
+      dispatch(getAllTeams());
       navigate('/');
       dispatch(getUsersList());
       dispatch(getNews());

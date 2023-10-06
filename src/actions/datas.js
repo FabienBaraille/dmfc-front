@@ -8,6 +8,10 @@ export const GET_SR_PREDICTION = 'GET_SR_PREDICTION';
 export const SET_SR_PREDICTION = 'SET_SR_PREDICTION';
 export const GET_ROUNDS = 'GET_ROUNDS';
 export const SET_ROUNDS = 'SET_ROUNDS';
+export const GET_LEAGUE = 'GET_LEAGUE';
+export const SET_LEAGUE = 'SET_LEAGUE';
+export const POST_LEAGUE_CHANGE = 'POST_LEAGUE_CHANGE';
+export const LEAGUE_CREATION_MODE = 'LEAGUE_CREATION_MODE';
 
 export const setUsersList = (list) => ({
   type: SET_USERS_LIST,
@@ -43,4 +47,23 @@ export const getRounds = () => ({
 export const setRounds = (roundsInfos) => ({
   type: SET_ROUNDS,
   roundsInfos 
+});
+export const getLeague = () => ({
+  type: GET_LEAGUE,
+})
+export const setLeague = (inputName, inputValue) => ({
+  type: SET_LEAGUE,
+  inputName,
+  inputValue,
+});
+export const setDescription = (leagueDescription) => ({
+  type: SET_LEAGUE,
+  leagueDescription,
+});
+export const postLeagueChange = () => ({
+  type: POST_LEAGUE_CHANGE,
+});
+export const setLeagueCreationMode = (leagueCreation) => ({
+  type: LEAGUE_CREATION_MODE,
+  leagueCreation,
 });

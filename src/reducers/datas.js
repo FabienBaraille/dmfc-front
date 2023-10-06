@@ -1,5 +1,5 @@
 import { NEWS_CREATION_MODE, SET_NEWS } from "../actions/news";
-import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_IS_LOADING_SR, SET_ROUNDS, SET_SR_PREDICTION, SET_USERS_LIST } from '../actions/datas';
+import { LEAGUE_CREATION_MODE, SET_ALL_LEAGUE, SET_IS_LOADING, SET_IS_LOADING_SR, SET_LEAGUE, SET_ROUNDS, SET_SR_PREDICTION, SET_USERS_LIST } from '../actions/datas';
 
 const initialState = {
   'allUsers': [],
@@ -13,6 +13,12 @@ const initialState = {
   'news': '',
   'newsId': 0,
   // End news
+  // League Management
+  'leagueCreation': false,
+  'leagueInfos': {},
+  'leagueDescription': '',
+  'leagueName': '',
+  // End League management
   'rounds': [],
 };
 
@@ -64,8 +70,21 @@ const reducer = (state = initialState, action = {}) => {
         rounds: action.roundsInfos,
         isLoading: false,
       }
+    case SET_LEAGUE:
+      return {
+        ...state,
+        [action.inputName]: action.inputValue,
+        isLoading: false,
+      }
+    case LEAGUE_CREATION_MODE:
+      return {
+        ...state,
+        leagueCreation: action.leagueCreation,
+        isLoading: false,
+      }
+      
     default:
-      return state;
+    return state;
   }
 };
 

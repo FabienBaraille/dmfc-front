@@ -8,6 +8,8 @@ export const GET_SR_PREDICTION = 'GET_SR_PREDICTION';
 export const SET_SR_PREDICTION = 'SET_SR_PREDICTION';
 export const GET_ROUNDS = 'GET_ROUNDS';
 export const SET_ROUNDS = 'SET_ROUNDS';
+export const GET_SEASON = 'GET_SEASON';
+export const SET_SEASON = 'SET_SEASON'
 
 export const setUsersList = (list) => ({
   type: SET_USERS_LIST,
@@ -43,4 +45,11 @@ export const getRounds = () => ({
 export const setRounds = (roundsInfos) => ({
   type: SET_ROUNDS,
   roundsInfos 
+});
+export const getSeason = () => ({
+  type: GET_SEASON,
+});
+export const setSeason = (seasonInfos) => ({
+  type: SET_SEASON,
+  seasonInfos
 });

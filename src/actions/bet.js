@@ -5,7 +5,9 @@ export const SET_IS_LOADING_BET = 'SET_IS_LOADING_BET';
 export const GET_GAMES_ROUND = 'GET_GAMES_ROUND';
 export const SET_GAMES_ROUND = 'SET_GAMES_ROUND';
 export const CREATE_BET = 'CREATE_BET';
-export const UPDATE_BET = 'UPDATE_BET'
+export const UPDATE_BET = 'UPDATE_BET';
+export const CREATE_ROUND = 'CREATE_ROUND';
+export const SET_INPUT_VALUE_BET = 'SET_INPUT_VALUE_BET';
 
 export const addBetToList = (betTpl) => ({
   type: ADD_BET_TO_LIST,
@@ -46,4 +48,12 @@ export const updateBet = (winningTeam, winningDif, betId, status) => ({
   winningDif,
   betId,
   status
+});
+export const createRound = () => ({
+  type: CREATE_ROUND,
+});
+export const setInputValueBet = (inputName, inputValue) => ({
+  type: SET_INPUT_VALUE_BET,
+  inputName,
+  inputValue,
 });

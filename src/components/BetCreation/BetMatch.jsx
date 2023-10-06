@@ -1,10 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import data from "../../data/data"
+import data from "../../data/data";
 import { betToRemove } from "../../actions/bet";
-import Input from "../Utils/Input"
+import Input from "../Utils/Input";
+import { useState } from "react";
 
 const BetMatch = () => {
+
   const dispatch = useDispatch();
+
+  const [matchDate, setMatchDate] = useState('');
+
   const betListNumber = useSelector((state) => state.bet.betNumber);
 
   const teamsOptions = data.team.map((team) => (
@@ -18,7 +23,7 @@ const BetMatch = () => {
   }
 
   return (
-    <form className="match-line" key={betListNumber} id={betListNumber} onSubmit={handleDelete}>
+    <div className="match-line" id={betListNumber}>
       <select>
         {teamsOptions}
       </select>
@@ -26,8 +31,9 @@ const BetMatch = () => {
       <select>
         {teamsOptions}
       </select>
-      <Input label="Date limite de pronostique :" htmlFor="pronostic_limit" id="pronostic_limit" type="datetime-local" />
-    </form>
+      <Input label="Date limite de pronostique :" htmlFor="pronostic_limit" id="pronostic_limit" type="datetime-local" value={matchDate} onChange={event => setMatchDate(event.target.value)} />
+      <button id={betListNumber} type="button" onClick={handleDelete}></button>
+    </div>
   )
 };
 

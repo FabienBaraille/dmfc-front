@@ -1,4 +1,4 @@
-import { ADD_BET_TO_LIST, BET_TO_REMOVE, SET_GAMES_ROUND, SET_IS_LOADING_BET, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
+import { ADD_BET_TO_LIST, BET_TO_REMOVE, SET_GAMES_ROUND, SET_INPUT_VALUE_BET, SET_IS_LOADING_BET, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
 
 const initialState = {
   'betList': [],
@@ -6,12 +6,14 @@ const initialState = {
   'roundCreationMode': false,
   'isLoading': true,
   'games': [],
+  'roundName': '',
+  'roundCat': 'SR',
+  'roundNumber': '',
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case ADD_BET_TO_LIST:
-      console.log(state.betNumber);
       return {
         ...state,
         'betList': [...state.betList, action.betTpl],
@@ -39,6 +41,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         games: action.gamesList,
         isLoading: false,
+      }
+    case SET_INPUT_VALUE_BET:
+      return {
+        ...state,
+        [action.inputName]: action.inputValue,
       }
     default:
       return state;

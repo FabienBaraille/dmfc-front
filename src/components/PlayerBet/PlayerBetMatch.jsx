@@ -16,6 +16,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
   const [winDif, setWinDif] = useState(predictStatus !== 'Not done' ? prediction.predictedPointDifference : '');
 
   const matchDate = new Date(dateAndTimeOfMatch);
+  const matchMonth = matchDate.getMonth()+1 < 10 ? `0${matchDate.getMonth()+1}` : `${matchDate.getMonth()+1}`
   const currentDate = new Date();
 
   const unableMessage = unableBet(currentDate, matchDate, predictStatus);
@@ -78,8 +79,8 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
           disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} />
       </div>
       <div className="match_timer">
-        <p>{`Match time : ${matchDate.getMonth()+1} / ${matchDate.getDate()} / ${matchDate.getFullYear()} - ${matchDate.getHours()}:${matchDate.getMinutes()}`}</p>
-        {dateAndTimeOfMatch}
+        <h5>Match Time :</h5>
+        <p>{`${matchMonth} / ${matchDate.getDate()} / ${matchDate.getFullYear()} - ${matchDate.getHours()}:${matchDate.getMinutes()}`}</p>
       </div>
       {currentDate < matchDate && predictStatus !== 'Validated' && predictStatus !== 'Published' && 
         <div>

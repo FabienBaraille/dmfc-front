@@ -7,5 +7,5 @@ export const userByUsername = (array, username) => {
 };
 
 export const roleName = (DMFC) => {
-  return DMFC ? ['ROLE_DMFC'] : ['ROLE_JOUEUR'];
+  return DMFC ? ['ROLE_DMFC'] : ['ROLE_JOUEUR_NA'];
 };

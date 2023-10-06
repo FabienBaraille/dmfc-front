@@ -13,7 +13,9 @@ import {
   setSRPrediction,
   setIsLoadingSR,
   GET_ROUNDS,
-  setRounds
+  setRounds,
+  GET_SEASON,
+  setSeason
 } from "../actions/datas";
 
 import {
@@ -142,6 +144,20 @@ const datasMiddleware = (store) => (next) => async (action) => {
         });
       store.dispatch(setRounds(data));
 
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    // Action qui va faire la requête pour récupérer toutes les leagues
+    case GET_SEASON:
+      store.dispatch(setIsLoading());
+      try {
+        const { data } = await axios.get(`/api/seasons/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        store.dispatch(setSeason(data));
       } catch (error) {
         console.log(error);
       }

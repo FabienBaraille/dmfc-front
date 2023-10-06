@@ -3,6 +3,8 @@ export const GET_USERS_LIST = 'GET_USERS_LIST';
 export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const GET_ALL_LEAGUE = 'GET_ALL_LEAGUE';
 export const SET_ALL_LEAGUE = 'SET_ALL_LEAGUE';
+export const SET_ALL_TEAMS = 'SET_ALL_TEAMS';
+export const GET_ALL_TEAMS = 'SET_ALL_TEAMS'
 
 export const setUsersList = (list) => ({
   type: SET_USERS_LIST,
@@ -20,4 +22,11 @@ export const getAllLeague = () => ({
 export const setAllLeague = (leaguesList) => ({
   type: SET_ALL_LEAGUE,
   leaguesList
+});
+export const getAllTeams = () => ({
+  type: GET_ALL_TEAMS,
+});
+export const setAllTeams = (teamsList) => ({
+  type: SET_ALL_TEAMS,
+  teamsList
 });

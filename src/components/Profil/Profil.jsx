@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Wrapper from '../Wrapper/Wrapper';
 import Input from "../Utils/Input";
 import { updateUserProfile, setInputValue } from '../../actions/user';
+import { getAllTeams } from '../../actions/datas';
 
 import './Profil.scss';
 
@@ -10,7 +11,9 @@ import './Profil.scss';
 function Profil() {
   
   const dispatch = useDispatch();
-  const teamsList = useSelector((state) => state.teams.teamsList);
+  const teamsList = useSelector((state) => state.datas.allTeams);
+  console.log(teamsList);
+
   const loggedUser = useSelector((state) => state.user.loggedUser);
   const leagueName = loggedUser.league_id ? loggedUser.league_id.leagueName : 'N/A';
  
@@ -20,19 +23,24 @@ function Profil() {
     dispatch(setInputValue("email", loggedUser.email))
     dispatch(setInputValue("password", loggedUser.password))
     dispatch(setInputValue("team", loggedUser.team))
+    dispatch(getAllTeams());
   }, [] );
 
   const username = useSelector((state) => state.user.pseudo);
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);
-  const team = useSelector((state) => state.user.team);
+  const team = useSelector((state) => state.user.teamName);
+ 
 
-  const teamOptions = teamsList.map(({id, teamName}) => {
-    return(
-      <option key={id} value={teamName}>{teamName}</option>
-    )
+  const teamOptions = teamsList.map(({ id, teamName }) => {
+    return (
+      <option key={id} value={teamName}>
+        {teamName}
+      </option>
+    );
   });
-  console.log(teamOptions);
+  console.log(teamOptions)
+
   const handleInputChange = (event) => {
     dispatch(setInputValue(event.target.id, event.target.value));
   };
@@ -76,9 +84,11 @@ function Profil() {
           </div>
         </div>
         <div>
-          <label>Équipe Préférée: </label>
-          <select name="favoriteTeam" onChange={handleInputChange} value={team} >
-            <option value="">changer ta équipe préférée</option>{teamOptions}</select>
+        <label>Équipe Préférée: </label>
+          <select name="teams" onChange={handleInputChange} value={team}>
+            <option value="">Changer ta équipe préférée</option>
+            {teamOptions}
+          </select>
           <div className="form-btn">
             <button type="submit">Soumettre</button>
           </div>

@@ -13,6 +13,7 @@ const initialState = {
   'created': false,
   'loggedUser': {},
   'errorMessage': '',
+  'team': '',
 };
 
 const reducer = (state = initialState, action = {}) => {

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "../../Utils/cookies/getCookies";
 
 import { setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
-import { getAllLeague, getUsersList } from "../../actions/datas";
+import { getAllLeague, getAllTeams, getUsersList } from "../../actions/datas";
 
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
@@ -54,6 +54,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getAllLeague());
+    dispatch(getAllTeams());
     if (isLogged) {
       navigate('/');
       dispatch(getUsersList());

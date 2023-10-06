@@ -8,7 +8,9 @@ import {
   setUsersList,
   GET_ALL_LEAGUE,
   setAllLeague,
-  setIsLoading
+  setIsLoading,
+  GET_ALL_TEAMS,
+  setAllTeams,
 } from "../actions/datas";
 
 const datasMiddleware = (store) => (next) => async (action) => {
@@ -26,7 +28,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
           },
         });
         store.dispatch(setUsersList(data));
-        console.log(data)
       } catch (error) {
         console.log(error);
       }
@@ -44,7 +45,19 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-
+    case GET_ALL_TEAMS:
+      store.dispatch(setIsLoading())
+      try {
+        const { data } = await axios.get(`/api/teams`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        store.dispatch(setAllTeams(data));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
     default:
 }
   next(action);

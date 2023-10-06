@@ -1,9 +1,10 @@
-import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_USERS_LIST } from '../actions/datas';
+import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_USERS_LIST, SET_ALL_TEAMS } from '../actions/datas';
 
 const initialState = {
   'allUsers': [],
   'allLeague': [],
   'isLoading': true,
+  'allTeams':[],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -25,6 +26,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoading: true,
       }
+      case SET_ALL_TEAMS:
+        return {
+          ...state,
+          allTeams: action.teamsList,
+          isLoading: false,
+        }
     default:
       return state;
   }

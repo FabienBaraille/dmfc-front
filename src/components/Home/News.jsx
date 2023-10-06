@@ -1,18 +1,50 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Wrapper from '../Wrapper/Wrapper';
+import { postNewsChange, postNewsCreation, setNews, setNewsCreationMode } from '../../actions/news';
+import Input from '../Utils/Input';
 
 
 const News = () => {
-  const isDMFC = useSelector((state) => state.user.DMFC);
-  // Récupérer le fil d'actu dans la BDD
+  const dispatch = useDispatch()
+  const userRole = useSelector((state) => state.user.loggedUser.roles[0]);
+  const newsCreation = useSelector((state) => state.datas.newsCreation);
+  const news = useSelector((state) => state.datas.news);
+  const newsTitle = useSelector((state) => state.datas.newsTitle);
+  const newsId = useSelector((state) => state.datas.newsId);
+
+  const handleCreationMode = () => {
+    newsCreation ? dispatch(setNewsCreationMode(false)) : dispatch(setNewsCreationMode(true));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    newsId === 0 ? dispatch(postNewsCreation()) : dispatch(postNewsChange());    
+    dispatch(setNewsCreationMode(false));
+  };
+
+  const handleNewsChange = (event) => {
+    dispatch(setNews(event.target.id, event.target.value));
+  };
+
   return (
     <Wrapper name='news'>
       <h2>Fil d'actus</h2>
-      {isDMFC && <button type="button">Edit</button>}
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos exercitationem minus earum nulla odio blanditiis unde velit impedit, magnam asperiores numquam error laborum rem id at doloribus praesentium quod totam!</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis ipsum debitis omnis tenetur. Minus perferendis culpa praesentium! Reprehenderit nemo iusto atque quia, aut maxime ipsum fuga culpa suscipit reiciendis?</p>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, aspernatur amet. Ipsam autem doloremque et iure neque voluptate laboriosam, quasi tempore unde. Repellat natus necessitatibus veritatis quisquam quasi facilis aliquam?</p>
+      {(userRole === 'ROLE_DMFC' && !newsCreation) && <button type="button" onClick={handleCreationMode}>{newsTitle == '' ? "Créer" : "Editer"}</button>}
+      {newsCreation ?
+        <form onSubmit={handleSubmit}>
+          <Input htmlFor={"newsTitle"} id={"newsTitle"} label='Titre :' value={newsTitle} className={"newsTitle-container"} onChange={handleNewsChange}/>
+          <Input htmlFor={"news"} type={"textarea"} id={"news"} label='Actus :' value={news} className={"news-container"} onChange={handleNewsChange}/>
+          <button type='submit'>Valider</button>
+          <p>Pensez à validez vos changements !</p>
+        </form>         
+        :
+        <>
+          <h3>{newsTitle}</h3>
+          <p>{news}</p>
+        </>
+      }
     </Wrapper>
   )};
+
 export default News;

@@ -1,10 +1,20 @@
-import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_USERS_LIST, SET_ALL_TEAMS } from '../actions/datas';
+import { NEWS_CREATION, NEWS_CREATION_MODE, SET_NEWS } from "../actions/news";
+import { SET_ALL_LEAGUE, SET_IS_LOADING, SET_IS_LOADING_SR, SET_ROUNDS, SET_SR_PREDICTION, SET_USERS_LIST, SET_ALL_TEAMS } from '../actions/datas';
 
 const initialState = {
   'allUsers': [],
   'allLeague': [],
   'isLoading': true,
   'allTeams':[],
+  'SRPrediction': [],
+  'isLoadingSR': true,
+  // News
+  'newsCreation': false,
+  'newsTitle': '',
+  'news': '',
+  'newsId': 0,
+  // End news
+  'rounds': [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -32,6 +42,35 @@ const reducer = (state = initialState, action = {}) => {
           allTeams: action.teamsList,
           isLoading: false,
         }
+    case SET_IS_LOADING_SR:
+      return {
+        ...state,
+        isLoadingSR: true,
+      }
+    case SET_SR_PREDICTION:
+      return {
+        ...state,
+        SRPrediction: action.prediction,
+        isLoadingSR: false,
+      }
+    case NEWS_CREATION_MODE:
+      return {
+        ...state,
+        newsCreation: action.newsCreation,
+        isLoading: false,
+      }
+    case SET_NEWS:
+      return {
+        ...state,
+        [action.inputName]: action.inputValue,
+        isLoading: false,
+      }
+    case SET_ROUNDS:
+      return {
+        ...state,
+        rounds: action.roundsInfos,
+        isLoading: false,
+      }
     default:
       return state;
   }

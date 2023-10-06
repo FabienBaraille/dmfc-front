@@ -11,7 +11,7 @@ axios.defaults.baseURL = 'http://localhost:8000';
 const authMiddelware = (store) => (next) => async (action) => {
   const token = getCookies('token');
   switch (action.type) {
-      case CREATE_USER: {
+    case CREATE_USER: {
       const leagueId = action.leagueId ? action.leagueId : leagueByName(store.getState().datas.allLeague, store.getState().user.league);
       const roles = roleName(store.getState().user.DMFC);
       try {

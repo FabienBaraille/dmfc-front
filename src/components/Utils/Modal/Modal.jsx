@@ -12,13 +12,14 @@ const Modal = ({player}) => {
   }
 
   return (
-    <div className="modal-box_container" onClick={handleCancel}>
-      <div className="modal-box_content" onClick={null}>
-      <p>Voulez-vous vraiment sortir {player} de la ligue ?</p>
-      <button className="confirm-button" id="confirmRefuser">Oui</button>
-      <button className="cancel-button" id="cancelRefuser" onClick={handleCancel}>Annuler</button>
+    <>
+      <div className="modal-box_container" onClick={handleCancel} />
+      <div className="modal-box_content">
+        <p>Voulez-vous vraiment sortir {player} de la ligue ?</p>
+        <button className="confirm-button" id="confirmRefuser">Oui</button>
+        <button className="cancel-button" id="cancelRefuser" onClick={handleCancel}>Annuler</button>
       </div>
-    </div>
+    </>
   )
 };
 

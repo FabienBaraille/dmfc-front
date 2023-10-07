@@ -1,8 +1,5 @@
 import axios from 'redaxios';
 
-// Import de la fonction permettant de récupérer les cookies
-import { getCookies } from "../Utils/cookies/getCookies";
-
 import { 
   GET_USERS_LIST,
   setUsersList,
@@ -33,19 +30,12 @@ import {
 } from '../actions/news';
 
 const datasMiddleware = (store) => (next) => async (action) => {
-  // Récupérer le token stocké dans le cookies en passant la clé du cookies à récupérer à la fonction
-  const token = getCookies('token');
   switch (action.type) {
     // Action qui va faire la requête pour récupérer tous les utilisateurs d'une ligue suivant un id
     case GET_USERS_LIST:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`,
-          {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`);
         store.dispatch(setUsersList(data));
       } catch (error) {
         console.log(error);
@@ -55,11 +45,11 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_ALL_LEAGUE:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`/api/leagues`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(`/api/leagues`,
+          {
+            withCredentials: false
+          }
+        );
         store.dispatch(setAllLeague(data));
       } catch (error) {
         console.log(error);
@@ -69,11 +59,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_ALL_TEAMS:
       store.dispatch(setIsLoading())
       try {
-        const { data } = await axios.get(`/api/teams`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(`/api/teams`);
         store.dispatch(setAllTeams(data));
         } catch (error) {
           console.log(error);
@@ -84,11 +70,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoadingSR());
       try {
 
-        const { data } = await axios.get(`/api/srprediction/${action.id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(`/api/srprediction/${action.id}`);
         store.dispatch(setSRPrediction(data));
       } catch (error) {
         console.log(error);
@@ -104,11 +86,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
             league: store.getState().user.loggedUser.league_id.id,
             title: store.getState().datas.newsTitle,
             description: store.getState().datas.news,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
           }
         );
       } catch (error) {
@@ -119,12 +96,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_NEWS:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/news`, 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });        
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/news`);
         store.dispatch(setNews('newsTitle', data[0].title));
         store.dispatch(setNews('news', data[0].description));
         store.dispatch(setNews('newsId', data[0].id));
@@ -141,11 +113,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
             league: store.getState().user.loggedUser.league_id.id,
             title: store.getState().datas.newsTitle,
             description: store.getState().datas.news,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
           }
         );
         store.dispatch(getNews());
@@ -156,11 +123,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_ROUNDS:
       store.dispatch(setIsLoadingSR());
       try {
-        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/round`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/round`);
       store.dispatch(setRounds(data));
       } catch (error) {
         console.log(error);
@@ -170,11 +133,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_LEAGUE:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}`);
       store.dispatch(setLeague('leagueName', data.leagueName));
       store.dispatch(setLeague('leagueDescription', data.leagueDescription))
       } catch (error) {
@@ -185,11 +144,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_SEASON:
       store.dispatch(setIsLoading());
       try {
-        const { data } = await axios.get(`/api/seasons/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(`/api/seasons/`);
         store.dispatch(setSeason(data));
         } catch (error) {
           console.log(error);
@@ -203,11 +158,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
           {
             leagueName: store.getState().datas.leagueName,
             leagueDescription: store.getState().datas.leagueDescription,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
           }
         );
         store.dispatch(getLeague());

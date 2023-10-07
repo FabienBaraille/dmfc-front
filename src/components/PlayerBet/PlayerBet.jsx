@@ -21,10 +21,9 @@ const PlayerBet = () => {
   const isLoadingSR = useSelector((state) => state.datas.isLoadingSR);
   const gamesOfRound = useSelector((state) => state.bet.games);
   const predictionsList = useSelector((state) => state.datas.SRPrediction);
-
   
   useEffect(() => {
-    dispatch(getGamesRound(rounds.length));
+    dispatch(getGamesRound(rounds[rounds.length-1].id));
     dispatch(getSRPrediction(loggedUserId));
   }, [])
   
@@ -39,7 +38,8 @@ const PlayerBet = () => {
   }
   return (
     <Wrapper name="player_bet">
-    <h2>{`Pronostique SR : Round ${rounds.length}`}</h2>
+    <h2>Pronostique SR</h2>
+    <h2>{`${rounds[rounds.length-1].name}`}</h2>
       <div className="player_bet">
         {betList}
       </div>

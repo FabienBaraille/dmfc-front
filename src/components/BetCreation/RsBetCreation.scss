@@ -1,8 +1,70 @@
+@use '/src/styles/variables' as v;
+
 #rsbetcreation {
   width: 90%;
+  .round-choice {
+    margin-bottom: 1.4rem;
+    h4, p {
+      margin-bottom: 10px;
+    }
+  }
+  .round-creation {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 1.2rem;
+    margin: 20px 0;
+    label {
+      margin-right: 15px;
+    }
+  }
+  select {
+    height: fit-content;
+    margin: 0 10px;
+    width: fit-content;
+  }
+}
+.match-line {
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  &:first-child {
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
-.match-line {
-  width: 100%;
-  display: flex;
+
+.trash-button {
+  font-family: v.$main-font;
+  font-size: 1rem;
+  display: block;
+  width: fit-content;
+  margin: 0;
+  .trash-logo {
+    content: url('/src/assets/design/trash-2.svg');
+    filter: invert(43%) sepia(15%) saturate(5000%) hue-rotate(346deg) ;
+    &:hover {
+      filter: unset;
+    }
+  }
+}
+
+@media screen and (min-width : 768px) {
+  .match-line {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    div {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
 }

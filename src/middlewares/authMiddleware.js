@@ -68,7 +68,8 @@ const authMiddelware = (store) => (next) => async (action) => {
             Authorization: `Bearer ${token}`,
           }
         });
-
+        document.cookie = `isLogged=true;max-age=60*60*24`;
+        document.cookie = `userInfos=${JSON.stringify(data)};max-age=60*60*24`;
         store.dispatch(setUserInfos(data));
         store.dispatch(setIsLogged(true));
       } catch (error) {

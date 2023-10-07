@@ -65,6 +65,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    // Action qui va faire la requête pour récupérer toutes les teams
     case GET_ALL_TEAMS:
       store.dispatch(setIsLoading())
       try {

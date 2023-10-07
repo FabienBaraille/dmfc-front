@@ -17,15 +17,7 @@ const RsBetCreation = () => {
 
   const dispatch = useDispatch();
   const isCreatedMatch = useSelector((state) => state.bet.isCreatedMatch);
-
-     if (isCreatedMatch) {
-      setTimeout(() => {
-        dispatch(addBetToList([]));
-        dispatch(setInputValueBet('roundNumber', ''));
-        dispatch(setIsCreatedMatch(false));
-      }, 1500);
-    }
-
+  
   const betList = useSelector((state) => state.bet.betList);
   const roundCreationMode = useSelector((state) => state.bet.roundCreationMode);
   const roundsList = useSelector((state) => state.datas.rounds);
@@ -33,6 +25,16 @@ const RsBetCreation = () => {
   const roundCat = useSelector((state) => state.bet.roundCat);
   const roundNumber = useSelector((state) => state.bet.roundNumber);
   const isLoadingGame = useSelector((state) => state.bet.isLoadingGame);
+  
+  useEffect(() => {
+    if (!isLoadingGame && isCreatedMatch) {
+      setTimeout(() => {
+        dispatch(addBetToList([]));
+        dispatch(setInputValueBet('roundNumber', ''));
+        dispatch(setIsCreatedMatch(false));
+      }, 1500);
+    }
+  }, [isCreatedMatch])
 
   const roundOptions = roundsList.map(({id, name}) => {
     return (

@@ -57,7 +57,7 @@ const reducer = (state = initialState, action = {}) => {
     case SET_IS_CREATED_MATCH:
       return {
         ...state,
-        isCreated: action.isCreated,
+        isCreatedMatch: action.isCreated,
       }
     default:
       return state;

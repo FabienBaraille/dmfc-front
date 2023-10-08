@@ -35,6 +35,7 @@ import Modal from "../Utils/Modal/Modal";
 
 import './App.scss';
 import { getNews } from "../../actions/news";
+import RoundStats from "../Stats/RoundsStats";
 
 const App = () => {
   const navigate = useNavigate();
@@ -100,6 +101,7 @@ const App = () => {
           <Route element={<PlayerRoute />}>
             {/* Rajouter ici les routes concernant que le joueur */}
             <Route path='/player-bet' element={<PlayerBet />} />
+            <Route path='/roundsStat' element={<RoundStats />} />
           </Route>
           <Route element={<DMFCRoute />}>
             {/* Rajouter ici les routes concernant uniquement le DMFC */}

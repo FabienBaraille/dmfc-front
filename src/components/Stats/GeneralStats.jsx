@@ -28,7 +28,7 @@ const GeneralStats = () => {
   
   const roundsList = useSelector((state) => state.datas.rounds);
   const predictionsList = useSelector((state) => state.datas.SRPrediction);
-  const loggedUserName = useSelector((state) => state.user.loggedUser.username)
+  const loggedUser = useSelector((state) => state.user.loggedUser)
 
   const validatedPrediction = goodPrediction(predictionsList);
 
@@ -64,7 +64,7 @@ const GeneralStats = () => {
         <p>{`Bonus bookie : ${totalBookieScore}`}</p>
       </div>
       <div className='return-btn'>
-        {playerName === loggedUserName && <button type='button'><NavLink to="/roundsStat">Historique des rounds</NavLink></button> }
+        {(playerName === loggedUser.username || loggedUser.roles[0] === "ROLE_DMFC") && <button type='button'><NavLink to="/roundsStat">Historique des rounds</NavLink></button> }
         <Retour where="au classement" link="/rankings" />
       </div>
     </Wrapper>

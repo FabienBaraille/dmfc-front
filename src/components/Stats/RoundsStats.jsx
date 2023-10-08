@@ -3,6 +3,8 @@ import Wrapper from '../Wrapper/Wrapper';
 import ResultElmt from './Element/ResultElmt';
 import { predictionByGameId } from '../../Utils/filters/predictionFilter';
 
+import './RoundsStats.scss';
+
 const RoundStats = () => {
 
   const allPrediction = useSelector((state) => state.datas.SRPrediction);
@@ -26,7 +28,7 @@ const RoundStats = () => {
   });
 
   return (
-    <div>
+    <div className='rounds-stats'>
       {byRound}
     </div>
   )};

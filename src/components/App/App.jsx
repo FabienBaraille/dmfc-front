@@ -101,7 +101,6 @@ const App = () => {
           <Route element={<PlayerRoute />}>
             {/* Rajouter ici les routes concernant que le joueur */}
             <Route path='/player-bet' element={<PlayerBet />} />
-            <Route path='/roundsStat' element={<RoundStats />} />
           </Route>
           <Route element={<DMFCRoute />}>
             {/* Rajouter ici les routes concernant uniquement le DMFC */}
@@ -109,6 +108,7 @@ const App = () => {
             <Route path='/scores/SR' element={<BetResult />} />
             <Route path='/league-management' element={<LeagueManagement />} />
           </Route>
+          <Route path='/roundsStat' element={<RoundStats />} />
           <Route path='/rules' element={<SimpleRules />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/Error403' element={<Error403 />} />

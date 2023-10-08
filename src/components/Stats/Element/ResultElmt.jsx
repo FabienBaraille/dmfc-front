@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 
 import './ResultElmt.scss';
+import { useSelector } from 'react-redux';
 
 const ResultElmt = ({filteredPrediction, index}) => {
 
-  const {predictedWinnigTeam, predictedPointDifference, pointScored, bonusPointsErned, bonusBookie} = filteredPrediction;
+  const {predictedWinnigTeam, predictedPointDifference, pointScored, bonusPointsErned, bonusBookie, validationStatus} = filteredPrediction;
+  const loggedUserRole = useSelector((state) => state.user.loggedUser.roles[0]);
 
   return (
     <div className="bet_result player-stat">
@@ -25,6 +27,7 @@ const ResultElmt = ({filteredPrediction, index}) => {
           <li>{`Bonus bookies : ${bonusBookie}`}</li>
         </ul>
       </div>
+      {loggedUserRole === "ROLE_DMFC" && <h5>{`Status : ${validationStatus}`}</h5> }
     </div>
   )
 };

@@ -17,6 +17,13 @@ const RoundStats = () => {
         return (
           <ResultElmt key={id} filteredPrediction={filteredPrediction} index={index+1} />
         )
+      } else {
+        return (
+          <div key={id} className="bet_result player-stat">
+            <h5>{`Match ${index+1}`} </h5>
+            <p>Pas de pronostique réalisé</p>
+          </div>
+        )
       }
     })
     return (

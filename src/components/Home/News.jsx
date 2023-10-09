@@ -30,7 +30,7 @@ const News = () => {
   return (
     <Wrapper name='news'>
       <h2>Fil d'actus</h2>
-      {(userRole === 'ROLE_DMFC' && !newsCreation) && <button type="button" onClick={handleCreationMode}>{newsTitle == '' ? "Créer" : "Editer"}</button>}
+      {(userRole === 'ROLE_DMFC' && !newsCreation) && <button className='editBtn' type="button" onClick={handleCreationMode}>{newsTitle == '' ? "Créer" : "Editer"}</button>}
       {newsCreation ?
         <form onSubmit={handleSubmit}>
           <Input htmlFor={"newsTitle"} id={"newsTitle"} label='Titre :' value={newsTitle} className={"newsTitle-container"} onChange={handleNewsChange}/>

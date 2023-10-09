@@ -20,7 +20,8 @@ const GeneralStats = () => {
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.datas.allUsers);
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
-  const {0 : {id, username, title, score, position, team : {name, logo}}} = userByUsername(usersList, playerName);
+  const {0 : {id, username, title, score, position}} = userByUsername(usersList, playerName);
+  // team : {name, logo}
 
   useEffect(() => {
     dispatch(getSRPrediction(id));
@@ -48,9 +49,9 @@ const GeneralStats = () => {
         <h2>Saison en cours : </h2>
         <h3>Stats de {username}</h3>
         <h4>Titre : {title}</h4>
-        <div className='team-infos'>
+        {/* <div className='team-infos'>
           <h4>{name} - </h4><img className='logo' src={`/src/assets/logos/${logo}`} alt="" />
-        </div>
+        </div> */}
       </div>
       <div className='prediction-stats'>
         <p>{`Classement actuel : ${position}`}</p>

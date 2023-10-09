@@ -12,18 +12,14 @@ function Profil() {
   
   const dispatch = useDispatch();
   const teamsList = useSelector((state) => state.datas.allTeams);
-  console.log(teamsList);
-
   const loggedUser = useSelector((state) => state.user.loggedUser);
   const leagueName = loggedUser.league_id ? loggedUser.league_id.leagueName : 'N/A';
  
-  
   useEffect(() => {
     dispatch(setInputValue("pseudo", loggedUser.username))
     dispatch(setInputValue("email", loggedUser.email))
     dispatch(setInputValue("password", loggedUser.password))
     dispatch(setInputValue("team", loggedUser.team))
-    dispatch(getAllTeams());
   }, [] );
 
   const username = useSelector((state) => state.user.pseudo);
@@ -39,7 +35,6 @@ function Profil() {
       </option>
     );
   });
-  console.log(teamOptions)
 
   const handleInputChange = (event) => {
     dispatch(setInputValue(event.target.id, event.target.value));
@@ -58,7 +53,7 @@ function Profil() {
         <p>Pseudo: <span className="perso">{loggedUser.username}</span></p>
         <p>Score: <span className="perso">{loggedUser.score || 'NULL'}</span></p>
         <p>Ma Ligue: <span className="perso">{leagueName}</span></p>
-        <p>Équipe Préférée: <span className="perso"></span></p>
+        <p>Équipe Préférée: <select className="perso">{teamOptions}</select></p>
       </div>
       <form className="change-info" onSubmit={handleSubmit}>
         <h2>Changer mes paramètres</h2>

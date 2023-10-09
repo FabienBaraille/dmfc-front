@@ -68,7 +68,8 @@ const authMiddelware = (store) => (next) => async (action) => {
             Authorization: `Bearer ${token}`,
           }
         });
-
+        document.cookie = `isLogged=true;max-age=60*60*24`;
+        document.cookie = `userInfos=${JSON.stringify(data)};max-age=60*60*24`;
         store.dispatch(setUserInfos(data));
         store.dispatch(setIsLogged(true));
       } catch (error) {
@@ -79,7 +80,6 @@ const authMiddelware = (store) => (next) => async (action) => {
     case UPDATE_USER_PROFILE: 
     try {
       const id = store.getState().user.loggedUser.id;
-      console.log(id);
       const { data } = await axios.put(`/api/user/${id}`, {
         username: store.getState().user.pseudo,
         email: store.getState().user.email,

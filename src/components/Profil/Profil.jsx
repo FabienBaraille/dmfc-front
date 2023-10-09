@@ -12,7 +12,6 @@ function Profil() {
   
   const dispatch = useDispatch();
   const teamsList = useSelector((state) => state.datas.allTeams);
-  console.log(teamsList);
 
   const loggedUser = useSelector((state) => state.user.loggedUser);
   const leagueName = loggedUser.league_id ? loggedUser.league_id.leagueName : 'N/A';
@@ -23,8 +22,7 @@ function Profil() {
     dispatch(setInputValue("email", loggedUser.email))
     dispatch(setInputValue("password", loggedUser.password))
     dispatch(setInputValue("team", loggedUser.team))
-    dispatch(getAllTeams());
-  }, [] );
+  }, [dispatch, loggedUser] );
 
   const username = useSelector((state) => state.user.pseudo);
   const email = useSelector((state) => state.user.email);
@@ -32,14 +30,13 @@ function Profil() {
   const team = useSelector((state) => state.user.teamName);
  
 
-  const teamOptions = teamsList.map(({ id, teamName }) => {
+  const teamOptions = teamsList.map(({ id, name }) => {
     return (
-      <option key={id} value={teamName}>
-        {teamName}
+      <option key={id} value={name}>
+        {name}
       </option>
     );
   });
-  console.log(teamOptions)
 
   const handleInputChange = (event) => {
     dispatch(setInputValue(event.target.id, event.target.value));

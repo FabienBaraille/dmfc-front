@@ -58,7 +58,6 @@ const authMiddelware = (store) => (next) => async (action) => {
             password: store.getState().user.password,
           }
         );
-        // document.cookie = `token=${data.token};max-age=60*60*24`;
         store.dispatch(getUser(store.getState().user.pseudo), data.token);
       } catch (error) {
         store.dispatch(setErrorMessage('Pseudo ou Mot de passe erroné'));

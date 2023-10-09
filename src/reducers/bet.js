@@ -25,7 +25,6 @@ const initialState = {
   'roundCat': 'SR',
   'roundNumber': '',
   'predictionByGame': [],
-  'gameId': '',
   'updatedGame': {}
 };
 
@@ -85,8 +84,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         predictionByGame: action.predictionInfos,
         isUpdated: true,
-        isLoadingGame: false,
-        gameId: action.gameId
+        isLoadingGame: false
       }
     case SET_UPDATED_GAME:
       return {

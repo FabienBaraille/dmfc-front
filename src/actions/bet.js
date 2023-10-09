@@ -99,10 +99,9 @@ export const updateGame = (gameId, visitorScore, homeScore, visitorOdd, homeOdd,
   homeOdd,
   winner
 });
-export const setPredictionByGame = (predictionInfos, gameId) => ({
+export const setPredictionByGame = (predictionInfos) => ({
   type: SET_PREDICTION_BY_GAME,
   predictionInfos,
-  gameId
 });
 
 export const resetGameId = (g) => ({

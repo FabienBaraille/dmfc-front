@@ -131,7 +131,7 @@ const betMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoadingGame(true));
       try {
         const { data } = await axios.get(`/api/game/${action.gameId}/srprediction`);
-        store.dispatch(setPredictionByGame(data, action.gameId));
+        store.dispatch(setPredictionByGame(data));
       } catch (error) {
         console.log(error);
       }

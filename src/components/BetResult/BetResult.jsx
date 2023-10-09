@@ -8,8 +8,6 @@ import GameBetResult from "./GameBetResult";
 import RoundSelector from "../BetCreation/Element/RoundSelector";
 import LoadElmt from "../Loader/LoadElmt";
 
-import { gameById } from "../../Utils/filters/gamesFilter";
-
 import './BetResult.scss';
 
 const BetResult = () => {
@@ -22,7 +20,6 @@ const BetResult = () => {
   const isLoadingGame = useSelector((state) => state.bet.isLoadingGame);
   const isUpdated = useSelector((state) => state.bet.isUpdated);
   const predictionList = useSelector((state) => state.bet.predictionByGame);
-  const gameId = useSelector((state) => state.bet.gameId);
   const updatedGame = useSelector((state) => state.bet.updatedGame);
 
   useEffect(() => {

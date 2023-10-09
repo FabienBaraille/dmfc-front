@@ -16,16 +16,17 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
 
   const handleSubmit = event => {
     event.preventDefault();
+    const winner = visitorPoints > homePoints ? team[0].name : team[1].name;
     dispatch(updateGame(
         gameId,
         parseInt(visitorPoints),
         parseInt(homePoints),
         parseFloat(visitorCote),
-        parseFloat(homeCote)
+        parseFloat(homeCote),
+        winner
       )
     );
   }
-  console.log(gameId)
   return (
       <form className="bet_result" onSubmit={handleSubmit}>
         <div className="team-result">

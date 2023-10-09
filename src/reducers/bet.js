@@ -1,4 +1,15 @@
-import { ADD_BET_TO_LIST, BET_TO_REMOVE, SET_GAMES_ROUND, SET_INPUT_VALUE_BET, SET_IS_CREATED_MATCH, SET_IS_LOADING_BET, SET_IS_LOADING_GAME, SET_IS_UPDATED, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
+import { 
+  ADD_BET_TO_LIST,
+  BET_TO_REMOVE,
+  SET_GAMES_ROUND,
+  SET_INPUT_VALUE_BET,
+  SET_IS_CREATED_MATCH,
+  SET_IS_LOADING_BET,
+  SET_IS_LOADING_GAME,
+  SET_IS_UPDATED,
+  SET_PREDICTION_BY_GAME,
+  TOGGLE_CREATION_MODE_BET
+} from "../actions/bet";
 
 const initialState = {
   'betList': [],
@@ -12,6 +23,8 @@ const initialState = {
   'roundName': '',
   'roundCat': 'SR',
   'roundNumber': '',
+  'predictionByGame': [],
+  'gameId': '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -64,6 +77,14 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isUpdated: action.isUpdated,
+      }
+    case SET_PREDICTION_BY_GAME:
+      return {
+        ...state,
+        predictionByGame: action.predictionInfos,
+        isUpdated: true,
+        isLoadingGame: false,
+        gameId: action.gameId
       }
     default:
       return state;

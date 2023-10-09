@@ -1,7 +1,23 @@
 import axios from 'redaxios';
 
 // Import de la fonction permettant de récupérer les cookies
-import { CREATE_BET, CREATE_GAME, CREATE_ROUND, GET_GAMES_ROUND, UPDATE_BET, UPDATE_GAME, setGamesRound, setIsCreatedMatch, setIsLoadingBet, setIsLoadingGame, setIsUpdated, toggleCreationMode } from '../actions/bet';
+import { 
+  CREATE_BET,
+  CREATE_GAME,
+  CREATE_ROUND,
+  GET_GAMES_ROUND,
+  GET_PREDICTION_BY_GAME,
+  UPDATE_BET,
+  UPDATE_BET_POINTS,
+  UPDATE_GAME,
+  getPredictionByGame,
+  setGamesRound,
+  setIsCreatedMatch,
+  setIsLoadingBet,
+  setIsLoadingGame,
+  setPredictionByGame,
+  toggleCreationMode
+} from '../actions/bet';
 import { getRounds, getSRPrediction } from '../actions/datas';
 
 const betMiddleware = (store) => (next) => async (action) => {
@@ -99,15 +115,39 @@ const betMiddleware = (store) => (next) => async (action) => {
             homeScore: action.homeScore,
             visitorScore: action.visitorScore,
             homeOdd: action.homeOdd,
-            visitorOdd: action.visitorOdd
+            visitorOdd: action.visitorOdd,
+            winner: action.winner
           }
         );
-        store.dispatch(setIsLoadingGame(false));
-        store.dispatch(setIsUpdated(true));
+        store.dispatch(getPredictionByGame(action.gameId));
       } catch (error) {
         console.log(error);
       }
     }
+    break;
+    case GET_PREDICTION_BY_GAME:
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.get(`/api/game/${action.gameId}/srprediction`);
+        store.dispatch(setPredictionByGame(data, action.gameId));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    case UPDATE_BET_POINTS:
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.put(`/api/prediction/${action.betId}/dmfc`,
+          {
+            pointScored: action.winningPoints,
+            bonusPointsErned: action.difPoints,
+            bonusBookie: action.bookiesPoints
+          }
+        );
+        store.dispatch(setIsLoadingGame(false));
+      } catch (error) {
+        console.log(error);
+      }
     break;
     default:
   }

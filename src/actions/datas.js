@@ -5,7 +5,7 @@ export const SET_IS_LOADING_SR = 'SET_IS_LOADING_SR';
 export const GET_ALL_LEAGUE = 'GET_ALL_LEAGUE';
 export const SET_ALL_LEAGUE = 'SET_ALL_LEAGUE';
 export const SET_ALL_TEAMS = 'SET_ALL_TEAMS';
-export const GET_ALL_TEAMS = 'GET_ALL_TEAMS'
+export const GET_ALL_TEAMS = 'GET_ALL_TEAMS';
 export const GET_SR_PREDICTION = 'GET_SR_PREDICTION';
 export const SET_SR_PREDICTION = 'SET_SR_PREDICTION';
 export const GET_ROUNDS = 'GET_ROUNDS';
@@ -15,7 +15,7 @@ export const SET_LEAGUE = 'SET_LEAGUE';
 export const POST_LEAGUE_CHANGE = 'POST_LEAGUE_CHANGE';
 export const LEAGUE_CREATION_MODE = 'LEAGUE_CREATION_MODE';
 export const GET_SEASON = 'GET_SEASON';
-export const SET_SEASON = 'SET_SEASON'
+export const SET_SEASON = 'SET_SEASON';
 
 export const setUsersList = (list) => ({
   type: SET_USERS_LIST,

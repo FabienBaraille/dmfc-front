@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { createBet, updateBet } from '../../actions/bet';
 import { unableBet } from '../../Utils/filters/predictionFilter';
+import { transformDate } from "../../Utils/stats/calcDate";
 
 
 const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, prediction }) => {
@@ -16,8 +17,9 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
   const [winDif, setWinDif] = useState(predictStatus !== 'Not done' ? prediction.predictedPointDifference : '');
 
   const matchDate = new Date(dateAndTimeOfMatch);
-  const matchMonth = matchDate.getMonth()+1 < 10 ? `0${matchDate.getMonth()+1}` : `${matchDate.getMonth()+1}`
   const currentDate = new Date();
+
+  const transformedDate = transformDate(matchDate, 'bet');
 
   const unableMessage = unableBet(currentDate, matchDate, predictStatus);
 
@@ -41,7 +43,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
   return (
     <form className="match" onSubmit={handleSubmit} id={id}>
       <div className="teams">
-        <div className="team1">
+        <div className="visitor">
           <input 
             type="radio" 
             id="0" 
@@ -50,13 +52,13 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
             disabled={(predictStatus === 'Published' || predictStatus === 'Validated')}
             onChange={(event) => setWinTeam(event.target.id)}
           />
-          <label htmlFor="team1" >
+          <label htmlFor="visitor" >
             {team[0].trigram}
           </label>
         </div>
-        @ 
-        <div className="team2">
-          <label htmlFor="team2" >
+        <div className='at-logo'> </div>
+        <div className="home-team">
+          <label htmlFor="home-team" >
             {team[1].trigram}
           </label>
           <input 
@@ -80,7 +82,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
       </div>
       <div className="match_timer">
         <h5>Match Time :</h5>
-        <p>{`${matchMonth} / ${matchDate.getDate()} / ${matchDate.getFullYear()} - ${matchDate.getHours()}:${matchDate.getMinutes()}`}</p>
+        <p>{transformedDate}</p>
       </div>
       {currentDate < matchDate && predictStatus !== 'Validated' && predictStatus !== 'Published' && 
         <div>

@@ -1,24 +1,44 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useDispatch, useSelector } from "react-redux";
+
 import Wrapper from "../Wrapper/Wrapper"
-import { addBetToList, createRound, setInputValueBet } from "../../actions/bet";
-import { toggleCreationMode } from "../../actions/bet";
 import BetTpl  from "./BetMatch";
 import Input from "../Utils/Input";
+import LoadElmt from "../Loader/LoadElmt";
 
+import { addBetToList, createGame, createRound, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
+import { toggleCreationMode } from "../../actions/bet";
+import { transformDate } from "../../Utils/stats/calcDate";
+
+import './RsBetCreation.scss';
+import { useEffect } from "react";
 
 const RsBetCreation = () => {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  const isCreatedMatch = useSelector((state) => state.bet.isCreatedMatch);
+  
   const betList = useSelector((state) => state.bet.betList);
   const roundCreationMode = useSelector((state) => state.bet.roundCreationMode);
   const roundsList = useSelector((state) => state.datas.rounds);
   const roundName = useSelector((state) => state.bet.roundName);
   const roundCat = useSelector((state) => state.bet.roundCat);
+  const roundNumber = useSelector((state) => state.bet.roundNumber);
+  const isLoadingGame = useSelector((state) => state.bet.isLoadingGame);
+  
+  useEffect(() => {
+    if (!isLoadingGame && isCreatedMatch) {
+      setTimeout(() => {
+        dispatch(addBetToList([]));
+        dispatch(setInputValueBet('roundNumber', ''));
+        dispatch(setIsCreatedMatch(false));
+      }, 1500);
+    }
+  }, [isCreatedMatch])
 
   const roundOptions = roundsList.map(({id, name}) => {
     return (
-      <option key={id} value={name}>{name}</option>
+      <option key={`round${id}`} value={id}>{name}</option>
     )
   });
 
@@ -38,28 +58,52 @@ const RsBetCreation = () => {
     event.preventDefault();
     if (roundCreationMode) {
       dispatch(createRound());
+    } else {
+    const formData = new FormData(event.currentTarget);
+    const visitors = formData.getAll('visitor');
+    const homeTeams = formData.getAll('home-team');
+    const deadlines = formData.getAll('deadline');
+    visitors.forEach((team, index) => {
+      const visitorId = team;
+      const homeTeamId = homeTeams[index];
+      const deadline = deadlines[index];
+      const transformedDeadline = transformDate(deadline, 'create');
+      dispatch(createGame(transformedDeadline, [homeTeamId, visitorId]))
+    })
     }
   }
-
+  if (isLoadingGame) {
+    return <LoadElmt />
+  }
+  if (isCreatedMatch) {
+    return (
+      <Wrapper>
+        <h2>Match(s) créé(s) avec succès !</h2>
+      </Wrapper>
+    )
+  }
   return (
     <Wrapper name="rsbetcreation">
-      <div>
-        <p>Pronostique saison régulière</p>
-        {roundCreationMode ||
-          <select>
-            <option>Choisir le Round</option>
-            {roundOptions}
-          </select>
+      <div className="round-choice">
+        <h4>Pronostique saison régulière</h4>
+        {!roundCreationMode &&
+          <>
+            <p>Sélectionne un round dans lequel créer des matchs.</p>
+            <select id="roundNumber" value={roundNumber} onChange={handleInput}>
+              <option value=''>Choisir le Round</option>
+              {roundOptions}
+            </select>
+          </>
         }
       </div>
-      <form onSubmit={handleSubmit} >
-        {betList.length ==0 ?
+      <form onSubmit={handleSubmit}>
+        {betList.length == 0 ?
           <>
             <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Création d'un nouveau round" : "Round existant"}</button>
             {roundCreationMode &&
-              <>
+              <div className="round-creation">
                 <Input 
-                  label="Nom du Round" 
+                  label="Nom du Round :" 
                   htmlFor="roundName" 
                   id="roundName" 
                   type="text" 
@@ -67,18 +111,19 @@ const RsBetCreation = () => {
                   value={roundName}
                   onChange={handleInput}
                 />
+                <p>Phase :</p>
                 <select id="roundCat" placeholder="Catégorie Round" onChange={handleInput} value={roundCat} >
                   <option value='SR'>SR</option>
                   <option value='PO' disabled>PO</option>
                 </select>
-              </>
+              </div>
             }
           </>
         : null }
-        {betList}
-        {! roundCreationMode && <button type="button" className="addBet" onClick={handleAddBet}>+</button> }
+        {roundNumber !== '' &&  betList}
+        {(!roundCreationMode && roundNumber !== '') && <button type="button" className="addBet" onClick={handleAddBet}>Ajouter un match</button> }
         {(betList.length !== 0 || roundCreationMode) ?
-            <button type="submit">Créer</button>
+            <button type="submit">Créer {roundCreationMode ? 'le round' : 'le(s) match(s)' }</button>
         : null}
       </form>
     </Wrapper>

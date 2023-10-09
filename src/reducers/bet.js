@@ -8,6 +8,7 @@ import {
   SET_IS_LOADING_GAME,
   SET_IS_UPDATED,
   SET_PREDICTION_BY_GAME,
+  SET_UPDATED_GAME,
   TOGGLE_CREATION_MODE_BET
 } from "../actions/bet";
 
@@ -25,6 +26,7 @@ const initialState = {
   'roundNumber': '',
   'predictionByGame': [],
   'gameId': '',
+  'updatedGame': {}
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -85,6 +87,11 @@ const reducer = (state = initialState, action = {}) => {
         isUpdated: true,
         isLoadingGame: false,
         gameId: action.gameId
+      }
+    case SET_UPDATED_GAME:
+      return {
+        ...state,
+        updatedGame: action.gameInfos,
       }
     default:
       return state;

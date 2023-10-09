@@ -16,6 +16,7 @@ import {
   setIsLoadingBet,
   setIsLoadingGame,
   setPredictionByGame,
+  setUpdatedGame,
   toggleCreationMode
 } from '../actions/bet';
 import { getRounds, getSRPrediction } from '../actions/datas';
@@ -119,6 +120,7 @@ const betMiddleware = (store) => (next) => async (action) => {
             winner: action.winner
           }
         );
+        store.dispatch(setUpdatedGame(data.game));
         store.dispatch(getPredictionByGame(action.gameId));
       } catch (error) {
         console.log(error);

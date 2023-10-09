@@ -23,13 +23,13 @@ const BetResult = () => {
   const isUpdated = useSelector((state) => state.bet.isUpdated);
   const predictionList = useSelector((state) => state.bet.predictionByGame);
   const gameId = useSelector((state) => state.bet.gameId);
+  const updatedGame = useSelector((state) => state.bet.updatedGame);
 
   useEffect(() => {
     if (roundNumber === '') {
       dispatch(setInputValueBet('roundNumber', roundsList[roundsList.length-1].id));
       dispatch(getGamesRound(roundsList[roundsList.length-1].id));
     } else {
-      console.log('test', gamesList)
       dispatch(getGamesRound(roundNumber));
     }
     if (!isLoadingGame && isUpdated === true) {
@@ -42,14 +42,14 @@ const BetResult = () => {
 
   const gamesToEdit = gamesList.map(({id, ...rest}) => <GameBetResult key={id} gameId={id} {...rest} />);
   const calculatePoints = () =>  {
-    console.log('calc', gamesList)
-    const game = gameById(gameId, gamesList);
-    predictionList.forEach((prediction) => {
-      const teamEarnedPoints = prediction.predictedWinnigTeam === game.winner ? 10 : 0;
-      const diffEarnedPoints = prediction.predictedPointDifference === Math.abs(game.visitorScore - game.homeScore) ? 20 : Math.abs(Math.abs(game.visitorScore - game.homeScore) - prediction.predictedWinnigTeam) <= 5 ? 10 : 0;
-      const bookiesChoice = game.visitorOdd > game.homeOdd ? game.team[0].name : game.team[1].name;
-      const bookiesEarnedPoints = (prediction.predictedWinnigTeam === bookiesChoice && prediction.predictedWinnigTeam === game.winner) ? 10 : 0;
-      dispatch(updateBetPoints(prediction.id, teamEarnedPoints, diffEarnedPoints, bookiesEarnedPoints));
+    const {winner, visitorScore, homeScore, visitorOdd, homeOdd, team} = updatedGame;
+    predictionList.forEach(({id, predictedWinnigTeam, predictedPointDifference}) => {
+      const teamEarnedPoints = predictedWinnigTeam === winner ? 10 : 0;
+      const predictedPts = parseInt(predictedPointDifference);
+      const diffEarnedPoints = predictedPts === Math.abs(visitorScore - homeScore) ? 20 : Math.abs(Math.abs(visitorScore - homeScore) - predictedWinnigTeam) <= 5 ? 10 : 0;
+      const bookiesChoice = visitorOdd > homeOdd ? team[0].name : team[1].name;
+      const bookiesEarnedPoints = (predictedWinnigTeam === bookiesChoice && predictedWinnigTeam === updatedGame.winner) ? 10 : 0;
+      dispatch(updateBetPoints(id, teamEarnedPoints, diffEarnedPoints, bookiesEarnedPoints));
     })
   }
   

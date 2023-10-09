@@ -11,6 +11,8 @@ export const SET_INPUT_VALUE_BET = 'SET_INPUT_VALUE_BET';
 export const CREATE_GAME = 'CREATE_GAME';
 export const SET_IS_LOADING_GAME = 'SET_IS_LOADING_GAME';
 export const SET_IS_CREATED_MATCH = 'SET_IS_CREATED_MATCH';
+export const UPDATE_GAME = 'UPDATE_GAME';
+export const SET_IS_UPDATED = 'SET_IS_UPDATED';
 
 export const setIsLoadingBet = (isLoading) => ({
   type: SET_IS_LOADING_BET,
@@ -29,12 +31,15 @@ export const setInputValueBet = (inputName, inputValue) => ({
   inputName,
   inputValue,
 });
+export const setIsUpdated = (isUpdated) => ({
+  type: SET_IS_UPDATED,
+  isUpdated
+});
 
 export const addBetToList = (betTpl) => ({
   type: ADD_BET_TO_LIST,
   betTpl,
 });
-
 export const betToRemove = (idToRemove) => ({
   type: BET_TO_REMOVE,
   idToRemove,
@@ -75,4 +80,12 @@ export const updateBet = (winningTeam, winningDif, betId, status) => ({
   winningDif,
   betId,
   status
+});
+export const updateGame = (gameId, visitorScore, homeScore, visitorOdd, homeOdd) => ({
+  type: UPDATE_GAME,
+  gameId,
+  visitorScore,
+  homeScore,
+  visitorOdd,
+  homeOdd
 });

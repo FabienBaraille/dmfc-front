@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import Wrapper from '../Wrapper/Wrapper';
 import Input from "../Utils/Input";
 import { updateUserProfile, setInputValue } from '../../actions/user';
-import { getAllTeams } from '../../actions/datas';
 
 import './Profil.scss';
 
@@ -23,7 +22,6 @@ function Profil() {
     dispatch(setInputValue("email", loggedUser.email))
     dispatch(setInputValue("password", loggedUser.password))
     dispatch(setInputValue("team", loggedUser.team))
-    dispatch(getAllTeams());
   }, [] );
 
   const username = useSelector((state) => state.user.pseudo);
@@ -32,10 +30,10 @@ function Profil() {
   const team = useSelector((state) => state.user.teamName);
  
 
-  const teamOptions = teamsList.map(({ id, teamName }) => {
+  const teamOptions = teamsList.map(({ id, name }) => {
     return (
-      <option key={id} value={teamName}>
-        {teamName}
+      <option key={id} value={name}>
+        {name}
       </option>
     );
   });

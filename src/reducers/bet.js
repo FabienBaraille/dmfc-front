@@ -1,4 +1,4 @@
-import { ADD_BET_TO_LIST, BET_TO_REMOVE, SET_GAMES_ROUND, SET_INPUT_VALUE_BET, SET_IS_CREATED_MATCH, SET_IS_LOADING_BET, SET_IS_LOADING_GAME, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
+import { ADD_BET_TO_LIST, BET_TO_REMOVE, SET_GAMES_ROUND, SET_INPUT_VALUE_BET, SET_IS_CREATED_MATCH, SET_IS_LOADING_BET, SET_IS_LOADING_GAME, SET_IS_UPDATED, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
 
 const initialState = {
   'betList': [],
@@ -7,6 +7,7 @@ const initialState = {
   'isLoading': true,
   'isLoadingGame': false,
   'isCreatedMatch': false,
+  'isUpdated': false,
   'games': [],
   'roundName': '',
   'roundCat': 'SR',
@@ -58,6 +59,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isCreatedMatch: action.isCreated,
+      }
+    case SET_IS_UPDATED:
+      return {
+        ...state,
+        isUpdated: action.isUpdated,
       }
     default:
       return state;

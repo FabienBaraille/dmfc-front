@@ -3,9 +3,9 @@
 #GeneralStats {
   width: 90%;
   .title-stats {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .team-infos {
       display: flex;
       align-items: center;
@@ -27,5 +27,8 @@
     p {
       margin-bottom: 0.5rem;
     }
+  }
+  .return-btn {
+    flex-direction: column;
   }
 }

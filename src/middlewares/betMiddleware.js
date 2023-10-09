@@ -1,22 +1,15 @@
 import axios from 'redaxios';
 
 // Import de la fonction permettant de récupérer les cookies
-import { getCookies } from "../Utils/cookies/getCookies";
 import { CREATE_BET, CREATE_GAME, CREATE_ROUND, GET_GAMES_ROUND, UPDATE_BET, setGamesRound, setIsCreatedMatch, setIsLoadingBet, setIsLoadingGame, toggleCreationMode } from '../actions/bet';
 import { getRounds, getSRPrediction } from '../actions/datas';
 
 const betMiddleware = (store) => (next) => async (action) => {
-  const token = getCookies('token');
   switch (action.type) {
     case GET_GAMES_ROUND:
       store.dispatch(setIsLoadingBet(true));
       try {
-        const { data } = await axios.get(`/api/games/round/${action.roundId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const { data } = await axios.get(`/api/games/round/${action.roundId}`);
         store.dispatch(setGamesRound(data));
       } catch (error) {
         console.log(error);
@@ -26,20 +19,16 @@ const betMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.post(`/api/srprediction/new`,
-        {
-          gameId: action.matchId,
-          validation_status: action.status,
-          predicted_winnig_team: action.winningTeam,
-          predicted_point_difference: action.winningDif,
-          point_scored: 0,
-          bonus_points_erned: 0,
-          bonus_bookie: 0,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+          {
+            gameId: action.matchId,
+            validation_status: action.status,
+            predicted_winnig_team: action.winningTeam,
+            predicted_point_difference: action.winningDif,
+            point_scored: 0,
+            bonus_points_erned: 0,
+            bonus_bookie: 0,
+          }
+        );
         store.dispatch(setIsLoadingBet(false));
         store.dispatch(getSRPrediction(store.getState().user.loggedUser.id));
       } catch (error) {
@@ -47,44 +36,36 @@ const betMiddleware = (store) => (next) => async (action) => {
       }
     break;
     case UPDATE_BET:
-    store.dispatch(setIsLoadingBet(true));
-    try {
-      const { data } = await axios.put(`/api/prediction/update/${action.betId}`,
-      {
-        validation_status: action.status,
-        predicted_winnig_team: action.winningTeam,
-        predicted_point_difference: action.winningDif,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      store.dispatch(setIsLoadingBet(false));
-      store.dispatch(getSRPrediction(store.getState().user.loggedUser.id));
-    } catch (error) {
-      console.log(error);
-    }
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.put(`/api/prediction/update/${action.betId}`,
+          {
+            validation_status: action.status,
+            predicted_winnig_team: action.winningTeam,
+            predicted_point_difference: action.winningDif,
+          }
+        );
+        store.dispatch(setIsLoadingBet(false));
+        store.dispatch(getSRPrediction(store.getState().user.loggedUser.id));
+      } catch (error) {
+        console.log(error);
+      }
     break;
-    case CREATE_ROUND:{
+    case CREATE_ROUND: {
       store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.post(`/api/round/new`,
-        {
-          season: {
-            id: store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].id,
-            year:store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].year,
-          },
-          name: store.getState().bet.roundName,
-          category: store.getState().bet.roundCat,
-          user_id: store.getState().user.loggedUser.id,
-          league_id: store.getState().user.loggedUser.league_id.id
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+          {
+            season: {
+              id: store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].id,
+              year:store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].year,
+            },
+            name: store.getState().bet.roundName,
+            category: store.getState().bet.roundCat,
+            user_id: store.getState().user.loggedUser.id,
+            league_id: store.getState().user.loggedUser.league_id.id
+          }
+        );
         store.dispatch(setIsLoadingBet(false));
         store.dispatch(getRounds());
         store.dispatch(toggleCreationMode(false));
@@ -93,20 +74,16 @@ const betMiddleware = (store) => (next) => async (action) => {
       }
     }
     break;
-    case CREATE_GAME:{
+    case CREATE_GAME: {
       store.dispatch(setIsLoadingGame(true));
       try {
         const { data } = await axios.post(`/api/game/new`,
-        {
-          dateAndTimeOfMatch : action.date,
-          round : store.getState().bet.roundNumber,
-          teams : action.teams,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+          {
+            dateAndTimeOfMatch : action.date,
+            round : store.getState().bet.roundNumber,
+            teams : action.teams,
+          }
+        );
         store.dispatch(setIsLoadingGame(false));
         store.dispatch(setIsCreatedMatch(true));
       } catch (error) {

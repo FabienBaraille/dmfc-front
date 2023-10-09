@@ -25,6 +25,14 @@
   font-weight: 700;
   src: url('/src/assets/fonts/roboto-v30-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+/* days-one-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Days One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/src/assets/fonts/days-one-v18-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 
 body {
   background-image: url('/src/assets/design/wood-floor.png');
@@ -39,18 +47,21 @@ body {
     text-shadow: 0 0 2px v.$orange;
   }
   h2 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   h3 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   h4 {
     padding: 1rem 0 0 1rem;
     text-align: unset;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+  h5 {
+    margin-bottom: 5px;
   }
   main {
-    margin-top: 6em;
+    margin: 6em 0 3em;
     .at-logo {
       content: url('/src/assets/design/at-sign.svg');
       margin: 0 15px;

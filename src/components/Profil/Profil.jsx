@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import Wrapper from '../Wrapper/Wrapper';
 import Input from "../Utils/Input";
 import { updateUserProfile, setInputValue } from '../../actions/user';
-import { getAllTeams } from '../../actions/datas';
 
 import './Profil.scss';
 
@@ -27,11 +26,10 @@ function Profil() {
   const password = useSelector((state) => state.user.password);
   const team = useSelector((state) => state.user.teamName);
  
-
-  const teamOptions = teamsList.map(({ id, teamName }) => {
+  const teamOptions = teamsList.map(({ id, name }) => {
     return (
-      <option key={id} value={teamName}>
-        {teamName}
+      <option key={id} value={name}>
+        {name}
       </option>
     );
   });

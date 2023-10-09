@@ -9,7 +9,9 @@ import {
   SET_SEASON,
   SET_SR_PREDICTION,
   SET_USERS_LIST,
-  SET_ALL_TEAMS 
+  SET_ALL_TEAMS, 
+  SET_TITLE,
+  SET_FOCUS,
 } from '../actions/datas';
 
 const initialState = {
@@ -30,6 +32,8 @@ const initialState = {
   'leagueInfos': {},
   'leagueDescription': '',
   'leagueName': '',
+  'title': '',
+  'focusedInputId': null,
   // End League management
   'rounds': [],
   'allSeasons': []
@@ -37,6 +41,11 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      }
     case SET_USERS_LIST:
       return {
         ...state,
@@ -49,17 +58,12 @@ const reducer = (state = initialState, action = {}) => {
         allLeague: action.leaguesList,
         isLoading: false,
       }
-    case SET_IS_LOADING:
+    case SET_ALL_TEAMS:
       return {
         ...state,
-        isLoading: true,
+        allTeams: action.teamsList,
+        isLoading: false,
       }
-      case SET_ALL_TEAMS:
-        return {
-          ...state,
-          allTeams: action.teamsList,
-          isLoading: false,
-        }
     case SET_IS_LOADING_SR:
       return {
         ...state,
@@ -106,6 +110,17 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         allSeasons: action.seasonInfos,
         isLoading: false,
+      }
+    case SET_TITLE:
+      return {
+        ...state,
+        title: action.title,
+        isLoading: false,
+      }
+    case SET_FOCUS:
+      return {
+        ...state,
+        focusedInputId: action.id,
       }
     default:
     return state;

@@ -49,7 +49,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
             id="0" 
             name='winning-team' 
             defaultChecked={predictStatus !== 'Not done' ? prediction.predictedWinnigTeam === team[0].name : false} 
-            disabled={(predictStatus === 'Published' || predictStatus === 'Validated')}
+            disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')}
             onChange={(event) => setWinTeam(event.target.id)}
           />
           <label htmlFor="visitor" >

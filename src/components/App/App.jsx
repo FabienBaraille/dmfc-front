@@ -35,6 +35,7 @@ import Modal from "../Utils/Modal/Modal";
 
 import './App.scss';
 import { getNews } from "../../actions/news";
+import RoundStats from "../Stats/RoundsStats";
 
 const App = () => {
   const navigate = useNavigate();
@@ -107,6 +108,7 @@ const App = () => {
             <Route path='/scores/SR' element={<BetResult />} />
             <Route path='/league-management' element={<LeagueManagement />} />
           </Route>
+          <Route path='/roundsStat' element={<RoundStats />} />
           <Route path='/rules' element={<SimpleRules />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/Error403' element={<Error403 />} />

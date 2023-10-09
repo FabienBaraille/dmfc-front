@@ -12,6 +12,7 @@ import { transformDate } from "../../Utils/stats/calcDate";
 
 import './RsBetCreation.scss';
 import { useEffect } from "react";
+import RoundSelector from "./Element/RoundSelector";
 
 const RsBetCreation = () => {
 
@@ -20,7 +21,6 @@ const RsBetCreation = () => {
   
   const betList = useSelector((state) => state.bet.betList);
   const roundCreationMode = useSelector((state) => state.bet.roundCreationMode);
-  const roundsList = useSelector((state) => state.datas.rounds);
   const roundName = useSelector((state) => state.bet.roundName);
   const roundCat = useSelector((state) => state.bet.roundCat);
   const roundNumber = useSelector((state) => state.bet.roundNumber);
@@ -35,12 +35,6 @@ const RsBetCreation = () => {
       }, 1500);
     }
   }, [isCreatedMatch])
-
-  const roundOptions = roundsList.map(({id, name}) => {
-    return (
-      <option key={`round${id}`} value={id}>{name}</option>
-    )
-  });
 
   const betTpl = BetTpl()
 
@@ -87,13 +81,7 @@ const RsBetCreation = () => {
       <div className="round-choice">
         <h4>Pronostique saison régulière</h4>
         {!roundCreationMode &&
-          <>
-            <p>Sélectionne un round dans lequel créer des matchs.</p>
-            <select id="roundNumber" value={roundNumber} onChange={handleInput}>
-              <option value=''>Choisir le Round</option>
-              {roundOptions}
-            </select>
-          </>
+          <RoundSelector />
         }
       </div>
       <form onSubmit={handleSubmit}>

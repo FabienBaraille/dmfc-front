@@ -52,7 +52,7 @@ const Connexion = () => {
           {isCreationMode &&
             <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com" isRequired={true}/>
           }
-          <Input label="Mot de Passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
+          <Input label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
           {isCreationMode &&
             <>
               <div className="dmfc-opt">

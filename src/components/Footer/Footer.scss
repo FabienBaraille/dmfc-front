@@ -10,12 +10,12 @@
   padding: 0.5em;
   text-align: center;
   font-family: v.$main-font;
-  margin-top: 1rem;
   box-shadow: 0 -5px 4px 0 v.$light-orange;
 }
 .footer a {
   display: inline-block;
-  width: 125px;
+  width: 200px;
+  font-size: 0.9rem;
   &:hover {
     color: v.$orange;
   }

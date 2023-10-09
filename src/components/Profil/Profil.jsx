@@ -12,7 +12,7 @@ function Profil() {
   
   const dispatch = useDispatch();
   const teamsList = useSelector((state) => state.datas.allTeams);
-
+  
   const loggedUser = useSelector((state) => state.user.loggedUser);
   const leagueName = loggedUser.league_id ? loggedUser.league_id.leagueName : 'N/A';
  
@@ -28,7 +28,7 @@ function Profil() {
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);
   const team = useSelector((state) => state.teams.favoriteTeam);
-  console.log(team);
+
 
   const teamOptions = teamsList.map(({ id, name }) => {
     return (

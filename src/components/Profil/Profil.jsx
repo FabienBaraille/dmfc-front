@@ -29,7 +29,6 @@ function Profil() {
   const password = useSelector((state) => state.user.password);
   const team = useSelector((state) => state.teams.favoriteTeam);
 
-
   const teamOptions = teamsList.map(({ id, name }) => {
     return (
       <option key={id} value={name}>
@@ -86,7 +85,7 @@ function Profil() {
         </div>
         <div>
         <label>Équipe Préférée: </label>
-          <select name="teams" onChange={handleInputChange} value={team}>
+          <select name="teams" id="teams" onChange={handleInputChange} value={team}>
             <option value="">Changer ta équipe préférée</option>
             {teamOptions}
           </select>

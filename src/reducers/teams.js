@@ -7,7 +7,7 @@ switch (action.type) {
     case 'SAVE_FAVORITE_TEAM':
       return {
         ...state,
-        favoriteTeam: action.name,
+        favoriteTeam: action.teamName,
       };
     default:
       return state;

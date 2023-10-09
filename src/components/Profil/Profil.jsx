@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Wrapper from '../Wrapper/Wrapper';
 import Input from "../Utils/Input";
 import { updateUserProfile, setInputValue } from '../../actions/user';
-import { getAllTeams } from '../../actions/datas';
+import { saveFavoriteTeam } from '../../actions/teams';
 
 import './Profil.scss';
 
@@ -27,8 +27,8 @@ function Profil() {
   const username = useSelector((state) => state.user.pseudo);
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);
-  const team = useSelector((state) => state.user.teamName);
- 
+  const team = useSelector((state) => state.teams.favoriteTeam);
+  console.log(team);
 
   const teamOptions = teamsList.map(({ id, name }) => {
     return (
@@ -39,8 +39,12 @@ function Profil() {
   });
 
   const handleInputChange = (event) => {
+    if (event.target.id === 'teams') {
+      dispatch(saveFavoriteTeam(event.target.value));
+    } else {
     dispatch(setInputValue(event.target.id, event.target.value));
-  };
+  }
+};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -55,7 +59,7 @@ function Profil() {
         <p>Pseudo: <span className="perso">{loggedUser.username}</span></p>
         <p>Score: <span className="perso">{loggedUser.score || 'NULL'}</span></p>
         <p>Ma Ligue: <span className="perso">{leagueName}</span></p>
-        <p>Équipe Préférée: <span className="perso"></span></p>
+        <p>Équipe Préférée: <span className="perso">{team}</span></p>
       </div>
       <form className="change-info" onSubmit={handleSubmit}>
         <h2>Changer mes paramètres</h2>

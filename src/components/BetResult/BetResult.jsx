@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-import { getAllPredictions, getGamesRound, resetCountBet, setInputValueBet, setIsUpdated, updateBetPoints } from "../../actions/bet";
+import { getAllPredictions, getGamesRound, resetCountBet, resetCountPred, setInputValueBet, setIsUpdated, setUpdatedMessage, updateBetPoints, updatePlayerScore } from "../../actions/bet";
 
 import Wrapper from "../Wrapper/Wrapper";
 import GameBetResult from "./GameBetResult";
@@ -10,11 +9,11 @@ import RoundSelector from "../BetCreation/Element/RoundSelector";
 import LoadElmt from "../Loader/LoadElmt";
 
 import './BetResult.scss';
+import { getUsersList } from "../../actions/datas";
 
 const BetResult = () => {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const roundNumber = useSelector((state) => state.bet.roundNumber);
   const roundsList = useSelector((state) => state.datas.rounds);
@@ -25,8 +24,10 @@ const BetResult = () => {
   const updatedGame = useSelector((state) => state.bet.updatedGame);
   const countBet = useSelector((state) => state.bet.countBet);
   const allUsers = useSelector((state) => state.datas.allUsers);
+  const userPlaying = allUsers.filter(({roles}) => roles.includes('ROLE_JOUEUR'));
   const countPred = useSelector((state) => state.bet.countPred);
   const allPredictions = useSelector((state) => state.bet.allPredictions);
+  const updatedMessage = useSelector((state) => state.bet.updatedMessage);
 
   useEffect(() => {
     if (roundNumber === '') {
@@ -42,34 +43,51 @@ const BetResult = () => {
       }, 1500);
     }
     if (predictionList.length > 0 && countBet === predictionList.length) {
-      allUsers.forEach(({id}) => dispatch(getAllPredictions(id)));
+      userPlaying.forEach(({id}) => dispatch(getAllPredictions(id)));
       dispatch(resetCountBet());
     }
-    if (allPredictions.length > 0 && allUsers.length === countPred) {
+    if (allPredictions.length != 0 && userPlaying.length === countPred) {
       updateScore();
+      dispatch(resetCountPred());
+      dispatch(setIsUpdated(false));
     }
-  }, [roundNumber, isUpdated, countBet, countPred])
+    if (!isLoading && updatedMessage !== '') {
+      setTimeout(() => {
+        dispatch(setUpdatedMessage(''));
+        dispatch(getUsersList());
+      }, 1500);
+    }
+  }, [roundNumber, isUpdated, countBet, countPred, updatedMessage])
 
   const gamesToEdit = gamesList.map(({id, ...rest}) => <GameBetResult key={id} gameId={id} {...rest} />);
   const calculatePoints = () =>  {
     const {winner, visitorScore, homeScore, visitorOdd, homeOdd, team} = updatedGame;
-    predictionList.forEach(({id, predictedWinnigTeam, predictedPointDifference}) => {
-      // ATTENTION IL FAUT PRENDRE EN COMPTE LE STATUS DE LA PREDICTION !!!
-      const teamEarnedPoints = predictedWinnigTeam === winner ? 10 : 0;
-      const predictedPts = parseInt(predictedPointDifference);
-      const diffEarnedPoints = predictedPts === Math.abs(visitorScore - homeScore) ? 20 : Math.abs(Math.abs(visitorScore - homeScore) - predictedWinnigTeam) <= 5 ? 10 : 0;
-      const bookiesChoice = visitorOdd > homeOdd ? team[0].name : team[1].name;
-      const bookiesEarnedPoints = (predictedWinnigTeam === bookiesChoice && predictedWinnigTeam === updatedGame.winner) ? 10 : 0;
+    predictionList.forEach(({id, predictedWinnigTeam, predictedPointDifference, validationStatus}) => {
+      let teamEarnedPoints = 0;
+      let diffEarnedPoints = 0;
+      let bookiesEarnedPoints = 0;
+      if (validationStatus !== "Saved") {
+        teamEarnedPoints = predictedWinnigTeam === winner ? 10 : 0;
+        const predictedPts = parseInt(predictedPointDifference);
+        diffEarnedPoints = predictedPts === Math.abs(visitorScore - homeScore) ? 20 : Math.abs(Math.abs(visitorScore - homeScore) - predictedWinnigTeam) <= 5 ? 10 : 0;
+        const bookiesChoice = visitorOdd > homeOdd ? team[0].name : team[1].name;
+        bookiesEarnedPoints = (predictedWinnigTeam === bookiesChoice && predictedWinnigTeam === updatedGame.winner) ? 10 : 0;
+      }
       dispatch(updateBetPoints(id, teamEarnedPoints, diffEarnedPoints, bookiesEarnedPoints));
     })
   }
   const updateScore = () => {
-    allPredictions.forEach((userPredictions) => {
-      console.log(userPredictions)
+    allPredictions.forEach((userPrediction) => {
+      let userScore = 0;
+      if (userPrediction.length != 0) {
+        userPrediction.forEach(({pointScored, bonusPointsErned, bonusBookie}) => {
+          userScore += pointScored + bonusPointsErned + bonusBookie 
+        })
+      }
+      dispatch(updatePlayerScore(userPrediction[0].User.id, userScore));
     })
   }
-  
-  if (isLoading) {
+  if (isLoading || countBet != 0 || countPred != 0) {
     return <LoadElmt />
   }
   if (isUpdated) {
@@ -77,6 +95,13 @@ const BetResult = () => {
       <Wrapper>
         <h2>Match mis à jour avec succès !</h2>
         <h2>Les scores des joueurs vont maintenant être recalculés</h2>
+      </Wrapper>
+    )
+  }
+  if (updatedMessage !== '') {
+    return (
+      <Wrapper>
+        <h2>{updatedMessage}</h2>
       </Wrapper>
     )
   }

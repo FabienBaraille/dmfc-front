@@ -11,6 +11,7 @@ import {
   UPDATE_BET,
   UPDATE_BET_POINTS,
   UPDATE_GAME,
+  UPDATE_PLAYER_SCORE,
   getPredictionByGame,
   setAllPredictions,
   setCountUpdate,
@@ -20,6 +21,7 @@ import {
   setIsLoadingGame,
   setPredictionByGame,
   setUpdatedGame,
+  setUpdatedMessage,
   toggleCreationMode
 } from '../actions/bet';
 import { getRounds, getSRPrediction } from '../actions/datas';
@@ -159,7 +161,21 @@ const betMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.get(`/api/srprediction/${action.playerId}`);
-        store.dispatch(setAllPredictions(action.playerId, data));
+        store.dispatch(setAllPredictions(data));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    case UPDATE_PLAYER_SCORE:
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.put(`/api/user/${action.playerId}/dmfc`,
+          {
+            score: action.playerScore,
+          }
+        );
+        store.dispatch(setUpdatedMessage(data.message));
+        store.dispatch(setIsLoadingBet(false));
       } catch (error) {
         console.log(error);
       }

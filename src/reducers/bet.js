@@ -10,11 +10,11 @@ import {
   SET_PREDICTION_BY_GAME,
   SET_UPDATED_GAME,
   TOGGLE_CREATION_MODE_BET,
-  SET_IS_UPDATED_SCORE,
   SET_ALL_PREDICTIONS,
   SET_COUNT_BET,
   RESET_COUNT_BET,
-  RESET_COUNT_PRED
+  RESET_COUNT_PRED,
+  SET_UPDATED_MESSAGE
 } from "../actions/bet";
 
 const initialState = {
@@ -25,14 +25,14 @@ const initialState = {
   'isLoadingGame': false,
   'isCreatedMatch': false,
   'isUpdated': false,
+  'updatedMessage': '',
   'games': [],
   'roundName': '',
   'roundCat': 'SR',
   'roundNumber': '',
   'predictionByGame': [],
   'updatedGame': {},
-  'isUpdatedScore': false,
-  'allPredictions': {},
+  'allPredictions': [],
   'countBet': 0,
   'countPred': 0
 };
@@ -76,12 +76,13 @@ const reducer = (state = initialState, action = {}) => {
     case RESET_COUNT_BET:
       return {
         ...state,
-        countBet: 0
+        countBet: 0,
       }
     case RESET_COUNT_PRED:
       return {
         ...state,
-        countPred: 0
+        countPred: 0,
+        allPredictions: []
       }
     case SET_INPUT_VALUE_BET:
       return {
@@ -116,16 +117,16 @@ const reducer = (state = initialState, action = {}) => {
         updatedGame: action.gameInfos,
         isLoading: false
       }
-    case SET_IS_UPDATED_SCORE:
-      return {
-        ...state,
-        isUpdatedScore: action.isUpdated
-      }
     case SET_ALL_PREDICTIONS:
       return {
         ...state,
-        allPredictions: {...state.allPredictions, [action.playerId]: action.predictionsInfos},
+        allPredictions: [...state.allPredictions, action.predictionsInfos],
         countPred: state.countPred + 1
+      }
+    case SET_UPDATED_MESSAGE:
+      return {
+        ...state,
+        updatedMessage: action.message
       }
     default:
       return state;

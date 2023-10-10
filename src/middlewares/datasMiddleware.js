@@ -173,9 +173,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoading());
       try {
         const { data } = await axios.put(`/api/user/${store.getState().datas.focusedInputId}/dmfc`,
-          {
-            title: store.getState().datas.title,
-          }
+          action.body
         );
         store.dispatch(getUsersList());
       } catch (error) {

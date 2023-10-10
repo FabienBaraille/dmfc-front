@@ -6,7 +6,7 @@ import { toggleConfirmationModal } from "../../actions/league";
 import './LeagueManagement.scss'
 
 import data from '../../data/data'
-import { postLeagueChange, postTitleChange, setFocusedInputId, setLeague, setLeagueCreationMode, setTitle } from "../../actions/datas";
+import { postLeagueChange, updatePlayerByDmfc, setFocusedInputId, setLeague, setLeagueCreationMode, setTitle } from "../../actions/datas";
 import Input from "../Utils/Input";
 
 const LeagueManagement = () => {
@@ -18,6 +18,9 @@ const LeagueManagement = () => {
   const leagueDescription = useSelector((state) => state.datas.leagueDescription);
   const leagueName = useSelector((state) => state.datas.leagueName);
   const focusedInputId = useSelector((state) => state.datas.focusedInputId);
+  const playerTitle = useSelector((state) => state.datas.title);
+
+  let isSubmitButtonClicked = false;
 
   const handleReject = () => {
     dispatch(toggleConfirmationModal(true))
@@ -31,8 +34,10 @@ const LeagueManagement = () => {
 
   const handleSubmitTitle = (event) => {
     event.preventDefault();
-    dispatch(postTitleChange());
+    isSubmitButtonClicked = true;
+    dispatch(updatePlayerByDmfc({title: playerTitle}));
     dispatch(setFocusedInputId(null))
+    handleBlur();
   };
   
   const handleTitleChange = (event) => {
@@ -43,8 +48,11 @@ const LeagueManagement = () => {
     dispatch(setFocusedInputId(event.target.id));
   };
 
-  const handleBlur = (event) => {
-    focusedInputId === event.target.id ? null : dispatch(setFocusedInputId(null));
+  const handleBlur = () => {
+    if (!isSubmitButtonClicked) {
+      dispatch(setFocusedInputId(null));
+    }
+    isSubmitButtonClicked = false;
   };
 
   const sortedUsers = allUsers.slice().sort((a, b) => a.username.localeCompare(b.username));
@@ -63,9 +71,9 @@ const LeagueManagement = () => {
         <tr key={id} className='users-row'>
           <th><Link to={`/player/${id}`}>{username}</Link></th>
           <th>
-            <form onSubmit={handleSubmitTitle} >
-              <Input value={title} id={id} onChange={handleTitleChange} onFocus={handleFocus} onBlur={handleBlur} />
-              {focusedInputId == id && <button type="submit">Valider</button>}
+            <form onSubmit={handleSubmitTitle}>
+              <Input value={title} id={id} onChange={handleTitleChange} onFocus={handleFocus} onBlur={handleBlur}/>
+              {focusedInputId == id && <button type="submit" onMouseDown={() => isSubmitButtonClicked = true}>Valider</button>}
             </form>
           </th>
           <th><button id="kickBtn" onClick={handleReject}>X</button></th>
@@ -73,7 +81,7 @@ const LeagueManagement = () => {
       )}
     </tbody>
   </table>
-  )
+  );
 
   const playerPending = data.User.length > 0 ? 
   (
@@ -102,13 +110,13 @@ const LeagueManagement = () => {
 
   const handleCreationMode = () => {
     leagueCreation ? dispatch(setLeagueCreationMode(false)) : dispatch(setLeagueCreationMode(true))
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(postLeagueChange());
     dispatch(setLeagueCreationMode(false))
-  }
+  };
 
   const handleLeagueChange = (event) => {
     dispatch(setLeague(event.target.id, event.target.value));

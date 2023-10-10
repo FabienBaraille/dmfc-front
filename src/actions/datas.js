@@ -85,3 +85,15 @@ export const setSeason = (seasonInfos) => ({
   type: SET_SEASON,
   seasonInfos
 });
+export const setTitle = (title) => ({
+  type: SET_TITLE,
+  title,
+});
+export const updatePlayerByDmfc = (body) => ({
+  type: POST_TITLE_CHANGE,
+  body
+})
+export const setFocusedInputId = (id) => ({
+  type: SET_FOCUS,
+  id,
+})

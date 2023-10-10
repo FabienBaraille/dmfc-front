@@ -12,14 +12,13 @@ const RoundSelector = () => {
 
   const roundOptions = roundsList.map(({id, name}) => {
     return (
-      <option key={`round${id}`} value={id}>{name}</option>
+      <option key={`round${id}`} value={id} defaultValue={id === roundNumber}>{name}</option>
     )
   });
   return (
     <>
-      <p>Sélectionne un round dans lequel créer des matchs.</p>
       <select id="roundNumber" value={roundNumber} onChange={handleInput}>
-        <option value=''>Choisir le Round</option>
+        <option value='' defaultValue={roundNumber === ''} disabled hidden>Choisir le Round</option>
         {roundOptions}
       </select>
     </>

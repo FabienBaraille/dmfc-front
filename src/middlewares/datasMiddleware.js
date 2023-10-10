@@ -9,6 +9,7 @@ import {
   GET_LEAGUE,
   POST_LEAGUE_CHANGE,
   GET_SEASON,
+  UPDATE_PLAYER_BY_DMFC,
   setUsersList,
   setAllLeague,
   setAllTeams,
@@ -19,7 +20,6 @@ import {
   setLeague,
   getLeague,
   setSeason,
-  POST_TITLE_CHANGE,
   getUsersList,
 } from "../actions/datas";
 
@@ -169,7 +169,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
       }
     break;
     // Action qui permet au DMFC de changer le titre d'un joueur
-    case POST_TITLE_CHANGE:
+    case UPDATE_PLAYER_BY_DMFC:
       store.dispatch(setIsLoading());
       try {
         const { data } = await axios.put(`/api/user/${store.getState().datas.focusedInputId}/dmfc`,

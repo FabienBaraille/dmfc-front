@@ -15,7 +15,7 @@ const ScoreUpdate = () => {
   const allPredictions = useSelector((state) => state.bet.allPredictions);
 
   useEffect(() => {
-    
+    console.log('init')
   }, []);
 
   console.log(allPredictions);

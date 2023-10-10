@@ -16,6 +16,9 @@ export const POST_LEAGUE_CHANGE = 'POST_LEAGUE_CHANGE';
 export const LEAGUE_CREATION_MODE = 'LEAGUE_CREATION_MODE';
 export const GET_SEASON = 'GET_SEASON';
 export const SET_SEASON = 'SET_SEASON';
+export const SET_TITLE = 'SET_TITLE';
+export const SET_FOCUS = 'SET_FOCUS';
+export const UPDATE_PLAYER_BY_DMFC = 'UPDATE_PLAYER_BY_DMFC';
 
 export const getUsersList = () => ({
   type: GET_USERS_LIST,
@@ -85,3 +88,15 @@ export const setSeason = (seasonInfos) => ({
   type: SET_SEASON,
   seasonInfos
 });
+export const setTitle = (title) => ({
+  type: SET_TITLE,
+  title,
+});
+export const updatePlayerByDmfc = (body) => ({
+  type: UPDATE_PLAYER_BY_DMFC,
+  body
+})
+export const setFocusedInputId = (id) => ({
+  type: SET_FOCUS,
+  id,
+})

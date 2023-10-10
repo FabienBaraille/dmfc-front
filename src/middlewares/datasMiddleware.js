@@ -168,10 +168,11 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-    // Action qui permet au DMFC de changer le titre d'un joueur
+    // Action qui permet au DMFC de changer les infos d'un joueur
     case UPDATE_PLAYER_BY_DMFC:
       store.dispatch(setIsLoading());
       try {
+        console.log(action.body);
         const { data } = await axios.put(`/api/user/${store.getState().datas.focusedInputId}/dmfc`,
           action.body
         );

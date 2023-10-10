@@ -19,6 +19,7 @@ export const SET_SEASON = 'SET_SEASON';
 export const SET_TITLE = 'SET_TITLE';
 export const SET_FOCUS = 'SET_FOCUS';
 export const UPDATE_PLAYER_BY_DMFC = 'UPDATE_PLAYER_BY_DMFC';
+export const SET_MODAL_FUNCTION = 'SET_MODAL_FUNCTION';
 
 export const setUsersList = (list) => ({
   type: SET_USERS_LIST,
@@ -95,8 +96,12 @@ export const setTitle = (title) => ({
 export const updatePlayerByDmfc = (body) => ({
   type: UPDATE_PLAYER_BY_DMFC,
   body
-})
+});
 export const setFocusedInputId = (id) => ({
   type: SET_FOCUS,
   id,
-})
+});
+export const setModalFunction = (func) => ({
+  type: SET_MODAL_FUNCTION,
+  func,
+});

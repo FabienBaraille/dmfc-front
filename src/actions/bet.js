@@ -11,7 +11,18 @@ export const SET_INPUT_VALUE_BET = 'SET_INPUT_VALUE_BET';
 export const CREATE_GAME = 'CREATE_GAME';
 export const SET_IS_LOADING_GAME = 'SET_IS_LOADING_GAME';
 export const SET_IS_CREATED_MATCH = 'SET_IS_CREATED_MATCH';
+export const UPDATE_GAME = 'UPDATE_GAME';
+export const SET_IS_UPDATED = 'SET_IS_UPDATED';
+export const GET_PREDICTION_BY_GAME = 'GET_PREDICTION_BY_GAME';
+export const SET_PREDICTION_BY_GAME = 'SET_PREDICTION_BY_GAME';
+export const RESET_GAME_ID = 'RESET_GAME_ID';
+export const UPDATE_BET_POINTS = 'UPDATE_BET_POINTS';
+export const SET_UPDATED_GAME = 'SET_UPDATED_GAME'
 
+export const getPredictionByGame = (gameId) => ({
+  type: GET_PREDICTION_BY_GAME,
+  gameId
+});
 export const setIsLoadingBet = (isLoading) => ({
   type: SET_IS_LOADING_BET,
   isLoading
@@ -29,12 +40,15 @@ export const setInputValueBet = (inputName, inputValue) => ({
   inputName,
   inputValue,
 });
+export const setIsUpdated = (isUpdated) => ({
+  type: SET_IS_UPDATED,
+  isUpdated
+});
 
 export const addBetToList = (betTpl) => ({
   type: ADD_BET_TO_LIST,
   betTpl,
 });
-
 export const betToRemove = (idToRemove) => ({
   type: BET_TO_REMOVE,
   idToRemove,
@@ -75,4 +89,32 @@ export const updateBet = (winningTeam, winningDif, betId, status) => ({
   winningDif,
   betId,
   status
+});
+export const updateGame = (gameId, visitorScore, homeScore, visitorOdd, homeOdd, winner) => ({
+  type: UPDATE_GAME,
+  gameId,
+  visitorScore,
+  homeScore,
+  visitorOdd,
+  homeOdd,
+  winner
+});
+export const setPredictionByGame = (predictionInfos) => ({
+  type: SET_PREDICTION_BY_GAME,
+  predictionInfos,
+});
+
+export const resetGameId = () => ({
+  type: RESET_GAME_ID,
+});
+export const updateBetPoints = (betId, winningPoints, difPoints, bookiesPoints) => ({
+  type: UPDATE_BET_POINTS,
+  betId,
+  winningPoints,
+  difPoints,
+  bookiesPoints 
+});
+export const setUpdatedGame = (gameInfos) => ({
+  type: SET_UPDATED_GAME,
+  gameInfos
 });

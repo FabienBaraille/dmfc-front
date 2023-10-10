@@ -20,8 +20,7 @@ const GeneralStats = () => {
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.datas.allUsers);
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
-  const {0 : {id, username, title, score, position}} = userByUsername(usersList, playerName);
-  // team : {name, logo}
+  const {0 : {id, username, title, score, position, team}} = userByUsername(usersList, playerName);
 
   useEffect(() => {
     dispatch(getSRPrediction(id));
@@ -40,7 +39,7 @@ const GeneralStats = () => {
   const averageRoundScore = averageScore(roundsList.length, totalWinScore, totalBonusScore, totalBookieScore);
   const maxPoints = scoreMax(roundsList);
   const playedRound = countRoundPlayed(roundsList, validatedPrediction);
-
+  console.log(score)
   if (isLoading) {
     return <LoadElmt />
   }
@@ -49,16 +48,16 @@ const GeneralStats = () => {
       <div className='title-stats'>
         <h2>Saison en cours : </h2>
         <h3>Stats de {username}</h3>
-        <h4>Titre : {title}</h4>
-        {/* <div className='team-infos'>
-          <h4>{name} - </h4><img className='logo' src={`/src/assets/logos/${logo}`} alt="" />
-        </div> */}
+        <h4>Titre : {title ? title : "Pas de titre"}</h4>
+        <div className='team-infos'>
+          <h4>{team ? team.name : "Pas d'équipe favorite"} - </h4><img className='logo' src={team ? `/src/assets/logos/${team.logo}` : ''} alt="" />
+        </div>
       </div>
       <div className='prediction-stats'>
-        <p>{`Classement actuel : ${position}`}</p>
+        <p>{`Classement actuel : ${position ? position : " -"}`}</p>
         <p>{`Nombre de round joué(s) : ${playedRound} / ${roundsList.length}`}</p>
         <h4>Score :</h4>
-        <p>{`Score : ${score} / ${maxPoints}`}</p>
+        <p>{`Score : ${score ? score : 0} / ${maxPoints}`}</p>
         <p>{`Moyen par round : ${averageRoundScore}`}</p>
         <p>{`Prono d'équipe réussi : ${totalWinScore}`}</p>
         <p>{`Bonus score : ${totalBonusScore}`}</p>

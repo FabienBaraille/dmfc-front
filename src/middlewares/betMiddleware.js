@@ -13,6 +13,7 @@ import {
   UPDATE_GAME,
   getPredictionByGame,
   setAllPredictions,
+  setCountUpdate,
   setGamesRound,
   setIsCreatedMatch,
   setIsLoadingBet,
@@ -148,6 +149,7 @@ const betMiddleware = (store) => (next) => async (action) => {
             bonusBookie: action.bookiesPoints
           }
         );
+        store.dispatch(setCountUpdate());
         store.dispatch(setIsLoadingBet(false));
       } catch (error) {
         console.log(error);

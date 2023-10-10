@@ -21,6 +21,19 @@ export const SET_UPDATED_GAME = 'SET_UPDATED_GAME';
 export const SET_IS_UPDATED_SCORE = 'SET_IS_UPDATED_SCORE';
 export const GET_ALL_PREDICTIONS = 'GET_ALL_PREDICTIONS';
 export const SET_ALL_PREDICTIONS = 'SET_ALL_PREDICTIONS';
+export const SET_COUNT_BET = 'SET_COUNT_BET';
+export const RESET_COUNT_BET = 'RESET_COUNT_BET';
+export const RESET_COUNT_PRED = 'RESET_COUNT_PRED';
+
+export const setCountUpdate = () => ({
+  type: SET_COUNT_BET,
+});
+export const resetCountBet = () => ({
+  type: RESET_COUNT_BET,
+});
+export const resetCountPred = () => ({
+  type: RESET_COUNT_PRED,
+});
 
 export const getPredictionByGame = (gameId) => ({
   type: GET_PREDICTION_BY_GAME,

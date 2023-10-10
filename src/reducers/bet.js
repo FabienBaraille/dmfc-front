@@ -11,7 +11,10 @@ import {
   SET_UPDATED_GAME,
   TOGGLE_CREATION_MODE_BET,
   SET_IS_UPDATED_SCORE,
-  SET_ALL_PREDICTIONS
+  SET_ALL_PREDICTIONS,
+  SET_COUNT_BET,
+  RESET_COUNT_BET,
+  RESET_COUNT_PRED
 } from "../actions/bet";
 
 const initialState = {
@@ -30,6 +33,8 @@ const initialState = {
   'updatedGame': {},
   'isUpdatedScore': false,
   'allPredictions': {},
+  'countBet': 0,
+  'countPred': 0
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -62,6 +67,21 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         games: action.gamesList,
         isLoading: false,
+      }
+    case SET_COUNT_BET:
+      return {
+        ...state,
+        countBet: state.countBet + 1
+      }
+    case RESET_COUNT_BET:
+      return {
+        ...state,
+        countBet: 0
+      }
+    case RESET_COUNT_PRED:
+      return {
+        ...state,
+        countPred: 0
       }
     case SET_INPUT_VALUE_BET:
       return {
@@ -104,7 +124,8 @@ const reducer = (state = initialState, action = {}) => {
     case SET_ALL_PREDICTIONS:
       return {
         ...state,
-        allPredictions: {...state.allPredictions, [action.playerId]: action.predictionsInfos}
+        allPredictions: {...state.allPredictions, [action.playerId]: action.predictionsInfos},
+        countPred: state.countPred + 1
       }
     default:
       return state;

@@ -36,7 +36,6 @@ import Modal from "../Utils/Modal/Modal";
 import './App.scss';
 import { getNews } from "../../actions/news";
 import RoundStats from "../Stats/RoundsStats";
-import ScoreUpdate from "../BetResult/ScoreUpdate";
 
 const App = () => {
   const navigate = useNavigate();
@@ -108,7 +107,6 @@ const App = () => {
             <Route path='/creation/SR' element={<RsBetCreation />} />
             <Route path='/scores/SR' element={<BetResult />} />
             <Route path='/league-management' element={<LeagueManagement />} />
-            <Route path='/score-update' element={<ScoreUpdate />} />
           </Route>
           <Route path='/roundsStat' element={<RoundStats />} />
           <Route path='/rules' element={<SimpleRules />} />

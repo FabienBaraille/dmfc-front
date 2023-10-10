@@ -82,8 +82,9 @@ const authMiddelware = (store) => (next) => async (action) => {
       const { data } = await axios.put(`/api/user/${id}`,
         {
           username: store.getState().user.pseudo,
-          email: store.getState().user.email,
+          // email: store.getState().user.email,
           password: store.getState().user.password,
+          team_id: store.getState().teams.favoriteTeam,
         }
       );
       store.dispatch(updateUserProfile(data));
@@ -91,7 +92,7 @@ const authMiddelware = (store) => (next) => async (action) => {
       console.log(error);
     }
     break;
-
+    
     default:
   }
 

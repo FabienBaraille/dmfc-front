@@ -23,10 +23,12 @@ const BetMatch = () => {
   return (
     <div className="match-line" key={betListNumber} id={betListNumber}>
       <select name="visitor">
+        <option defaultValue={true} disabled hidden>Choisir l'équipe visiteur</option>
         {teamsOptions}
       </select>
       <div className='at-logo'> </div>
       <select name="home-team">
+        <option defaultValue={true} disabled hidden>Choisir l'équipe recevant</option>
         {teamsOptions}
       </select>
       <Input 

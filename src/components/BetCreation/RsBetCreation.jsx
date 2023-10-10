@@ -81,7 +81,10 @@ const RsBetCreation = () => {
       <div className="round-choice">
         <h4>Pronostique saison régulière</h4>
         {!roundCreationMode &&
-          <RoundSelector />
+          <>
+            <p>Sélectionne un round dans lequel créer des matchs.</p>
+            <RoundSelector />
+          </>
         }
       </div>
       <form onSubmit={handleSubmit}>

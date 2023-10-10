@@ -2,22 +2,22 @@ import axios from 'redaxios';
 
 import { 
   GET_USERS_LIST,
-  setUsersList,
   GET_ALL_LEAGUE,
-  setAllLeague,
   GET_ALL_TEAMS,
+  GET_SR_PREDICTION,
+  GET_ROUNDS,
+  GET_LEAGUE,
+  POST_LEAGUE_CHANGE,
+  GET_SEASON,
+  setUsersList,
+  setAllLeague,
   setAllTeams,
   setIsLoading, 
-  GET_SR_PREDICTION,
   setSRPrediction,
   setIsLoadingSR,
-  GET_ROUNDS,
   setRounds,
-  GET_LEAGUE,
   setLeague,
-  POST_LEAGUE_CHANGE,
   getLeague,
-  GET_SEASON,
   setSeason
   
 } from "../actions/datas";

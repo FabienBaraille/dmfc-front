@@ -9,7 +9,7 @@ import {
   SET_SEASON,
   SET_SR_PREDICTION,
   SET_USERS_LIST,
-  SET_ALL_TEAMS 
+  SET_ALL_TEAMS, 
 } from '../actions/datas';
 
 const initialState = {
@@ -32,7 +32,7 @@ const initialState = {
   'leagueName': '',
   // End League management
   'rounds': [],
-  'allSeasons': []
+  'allSeasons': [],
 };
 
 const reducer = (state = initialState, action = {}) => {

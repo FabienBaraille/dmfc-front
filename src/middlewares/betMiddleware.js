@@ -5,12 +5,14 @@ import {
   CREATE_BET,
   CREATE_GAME,
   CREATE_ROUND,
+  GET_ALL_PREDICTIONS,
   GET_GAMES_ROUND,
   GET_PREDICTION_BY_GAME,
   UPDATE_BET,
   UPDATE_BET_POINTS,
   UPDATE_GAME,
   getPredictionByGame,
+  setAllPredictions,
   setGamesRound,
   setIsCreatedMatch,
   setIsLoadingBet,
@@ -109,7 +111,7 @@ const betMiddleware = (store) => (next) => async (action) => {
     }
     break;
     case UPDATE_GAME: {
-      store.dispatch(setIsLoadingGame(true));
+      store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.put(`/api/game/${action.gameId}`,
           {
@@ -128,7 +130,7 @@ const betMiddleware = (store) => (next) => async (action) => {
     }
     break;
     case GET_PREDICTION_BY_GAME:
-      store.dispatch(setIsLoadingGame(true));
+      store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.get(`/api/game/${action.gameId}/srprediction`);
         store.dispatch(setPredictionByGame(data));
@@ -137,7 +139,7 @@ const betMiddleware = (store) => (next) => async (action) => {
       }
     break;
     case UPDATE_BET_POINTS:
-      store.dispatch(setIsLoadingGame(true));
+      store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.put(`/api/prediction/${action.betId}/dmfc`,
           {
@@ -146,7 +148,16 @@ const betMiddleware = (store) => (next) => async (action) => {
             bonusBookie: action.bookiesPoints
           }
         );
-        store.dispatch(setIsLoadingGame(false));
+        store.dispatch(setIsLoadingBet(false));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    case GET_ALL_PREDICTIONS:
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.get(`/api/srprediction/${action.playerId}`);
+        store.dispatch(setAllPredictions(action.playerId, data));
       } catch (error) {
         console.log(error);
       }

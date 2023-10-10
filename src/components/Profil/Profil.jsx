@@ -11,7 +11,6 @@ function Profil() {
   
   const dispatch = useDispatch();
   const teamsList = useSelector((state) => state.datas.allTeams);
-  console.log(teamsList);
 
   const loggedUser = useSelector((state) => state.user.loggedUser);
   const leagueName = loggedUser.league_id ? loggedUser.league_id.leagueName : 'N/A';
@@ -32,12 +31,11 @@ function Profil() {
 
   const teamOptions = teamsList.map(({ id, name }) => {
     return (
-      <option key={id} value={name}>
+      <option key={id} value={id}>
         {name}
       </option>
     );
   });
-  console.log(teamOptions)
 
   const handleInputChange = (event) => {
     dispatch(setInputValue(event.target.id, event.target.value));

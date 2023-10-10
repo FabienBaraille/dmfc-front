@@ -1,7 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { getGamesRound, setInputValueBet, setIsUpdated, updateBetPoints } from "../../actions/bet";
+import {
+  getAllPredictions,
+  getGamesRound,
+  setInputValueBet,
+  setIsUpdated,
+  updateBetPoints
+} from "../../actions/bet";
 
 import Wrapper from "../Wrapper/Wrapper";
 import GameBetResult from "./GameBetResult";
@@ -13,14 +20,16 @@ import './BetResult.scss';
 const BetResult = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const roundNumber = useSelector((state) => state.bet.roundNumber);
   const roundsList = useSelector((state) => state.datas.rounds);
   const gamesList = useSelector((state) => state.bet.games);
-  const isLoadingGame = useSelector((state) => state.bet.isLoadingGame);
+  const isLoading = useSelector((state) => state.bet.isLoading);
   const isUpdated = useSelector((state) => state.bet.isUpdated);
   const predictionList = useSelector((state) => state.bet.predictionByGame);
   const updatedGame = useSelector((state) => state.bet.updatedGame);
+  const allUsers = useSelector((state) => state.datas.allUsers);
 
   useEffect(() => {
     if (roundNumber === '') {
@@ -29,7 +38,7 @@ const BetResult = () => {
     } else {
       dispatch(getGamesRound(roundNumber));
     }
-    if (!isLoadingGame && isUpdated === true) {
+    if (!isLoading && isUpdated === true) {
       setTimeout(() => {
         calculatePoints()
         dispatch(setIsUpdated(false));
@@ -48,9 +57,11 @@ const BetResult = () => {
       const bookiesEarnedPoints = (predictedWinnigTeam === bookiesChoice && predictedWinnigTeam === updatedGame.winner) ? 10 : 0;
       dispatch(updateBetPoints(id, teamEarnedPoints, diffEarnedPoints, bookiesEarnedPoints));
     })
+    allUsers.forEach(({id}) => dispatch(getAllPredictions(id)));
+    navigate("/score-update");
   }
   
-  if (isLoadingGame) {
+  if (isLoading) {
     return <LoadElmt />
   }
   if (isUpdated) {

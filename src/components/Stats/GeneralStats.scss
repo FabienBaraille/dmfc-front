@@ -32,3 +32,16 @@
     flex-direction: column;
   }
 }
+.arrow {
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+@media screen and (min-width : 768px) {
+  .arrow {
+    width: auto;
+
+}
+
+}

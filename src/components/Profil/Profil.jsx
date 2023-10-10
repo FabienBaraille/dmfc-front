@@ -30,7 +30,7 @@ function Profil() {
 
   const teamOptions = teamsList.map(({ id, name }) => {
     return (
-      <option key={id} value={id}>
+      <option key={id} value={name}>
         {name}
       </option>
     );
@@ -57,8 +57,9 @@ function Profil() {
     const updatedUserData = {
       ...loggedUser,
       username: pseudo,
-    };
-    const updateComplete = await dispatch(updateUserProfile(updatedUserData));
+    }
+
+    const updateComplete = dispatch(updateUserProfile(updatedUserData));
     if (updateComplete) {
       document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       document.cookie = `userInfos=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -78,7 +79,7 @@ function Profil() {
         <p>Équipe Préférée: <span className="perso">{team}</span></p>
       </div>
       <form className="change-info" onSubmit={handleSubmit}>
-        <h2>Changer mes paramètres</h2>
+        <h2 className='cmp'>Changer Mes Paramètres</h2>
         <div>
           <label>Email: </label>
           <Input htmlFor="email" id="email" type="email" name="email" value={email} onChange={handleEmailChange} placeholder="changer ton email" />

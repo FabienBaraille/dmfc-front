@@ -1,5 +1,5 @@
 import { NavLink, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getSRPrediction } from '../../actions/datas';
@@ -20,11 +20,32 @@ const GeneralStats = () => {
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.datas.allUsers);
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
-  const {0 : {id, username, title, score, position, team}} = userByUsername(usersList, playerName);
+  const {0 : {id, title, score, position, team}} = userByUsername(usersList, playerName);
 
   useEffect(() => {
     dispatch(getSRPrediction(id));
   }, [])
+
+  const [playerIndex, setPlayerIndex] = useState(0);
+
+  const currentPlayer = usersList[playerIndex];
+  const username = currentPlayer ? currentPlayer.username : '';
+  
+  const nextPlayer = () => {
+    if (playerIndex < usersList.length - 1) {
+      setPlayerIndex(playerIndex + 1);
+    } else {
+      setPlayerIndex(0);
+    }
+  };
+
+  const previousPlayer = () => {
+    if (playerIndex > 0) {
+      setPlayerIndex(playerIndex - 1);
+    } else {
+      setPlayerIndex(usersList.length - 1);
+    }
+  };
   
   const roundsList = useSelector((state) => state.datas.rounds);
   const predictionsList = useSelector((state) => state.datas.SRPrediction);
@@ -66,6 +87,10 @@ const GeneralStats = () => {
       <div className='return-btn'>
         {(playerName === loggedUser.username || loggedUser.roles[0] === "ROLE_DMFC") && <button type='button'><NavLink to="/roundsStat">Historique des rounds</NavLink></button> }
         <Retour where="au classement" link="/rankings" />
+      </div>
+      <div className='arrow'>
+      <button className='arrow-right' onClick={previousPlayer}>&lt;</button>
+      <button className='arrow-left' onClick={nextPlayer}>&gt;</button>
       </div>
     </Wrapper>
   )

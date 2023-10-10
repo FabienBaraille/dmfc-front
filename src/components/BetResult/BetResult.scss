@@ -10,12 +10,13 @@
   h2 {
     padding-bottom: 8px;
   }
+  
 }
 form {
   display: flex;
   flex-flow: column wrap;
 }
-.home-team, .odd-team {
+.team-result {
   margin: 5px 0px;
   div {
     margin: 5px 0px;
@@ -34,7 +35,6 @@ form {
   }
 }
 button {
-  width: 70%;
   background: v.$nav-back;
   color: v.$orange;
   border: unset;

@@ -1,14 +1,31 @@
-import { ADD_BET_TO_LIST, BET_TO_REMOVE, SET_GAMES_ROUND, SET_INPUT_VALUE_BET, SET_IS_LOADING_BET, TOGGLE_CREATION_MODE_BET } from "../actions/bet";
+import { 
+  ADD_BET_TO_LIST,
+  BET_TO_REMOVE,
+  SET_GAMES_ROUND,
+  SET_INPUT_VALUE_BET,
+  SET_IS_CREATED_MATCH,
+  SET_IS_LOADING_BET,
+  SET_IS_LOADING_GAME,
+  SET_IS_UPDATED,
+  SET_PREDICTION_BY_GAME,
+  SET_UPDATED_GAME,
+  TOGGLE_CREATION_MODE_BET
+} from "../actions/bet";
 
 const initialState = {
   'betList': [],
   'betNumber': 0,
   'roundCreationMode': false,
   'isLoading': true,
+  'isLoadingGame': false,
+  'isCreatedMatch': false,
+  'isUpdated': false,
   'games': [],
   'roundName': '',
   'roundCat': 'SR',
   'roundNumber': '',
+  'predictionByGame': [],
+  'updatedGame': {}
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -46,6 +63,33 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.inputName]: action.inputValue,
+      }
+    case SET_IS_LOADING_GAME:
+      return {
+        ...state,
+        isLoadingGame: action.isLoading
+      }
+    case SET_IS_CREATED_MATCH:
+      return {
+        ...state,
+        isCreatedMatch: action.isCreated,
+      }
+    case SET_IS_UPDATED:
+      return {
+        ...state,
+        isUpdated: action.isUpdated,
+      }
+    case SET_PREDICTION_BY_GAME:
+      return {
+        ...state,
+        predictionByGame: action.predictionInfos,
+        isUpdated: true,
+        isLoadingGame: false
+      }
+    case SET_UPDATED_GAME:
+      return {
+        ...state,
+        updatedGame: action.gameInfos,
       }
     default:
       return state;

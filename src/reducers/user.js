@@ -49,7 +49,10 @@ const reducer = (state = initialState, action = {}) => {
     case UPDATE_USER_PROFILE:
       return {
         ...state,
-        ...action.userData,
+        username: action.userData.pseudo,
+        email: action.userData.email,
+        password: action.userData.password,
+        favoriteTeam: action.userData.favoriteTeam,
       }
     default:
       return state;

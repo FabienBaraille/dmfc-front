@@ -1,23 +1,17 @@
-// export const initialState = {
-//   favoriteTeams: [],
-// };
+export const initialState = {
+  favoriteTeam: '',
+};
 
-// const reducer = (state = initialState, action = {}) => {
-// switch (action.type) {
-//     case 'SAVE_FAVORITE_TEAMS':
-//       return {
-//         ...state,
-//         favoriteTeams: action.favoriteTeams,
-//       };
+const reducer = (state = initialState, action) => {
+switch (action.type) {
+    case 'SAVE_FAVORITE_TEAM':
+      return {
+        ...state,
+        favoriteTeam: action.teamName,
+      };
+    default:
+      return state;
+  }
+};
 
-//       case 'SAVE_TEAMS':
-//         return {
-//           ...state,
-//           teamsList: action.teamsList,
-//        };
-//     default:
-//       return state;
-//   }
-// };
-
-// export default reducer;
+export default reducer;

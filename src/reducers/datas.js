@@ -9,7 +9,9 @@ import {
   SET_SEASON,
   SET_SR_PREDICTION,
   SET_USERS_LIST,
-  SET_ALL_TEAMS 
+  SET_ALL_TEAMS, 
+  SET_TITLE,
+  SET_FOCUS,
 } from '../actions/datas';
 
 const initialState = {
@@ -30,6 +32,8 @@ const initialState = {
   'leagueInfos': {},
   'leagueDescription': '',
   'leagueName': '',
+  'title': '',
+  'focusedInputId': null,
   // End League management
   'rounds': [],
   'allSeasons': []
@@ -106,6 +110,17 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         allSeasons: action.seasonInfos,
         isLoading: false,
+      }
+    case SET_TITLE:
+      return {
+        ...state,
+        title: action.title,
+        isLoading: false,
+      }
+    case SET_FOCUS:
+      return {
+        ...state,
+        focusedInputId: action.id,
       }
     default:
     return state;

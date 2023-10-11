@@ -1,11 +1,12 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
 import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getLeague, getRounds, getSeason, getAllTeams, getUsersList } from "../../actions/datas";
+import { getNews } from "../../actions/news";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
 import PlayerRoute from "./ProtectedRoute/PlayerRoute";
@@ -33,11 +34,10 @@ import Error403 from '../Error/Error403.jsx';
 import Footer from '../Footer/Footer';
 import LeagueManagement from "../LeagueManagement/LeagueManagement";
 import Modal from "../Utils/Modal/Modal";
-
-import './App.scss';
-import { getNews } from "../../actions/news";
 import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
+
+import './App.scss';
 
 const App = () => {
 

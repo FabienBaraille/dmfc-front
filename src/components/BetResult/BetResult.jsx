@@ -92,13 +92,13 @@ const BetResult = () => {
   }
   const updateScore = () => {
     allPredictions.forEach((userPrediction) => {
-      let userScore = 0;
       if (userPrediction.length != 0) {
+        let userScore = 0;
         userPrediction.forEach(({pointScored, bonusPointsErned, bonusBookie}) => {
-          userScore += pointScored + bonusPointsErned + bonusBookie 
+          userScore += pointScored + bonusPointsErned + bonusBookie
         })
+        dispatch(updatePlayerScore(userPrediction[0].User.id, userScore));
       }
-      dispatch(updatePlayerScore(userPrediction[0].User.id, userScore));
     })
   }
   if (isLoading || isLoadingGame) {

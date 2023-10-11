@@ -74,7 +74,7 @@ const Connexion = () => {
                   onChange={handleInput} 
                   value={league}
                   >
-                  <option>Choisis ta ligue</option>
+                  <option>Pas de ligue</option>
                   {leagueOptions}
                 </select>
               </div> :

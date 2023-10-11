@@ -6,6 +6,7 @@ const initialState = {
   'password': '',
   'DMFC': false,
   'league_name': '',
+  'league': 'Pas de ligue',
   'isCreationMode': false,
   'isLogged': false,
   'created': false,

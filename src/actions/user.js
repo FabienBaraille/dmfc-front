@@ -10,8 +10,12 @@ export const SET_IS_LOGGED = 'SET_IS_LOGGED';
 export const SET_IS_CREATED = 'SET_IS_CREATED';
 export const SET_USER_INFOS = 'SET_USER_INFOS';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
+export const SET_MAIL_ERROR = 'SET_MAIL_ERROR';
+export const SET_PASSWORD_ERROR = 'SET_PASSWORD_ERROR';
 export const SET_TARGET_KICK = 'SET_TARGET_KICK';
-export const RESET = 'RESET'
+// Action to reset the store when logout
+export const RESET = 'RESET';
+
 
 export const setInputValue = (inputName, inputValue) => ({
   type: SET_INPUT_VALUE,
@@ -56,10 +60,20 @@ export const updateUserProfile = (userData) => ({
   type: UPDATE_USER_PROFILE,
   userData,
 });
+export const setMailError = (isError) => ({
+  type: SET_MAIL_ERROR,
+  isError
+});
+export const setPasswordError = (isError) => ({
+  type: SET_PASSWORD_ERROR,
+  isError
+});
 export const setTargetKick = (username) => ({
   type: SET_TARGET_KICK,
   username,
 })
+
+// Action to reset the store when logout
 export const resetStore = () => ({
   type: RESET,
 });

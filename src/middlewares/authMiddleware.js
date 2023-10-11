@@ -2,7 +2,6 @@ import axios from 'redaxios';
 
 import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos, UPDATE_USER_PROFILE, updateUserProfile } from "../actions/user";
 
-import { leagueByName } from '../Utils/filters/leagueFilter';
 import { roleName } from '../Utils/filters/usersFilter';
 
 axios.defaults.baseURL = 'http://localhost:8000';
@@ -11,7 +10,7 @@ axios.defaults.withCredentials = true;
 const authMiddelware = (store) => (next) => async (action) => {
   switch (action.type) {
     case CREATE_USER: {
-      const leagueId = action.leagueId ? action.leagueId : store.getState().user.league !== 'Pas de ligue' ? leagueByName(store.getState().datas.allLeague, store.getState().user.league) : null;
+      const leagueId = action.leagueId ? action.leagueId : store.getState().user.league !== 'Pas de ligue' ? store.getState().user.league : null;
       const roles = roleName(store.getState().user.DMFC);
       try {
         const { data } = await axios.post(

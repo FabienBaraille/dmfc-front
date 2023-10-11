@@ -29,7 +29,7 @@ const Connexion = () => {
 
   const leagueOptions = leaguesList.map(({id, leagueName}) => {
     return(
-      <option key={id} value={leagueName}>{leagueName}</option>
+      <option key={id} value={id}>{leagueName}</option>
     )
   });
 
@@ -51,7 +51,6 @@ const Connexion = () => {
       dispatch(setPasswordError(isErrorPassword));
       dispatch(setMailError(isErrorMail));
       if (!isErrorMail && !isErrorPassword) {
-        console.log('test');
         if (DMFC) {
           dispatch(createLeague());
         } else {

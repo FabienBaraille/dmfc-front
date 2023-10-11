@@ -10,6 +10,7 @@ export const SET_IS_LOGGED = 'SET_IS_LOGGED';
 export const SET_IS_CREATED = 'SET_IS_CREATED';
 export const SET_USER_INFOS = 'SET_USER_INFOS';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
+export const SET_TARGET_KICK = 'SET_TARGET_KICK';
 export const RESET = 'RESET'
 
 export const setInputValue = (inputName, inputValue) => ({
@@ -55,6 +56,10 @@ export const updateUserProfile = (userData) => ({
   type: UPDATE_USER_PROFILE,
   userData,
 });
+export const setTargetKick = (username) => ({
+  type: SET_TARGET_KICK,
+  username,
+})
 export const resetStore = () => ({
   type: RESET,
 });

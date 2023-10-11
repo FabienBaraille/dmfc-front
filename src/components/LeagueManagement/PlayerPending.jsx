@@ -24,7 +24,7 @@ const PlayerPending = ({playersNA}) => {
     dispatch(setTargetKick(event.target.id));
     dispatch(setFocusedInputId(targetID));
     dispatch(toggleConfirmationModal(true));
-    dispatch(setModalFunction(updatePlayerByDmfc({league: null})));
+    dispatch(setModalFunction(updatePlayerByDmfc({league: 0})));
   };
 
   return (

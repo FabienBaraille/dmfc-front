@@ -47,7 +47,7 @@ const PlayerInLeague = ({players}) => {
     dispatch(setTargetKick(event.target.id));
     dispatch(setFocusedInputId(targetID));
     dispatch(toggleConfirmationModal(true));
-    dispatch(setModalFunction(updatePlayerByDmfc({role: ["ROLE_JOUEUR_NA"], title: null})));
+    dispatch(setModalFunction(updatePlayerByDmfc({role: ["ROLE_JOUEUR_NA"], title: null, league: 0})));
   };
 
   return (

@@ -27,6 +27,7 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
       )
     );
   }
+
   return (
       <form className="bet_result" onSubmit={handleSubmit}>
         <div className="team-result">

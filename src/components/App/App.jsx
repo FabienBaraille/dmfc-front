@@ -37,6 +37,7 @@ import Modal from "../Utils/Modal/Modal";
 import './App.scss';
 import { getNews } from "../../actions/news";
 import RoundStats from "../Stats/RoundsStats";
+import EmptyBet from "../BetResult/EmptyBet";
 
 const App = () => {
 

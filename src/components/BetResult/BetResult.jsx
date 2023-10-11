@@ -18,6 +18,7 @@ import Wrapper from "../Wrapper/Wrapper";
 import GameBetResult from "./GameBetResult";
 import RoundSelector from "../BetCreation/Element/RoundSelector";
 import LoadElmt from "../Loader/LoadElmt";
+import EmptyBet from "./EmptyBet"
 
 import './BetResult.scss';
 import { getUsersList } from "../../actions/datas";
@@ -74,6 +75,7 @@ const BetResult = () => {
   }, [roundNumber, isUpdated, countBet, countPred, updatedMessage])
 
   const gamesToEdit = gamesList.map(({id, ...rest}) => <GameBetResult key={id} gameId={id} {...rest} />);
+
   const calculatePoints = () =>  {
     const {winner, visitorScore, homeScore, visitorOdd, homeOdd, team} = updatedGame;
     predictionList.forEach(({id, predictedWinnigTeam, predictedPointDifference, validationStatus}) => {
@@ -90,6 +92,7 @@ const BetResult = () => {
       dispatch(updateBetPoints(id, teamEarnedPoints, diffEarnedPoints, bookiesEarnedPoints));
     })
   }
+
   const updateScore = () => {
     allPredictions.forEach((userPrediction) => {
       if (userPrediction.length != 0) {
@@ -101,9 +104,11 @@ const BetResult = () => {
       }
     })
   }
+
   if (isLoading || isLoadingGame) {
     return <LoadElmt />
   }
+
   if (isUpdated) {
     return (
       <Wrapper>
@@ -113,6 +118,16 @@ const BetResult = () => {
       </Wrapper>
     )
   }
+
+  if (roundsList.length === 0) {
+    return (
+      <Wrapper>
+        <h2>Aucun round en cours !</h2>
+        <h4>Créer d'abord vos rounds et vous pourrez ensuite venir saisir les résultats</h4>
+      </Wrapper>
+    )
+  }
+
   if (updatedMessage !== '') {
     return (
       <Wrapper>
@@ -120,6 +135,7 @@ const BetResult = () => {
       </Wrapper>
     )
   }
+
   return (
     <Wrapper name="bet_result">
       <h2>Saisie des résultats</h2>

@@ -42,12 +42,12 @@ const PlayerInLeague = ({players}) => {
   };
 
   const handleReject = (event) => {
-    const targetPlayer = players.filter(({username}) => username.includes(event.target.id))
-    const targetID = targetPlayer[0].id
+    const targetPlayer = players.filter(({username}) => username.includes(event.target.id));
+    const targetID = targetPlayer[0].id;
     dispatch(setTargetKick(event.target.id));
-    dispatch(setFocusedInputId(targetID)) 
+    dispatch(setFocusedInputId(targetID));
     dispatch(toggleConfirmationModal(true));
-    dispatch(setModalFunction(updatePlayerByDmfc({role: ["ROLE_JOUEUR_NA"]})));
+    dispatch(setModalFunction(updatePlayerByDmfc({role: ["ROLE_JOUEUR_NA"], title: null})));
   };
 
   return (

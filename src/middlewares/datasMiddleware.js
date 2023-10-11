@@ -21,6 +21,7 @@ import {
   getLeague,
   setSeason,
   getUsersList,
+  setFocusedInputId,
 } from "../actions/datas";
 
 import {
@@ -172,11 +173,12 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case UPDATE_PLAYER_BY_DMFC:
       store.dispatch(setIsLoading());
       try {
-        console.log(action.body);
         const { data } = await axios.put(`/api/user/${store.getState().datas.focusedInputId}/dmfc`,
           action.body
         );
+        store.dispatch(setFocusedInputId(null))
         store.dispatch(getUsersList());
+        
       } catch (error) {
         console.log(error);
       }

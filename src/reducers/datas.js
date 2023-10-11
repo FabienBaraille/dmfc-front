@@ -36,6 +36,7 @@ const initialState = {
   'leagueName': '',
   'title': '',
   'focusedInputId': null,
+  'focusedInputModal': null,
   'targetKick': null,
   'modalFunction': {},
   // End League management

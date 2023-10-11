@@ -11,6 +11,7 @@ const Modal = ({player}) => {
   const modalFunction = useSelector((state) => state.datas.modalFunction);
 
   const handleCancel = () => {
+    // dispatch(setFocusedInputId(null))
     dispatch(setFocusedInputId(null)) 
     dispatch(toggleConfirmationModal(false))
   }

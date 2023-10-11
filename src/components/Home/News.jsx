@@ -15,6 +15,7 @@ const News = () => {
 
   const handleCreationMode = () => {
     newsCreation ? dispatch(setNewsCreationMode(false)) : dispatch(setNewsCreationMode(true));
+    console.log(newsCreation);
   };
 
   const handleSubmit = (event) => {
@@ -26,11 +27,11 @@ const News = () => {
   const handleNewsChange = (event) => {
     dispatch(setNews(event.target.id, event.target.value));
   };
-
+  
   return (
     <Wrapper name='news'>
       <h2>Fil d'actus</h2>
-      {(userRole === 'ROLE_DMFC' && !newsCreation) && <button className='editBtn' type="button" onClick={handleCreationMode}>{newsTitle == '' ? "Créer" : "Editer"}</button>}
+      {(userRole === 'ROLE_DMFC' && !newsCreation) && <button className='homeEditBtn' type="button" onClick={handleCreationMode}>{newsTitle == '' ? "Créer" : "Editer"}</button>}
       {newsCreation ?
         <form onSubmit={handleSubmit}>
           <Input htmlFor={"newsTitle"} id={"newsTitle"} label='Titre :' value={newsTitle} className={"newsTitle-container"} onChange={handleNewsChange}/>

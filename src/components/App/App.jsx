@@ -53,6 +53,7 @@ const App = () => {
   }, []);
 
   const isLoading = useSelector((state) => state.datas.isLoading);
+  const targetKick = useSelector((state) => state.datas.targetKick);
   const isLogged = useSelector((state) => state.user.isLogged);
   const isCreated = useSelector((state) => state.user.created);
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible);
@@ -84,7 +85,7 @@ const App = () => {
       <Header />
       {isLogged && <Navbar />}
       <main>
-      {isConfirmationVisible && <Modal player="Tocard" />}
+      {isConfirmationVisible && <Modal player={targetKick} />}
         <Routes>
           <Route path='/login' element={
             <>

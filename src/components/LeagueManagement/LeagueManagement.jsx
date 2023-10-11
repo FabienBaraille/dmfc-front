@@ -6,7 +6,7 @@ import { toggleConfirmationModal } from "../../actions/league";
 import './LeagueManagement.scss'
 
 import data from '../../data/data'
-import { postLeagueChange, setLeague, setLeagueCreationMode } from "../../actions/datas";
+import { postLeagueChange, updatePlayerByDmfc, setFocusedInputId, setLeague, setLeagueCreationMode, setTitle } from "../../actions/datas";
 import Input from "../Utils/Input";
 
 const LeagueManagement = () => {
@@ -17,6 +17,10 @@ const LeagueManagement = () => {
   const leagueCreation = useSelector((state) => state.datas.leagueCreation);
   const leagueDescription = useSelector((state) => state.datas.leagueDescription);
   const leagueName = useSelector((state) => state.datas.leagueName);
+  const focusedInputId = useSelector((state) => state.datas.focusedInputId);
+  const playerTitle = useSelector((state) => state.datas.title);
+
+  let isSubmitButtonClicked = false;
 
   const handleReject = () => {
     dispatch(toggleConfirmationModal(true))
@@ -28,6 +32,31 @@ const LeagueManagement = () => {
     document.body.classList.remove('modal-open');
   }
 
+  const handleSubmitTitle = (event) => {
+    event.preventDefault();
+    isSubmitButtonClicked = true;
+    dispatch(updatePlayerByDmfc({title: playerTitle}));
+    dispatch(setFocusedInputId(null))
+    handleBlur();
+  };
+  
+  const handleTitleChange = (event) => {
+    dispatch(setTitle(event.target.value));
+  };
+
+  const handleFocus = (event) => {
+    dispatch(setFocusedInputId(event.target.id));
+  };
+
+  const handleBlur = () => {
+    if (!isSubmitButtonClicked) {
+      dispatch(setFocusedInputId(null));
+    }
+    isSubmitButtonClicked = false;
+  };
+
+  const sortedUsers = allUsers.slice().sort((a, b) => a.username.localeCompare(b.username));
+
   const playerInLigue = ( 
     <table className="ranking-table">
     <thead>
@@ -38,15 +67,21 @@ const LeagueManagement = () => {
       </tr>
     </thead>
     <tbody>
-      {allUsers.map(({id, username, title}) => 
+      {sortedUsers.map(({id, username, title}) => 
         <tr key={id} className='users-row'>
           <th><Link to={`/player/${id}`}>{username}</Link></th>
-          <th><input defaultValue={title}></input><button id="changeTitleBtn" onClick={handleReject}>V</button></th>
+          <th>
+            <form onSubmit={handleSubmitTitle}>
+              <Input value={title} id={id} onChange={handleTitleChange} onFocus={handleFocus} onBlur={handleBlur}/>
+              {focusedInputId == id && <button type="submit" onMouseDown={() => isSubmitButtonClicked = true}>Valider</button>}
+            </form>
+          </th>
           <th><button id="kickBtn" onClick={handleReject}>X</button></th>
-        </tr>)}
+        </tr>
+      )}
     </tbody>
   </table>
-  )
+  );
 
   const playerPending = data.User.length > 0 ? 
   (
@@ -75,13 +110,13 @@ const LeagueManagement = () => {
 
   const handleCreationMode = () => {
     leagueCreation ? dispatch(setLeagueCreationMode(false)) : dispatch(setLeagueCreationMode(true))
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(postLeagueChange());
     dispatch(setLeagueCreationMode(false))
-  }
+  };
 
   const handleLeagueChange = (event) => {
     dispatch(setLeague(event.target.id, event.target.value));

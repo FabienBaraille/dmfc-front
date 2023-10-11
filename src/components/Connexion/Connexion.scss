@@ -26,6 +26,16 @@
     box-shadow: 0 0 2px 2px v.$shadow;
     width: 200px;
   }
+  .special-input {
+    flex-direction: column;
+    align-items: end;
+    div {
+      margin: 0.2rem 0;
+    }
+    p {
+      margin: 0.2rem 0;
+    }
+  }
   .error-message {
     color: red;
     text-shadow: 0 0 2px v.$shadow;

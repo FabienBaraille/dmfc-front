@@ -32,6 +32,8 @@ import Error403 from '../Error/Error403.jsx';
 import Footer from '../Footer/Footer';
 import LeagueManagement from "../LeagueManagement/LeagueManagement";
 import Modal from "../Utils/Modal/Modal";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './App.scss';
 import { getNews } from "../../actions/news";
@@ -115,6 +117,7 @@ const App = () => {
           <Route path='*' element={<Error404 />} />
         </Routes>
       </main>
+      <ToastContainer />
       <UpButton />
       <Footer />
     </>

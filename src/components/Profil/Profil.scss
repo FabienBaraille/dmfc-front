@@ -5,7 +5,7 @@
 }
 
 .profil {
-  line-height: 2em;
+  line-height: 2.5em;
   p {
     font-family: v.$main-font;
     text-align: center;
@@ -20,6 +20,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 1em;
+  line-height: 1em;
 
   div {
     margin-top: 0.3em;
@@ -103,6 +105,8 @@
   
   .change-info {
     align-self: flex-end;
-    margin-top: -15em;
+    margin-top: -18em;
+    border-bottom: 5em;
+    line-height: 3em;
   }
 }

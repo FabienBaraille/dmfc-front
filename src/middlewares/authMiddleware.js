@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 const authMiddelware = (store) => (next) => async (action) => {
   switch (action.type) {
     case CREATE_USER: {
-      const leagueId = action.leagueId ? action.leagueId : leagueByName(store.getState().datas.allLeague, store.getState().user.league);
+      const leagueId = action.leagueId ? action.leagueId : store.getState().user.league !== 'Pas de ligue' ? leagueByName(store.getState().datas.allLeague, store.getState().user.league) : null;
       const roles = roleName(store.getState().user.DMFC);
       try {
         const { data } = await axios.post(

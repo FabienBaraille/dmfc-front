@@ -1,4 +1,5 @@
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import reduxReset from 'redux-reset';
 
 import { composeWithDevTools } from '@redux-devtools/extension';
 
@@ -8,7 +9,8 @@ import datasMiddleware from '../middlewares/datasMiddleware';
 import betMiddleware from '../middlewares/betMiddleware';
 
 const enhancer = composeWithDevTools(
-  applyMiddleware(authMiddleware, datasMiddleware, betMiddleware)
+  applyMiddleware(authMiddleware, datasMiddleware, betMiddleware),
+  reduxReset()
 );
 
 const store = createStore(

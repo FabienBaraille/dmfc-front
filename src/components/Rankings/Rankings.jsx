@@ -15,9 +15,9 @@ const Rankings = () => {
   const userPlaying = sortedPlayersList.filter(({roles}) => !roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_DMFC'));
 
   const playerList = userPlaying.map(({id, username, score, oldPosition} , index) => {
-    const position = oldPosition === null ? userPlaying.length : oldPosition;
-    const changePos = parseInt(position) - (index + 1);
-    const posMark = positionDisplay(changePos);
+  const position = oldPosition === null ? userPlaying.length : oldPosition;
+  const changePos = parseInt(position) - (index + 1);
+  const posMark = positionDisplay(changePos);
 
     return (
       <tr key={id} className='users-row'>

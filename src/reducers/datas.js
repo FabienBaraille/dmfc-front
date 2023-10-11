@@ -41,7 +41,7 @@ const initialState = {
   'modalFunction': {},
   // End League management
   'rounds': [],
-  'allSeasons': []
+  'allSeasons': [],
 };
 
 const reducer = (state = initialState, action = {}) => {

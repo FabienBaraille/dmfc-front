@@ -13,8 +13,8 @@ import {
   SET_ALL_PREDICTIONS,
   SET_COUNT_BET,
   RESET_COUNT_BET,
-  RESET_COUNT_PRED,
-  SET_UPDATED_MESSAGE
+  SET_UPDATED_MESSAGE,
+  RESET_SCORE_UPDATE
 } from "../actions/bet";
 
 const initialState = {
@@ -78,11 +78,13 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         countBet: 0,
       }
-    case RESET_COUNT_PRED:
+    case RESET_SCORE_UPDATE:
       return {
         ...state,
         countPred: 0,
-        allPredictions: []
+        allPredictions: [],
+        predictionByGame: [],
+        updatedGame: {},
       }
     case SET_INPUT_VALUE_BET:
       return {

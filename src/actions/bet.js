@@ -22,7 +22,7 @@ export const GET_ALL_PREDICTIONS = 'GET_ALL_PREDICTIONS';
 export const SET_ALL_PREDICTIONS = 'SET_ALL_PREDICTIONS';
 export const SET_COUNT_BET = 'SET_COUNT_BET';
 export const RESET_COUNT_BET = 'RESET_COUNT_BET';
-export const RESET_COUNT_PRED = 'RESET_COUNT_PRED';
+export const RESET_SCORE_UPDATE = 'RESET_SCORE_UPDATE';
 export const UPDATE_PLAYER_SCORE = 'UPDATE_PLAYER_SCORE';
 export const SET_UPDATED_MESSAGE = 'SET_UPDATED_MESSAGE'
 
@@ -32,8 +32,8 @@ export const setCountUpdate = () => ({
 export const resetCountBet = () => ({
   type: RESET_COUNT_BET,
 });
-export const resetCountPred = () => ({
-  type: RESET_COUNT_PRED,
+export const resetScoreUpdate = () => ({
+  type: RESET_SCORE_UPDATE,
 });
 
 export const getPredictionByGame = (gameId) => ({

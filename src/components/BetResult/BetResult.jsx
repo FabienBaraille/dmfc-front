@@ -1,7 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import { getAllPredictions, getGamesRound, resetCountBet, resetCountPred, setInputValueBet, setIsUpdated, setUpdatedMessage, updateBetPoints, updatePlayerScore } from "../../actions/bet";
+import {
+  getAllPredictions,
+  getGamesRound,
+  resetCountBet,
+  resetScoreUpdate,
+  setInputValueBet,
+  setIsLoadingGame,
+  setIsUpdated,
+  setUpdatedMessage,
+  updateBetPoints,
+  updatePlayerScore
+} from "../../actions/bet";
 
 import Wrapper from "../Wrapper/Wrapper";
 import GameBetResult from "./GameBetResult";
@@ -19,6 +30,7 @@ const BetResult = () => {
   const roundsList = useSelector((state) => state.datas.rounds);
   const gamesList = useSelector((state) => state.bet.games);
   const isLoading = useSelector((state) => state.bet.isLoading);
+  const isLoadingGame = useSelector((state) => state.bet.isLoadingGame);
   const isUpdated = useSelector((state) => state.bet.isUpdated);
   const predictionList = useSelector((state) => state.bet.predictionByGame);
   const updatedGame = useSelector((state) => state.bet.updatedGame);
@@ -38,9 +50,10 @@ const BetResult = () => {
     }
     if (!isLoading && isUpdated === true) {
       setTimeout(() => {
+        dispatch(setIsLoadingGame(true));
         calculatePoints();
         dispatch(setIsUpdated(false));
-      }, 1500);
+      }, 2000);
     }
     if (predictionList.length > 0 && countBet === predictionList.length) {
       userPlaying.forEach(({id}) => dispatch(getAllPredictions(id)));
@@ -48,14 +61,15 @@ const BetResult = () => {
     }
     if (allPredictions.length != 0 && userPlaying.length === countPred) {
       updateScore();
-      dispatch(resetCountPred());
+      dispatch(resetScoreUpdate());
       dispatch(setIsUpdated(false));
     }
     if (!isLoading && updatedMessage !== '') {
+      dispatch(setIsLoadingGame(false));
       setTimeout(() => {
         dispatch(setUpdatedMessage(''));
         dispatch(getUsersList());
-      }, 1500);
+      }, 2000);
     }
   }, [roundNumber, isUpdated, countBet, countPred, updatedMessage])
 
@@ -87,14 +101,15 @@ const BetResult = () => {
       dispatch(updatePlayerScore(userPrediction[0].User.id, userScore));
     })
   }
-  if (isLoading || countBet != 0 || countPred != 0) {
+  if (isLoading || isLoadingGame) {
     return <LoadElmt />
   }
   if (isUpdated) {
     return (
       <Wrapper>
         <h2>Match mis à jour avec succès !</h2>
-        <h2>Les scores des joueurs vont maintenant être recalculés</h2>
+        <h4>Les scores des joueurs vont maintenant être recalculés</h4>
+        <h4>Merci de patienter.</h4>
       </Wrapper>
     )
   }

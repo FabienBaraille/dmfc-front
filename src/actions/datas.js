@@ -1,5 +1,5 @@
-export const SET_USERS_LIST = 'SET_USERS_LIST';
 export const GET_USERS_LIST = 'GET_USERS_LIST';
+export const SET_USERS_LIST = 'SET_USERS_LIST';
 export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const SET_IS_LOADING_SR = 'SET_IS_LOADING_SR';
 export const GET_ALL_LEAGUE = 'GET_ALL_LEAGUE';
@@ -20,12 +20,12 @@ export const SET_TITLE = 'SET_TITLE';
 export const SET_FOCUS = 'SET_FOCUS';
 export const UPDATE_PLAYER_BY_DMFC = 'UPDATE_PLAYER_BY_DMFC';
 
+export const getUsersList = () => ({
+  type: GET_USERS_LIST,
+});
 export const setUsersList = (list) => ({
   type: SET_USERS_LIST,
   list,
-});
-export const getUsersList = () => ({
-  type: GET_USERS_LIST,
 });
 export const setIsLoading = () => ({
   type: SET_IS_LOADING,

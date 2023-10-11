@@ -36,7 +36,7 @@ const initialState = {
   'focusedInputId': null,
   // End League management
   'rounds': [],
-  'allSeasons': []
+  'allSeasons': [],
 };
 
 const reducer = (state = initialState, action = {}) => {

@@ -39,7 +39,6 @@ const GeneralStats = () => {
   const averageRoundScore = averageScore(roundsList.length, totalWinScore, totalBonusScore, totalBookieScore);
   const maxPoints = scoreMax(roundsList);
   const playedRound = countRoundPlayed(roundsList, validatedPrediction);
-  console.log(score)
   if (isLoading) {
     return <LoadElmt />
   }

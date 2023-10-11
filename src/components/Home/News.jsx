@@ -15,12 +15,11 @@ const News = () => {
 
   const handleCreationMode = () => {
     newsCreation ? dispatch(setNewsCreationMode(false)) : dispatch(setNewsCreationMode(true));
-    console.log(newsCreation);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    newsId === 0 ? dispatch(postNewsCreation()) : dispatch(postNewsChange());    
+    newsId === 0 ? dispatch(postNewsCreation()) : dispatch(postNewsChange());
     dispatch(setNewsCreationMode(false));
   };
 

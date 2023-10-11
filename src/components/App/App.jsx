@@ -36,6 +36,7 @@ import Modal from "../Utils/Modal/Modal";
 import './App.scss';
 import { getNews } from "../../actions/news";
 import RoundStats from "../Stats/RoundsStats";
+import EmptyBet from "../BetResult/EmptyBet";
 
 const App = () => {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ const App = () => {
   const isLogged = useSelector((state) => state.user.isLogged);
   const isCreated = useSelector((state) => state.user.created);
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible);
+  const rounds = useSelector((state) => state.datas.rounds);
 
   useEffect(() => {
     dispatch(getAllLeague());
@@ -106,7 +108,7 @@ const App = () => {
           <Route element={<DMFCRoute />}>
             {/* Rajouter ici les routes concernant uniquement le DMFC */}
             <Route path='/creation/SR' element={<RsBetCreation />} />
-            <Route path='/scores/SR' element={<BetResult />} />
+            <Route path='/scores/SR' element={rounds.length == 0 ? <EmptyBet /> : <BetResult /> } />
             <Route path='/league-management' element={<LeagueManagement />} />
           </Route>
           <Route path='/roundsStat' element={<RoundStats />} />

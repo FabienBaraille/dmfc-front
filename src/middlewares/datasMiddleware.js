@@ -92,6 +92,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
             description: store.getState().datas.news,
           }
         );
+        store.dispatch(setNews('newsId', data.news.id));
       } catch (error) {
         console.log(error);
       }

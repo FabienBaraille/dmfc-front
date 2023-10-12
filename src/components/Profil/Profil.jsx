@@ -13,9 +13,7 @@ import Wrapper from '../Wrapper/Wrapper';
 import Input from "../Utils/Input";
 import Strength from "../Connexion/AddOn/Strength";
 
-
 import './Profil.scss';
-
 
 function Profil() {
 
@@ -27,7 +25,7 @@ function Profil() {
   const leaguesList = useSelector((state) => state.datas.allLeague);
   const leagueName = loggedUser.league_id ? loggedUser.league_id.leagueName : 'N/A';
   const league = useSelector((state) => state.user.league);
-  
+
   useEffect(() => {
     const favoriteTeam = localStorage.getItem('favoriteTeam');
     if (favoriteTeam) {
@@ -35,9 +33,7 @@ function Profil() {
     }
     dispatch(setInputValue('pseudo', loggedUser.username));
     dispatch(setInputValue('email', loggedUser.email));
-    dispatch(setInputValue('password', loggedUser.password));
   }, []);
-
 
   const pseudo = useSelector((state) => state.user.pseudo);
   const email = useSelector((state) => state.user.email);
@@ -63,10 +59,8 @@ function Profil() {
 
   const handleTeamChange = (event) => {
     const selectedTeam = event.target.value;
-  
     dispatch(saveFavoriteTeam(selectedTeam));
     localStorage.setItem('favoriteTeam', selectedTeam);
-
   };
 
   const handleSubmit = async (event, paramName) => {

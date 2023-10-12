@@ -124,12 +124,10 @@ export const setPredictionByGame = (predictionInfos) => ({
 export const resetGameId = () => ({
   type: RESET_GAME_ID,
 });
-export const updateBetPoints = (betId, winningPoints, difPoints, bookiesPoints) => ({
+export const updateBetPoints = (betId, updateInfos) => ({
   type: UPDATE_BET_POINTS,
   betId,
-  winningPoints,
-  difPoints,
-  bookiesPoints 
+  updateInfos
 });
 export const setUpdatedGame = (gameInfos) => ({
   type: SET_UPDATED_GAME,

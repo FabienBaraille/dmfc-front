@@ -18,6 +18,9 @@ function Profil() {
   const loggedUser = useSelector((state) => state.user.loggedUser);
   const team = useSelector((state) => state.teams.favoriteTeam);
   const leagueName = loggedUser.league_id ? loggedUser.league_id.leagueName : 'N/A';
+  const pseudo = useSelector((state) => state.user.pseudo);
+  const email = useSelector((state) => state.user.email);
+  const password = useSelector((state) => state.user.password);  
 
   
   useEffect(() => {
@@ -30,10 +33,6 @@ function Profil() {
     dispatch(setInputValue('password', loggedUser.password));
   }, []);
 
-
-  const pseudo = useSelector((state) => state.user.pseudo);
-  const email = useSelector((state) => state.user.email);
-  const password = useSelector((state) => state.user.password);
 
   const teamOptions = teamsList.map(({ id, name }) => {
     return (
@@ -67,10 +66,6 @@ function Profil() {
     event.preventDefault();
     const updatedUserData = {
       ...loggedUser,
-      username: pseudo,
-      email: email,
-      password: password,
-      team: team,
     };
     if (pseudo !== loggedUser.username) {
       document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -100,6 +95,7 @@ function Profil() {
         <p>Email: <span className="perso">{loggedUser.email}</span></p>
         <p>Pseudo: <span className="perso">{loggedUser.username}</span></p>
         <p>Score: <span className="perso">{loggedUser.score || 'NULL'}</span></p>
+        <p>Title: <span className="perso">{loggedUser.title}</span></p>
         <p>Ma Ligue: <span className="perso">{leagueName}</span></p>
         <p>Équipe Préférée: <span className="perso">{team}</span></p>
       </div>

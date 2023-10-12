@@ -20,7 +20,7 @@ const GeneralStats = () => {
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.datas.allUsers);
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
-  const {0 : {id, title, score, position, team}} = userByUsername(usersList, playerName);
+  const {0 : {id, title, username,score, position, team}} = userByUsername(usersList, playerName);
 
   useEffect(() => {
     dispatch(getSRPrediction(id));
@@ -28,25 +28,33 @@ const GeneralStats = () => {
 
   const [playerIndex, setPlayerIndex] = useState(0);
 
+  const userDataList = usersList.map((user) => ({
+    id: user.id,
+    title: user.title,
+    score: user.score,
+    position: user.position,
+    team: user.team,
+    username: user.username,
+  }));
+
   const currentPlayer = usersList[playerIndex];
-  const username = currentPlayer ? currentPlayer.username : '';
   
   const nextPlayer = () => {
-    if (playerIndex < usersList.length - 1) {
-      setPlayerIndex(playerIndex + 1);
+    if (playerIndex < userDataList.length - 1) {
+      setPlayerIndex(currentPlayer + 1);
     } else {
       setPlayerIndex(0);
     }
   };
-
+  
   const previousPlayer = () => {
     if (playerIndex > 0) {
-      setPlayerIndex(playerIndex - 1);
+      setPlayerIndex(currentPlayer - 1);
     } else {
-      setPlayerIndex(usersList.length - 1);
+      setPlayerIndex(userDataList.length - 1);
     }
   };
-  
+    
   const roundsList = useSelector((state) => state.datas.rounds);
   const predictionsList = useSelector((state) => state.datas.SRPrediction);
   const loggedUser = useSelector((state) => state.user.loggedUser)

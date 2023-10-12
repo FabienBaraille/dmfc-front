@@ -64,7 +64,7 @@ const PlayerInLeague = ({players}) => {
         <tbody>
           {sortedUsers.map(({id, username, title}) => 
             <tr key={id} className='users-row'>
-              <th><Link to={`/player/${id}`}>{username}</Link></th>
+              <th><Link to={`/player/${username}`}>{username}</Link></th>
               <th>
                 <form onSubmit={handleSubmitTitle}>
                   <Input value={title} id={id} onChange={handleTitleChange} onFocus={handleFocus} onBlur={handleBlur}/>

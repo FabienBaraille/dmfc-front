@@ -1,14 +1,17 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from 'react-toastify';
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
 import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getLeague, getRounds, getSeason, getAllTeams, getUsersList } from "../../actions/datas";
+import { getNews } from "../../actions/news";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
 import PlayerRoute from "./ProtectedRoute/PlayerRoute";
+import PlayerNARoute from "./ProtectedRoute/PlayerNARoute";
 
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
@@ -32,14 +35,14 @@ import Error403 from '../Error/Error403.jsx';
 import Footer from '../Footer/Footer';
 import LeagueManagement from "../LeagueManagement/LeagueManagement";
 import Modal from "../Utils/Modal/Modal";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-import './App.scss';
-import { getNews } from "../../actions/news";
 import RoundStats from "../Stats/RoundsStats";
+import EmptyBet from "../BetResult/EmptyBet";
+
+import 'react-toastify/dist/ReactToastify.css';
+import './App.scss';
 
 const App = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -55,20 +58,27 @@ const App = () => {
   }, []);
 
   const isLoading = useSelector((state) => state.datas.isLoading);
+  const targetKick = useSelector((state) => state.datas.targetKick);
   const isLogged = useSelector((state) => state.user.isLogged);
   const isCreated = useSelector((state) => state.user.created);
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible);
+  const rounds = useSelector((state) => state.datas.rounds);
+  const userRole = useSelector((state) => state.user.loggedUser);
 
   useEffect(() => {
     dispatch(getAllLeague());
     if (isLogged) {
-      navigate('/');
-      dispatch(getAllTeams());
-      dispatch(getUsersList());
-      dispatch(getNews());
-      dispatch(getRounds());
-      dispatch(getLeague());
-      dispatch(getSeason());
+      if (userRole.roles[0] === "ROLE_JOUEUR_NA") {
+        navigate('/profil');
+      } else {
+        navigate('/');
+        dispatch(getAllTeams());
+        dispatch(getUsersList());
+        dispatch(getNews());
+        dispatch(getRounds());
+        dispatch(getLeague());
+        dispatch(getSeason());
+      }
     } else {
       navigate('/login');
       dispatch(toggleCreationMode(false));
@@ -86,7 +96,7 @@ const App = () => {
       <Header />
       {isLogged && <Navbar />}
       <main>
-      {isConfirmationVisible && <Modal player="Tocard" />}
+      {isConfirmationVisible && <Modal player={targetKick} />}
         <Routes>
           <Route path='/login' element={
             <>
@@ -94,24 +104,25 @@ const App = () => {
               <SimpleRules />
             </>
           } />
-          <Route path='/' element={<Home />} />
           <Route path='/profil' element={<Profil />} />
-          <Route path='/rankings' element={<Rankings />} />
-          <Route path='/player/:playerName' element={<GeneralStats />} />
-          <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
-          <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
-          <Route element={<PlayerRoute />}>
-            {/* Rajouter ici les routes concernant que le joueur */}
-            <Route path='/player-bet' element={<PlayerBet />} />
+          <Route element={<PlayerNARoute />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/rankings' element={<Rankings />} />
+            <Route path='/player/:playerName' element={<GeneralStats />} />
+            <Route element={<PlayerRoute />}>
+              {/* Rajouter ici les routes concernant que le joueur */}
+              <Route path='/player-bet' element={<PlayerBet />} />
+            </Route>
+            <Route element={<DMFCRoute />}>
+              {/* Rajouter ici les routes concernant uniquement le DMFC */}
+              <Route path='/creation/SR' element={<RsBetCreation />} />
+              <Route path='/scores/SR' element={rounds.length == 0 ? <EmptyBet /> : <BetResult />} />
+              <Route path='/league-management' element={<LeagueManagement />} />
+            </Route>
+            <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
+            <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
+            <Route path='/roundsStat' element={<RoundStats />} />
           </Route>
-          <Route element={<DMFCRoute />}>
-            {/* Rajouter ici les routes concernant uniquement le DMFC */}
-            <Route path='/creation/SR' element={<RsBetCreation />} />
-            <Route path='/scores/SR' element={<BetResult />} />
-            <Route path='/league-management' element={<LeagueManagement />} />
-          </Route>
-          <Route path='/roundsStat' element={<RoundStats />} />
-          <Route path='/rules' element={<SimpleRules />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/Error403' element={<Error403 />} />
           <Route path='*' element={<Error404 />} />

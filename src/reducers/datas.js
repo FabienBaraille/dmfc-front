@@ -12,7 +12,9 @@ import {
   SET_ALL_TEAMS, 
   SET_TITLE,
   SET_FOCUS,
+  SET_MODAL_FUNCTION,
 } from '../actions/datas';
+import { SET_TARGET_KICK } from "../actions/user";
 
 const initialState = {
   'allUsers': [],
@@ -34,6 +36,9 @@ const initialState = {
   'leagueName': '',
   'title': '',
   'focusedInputId': null,
+  'focusedInputModal': null,
+  'targetKick': null,
+  'modalFunction': {},
   // End League management
   'rounds': [],
   'allSeasons': [],
@@ -121,6 +126,16 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         focusedInputId: action.id,
+      }
+    case SET_TARGET_KICK:
+      return {
+        ...state,
+        targetKick: action.username,
+      }
+    case SET_MODAL_FUNCTION:
+      return {
+        ...state,
+        modalFunction: action.func
       }
     default:
     return state;

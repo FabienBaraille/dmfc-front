@@ -85,6 +85,14 @@ function Profil() {
     }
   };
 
+  if (loggedUser.roles[0] === "ROLE_JOUEUR_NA") {
+    return (
+      <Wrapper name="profil-page">
+        <h3>En attente de validation de ton affiliation par le DMFC de la ligue {leagueName}.</h3>
+      </Wrapper>
+    )
+  }
+
   return (
     <Wrapper name="profil-page">
       <div className ="profil">

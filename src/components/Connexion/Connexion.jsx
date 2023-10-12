@@ -1,16 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useDispatch, useSelector } from "react-redux";
 
-import { checkLogin, createLeague, createUser, setErrorMessage, setInputValue, toggleCreationMode } from "../../actions/user";
+import { checkLogin, createLeague, createUser, setErrorMessage, setInputValue, setMailError, setPasswordError, toggleCreationMode } from "../../actions/user";
 
 import Wrapper from "../Wrapper/Wrapper";
 import Input from "../Utils/Input";
 
 import './Connexion.scss';
+import Strength from "./AddOn/Strength";
+import { verifyMail, verifyPassword } from "../../Utils/filters/usersFilter";
 
 const Connexion = () => {
 
   const dispatch = useDispatch();
+
   const leaguesList = useSelector((state) => state.datas.allLeague);
   const pseudo = useSelector((state) => state.user.pseudo);
   const email = useSelector((state) => state.user.email);
@@ -21,10 +24,12 @@ const Connexion = () => {
   const isCreationMode = useSelector((state) => state.user.isCreationMode);
 
   const errorMessage = useSelector((state) => state.user.errorMessage);
+  const mailError = useSelector((state) => state.user.mailError);
+  const passwordError = useSelector((state) => state.user.passwordError);
 
   const leagueOptions = leaguesList.map(({id, leagueName}) => {
     return(
-      <option key={id} value={leagueName}>{leagueName}</option>
+      <option key={id} value={id}>{leagueName}</option>
     )
   });
 
@@ -32,14 +37,26 @@ const Connexion = () => {
     const inputValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     dispatch(setInputValue(event.target.id, inputValue));
     dispatch(setErrorMessage(''));
+    if (passwordError || mailError) {
+      dispatch(setPasswordError(false));
+      dispatch(setMailError(false));
+    }
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (isCreationMode && DMFC) {
-      dispatch(createLeague());
-    } else if (isCreationMode) {
-      dispatch(createUser());
+    if (isCreationMode) {
+      const isErrorMail = verifyMail(email);
+      const isErrorPassword = verifyPassword(password);
+      dispatch(setPasswordError(isErrorPassword));
+      dispatch(setMailError(isErrorMail));
+      if (!isErrorMail && !isErrorPassword) {
+        if (DMFC) {
+          dispatch(createLeague());
+        } else {
+          dispatch(createUser());
+        }
+      }
     } else {
       dispatch(checkLogin());
     }
@@ -50,9 +67,16 @@ const Connexion = () => {
       <form onSubmit={handleSubmit}>
           <Input label="Login :" htmlFor="pseudo" id="pseudo" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo" isRequired={true}/>
           {isCreationMode &&
-            <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com" isRequired={true}/>
+            <div className="special-input">
+              <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com" isRequired={true}/>
+              {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
+            </div>
           }
-          <Input label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
+          <div className="special-input">
+            <Input label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
+            {isCreationMode && <Strength password={password} /> }
+            {(isCreationMode && passwordError) && <p className="error-message">Le mot de passe doit avoir au moins 8 caractères dont 1 majuscule, 1 minuscule et 1 caractère spécial.</p>}
+          </div>
           {isCreationMode &&
             <>
               <div className="dmfc-opt">

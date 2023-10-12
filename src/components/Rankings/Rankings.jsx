@@ -28,7 +28,7 @@ const Rankings = () => {
             </Link>
           </th>}
           <th className="player"><Link to={`/player/${username}`}>{username}</Link></th>
-          <th><Link to={`/player/${username}`}>{score}</Link></th>
+          <th><Link to={`/player/${username}`}>{score != null ? score : 0}</Link></th>
       </tr>
     )
   })

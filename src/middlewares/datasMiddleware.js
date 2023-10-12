@@ -21,6 +21,7 @@ import {
   getLeague,
   setSeason,
   getUsersList,
+  setFocusedInputId,
 } from "../actions/datas";
 
 import {
@@ -91,6 +92,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
             description: store.getState().datas.news,
           }
         );
+        store.dispatch(setNews('newsId', data.news.id));
       } catch (error) {
         console.log(error);
       }
@@ -168,14 +170,16 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-    // Action qui permet au DMFC de changer le titre d'un joueur
+    // Action qui permet au DMFC de changer les infos d'un joueur
     case UPDATE_PLAYER_BY_DMFC:
       store.dispatch(setIsLoading());
       try {
         const { data } = await axios.put(`/api/user/${store.getState().datas.focusedInputId}/dmfc`,
           action.body
         );
+        store.dispatch(setFocusedInputId(null))
         store.dispatch(getUsersList());
+        
       } catch (error) {
         console.log(error);
       }

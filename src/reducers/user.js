@@ -1,4 +1,4 @@
-import { SET_ERROR_MESSAGE, SET_INPUT_VALUE, SET_IS_CREATED, SET_IS_LOGGED, SET_USER_INFOS, TOGGLE_CREATION_MODE, UPDATE_USER_PROFILE } from "../actions/user";
+import { SET_ERROR_MESSAGE, SET_INPUT_VALUE, SET_IS_CREATED, SET_IS_LOGGED, SET_MAIL_ERROR, SET_PASSWORD_ERROR, SET_USER_INFOS, TOGGLE_CREATION_MODE, UPDATE_USER_PROFILE } from "../actions/user";
 
 const initialState = {
   'pseudo': '',
@@ -6,12 +6,15 @@ const initialState = {
   'password': '',
   'DMFC': false,
   'league_name': '',
+  'league': 'Pas de ligue',
   'isCreationMode': false,
   'isLogged': false,
   'created': false,
   'loggedUser': {},
   'errorMessage': '',
   'team': '',
+  'mailError': false,
+  'passwordError': false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -53,6 +56,16 @@ const reducer = (state = initialState, action = {}) => {
         email: action.userData.email,
         password: action.userData.password,
         favoriteTeam: action.userData.favoriteTeam,
+      }
+    case SET_MAIL_ERROR:
+      return {
+        ...state,
+        mailError: action.isError
+      }
+    case SET_PASSWORD_ERROR:
+      return {
+        ...state,
+        passwordError: action.isError
       }
     default:
       return state;

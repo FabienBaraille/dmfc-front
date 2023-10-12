@@ -53,29 +53,34 @@ const PlayerInLeague = ({players}) => {
   return (
     <Wrapper name={"league-management_actual"}>
       <div>Joueur de ma ligue :</div>
-      <table className="ranking-table">
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Titre</th>
-            <th>Sortir</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedUsers.map(({id, username, title}) => 
-            <tr key={id} className='users-row'>
-              <th><Link to={`/player/${id}`}>{username}</Link></th>
-              <th>
-                <form onSubmit={handleSubmitTitle}>
-                  <Input value={title} id={id} onChange={handleTitleChange} onFocus={handleFocus} onBlur={handleBlur}/>
-                  {focusedInputId == id && <button type="submit" onMouseDown={() => isSubmitButtonClicked = true}>Valider</button>}
-                </form>
-              </th>
-              <th><button id={username} onClick={handleReject}>X</button></th>
+      {players.length === 0 ? 
+        <p>Aucun joueur dans la ligue</p>
+          :
+        <table className="ranking-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Titre</th>
+              <th>Sortir</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedUsers.map(({id, username, title}) => 
+              <tr key={id} className='users-row'>
+                <th><Link to={`/player/${id}`}>{username}</Link></th>
+                <th>
+                  <form onSubmit={handleSubmitTitle}>
+                    <Input value={title} id={id} onChange={handleTitleChange} onFocus={handleFocus} onBlur={handleBlur}/>
+                    {focusedInputId == id && <button type="submit" onMouseDown={() => isSubmitButtonClicked = true}>Valider</button>}
+                  </form>
+                </th>
+                <th><button id={username} onClick={handleReject}>X</button></th>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      }
+
     </Wrapper>
   );
 };

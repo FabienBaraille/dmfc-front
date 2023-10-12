@@ -13,6 +13,7 @@ import {
   SET_TITLE,
   SET_FOCUS,
   SET_MODAL_FUNCTION,
+  SET_MODAL_SENTENCE,
 } from '../actions/datas';
 import { SET_TARGET_KICK } from "../actions/user";
 
@@ -39,6 +40,7 @@ const initialState = {
   'focusedInputModal': null,
   'targetKick': null,
   'modalFunction': {},
+  'modalSentence': false,
   // End League management
   'rounds': [],
   'allSeasons': [],
@@ -136,6 +138,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         modalFunction: action.func
+      }
+    case SET_MODAL_SENTENCE:
+      return {
+        ...state,
+        modalSentence: action.bool
       }
     default:
     return state;

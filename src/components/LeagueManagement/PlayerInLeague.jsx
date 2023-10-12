@@ -80,7 +80,6 @@ const PlayerInLeague = ({players}) => {
           </tbody>
         </table>
       }
-
     </Wrapper>
   );
 };

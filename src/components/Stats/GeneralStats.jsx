@@ -22,7 +22,7 @@ const GeneralStats = () => {
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
   const {0 : {id, title, score, position, team}} = userByUsername(usersList, playerName);
 
-    const [playerIndex, setPlayerIndex] = useState(0);
+  const [playerIndex, setPlayerIndex] = useState(0);
 
   const currentPlayer = usersList[playerIndex];
   const username = currentPlayer ? currentPlayer.username : '';

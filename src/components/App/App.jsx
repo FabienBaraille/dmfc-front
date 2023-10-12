@@ -6,8 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { getCookies } from "../../Utils/cookies/getCookies";
 
 import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
-import { getAllLeague, getLeague, getRounds, getSeason, getAllTeams, getUsersList } from "../../actions/datas";
-import { getNews } from "../../actions/news";
+import { getAllLeague, getDatasStart } from "../../actions/datas";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
 import PlayerRoute from "./ProtectedRoute/PlayerRoute";
@@ -58,6 +57,7 @@ const App = () => {
   }, []);
 
   const isLoading = useSelector((state) => state.datas.isLoading);
+  const isLoadingStart = useSelector((state) => state.datas.isLoadingStart);
   const targetKick = useSelector((state) => state.datas.targetKick);
   const isLogged = useSelector((state) => state.user.isLogged);
   const isCreated = useSelector((state) => state.user.created);
@@ -72,12 +72,7 @@ const App = () => {
         navigate('/profil');
       } else {
         navigate('/');
-        dispatch(getAllTeams());
-        dispatch(getUsersList());
-        dispatch(getNews());
-        dispatch(getRounds());
-        dispatch(getLeague());
-        dispatch(getSeason());
+        dispatch(getDatasStart());
       }
     } else {
       navigate('/login');
@@ -85,7 +80,7 @@ const App = () => {
     }
   }, [isLogged, isCreated]);
 
-  if (isLoading) {
+  if (isLoading || isLoadingStart) {
     return (
       <LoadElmt />
     )

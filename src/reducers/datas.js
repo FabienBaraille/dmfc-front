@@ -14,15 +14,17 @@ import {
   SET_FOCUS,
   SET_MODAL_FUNCTION,
   SET_MODAL_SENTENCE,
+  SET_IS_LOADING_START,
 } from '../actions/datas';
 import { SET_TARGET_KICK } from "../actions/user";
 
 const initialState = {
   'allUsers': [],
   'allLeague': [],
-  'isLoading': true,
   'allTeams':[],
   'SRPrediction': [],
+  'isLoadingStart': false,
+  'isLoading': true,
   'isLoadingSR': true,
   // News
   'newsCreation': false,
@@ -52,6 +54,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: true,
+      }
+    case SET_IS_LOADING_START:
+      return {
+        ...state,
+        isLoadingStart: action.isLoadingStart,
       }
     case SET_USERS_LIST:
       return {

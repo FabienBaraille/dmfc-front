@@ -142,11 +142,7 @@ const betMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.put(`/api/prediction/${action.betId}/dmfc`,
-          {
-            pointScored: action.winningPoints,
-            bonusPointsErned: action.difPoints,
-            bonusBookie: action.bookiesPoints
-          }
+          action.updateInfos,
         );
         store.dispatch(setCountUpdate());
         store.dispatch(setIsLoadingBet(false));

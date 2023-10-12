@@ -1,22 +1,47 @@
 @use '/src/styles/variables' as v;
 
-.Toastify__toast-container {
-  margin-top: 10em;
-  font-size: 1.6em;
-  padding: 1em;
-  font-family: v.$main-font;
-  width: auto;
+.success {
+  .Toastify__toast-container {
+    margin-top: 20em;
+    font-size: 1.6em;
+    padding: 1em;
+    font-family: v.$main-font; 
+    width: auto;
+  }
+
+  .Toastify__progress-bar {
+    background-color: v.$orange; 
+  }
+
+  .Toastify__close-button {
+    color: v.$orange; 
+    width: auto;
+  }
+
+  .Toastify__toast-icon {
+    margin-right: 0.56em;
+  }
 }
 
-.Toastify__progress-bar {
-  background-color: v.$orange;
-}
+.error {
+  .Toastify__toast-container {
+    margin-top: 20em;
+    font-size: 1.6em;
+    padding: 1em;
+    font-family: v.$main-font; 
+    width: auto;
+  }
 
-.Toastify__close-button {
-  color: v.$orange;
-  width: auto;
-}
+  .Toastify__progress-bar {
+    background-color: red;
+  }
 
-.Toastify__toast-icon {
-  margin-right: 0.56em;
+  .Toastify__close-button {
+    color: red;
+    width: auto;
+  }
+
+  .Toastify__toast-icon {
+    margin-right: 0.56em;
+  }
 }

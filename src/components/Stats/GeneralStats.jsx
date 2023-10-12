@@ -1,5 +1,5 @@
 import { NavLink, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getSRPrediction } from '../../actions/datas';
@@ -22,35 +22,6 @@ const GeneralStats = () => {
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
   const {0 : {id, title, username,score, position, team}} = userByUsername(usersList, playerName);
 
-    const [playerIndex, setPlayerIndex] = useState(0);
-
-  const userDataList = usersList.map((user) => ({
-    id: user.id,
-    title: user.title,
-    score: user.score,
-    position: user.position,
-    team: user.team,
-    username: user.username,
-  }));
-
-  const currentPlayer = usersList[playerIndex];
-  
-  const nextPlayer = () => {
-    if (playerIndex < userDataList.length - 1) {
-      setPlayerIndex(currentPlayer + 1);
-    } else {
-      setPlayerIndex(0);
-    }
-  };
-  
-  const previousPlayer = () => {
-    if (playerIndex > 0) {
-      setPlayerIndex(currentPlayer - 1);
-    } else {
-      setPlayerIndex(userDataList.length - 1);
-    }
-  };
-    
   const roundsList = useSelector((state) => state.datas.rounds);
   const predictionsList = useSelector((state) => state.datas.SRPrediction);
   const loggedUser = useSelector((state) => state.user.loggedUser)
@@ -64,6 +35,25 @@ const GeneralStats = () => {
   const averageRoundScore = averageScore(roundsList.length, totalWinScore, totalBonusScore, totalBookieScore);
   const maxPoints = scoreMax(roundsList);
   const playedRound = countRoundPlayed(roundsList, validatedPrediction);
+
+  const userDataList = usersList.map((user) => ({
+    title: user.title,
+    score: user.score,
+    position: user.position,
+    team: user.team,
+    username: user.username,
+  }));
+
+  const nextPlayer = () => {
+    const nextIndex = (playerIndex + 1) % userDataList.length;
+    return `/player/${userDataList[nextIndex].id}`;
+  };
+  
+  const previousPlayer = () => {
+    const previousIndex = (playerIndex - 1 + userDataList.length) % userDataList.length;
+    return `/player/${userDataList[previousIndex].id}`;
+  };
+  
 
   useEffect(() => {
     dispatch(getSRPrediction(id));

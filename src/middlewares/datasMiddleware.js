@@ -105,9 +105,11 @@ const datasMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoading());
       try {
         const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/news`);
-        store.dispatch(setNews('newsTitle', data[0].title));
-        store.dispatch(setNews('news', data[0].description));
-        store.dispatch(setNews('newsId', data[0].id));
+        if (data.length > 0) {
+          store.dispatch(setNews('newsTitle', data[0].title));
+          store.dispatch(setNews('news', data[0].description));
+          store.dispatch(setNews('newsId', data[0].id));
+        }
       } catch (error) {
         console.log(error);
       }

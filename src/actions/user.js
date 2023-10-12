@@ -6,6 +6,7 @@ export const CREATE_LEAGUE = 'CREATE_LEAGUE';
 export const GET_USER = 'GET_USER';
 export const GET_CURRENT_USER = 'GET_CURRENT_USER';
 export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
+export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const SET_IS_LOGGED = 'SET_IS_LOGGED';
 export const SET_IS_CREATED = 'SET_IS_CREATED';
 export const SET_USER_INFOS = 'SET_USER_INFOS';
@@ -59,6 +60,10 @@ export const setErrorMessage = (message) => ({
 export const updateUserProfile = (userData) => ({
   type: UPDATE_USER_PROFILE,
   userData,
+});
+export const updateUsername = (username) => ({
+  type: UPDATE_USERNAME,
+  username
 });
 export const setMailError = (isError) => ({
   type: SET_MAIL_ERROR,

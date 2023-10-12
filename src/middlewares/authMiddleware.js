@@ -1,6 +1,6 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos, UPDATE_USER_PROFILE, updateUserProfile } from "../actions/user";
+import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos, UPDATE_USER_PROFILE, UPDATE_USERNAME, updateUserProfile } from "../actions/user";
 
 import { roleName } from '../Utils/filters/usersFilter';
 
@@ -74,17 +74,28 @@ const authMiddelware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-
     case UPDATE_USER_PROFILE: 
-    try {
-      const id = store.getState().user.loggedUser.id;
-      const { data } = await axios.put(`/api/user/${id}`,
-        action.userData
-      );
-      store.dispatch(getUser(store.getState().user.loggedUser.username));
-    } catch (error) {
-      console.log(error);
-    }
+      try {
+        const id = store.getState().user.loggedUser.id;
+        const { data } = await axios.put(`/api/user/${id}`,
+          action.userData
+        );
+        store.dispatch(getUser(store.getState().user.loggedUser.username));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    case UPDATE_USERNAME: 
+      try {
+        const id = store.getState().user.loggedUser.id;
+        const { data } = await axios.put(`/api/user/${id}`,
+        {
+          username: action.username,
+        }
+        );
+      } catch (error) {
+        console.log(error);
+      }
     break;
     default:
   }

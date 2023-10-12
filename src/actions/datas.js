@@ -20,6 +20,7 @@ export const SET_TITLE = 'SET_TITLE';
 export const SET_FOCUS = 'SET_FOCUS';
 export const UPDATE_PLAYER_BY_DMFC = 'UPDATE_PLAYER_BY_DMFC';
 export const SET_MODAL_FUNCTION = 'SET_MODAL_FUNCTION';
+export const SET_MODAL_SENTENCE = 'SET_MODAL_SENTENCE';
 
 export const getUsersList = () => ({
   type: GET_USERS_LIST,
@@ -104,4 +105,8 @@ export const setFocusedInputId = (id) => ({
 export const setModalFunction = (func) => ({
   type: SET_MODAL_FUNCTION,
   func,
+});
+export const setModalSentence = (bool) => ({
+  type: SET_MODAL_SENTENCE,
+  bool,
 });

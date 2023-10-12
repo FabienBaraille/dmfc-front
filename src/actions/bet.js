@@ -143,10 +143,11 @@ export const setAllPredictions = (predictionsInfos) => ({
   type: SET_ALL_PREDICTIONS,
   predictionsInfos
 });
-export const updatePlayerScore = (playerId, playerScore) => ({
+export const updatePlayerScore = (playerId, playerScore, playerOldPosition) => ({
   type: UPDATE_PLAYER_SCORE,
   playerId,
-  playerScore
+  playerScore,
+  playerOldPosition
 });
 export const setUpdatedMessage = (message) => ({
   type: SET_UPDATED_MESSAGE,

@@ -22,6 +22,7 @@ import EmptyBet from "./EmptyBet"
 
 import './BetResult.scss';
 import { getUsersList } from "../../actions/datas";
+import { positionFinder } from "../../Utils/filters/usersFilter";
 
 const BetResult = () => {
 
@@ -100,7 +101,8 @@ const BetResult = () => {
         userPrediction.forEach(({pointScored, bonusPointsErned, bonusBookie}) => {
           userScore += pointScored + bonusPointsErned + bonusBookie
         })
-        dispatch(updatePlayerScore(userPrediction[0].User.id, userScore));
+        const oldPosition = positionFinder(userPlaying, userPrediction[0].User.id);
+        dispatch(updatePlayerScore(userPrediction[0].User.id, userScore, oldPosition));
       }
     })
   }

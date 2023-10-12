@@ -22,11 +22,7 @@ const GeneralStats = () => {
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
   const {0 : {id, title, score, position, team}} = userByUsername(usersList, playerName);
 
-  useEffect(() => {
-    dispatch(getSRPrediction(id));
-  }, [])
-
-  const [playerIndex, setPlayerIndex] = useState(0);
+    const [playerIndex, setPlayerIndex] = useState(0);
 
   const currentPlayer = usersList[playerIndex];
   const username = currentPlayer ? currentPlayer.username : '';
@@ -60,6 +56,11 @@ const GeneralStats = () => {
   const averageRoundScore = averageScore(roundsList.length, totalWinScore, totalBonusScore, totalBookieScore);
   const maxPoints = scoreMax(roundsList);
   const playedRound = countRoundPlayed(roundsList, validatedPrediction);
+
+  useEffect(() => {
+    dispatch(getSRPrediction(id));
+  }, [])
+
   if (isLoading) {
     return <LoadElmt />
   }

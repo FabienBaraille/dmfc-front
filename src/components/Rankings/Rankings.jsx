@@ -27,11 +27,14 @@ const Rankings = () => {
           <th><Link to={`/player/${username}`}>{score != null ? score : 0}</Link></th>
       </tr>
     )
-  })
+  });
 
   return (
     <Wrapper name={'rankings'}>
       <h2>Classement Général</h2>
+      {playerList.length === 0 ? 
+      <h3>Il n'y à actuellement personne dans la ligue</h3>
+        :
       <table className="ranking-table">
         <thead>
           <tr>
@@ -44,6 +47,8 @@ const Rankings = () => {
           {playerList}
         </tbody>
       </table>
+      }
     </Wrapper>
   )};
+
 export default Rankings;

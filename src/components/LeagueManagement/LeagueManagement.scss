@@ -27,9 +27,9 @@
   max-height: 300px;
   min-height: 45px;
 }
-#league-management_pending {
-  div {
-    margin-bottom: 20px;
+#league-management_actual, #league-management_pending {
+  p {
+    margin: 20px 0;
   }
 }
 
@@ -53,9 +53,21 @@
     }
     .leagueEditBtn {
       position: absolute;
-      top: 3%;
+      top: 1px;
       right: -21px;
       width: fit-content;
+      &::after {
+        content: "";
+        position: absolute;
+        top: -11px;
+        left: 57px;
+        border-top: 14px solid transparent;
+        border-left: 9px solid #323232;
+      }
+      &:hover::after {
+        border-top: 14px solid transparent;
+        border-left: 9px solid v.$orange;
+      }
     }
     div {
       margin-top: 10px;
@@ -67,16 +79,6 @@
     }
     textarea {
       margin: 20px 0;
-    }
-    .leagueEditBtn {
-      &::before {
-        content: "";
-        border-bottom: 14px solid #323232;
-        border-right: 9px solid transparent;
-        position: absolute;
-        top: -12px;
-        left: 57px;
-      }
     }
     form p {
       font-size: 12px;

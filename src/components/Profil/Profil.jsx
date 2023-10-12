@@ -136,53 +136,57 @@ function Profil() {
   }
 
   return (
-    <Wrapper name="profil-page">
-      <div className ="profil">
-        <h3>Profil</h3>
-        <p>Email: <span className="perso">{loggedUser.email}</span></p>
-        <p>Pseudo: <span className="perso">{loggedUser.username}</span></p>
-        <p>Score: <span className="perso">{loggedUser.score || 'NULL'}</span></p>
-        <p>Ma Ligue: <span className="perso">{leagueName}</span></p>
-        <p>Équipe Préférée: <span className="perso">{loggedUser.team !== null ? loggedUser.team.name : 'Non choisi'}</span></p>
-      </div>
-      <form className="change-info" onSubmit={handleSubmit}>
-        <h3>Changer Mes Paramètres</h3>
-        <div>
-          <div className="special-input">
-            <Input label="Email:" htmlFor="email" id="email" type="email" name="email" value={email} onChange={handleInput} placeholder="changer ton email" isRequired={true}/>
-            {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
-          </div>
-          <div className="form-btn">
-            <button type="submit" onClick={(event) => handleSubmit(event, 'email')}>Soumettre</button>
-          </div>
+    <>
+      <Wrapper name="profil-page">
+        <div className ="profil">
+          <h3>Profil</h3>
+          <p>Email: <span className="perso">{loggedUser.email}</span></p>
+          <p>Pseudo: <span className="perso">{loggedUser.username}</span></p>
+          <p>Score: <span className="perso">{loggedUser.score || 'NULL'}</span></p>
+          <p>Ma Ligue: <span className="perso">{leagueName}</span></p>
+          <p>Équipe Préférée: <span className="perso">{loggedUser.team !== null ? loggedUser.team.name : 'Non choisi'}</span></p>
         </div>
-        <div>
-          <div className="special-input">
-            <Input label="Mot de Passe:" htmlFor="mot de passe" id="password" type="password" name="password" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
-            <Strength password={password} />
+      </Wrapper>
+      <Wrapper name="profil-change">
+        <form className="change-info" onSubmit={handleSubmit}>
+          <h3>Changer Mes Paramètres</h3>
+          <div className="changeContainer">
+            <div className="special-input">
+              <Input label="Email:" htmlFor="email" id="email" type="email" name="email" value={email} onChange={handleInput} placeholder="changer ton email" isRequired={true}/>
+              {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
+            </div>
+            <div className="form-btn">
+              <button type="submit" onClick={(event) => handleSubmit(event, 'email')}>Soumettre</button>
+            </div>
           </div>
-          <div className="form-btn">
-          <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Soumettre</button>
+          <div className="changeContainer">
+            <div className="special-input">
+              <Input label="Mot de Passe:" htmlFor="mot de passe" id="password" type="password" name="password" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
+              <Strength password={password} />
+            </div>
+            <div className="form-btn">
+            <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Soumettre</button>
+            </div>
           </div>
-        </div>
-        <div>
-          <Input label="Pseudo:" htmlFor="pseudo" id="pseudo" type="text" name="username" value={pseudo} onChange={handleInput} placeholder="change ton pseudo"/>
-          <div className="form-btn">
-            <button type="submit" onClick={(event) => handleSubmit(event, 'pseudo')}>Soumettre</button>
+          <div className="changeContainer">
+            <Input label="Pseudo:" htmlFor="pseudo" id="pseudo" type="text" name="username" value={pseudo} onChange={handleInput} placeholder="change ton pseudo"/>
+            <div className="form-btn">
+              <button type="submit" onClick={(event) => handleSubmit(event, 'pseudo')}>Soumettre</button>
+            </div>
           </div>
-        </div>
-        <div>
-          <label>Équipe Préférée: </label>
-          <select name="team" id="team" onChange={handleTeamChange} value={team}>
-            <option value="">Changer ta équipe préférée</option>
-            {teamOptions}
-          </select>
-          <div className="form-btn">
-            <button type="submit" onClick={(event) => handleSubmit(event, 'équipe préférée')}>Soumettre</button>
+          <div className="changeContainer">
+            <label>Équipe Préférée: </label>
+            <select name="team" id="team" onChange={handleTeamChange} value={team}>
+              <option value="">Changer ta équipe préférée</option>
+              {teamOptions}
+            </select>
+            <div className="form-btn">
+              <button type="submit" onClick={(event) => handleSubmit(event, 'équipe préférée')}>Soumettre</button>
+            </div>
           </div>
-        </div>
-      </form>
-    </Wrapper>
+        </form>
+      </Wrapper>
+    </>
   );
   }
 

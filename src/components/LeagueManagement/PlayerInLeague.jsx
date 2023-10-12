@@ -50,8 +50,6 @@ const PlayerInLeague = ({players}) => {
     dispatch(setModalFunction(updatePlayerByDmfc({role: ["ROLE_JOUEUR_NA"], title: null, league: 0})));
   };
 
-  console.log(players);
-
   return (
     <Wrapper name={"league-management_actual"}>
       <div>Joueur de ma ligue :</div>

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from 'react-toastify';
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
@@ -37,6 +38,7 @@ import Modal from "../Utils/Modal/Modal";
 import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
 
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 
 const App = () => {
@@ -126,6 +128,7 @@ const App = () => {
           <Route path='*' element={<Error404 />} />
         </Routes>
       </main>
+      <ToastContainer />
       <UpButton />
       <Footer />
     </>

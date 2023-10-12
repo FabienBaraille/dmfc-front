@@ -38,7 +38,7 @@ export const createLeague = () => ({
 });
 export const getUser = (username) => ({
   type: GET_USER,
-  username,
+  username
 });
 export const setIsLogged = (isLogged) => ({
   type: SET_IS_LOGGED,

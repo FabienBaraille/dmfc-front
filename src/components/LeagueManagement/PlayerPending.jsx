@@ -4,7 +4,7 @@ import Wrapper from "../Wrapper/Wrapper";
 import { toggleConfirmationModal } from "../../actions/league";
 import { Link } from "react-router-dom";
 import { setTargetKick } from '../../actions/user';
-import { setFocusedInputId, setModalFunction, updatePlayerByDmfc } from '../../actions/datas';
+import { setFocusedInputId, setModalFunction, setModalSentence, updatePlayerByDmfc } from '../../actions/datas';
 
 const PlayerPending = ({playersNA}) => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const PlayerPending = ({playersNA}) => {
   const handleAccept = (event) => {
     const targetPlayer = playersNA.filter(({username}) => username.includes(event.target.id));
     const targetID = targetPlayer[0].id;
+    dispatch(setModalSentence(true))
     dispatch(setTargetKick(event.target.id));
     dispatch(setFocusedInputId(targetID));
     dispatch(toggleConfirmationModal(true));
@@ -50,7 +51,7 @@ const PlayerPending = ({playersNA}) => {
             </tbody>
           </table>
         ) : (
-          <div>Pas de demande actuellement</div>
+          <p>Pas de demande actuellement</p>
         )
         }
     </Wrapper>

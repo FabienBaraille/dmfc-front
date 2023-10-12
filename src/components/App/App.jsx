@@ -55,6 +55,10 @@ const App = () => {
       const userInfos = getCookies('userInfos');
       dispatch(setUserInfos(JSON.parse(userInfos)));
     }
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }, []);
 
   const isLoading = useSelector((state) => state.datas.isLoading);

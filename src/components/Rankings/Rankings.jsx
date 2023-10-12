@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { usersSortByScore } from '../../Utils/filters/usersFilter';
-
 import Wrapper from '../Wrapper/Wrapper';
 
 import './Rankings.scss';
@@ -11,19 +9,16 @@ import { positionDisplay } from '../../Utils/display/positionDisplay';
 const Rankings = () => {
 
   const usersList = useSelector((state) => state.datas.allUsers);
-  const sortedPlayersList = usersSortByScore(usersList);
-  const userPlaying = sortedPlayersList.filter(({roles}) => !roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_DMFC'));
+  const userPlaying = usersList.filter(({roles}) => !roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_DMFC') && !roles.includes('ROLE_JOUEUR_NA'));
 
   const playerList = userPlaying.map(({id, username, score, oldPosition} , index) => {
-
-    const position = oldPosition === null ? userPlaying.length : oldPosition;
-    const changePos = parseInt(position) - (index + 1);
+    const changePos = oldPosition === null ? 0 : parseInt(oldPosition) - (index + 1);
     const posMark = positionDisplay(changePos);
 
     return (
       <tr key={id} className='users-row'>
           <th><Link to={`/player/${username}`}>{`#${index + 1}`}</Link></th>
-          {<th className={changePos > 0 ? "green" : changePos < 0 ? "red" : ""}>
+          {<th className={changePos > 0 ? "green" : changePos < 0 ? "red" : "grey"}>
             <Link to={`/player/${username}`}>
               {posMark}
             </Link>

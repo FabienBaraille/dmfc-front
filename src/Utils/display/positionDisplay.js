@@ -4,6 +4,6 @@ export const positionDisplay = (posChange) => {
   } else if (posChange < 0) {
     return `▼ ${Math.abs(posChange)}`
   } else {
-    return posChange;
+    return `=`;
   }
 }

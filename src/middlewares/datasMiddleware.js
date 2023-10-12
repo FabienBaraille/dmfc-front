@@ -32,6 +32,8 @@ import {
   setNews,
 } from '../actions/news';
 
+import { usersSortByScore } from '../Utils/filters/usersFilter';
+
 
 const datasMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -75,7 +77,8 @@ const datasMiddleware = (store) => (next) => async (action) => {
       try {
 
         const { data } = await axios.get(`/api/srprediction/${action.id}`);
-        store.dispatch(setSRPrediction(data));
+        const sortedList = usersSortByScore(data);
+        store.dispatch(setSRPrediction(sortedList));
       } catch (error) {
         console.log(error);
       }

@@ -78,14 +78,11 @@ const betMiddleware = (store) => (next) => async (action) => {
       try {
         const { data } = await axios.post(`/api/round/new`,
           {
-            season: {
-              id: store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].id,
-              year:store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].year,
-            },
+            season: store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].id,
             name: store.getState().bet.roundName,
             category: store.getState().bet.roundCat,
-            user_id: store.getState().user.loggedUser.id,
-            league_id: store.getState().user.loggedUser.league_id.id
+            user: store.getState().user.loggedUser.id,
+            league: store.getState().user.loggedUser.league_id.id
           }
         );
         store.dispatch(setIsLoadingBet(false));
@@ -172,6 +169,7 @@ const betMiddleware = (store) => (next) => async (action) => {
         const { data } = await axios.put(`/api/user/${action.playerId}/dmfc`,
           {
             score: action.playerScore,
+            oldPosition: action.playerOldPosition,
           }
         );
         store.dispatch(setUpdatedMessage(data.message));

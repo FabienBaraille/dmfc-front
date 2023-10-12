@@ -10,6 +10,16 @@ export const roleName = (DMFC) => {
   return DMFC ? ['ROLE_DMFC'] : ['ROLE_JOUEUR_NA'];
 };
 
+export const positionFinder = (usersList, userId) => {
+  let position = 0;
+  usersList.forEach(({id}, index) => {
+    if (id === userId) {
+      position = index;
+    }
+  });
+  return position + 1;
+}
+
 export const verifyMail = (mail) => {
   const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
   return !regex.test(mail);

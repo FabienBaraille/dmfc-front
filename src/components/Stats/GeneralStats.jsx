@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 import { userByUsername } from '../../Utils/filters/usersFilter';
 import { countBonusBookie, countBonusScore, countRoundPlayed, countWinningTeam, goodPrediction } from '../../Utils/stats/roundStats';
-import { averageScore, scoreMax } from '../../Utils/stats/calcStats';
+import { averageScore, calcActualPosition, scoreMax } from '../../Utils/stats/calcStats';
 
 import './GeneralStats.scss';
 
@@ -21,13 +21,17 @@ const GeneralStats = () => {
 
   const { playerName } = useParams();
   const dispatch = useDispatch();
-  const usersList = useSelector((state) => state.datas.allUsers);
+  const usersList = useSelector((state) => state.datas.allUsers).filter(({roles}) => !roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_DMFC') && !roles.includes('ROLE_JOUEUR_NA'));
+
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
-  const {0 : {id, title, username,score, position, team}} = userByUsername(usersList, playerName);
+  const {0 : {id, title, username, score, team}} = userByUsername(usersList, playerName);
+
+  const position = calcActualPosition(usersList, playerName);
 
   const roundsList = useSelector((state) => state.datas.rounds);
   const predictionsList = useSelector((state) => state.datas.SRPrediction);
-  const loggedUser = useSelector((state) => state.user.loggedUser)
+  const loggedUser = useSelector((state) => state.user.loggedUser);
+  const {year} = useSelector((state) => state.datas.allSeasons[state.datas.allSeasons.length-1]);
 
   const validatedPrediction = goodPrediction(predictionsList);
 
@@ -44,7 +48,6 @@ const GeneralStats = () => {
   const userDataList = usersList.map((user) => ({
     title: user.title,
     score: user.score,
-    position: user.position,
     team: user.team,
     username: user.username,
   }));
@@ -71,7 +74,7 @@ const GeneralStats = () => {
 
   useEffect(() => {
     dispatch(getSRPrediction(id));
-  }, [])
+  }, [playerName])
 
   if (isLoading) {
     return <LoadElmt />
@@ -80,7 +83,7 @@ const GeneralStats = () => {
     <Page>
       <Wrapper name='GeneralStats'>
         <div className='title-stats'>
-          <h2>Saison en cours : </h2>
+          <h2>Saison en cours : {year}</h2>
           <h3>Stats de {username}</h3>
           <h4>Titre : {title ? title : "Pas de titre"}</h4>
           <div className='team-infos'>
@@ -97,16 +100,16 @@ const GeneralStats = () => {
           <p>{`Bonus score : ${totalBonusScore}`}</p>
           <p>{`Bonus bookie : ${totalBookieScore}`}</p>
         </div>
-        <div className='return-btn'>
-          {(playerName === loggedUser.username || loggedUser.roles[0] === "ROLE_DMFC") && <button type='button'><NavLink to="/roundsStat">Historique des rounds</NavLink></button> }
-          <Retour where="au classement" link="/rankings" />
-        </div>
-        <div className='arrow'>
+        <div className='stats-navigation'>
           <Link to={`/player/${userDataList[previousPlayerIndex].username}`}>
-            <button className='arrow-right' onClick={previousPlayer}>&lt;</button>
+            <button className='arrow' onClick={previousPlayer}>&lt;</button>
           </Link>
+          <div className='return-btn'>
+            {(playerName === loggedUser.username || loggedUser.roles[0] === "ROLE_DMFC") && <button type='button'><NavLink to="/roundsStat">Historique des rounds</NavLink></button> }
+            <Retour where="au classement" link="/rankings" />
+          </div>
           <Link to={`/player/${userDataList[nextPlayerIndex].username}`}>
-            <button className='arrow-left' onClick={nextPlayer}>&gt;</button>
+            <button className='arrow' onClick={nextPlayer}>&gt;</button>
           </Link>
         </div>
       </Wrapper>

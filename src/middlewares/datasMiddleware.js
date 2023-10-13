@@ -42,7 +42,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoading());
       try {
         const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`);
-        store.dispatch(setUsersList(data));
+        store.dispatch(setUsersList(usersSortByScore(data)));
       } catch (error) {
         console.log(error);
       }
@@ -60,7 +60,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
         ]);
         store.dispatch(setSeason(data1.data));
         store.dispatch(setAllTeams(data2.data));
-        store.dispatch(setUsersList(data3.data));
+        store.dispatch(setUsersList(usersSortByScore(data3.data)));
         if (data4.data.length > 0) {
           store.dispatch(setNews('newsTitle', data4.data[0].title));
           store.dispatch(setNews('news', data4.data[0].description));
@@ -69,14 +69,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
         store.dispatch(setRounds(data5.data));
         store.dispatch(setLeague('leagueName', data6.data.leagueName));
         store.dispatch(setLeague('leagueDescription', data6.data.leagueDescription));
-        // pas besoin ailleurs
-        // await store.dispatch(getSeason());
-        // await store.dispatch(getAllTeams());
-        // besoin ailleurs
-        // await store.dispatch(getUsersList());
-        // await store.dispatch(getNews());
-        // await store.dispatch(getRounds());
-        // await store.dispatch(getLeague());
         store.dispatch(setIsLoadingStart(false));
       } catch (error) {
         console.log(error);

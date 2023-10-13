@@ -31,17 +31,16 @@
   .return-btn {
     flex-direction: column;
   }
-}
-.arrow {
-  display: flex;
-  cursor: pointer;
-  justify-content: space-between;
-}
-
-@media screen and (min-width : 768px) {
-  .arrow {
-    width: auto;
-
-}
-
+  .stats-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      width: auto;
+      margin: 0.2rem;
+    }
+    .arrow {
+      width: 30px;
+    }
+  }
 }

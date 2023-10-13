@@ -138,7 +138,7 @@ const BetResult = () => {
     <Page>
       <Wrapper name="bet_result">
         <h2>Saisie des résultats</h2>
-        <p>Sélectionner le round :</p>
+        <p>Sélectionne le round :</p>
         <RoundSelector />
         {gamesToEdit}
       </Wrapper>

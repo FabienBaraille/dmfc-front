@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
+import './Page.scss';
+
 const Page = ({ children }) => {
   const pageRef = useRef(null);
   useEffect(() => {

@@ -38,7 +38,6 @@ import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
 
 import 'react-toastify/dist/ReactToastify.css';
-import './App.scss';
 
 const App = () => {
 

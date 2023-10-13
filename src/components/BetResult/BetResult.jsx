@@ -117,15 +117,6 @@ const BetResult = () => {
     )
   }
 
-  if (roundsList.length === 0) {
-    return (
-      <Wrapper>
-        <h2>Aucun round en cours !</h2>
-        <h4>Créer d'abord vos rounds et vous pourrez ensuite venir saisir les résultats</h4>
-      </Wrapper>
-    )
-  }
-
   if (updatedMessage !== '') {
     return (
       <Wrapper>

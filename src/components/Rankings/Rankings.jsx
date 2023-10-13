@@ -32,7 +32,7 @@ const Rankings = () => {
   });
 
   return (
-    <Page>
+    // <Page>
       <Wrapper name={'rankings'}>
         <h2>Classement Général</h2>
         {playerList.length === 0 ? 
@@ -52,7 +52,7 @@ const Rankings = () => {
         </table>
         }
       </Wrapper>
-    </Page>
+    // </Page>
   )};
 
 export default Rankings;

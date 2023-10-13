@@ -5,7 +5,6 @@ import Wrapper from "../Wrapper/Wrapper"
 import BetTpl  from "./BetMatch";
 import Input from "../Utils/Input";
 import LoadElmt from "../Loader/LoadElmt";
-import Page from '../Page/Page';
 
 import { addBetToList, createGame, createRound, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
 import { toggleCreationMode } from "../../actions/bet";
@@ -78,7 +77,6 @@ const RsBetCreation = () => {
     )
   }
   return (
-    <Page>
       <Wrapper name="rsbetcreation">
         <div className="round-choice">
           <h4>Pronostique saison régulière</h4>
@@ -120,7 +118,6 @@ const RsBetCreation = () => {
           : null}
         </form>
       </Wrapper>
-    </Page>
   )
 };
 

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import LeagueTitle from "./LeagueTitle";
 import PlayerInLeague from "./PlayerInLeague";
 import PlayerPending from "./PlayerPending";
-import Page from '../Page/Page';
 
 import './LeagueManagement.scss'
 
@@ -22,7 +21,6 @@ const LeagueManagement = () => {
   }
 
   return (
-    <Page>
       <div className="league-management">
         <LeagueTitle />
         <div className="league-management_player">
@@ -30,7 +28,6 @@ const LeagueManagement = () => {
           <PlayerPending playersNA={playersNA}/>
         </div>
       </div>
-    </Page>
   )
 };
 

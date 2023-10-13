@@ -3,7 +3,6 @@ import { predictionByGameId } from '../../Utils/filters/predictionFilter';
 import { useSelector } from 'react-redux';
 import Wrapper from '../Wrapper/Wrapper';
 import ResultElmt from './Element/ResultElmt';
-import Page from '../Page/Page';
 import RoundSelector from '../BetCreation/Element/RoundSelector';
 
 import './RoundsStats.scss';
@@ -36,7 +35,6 @@ const RoundStats = () => {
       </Wrapper>;
 
   return (
-    <Page>
       <div className='rounds-stats'>
         <Wrapper name='round-history'>
           <p>Sélectionne le round :</p>
@@ -44,7 +42,6 @@ const RoundStats = () => {
         </Wrapper>
         {roundNumber !== '' && <Wrapper>{ofRound}</Wrapper>}
       </div>
-    </Page>
   )};
 
 export default RoundStats;

@@ -18,8 +18,6 @@ import Wrapper from "../Wrapper/Wrapper";
 import GameBetResult from "./GameBetResult";
 import RoundSelector from "../BetCreation/Element/RoundSelector";
 import LoadElmt from "../Loader/LoadElmt";
-import Page from '../Page/Page';
-import EmptyBet from "./EmptyBet";
 
 import './BetResult.scss';
 import { getUsersList } from "../../actions/datas";
@@ -126,14 +124,12 @@ const BetResult = () => {
   }
 
   return (
-    <Page>
       <Wrapper name="bet_result">
         <h2>Saisie des résultats</h2>
         <p>Sélectionne le round :</p>
         <RoundSelector />
         {gamesToEdit}
       </Wrapper>
-    </Page>
   )
 };
 

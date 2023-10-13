@@ -38,7 +38,8 @@ import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
 
 import 'react-toastify/dist/ReactToastify.css';
-import Page from "../Page/Page";
+
+import './App.scss'
 
 const App = () => {
 
@@ -64,7 +65,6 @@ const App = () => {
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible);
   const rounds = useSelector((state) => state.datas.rounds);
   const userRole = useSelector((state) => state.user.loggedUser);
-  const newsId = useSelector((state) => state.datas.newsId);
 
   useEffect(() => {
     dispatch(getAllLeague());
@@ -103,7 +103,7 @@ const App = () => {
           <Route path='/profil' element={<Profil />} />
           <Route element={<PlayerNARoute />}>
             <Route path='/' element={<Home />} />
-            <Route path='/rankings' element={<Page><Rankings /></Page>} />
+            <Route path='/rankings' element={<Rankings />} />
             <Route path='/player/:playerName' element={<GeneralStats />} />
             <Route element={<PlayerRoute />}>
               {/* Rajouter ici les routes concernant que le joueur */}

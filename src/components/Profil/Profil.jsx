@@ -8,7 +8,6 @@ import { updateUserProfile, setInputValue, setMailError, resetStore, updateUsern
 import { verifyMail } from "../../Utils/filters/usersFilter";
 
 import { toastSucess, toastWarning } from "../Toast/ToastSuccess";
-import Page from '../Page/Page';
 import Wrapper from '../Wrapper/Wrapper';
 import Input from "../Utils/Input";
 import Strength from "../Connexion/AddOn/Strength";
@@ -88,24 +87,22 @@ function Profil() {
   if (loggedUser.roles[0] === "ROLE_JOUEUR_NA") {
     if (loggedUser.league_id === null) {
       return (
-        <Page>
-          <Wrapper name="profil-page">
-            <h3>Vous n'avez pas de ligue, merci d'en choisir une pour pouvoir jouer.</h3>
-            <form onSubmit={handleLeagueChange}>
-              <label htmlFor="league">Ligue :</label>
-              <select 
-                id="league" 
-                placeholder="Nom de la ligue" 
-                onChange={handleInput} 
-                value={league}
-                >
-                <option>Choisis ta ligue</option>
-                {leagueOptions}
-              </select>
-              <button type="submit">Envoyer la demande</button>
-            </form>
-          </Wrapper>
-        </Page>
+        <Wrapper name="profil-page">
+          <h3>Vous n'avez pas de ligue, merci d'en choisir une pour pouvoir jouer.</h3>
+          <form onSubmit={handleLeagueChange}>
+            <label htmlFor="league">Ligue :</label>
+            <select 
+              id="league" 
+              placeholder="Nom de la ligue" 
+              onChange={handleInput} 
+              value={league}
+              >
+              <option>Choisis ta ligue</option>
+              {leagueOptions}
+            </select>
+            <button type="submit">Envoyer la demande</button>
+          </form>
+        </Wrapper>
       )
     }
     return (
@@ -116,7 +113,7 @@ function Profil() {
   }
 
   return (
-    <Page>
+    <>
       <Wrapper name="profil-page">
         <div className ="profil">
           <h3>Profil</h3>
@@ -162,7 +159,7 @@ function Profil() {
           </div>
         </form>
       </Wrapper>
-    </Page>
+    </>
   );
   }
 

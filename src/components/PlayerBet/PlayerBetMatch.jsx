@@ -42,7 +42,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
     ))
   }
   return (
-    <Page>
+    <div className='page'>
       <form className="match" onSubmit={handleSubmit} id={id}>
         <div className="teams">
           <div className="visitor">
@@ -93,7 +93,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
           </div>}
         {(currentDate > matchDate || predictStatus == 'Validated' || predictStatus == 'Published') && <h5>{unableMessage}</h5>}
       </form>
-    </Page>
+    </div>
   )
 };
 

@@ -76,7 +76,7 @@ const Connexion = () => {
               </div>
             }
           <div className="special-input" id="passwordInput">
-            <Input label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
+            <Input className='password' label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
             {(isCreationMode && password !== "") && <Strength password={password} /> }
             {(isCreationMode && passwordError) && <p className="error-message">Le mot de passe doit avoir au moins 8 caractères dont 1 majuscule, 1 minuscule et 1 caractère spécial.</p>}
           </div>

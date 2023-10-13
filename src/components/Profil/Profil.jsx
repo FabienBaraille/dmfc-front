@@ -138,7 +138,7 @@ function Profil() {
             </div>
           </div>
           <div className="changeContainer" id="passwordInput">
-              <Input label="Mot de Passe :" htmlFor="mot de passe" id="password" type="password" className="inputContainer" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
+              <Input className='password' label="Mot de Passe :" htmlFor="mot de passe" id="password" type="password" className="inputContainer" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
               {password !== "" && <Strength password={password} />}
             <div className="form-btn">
             <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Changer</button>

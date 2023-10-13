@@ -15,10 +15,10 @@ const Logout = () => {
   }
 
   return (
-    <Wrapper name="logout">
-      <h3>Tu veux te déconnecter ?</h3>
-      <button type="button" onClick={handleLogout}>Sortir de là !</button>
-    </Wrapper>
+      <Wrapper name="logout">
+        <h3>Tu veux te déconnecter ?</h3>
+        <button type="button" onClick={handleLogout}>Sortir de là !</button>
+      </Wrapper>
   )
 }
 

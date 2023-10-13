@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import { positionDisplay } from '../../Utils/display/positionDisplay';
 
-import Page from '../Page/Page';
 import Wrapper from '../Wrapper/Wrapper';
 
 import './Rankings.scss';
@@ -32,27 +31,25 @@ const Rankings = () => {
   });
 
   return (
-    <Page>
-      <Wrapper name={'rankings'}>
-        <h2>Classement Général</h2>
-        {playerList.length === 0 ? 
-        <h3>Il n'y à actuellement personne dans la ligue</h3>
-          :
-        <table className="ranking-table">
-          <thead>
-            <tr>
-              <th colSpan={2}>Classement</th>
-              <th>Nom du Joueur</th>
-              <th>Score actuel</th>
-            </tr>
-          </thead>
-          <tbody>
-            {playerList}
-          </tbody>
-        </table>
-        }
-      </Wrapper>
-    </Page>
+    <Wrapper name={'rankings'}>
+      <h2>Classement Général</h2>
+      {playerList.length === 0 ? 
+      <h3>Il n'y à actuellement personne dans la ligue</h3>
+        :
+      <table className="ranking-table">
+        <thead>
+          <tr>
+            <th colSpan={2}>Classement</th>
+            <th>Nom du Joueur</th>
+            <th>Score actuel</th>
+          </tr>
+        </thead>
+        <tbody>
+          {playerList}
+        </tbody>
+      </table>
+      }
+    </Wrapper>
   )};
 
 export default Rankings;

@@ -1,12 +1,18 @@
+import { useState } from 'react';
+
 import PropTypes from 'prop-types';
 
+import './Input.scss';
+
 const Input = ({label, htmlFor, type, value, id, className = null, onChange = null, placeholder = null, isRequired = false, inputName = null, onFocus= null, onBlur= null }) => {
+  const [hide, setHide] = useState(true);
+  
   return (
     <div className={className}>
       <label htmlFor={htmlFor}>{label}</label>
       <input 
         name={inputName}
-        type={type} 
+        type={id !== 'password' ? type : hide ? type : 'text'}
         id={id} 
         onChange={onChange} 
         defaultValue={value}
@@ -15,6 +21,11 @@ const Input = ({label, htmlFor, type, value, id, className = null, onChange = nu
         onFocus={onFocus}
         onBlur={onBlur}
       />
+      {id === 'password' && 
+        <span onClick={() => setHide(!hide)}>
+          <div className={hide ? 'eye-open' : 'eye-close'}></div>
+        </span>
+      }
     </div>
   )
 };

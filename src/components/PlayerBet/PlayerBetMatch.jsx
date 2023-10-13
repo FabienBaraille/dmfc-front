@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Page from '../Page/Page';
 import { createBet, updateBet } from '../../actions/bet';
 import { unableBet } from '../../Utils/filters/predictionFilter';
 import { transformDate } from "../../Utils/stats/calcDate";
@@ -42,7 +41,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
     ))
   }
   return (
-    <Page>
+    <div className='page'>
       <form className="match" onSubmit={handleSubmit} id={id}>
         <div className="teams">
           <div className="visitor">
@@ -93,7 +92,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
           </div>}
         {(currentDate > matchDate || predictStatus == 'Validated' || predictStatus == 'Published') && <h5>{unableMessage}</h5>}
       </form>
-    </Page>
+    </div>
   )
 };
 

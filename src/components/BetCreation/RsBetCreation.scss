@@ -1,7 +1,8 @@
 @use '/src/styles/variables' as v;
 
 #rsbetcreation {
-  width: 90%;
+  width: fit-content;
+  min-width: 45%;
   .round-choice {
     margin-bottom: 1.4rem;
     text-align: center;

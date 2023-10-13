@@ -40,6 +40,8 @@ import CheatSheets from '../CheatSheets/CheatSheets';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+import './App.scss'
+
 const App = () => {
 
   const navigate = useNavigate();

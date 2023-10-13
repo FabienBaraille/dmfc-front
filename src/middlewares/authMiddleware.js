@@ -5,7 +5,8 @@ import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser,
 import { roleName } from '../Utils/filters/usersFilter';
 import { getUsersList } from '../actions/datas';
 
-axios.defaults.baseURL = 'http://localhost:8000';
+// axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = 'http://maxime-lemarchand-server.eddi.cloud/projet-03-dmfc-back/public';
 axios.defaults.withCredentials = true;
 
 const authMiddelware = (store) => (next) => async (action) => {
@@ -59,7 +60,9 @@ const authMiddelware = (store) => (next) => async (action) => {
           }
         );
         store.dispatch(getUser(store.getState().user.pseudo), data.token);
+        console.log(data);
       } catch (error) {
+        console.log(error);
         store.dispatch(setErrorMessage('Pseudo ou Mot de passe erroné'));
       }
     }

@@ -36,6 +36,17 @@
       margin: 0.2rem 0;
     }
   }
+  #passwordInput {
+    position: relative;
+    .wrapper-strength{
+      position: absolute;
+      top: 33px;
+      right: 0px;
+      flex-wrap: nowrap;
+      align-items: center;
+      width: 300px;
+    }
+  }
   .error-message {
     color: red;
     text-shadow: 0 0 2px v.$shadow;

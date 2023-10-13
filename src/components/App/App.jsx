@@ -63,6 +63,7 @@ const App = () => {
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible);
   const rounds = useSelector((state) => state.datas.rounds);
   const userRole = useSelector((state) => state.user.loggedUser);
+  const newsId = useSelector((state) => state.datas.newsId);
 
   useEffect(() => {
     dispatch(getAllLeague());

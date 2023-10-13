@@ -62,6 +62,7 @@ const Connexion = () => {
       dispatch(checkLogin());
     }
   }
+
   return (
     <Page>
       <Wrapper name="connexion">
@@ -74,54 +75,54 @@ const Connexion = () => {
                 {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
               </div>
             }
-            <div className="special-input">
-              <Input label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
-              {isCreationMode && <Strength password={password} /> }
-              {(isCreationMode && passwordError) && <p className="error-message">Le mot de passe doit avoir au moins 8 caractères dont 1 majuscule, 1 minuscule et 1 caractère spécial.</p>}
-            </div>
-            {isCreationMode &&
-              <>
-                <div className="dmfc-opt">
-                  <label htmlFor="dmfc">DMFC</label>
-                  <input 
-                    type="checkbox" 
-                    id="DMFC" 
-                    onChange={handleInput}
-                    value={DMFC}
-                    checked={DMFC}
-                  />
-                </div>
-                {!DMFC ? 
-                <div>
-                  <label htmlFor="league">Ligue :</label>
-                  <select 
-                    id="league" 
-                    placeholder="Nom de la ligue" 
-                    onChange={handleInput} 
-                    value={league}
-                    >
-                    <option>Choisis ta ligue</option>
-                    {leagueOptions}
-                  </select>
-                </div> :
-                <Input label="Créer ma ligue :" htmlFor="league_name" id="league_name" type="league_name" onChange={handleInput} value={league_name} placeholder="Nom de la league"/>}
-              </>
-            }
-            <div className="form-btn">
-              <button type="submit">{isCreationMode ? "Créer" : "Connexion"} </button>
-              <button 
-                type="button" 
-                onClick={() => dispatch(toggleCreationMode(!isCreationMode))}
-                >
-                {isCreationMode ? "J'ai déjà un compte" : "Créer un compte"}
-              </button>
-              {/* {!isCreationMode && <button type="button">J'ai oublié mon mot de passe</button>} */}
-              {/* Faire formulaire rappel identifiant */}
-            </div>
-        </form>
-        {errorMessage !== '' && <p className="error-message">{errorMessage}</p>}
-      </Wrapper>
-    </Page>
+          <div className="special-input" id="passwordInput">
+            <Input label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
+            {(isCreationMode && password !== "") && <Strength password={password} /> }
+            {(isCreationMode && passwordError) && <p className="error-message">Le mot de passe doit avoir au moins 8 caractères dont 1 majuscule, 1 minuscule et 1 caractère spécial.</p>}
+          </div>
+          {isCreationMode &&
+            <>
+              <div className="dmfc-opt">
+                <label htmlFor="dmfc">DMFC</label>
+                <input 
+                  type="checkbox" 
+                  id="DMFC" 
+                  onChange={handleInput}
+                  value={DMFC}
+                  checked={DMFC}
+                />
+              </div>
+              {!DMFC ? 
+              <div>
+                <label htmlFor="league">Ligue :</label>
+                <select 
+                  id="league" 
+                  placeholder="Nom de la ligue" 
+                  onChange={handleInput} 
+                  value={league}
+                  >
+                  <option>Choisis ta ligue</option>
+                  {leagueOptions}
+                </select>
+              </div> :
+              <Input label="Créer ma ligue :" htmlFor="league_name" id="league_name" type="league_name" onChange={handleInput} value={league_name} placeholder="Nom de la league"/>}
+            </>
+          }
+          <div className="form-btn">
+            <button type="submit">{isCreationMode ? "Créer" : "Connexion"} </button>
+            <button 
+              type="button" 
+              onClick={() => dispatch(toggleCreationMode(!isCreationMode))}
+              >
+              {isCreationMode ? "J'ai déjà un compte" : "Créer un compte"}
+            </button>
+            {/* {!isCreationMode && <button type="button">J'ai oublié mon mot de passe</button>} */}
+            {/* Faire formulaire rappel identifiant */}
+          </div>
+      </form>
+      {errorMessage !== '' && <p className="error-message">{errorMessage}</p>}
+    </Wrapper>
+  </Page>
   )
 };
 

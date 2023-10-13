@@ -2,58 +2,56 @@
 
 #profil-page {
   margin-top: 3em;
-}
+};
 
 .profil {
   line-height: 2.5em;
   p {
     font-family: v.$main-font;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;    
   }
-}
+};
+
 .perso {
   color:v.$orange;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   -webkit-text-stroke: 0.03em black;
-}
+};
+
+#profil-change {
+  width: 90%
+};
+
 .change-info {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1em;
   line-height: 1em;
-
   div {
-    margin-top: 0.3em;
     margin: 0.2rem 0;
     display: flex;
-    flex-direction: column;
-    align-items: center; 
-
+    flex-flow: column wrap;
+    align-items: center;
     label {
       font-family: v.$main-font;
       font-size: 1.1rem;
       margin-bottom: 0.6rem; 
     }
-
     button, input, select{
       border: unset;
       padding: 0.3rem;
       border-radius: 5px;
       width: 100%;
     }
-
     input, select {
       background: v.$cell-back;
       box-shadow: 0 0 2px 2px v.$shadow;
       width: 200px;
     }
-
     .form-btn {
       display: flex;
       flex-direction: column;
       align-items: center;
-
       button {
         margin: 0.3rem 0;
         background: v.$nav-back;
@@ -67,46 +65,59 @@
       }
     }
   }
-}
+};
 
 
 @media screen and (min-width: 768px) {
   .change-info {
     div {
       flex-direction: row;
-      align-items: center; 
     }
     label, input, select  {
       margin-right: 1em;
     }
   }
-}
+};
 
 @media screen and (min-width: 1024px) {
-  #profil-page {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  #profil-page, #profil-change {
     max-height: 100vh;
-  }
-  #profil-page {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
     margin-top: 3em;
   }
-  
+  #profil-change {
+    width: fit-content;
+    .changeContainer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .inputContainer {
+      width: 81%;
+      place-content: space-between;
+    }
+    #passwordInput {
+      position: relative;
+      .wrapper-strength{
+        position: absolute;
+        top: 28px;
+        right: 105px;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+    }
+  }
+  #profil-page {
+    width: fit-content;
+    min-width: 25%;
+  }
   .profil {
     align-self: flex-start;
     line-height: 3em;
   }
-  
   .change-info {
-    align-self: flex-end;
-    margin-top: -18em;
-    border-bottom: 5em;
     line-height: 3em;
+    div {
+      align-items: baseline;
+    }
   }
-}
+};

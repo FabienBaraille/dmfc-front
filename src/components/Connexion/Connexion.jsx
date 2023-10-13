@@ -61,6 +61,7 @@ const Connexion = () => {
       dispatch(checkLogin());
     }
   }
+
   return (
     <Wrapper name="connexion">
       <h2>Connexion</h2>
@@ -72,9 +73,9 @@ const Connexion = () => {
               {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
             </div>
           }
-          <div className="special-input">
+          <div className="special-input" id="passwordInput">
             <Input label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
-            {isCreationMode && <Strength password={password} /> }
+            {(isCreationMode && password !== "") && <Strength password={password} /> }
             {(isCreationMode && passwordError) && <p className="error-message">Le mot de passe doit avoir au moins 8 caractères dont 1 majuscule, 1 minuscule et 1 caractère spécial.</p>}
           </div>
           {isCreationMode &&

@@ -31,9 +31,10 @@ const LeagueTitle = () => {
 
   return (
     <Wrapper name={'league-management_name'}>
+    <h2>Infos de ta Ligue :</h2>
     {(userRole === 'ROLE_DMFC' && !leagueCreation) && <button type="button" className="leagueEditBtn" onClick={handleCreationMode}>Editer</button>}
     {leagueCreation ?
-      <>
+      <>      
       <form onSubmit={handleSubmit}>
         <Input htmlFor={"leagueName"} id={"leagueName"} value={leagueName} onChange={handleLeagueChange}  />
           <textarea id="leagueDescription" onChange={handleLeagueChange} defaultValue={leagueDescription}/>

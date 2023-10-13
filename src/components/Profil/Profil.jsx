@@ -27,6 +27,10 @@ function Profil() {
   const leaguesList = useSelector((state) => state.datas.allLeague);
   const leagueName = loggedUser.league_id ? loggedUser.league_id.leagueName : 'N/A';
   const league = useSelector((state) => state.user.league);
+  const pseudo = useSelector((state) => state.user.pseudo);
+  const email = useSelector((state) => state.user.email);
+  const password = useSelector((state) => state.user.password);
+  const mailError = useSelector((state) => state.user.mailError);
   
   useEffect(() => {
     const favoriteTeam = localStorage.getItem('favoriteTeam');
@@ -35,14 +39,7 @@ function Profil() {
     }
     dispatch(setInputValue('pseudo', loggedUser.username));
     dispatch(setInputValue('email', loggedUser.email));
-    dispatch(setInputValue('password', loggedUser.password));
   }, []);
-
-
-  const pseudo = useSelector((state) => state.user.pseudo);
-  const email = useSelector((state) => state.user.email);
-  const password = useSelector((state) => state.user.password);
-  const mailError = useSelector((state) => state.user.mailError);
 
   const teamOptions = teamsList.map(({ id, name }) => {
     return (
@@ -149,39 +146,35 @@ function Profil() {
       </Wrapper>
       <Wrapper name="profil-change">
         <form className="change-info" onSubmit={handleSubmit}>
-          <h3>Changer Mes Paramètres</h3>
+          <h3>Changer mes Infos</h3>
           <div className="changeContainer">
-            <div className="special-input">
-              <Input label="Email:" htmlFor="email" id="email" type="email" name="email" value={email} onChange={handleInput} placeholder="changer ton email" isRequired={true}/>
+              <Input label="Email :" htmlFor="email" id="email" type="email" className="inputContainer" value={email} onChange={handleInput} placeholder="changer ton email" isRequired={true}/>
               {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
-            </div>
             <div className="form-btn">
-              <button type="submit" onClick={(event) => handleSubmit(event, 'email')}>Soumettre</button>
+              <button type="submit" onClick={(event) => handleSubmit(event, 'email')}>Changer</button>
+            </div>
+          </div>
+          <div className="changeContainer" id="passwordInput">
+              <Input label="Mot de Passe :" htmlFor="mot de passe" id="password" type="password" className="inputContainer" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
+              {password !== "" && <Strength password={password} />}
+            <div className="form-btn">
+            <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Changer</button>
             </div>
           </div>
           <div className="changeContainer">
-            <div className="special-input">
-              <Input label="Mot de Passe:" htmlFor="mot de passe" id="password" type="password" name="password" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
-              <Strength password={password} />
-            </div>
+            <Input label="Pseudo :" htmlFor="pseudo" id="pseudo" type="text" className="inputContainer" value={pseudo} onChange={handleInput} placeholder="change ton pseudo"/>
             <div className="form-btn">
-            <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Soumettre</button>
+              <button type="submit" onClick={(event) => handleSubmit(event, 'pseudo')}>Changer</button>
             </div>
           </div>
           <div className="changeContainer">
-            <Input label="Pseudo:" htmlFor="pseudo" id="pseudo" type="text" name="username" value={pseudo} onChange={handleInput} placeholder="change ton pseudo"/>
-            <div className="form-btn">
-              <button type="submit" onClick={(event) => handleSubmit(event, 'pseudo')}>Soumettre</button>
-            </div>
-          </div>
-          <div className="changeContainer">
-            <label>Équipe Préférée: </label>
+            <label>Équipe Préférée : </label>
             <select name="team" id="team" onChange={handleTeamChange} value={team}>
               <option value="">Changer ta équipe préférée</option>
               {teamOptions}
             </select>
             <div className="form-btn">
-              <button type="submit" onClick={(event) => handleSubmit(event, 'équipe préférée')}>Soumettre</button>
+              <button type="submit" onClick={(event) => handleSubmit(event, 'équipe préférée')}>Changer</button>
             </div>
           </div>
         </form>

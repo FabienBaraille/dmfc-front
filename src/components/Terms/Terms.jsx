@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import PropTypes from 'prop-types';
 
+import Page from '../Page/Page';
 import Wrapper from "../Wrapper/Wrapper";
 import Retour from '../Retour/Retour';
 
@@ -9,6 +10,7 @@ import './Terms.scss';
 
 const Terms = ({ isLogged }) => {
   return (
+    <Page>
       <Wrapper name='Terms'>
         <h2>Conditions générales d'utilisations</h2>
         <p>Le présent document a pour objet de définir les modalités et conditions dans lesquelles d’une part, DMFC-GAME, ci-après dénommé l’EDITEUR, met à la disposition de ses utilisateurs le site, et les services disponibles sur le site et d’autre part, la manière par laquelle l’utilisateur accède au site et utilise ses services.</p>
@@ -28,6 +30,7 @@ const Terms = ({ isLogged }) => {
             {!isLogged && <Retour where="à la page de connexion" link="/login" />}
           </div>
       </Wrapper>
+    </Page>
   )}
 
   Terms.propTypes = {

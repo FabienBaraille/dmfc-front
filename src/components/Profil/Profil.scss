@@ -79,7 +79,7 @@
     label, input, select  {
       margin-right: 1em;
     }
-  .password {
+  .password-input {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -112,6 +112,6 @@
     align-self: flex-end;
     margin-top: -18em;
     border-bottom: 5em;
-    line-height: 3em;
+    line-height: 2.5em;
   }
 }

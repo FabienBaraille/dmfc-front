@@ -140,18 +140,18 @@ function Profil() {
             </div>
           </div>
           <div>
-            <div className="special-input">
-              <Input label="Mot de Passe:" htmlFor="mot de passe" id="password" type="password" name="password" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
-              <Strength password={password} />
-            </div>
-            <div className="form-btn">
-            <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Soumettre</button>
-            </div>
-          </div>
-          <div>
             <Input label="Pseudo:" htmlFor="pseudo" id="pseudo" type="text" name="username" value={pseudo} onChange={handleInput} placeholder="change ton pseudo"/>
             <div className="form-btn">
               <button type="submit" onClick={(event) => handleSubmit(event, 'pseudo')}>Soumettre</button>
+            </div>
+          </div>
+          <div>
+          <div className="password-input">
+            <Input label="Mot de Passe:" htmlFor="mot de passe" id="password" type="password" name="password" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
+            {password && <Strength password={password} />}
+            </div>
+            <div className="form-btn">
+            <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Soumettre</button>
             </div>
           </div>
           <div>

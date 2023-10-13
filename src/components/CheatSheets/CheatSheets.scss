@@ -1,0 +1,72 @@
+@use '../../styles/variables' as v;
+
+.paragraph {
+  line-height: 1.5em;
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+.titles {
+  display: flex;
+  justify-content: space-around;
+}
+.usefull-links {
+  margin-top: 1em;
+}
+.links {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.pop-up-boxes {
+  display: flex;
+  justify-content: space-evenly;
+}
+.pop-up-click {
+  border: 1px solid v.$shadow;
+  background-color: v.$orange-clear;
+}
+.roster-east, .roster-west, .schedules-east, .schedules-west{
+  display: block;
+  gap: 12em;
+  margin: 1.5em;
+
+  .left-column-re, .left-column-rw, .left-column-se, .left-column-sw {
+    display: flex;
+    align-self: flex-start;
+    margin: 0.2em;
+  }
+
+  .middle-column-re, .middle-column-rw, .middle-column-se, .middle-column-sw {
+    display: flex;
+    align-self: center;
+    margin: 0.2em;
+
+  }
+  .right-column-re, .right-column-rw, .right-column-se, .right-column-sw {
+    display: flex;
+    align-self: flex-end;
+    margin: 0.2em;
+  }
+
+
+  .left-column-re, .left-column-rw, .left-column-se, .left-column-sw,
+  .middle-column-re, .middle-column-rw, .middle-column-se, .middle-column-sw, 
+  .right-column-re, .right-column-rw, .right-column-se, .right-column-sw {
+    li {
+      a {
+        display: block;
+        padding: 5px 10px;
+        border: 1px solid v.$shadow;
+        margin-bottom: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: v.$orange;
+        background-color: v.$nav-back;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+  }
+
+}

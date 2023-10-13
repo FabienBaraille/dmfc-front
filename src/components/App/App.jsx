@@ -38,6 +38,7 @@ import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
 
 import 'react-toastify/dist/ReactToastify.css';
+import Page from "../Page/Page";
 
 const App = () => {
 
@@ -102,7 +103,7 @@ const App = () => {
           <Route path='/profil' element={<Profil />} />
           <Route element={<PlayerNARoute />}>
             <Route path='/' element={<Home />} />
-            <Route path='/rankings' element={<Rankings />} />
+            <Route path='/rankings' element={<Page><Rankings /></Page>} />
             <Route path='/player/:playerName' element={<GeneralStats />} />
             <Route element={<PlayerRoute />}>
               {/* Rajouter ici les routes concernant que le joueur */}

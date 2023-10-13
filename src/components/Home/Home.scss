@@ -1,9 +1,9 @@
 @use '/src/styles/variables' as v;
 
 #news {
-  width: 90%;
   position: relative;
   text-align: center;
+  min-width: 90%;
   h2, h3 {
     margin-bottom: 14px;
   }
@@ -31,7 +31,7 @@
 .homeEditBtn {
   position: absolute;
   top: 3px;
-  right: -22px;
+  right: -23px;
   width: 80px;
   padding-right: 18px;
   &::after {
@@ -45,5 +45,20 @@
   &:hover::after {
     border-top: 14px solid transparent;
     border-left: 9px solid v.$orange;
+  }
+}
+
+@media screen and (min-width : 768px) {
+  .globalNews{
+    width: 45%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    #season-infos {
+      width: fit-content;
+    }
+    #news {
+      min-width: 60%;
+    }
   }
 }

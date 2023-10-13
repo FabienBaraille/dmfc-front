@@ -1,6 +1,8 @@
 @use '/src/styles/variables' as v;
 
 #emptyBet {
+  width: fit-content;
+  min-width: 45%;
   h3 {
     margin: 20px 0;
   }

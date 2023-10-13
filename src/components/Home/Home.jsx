@@ -8,8 +8,10 @@ import './Home.scss';
 const Home = () => {
   return (
     <Page>
-      <News />
-      <SeasonInfos />
+      <div className='globalNews'>
+        <SeasonInfos />
+        <News/>        
+      </div>
       <Rankings />
     </Page>
   )};

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { resetStore } from "../../actions/user";
 
 import Wrapper from "../Wrapper/Wrapper";
+import Page from "../Page/Page"
 
 const Logout = () => {
 
@@ -15,10 +16,12 @@ const Logout = () => {
   }
 
   return (
-    <Wrapper name="logout">
-      <h3>Tu veux te déconnecter ?</h3>
-      <button type="button" onClick={handleLogout}>Sortir de là !</button>
-    </Wrapper>
+    <Page>
+      <Wrapper name="logout">
+        <h3>Tu veux te déconnecter ?</h3>
+        <button type="button" onClick={handleLogout}>Sortir de là !</button>
+      </Wrapper>
+    </Page>
   )
 }
 

@@ -31,3 +31,13 @@ export const calcBetPoint = (updatedGame, predictedWinnigTeam, predictedPointDif
     bonusBookie: bookiesEarnedPoints
   }
 }
+
+export const calcActualPosition = (playerList, playerName) => {
+  let actualPosition = 0;
+  playerList.forEach(({username}, index) => {
+    if (username === playerName) {
+      actualPosition = index + 1;
+    }
+  });
+  return actualPosition;
+}

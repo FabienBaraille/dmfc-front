@@ -1,0 +1,14 @@
+.rounds-stats {
+  width: 90%;
+}
+#round-history {
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width : 768px) {
+  .rounds-stats {
+    width: 70%;
+  }
+}

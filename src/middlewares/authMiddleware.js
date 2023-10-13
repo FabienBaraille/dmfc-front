@@ -3,6 +3,7 @@ import axios from 'redaxios';
 import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos, UPDATE_USER_PROFILE, UPDATE_USERNAME, updateUserProfile } from "../actions/user";
 
 import { roleName } from '../Utils/filters/usersFilter';
+import { getUsersList } from '../actions/datas';
 
 axios.defaults.baseURL = 'http://localhost:8000';
 axios.defaults.withCredentials = true;
@@ -81,6 +82,7 @@ const authMiddelware = (store) => (next) => async (action) => {
           action.userData
         );
         store.dispatch(getUser(store.getState().user.loggedUser.username));
+        store.dispatch(getUsersList());
       } catch (error) {
         console.log(error);
       }

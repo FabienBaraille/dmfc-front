@@ -4,12 +4,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 90%;
+  form {
+    width: 100%;
+    .login, .password, .leagueChoice, .leagueCreation {
+      justify-content: space-between;
+      align-items: center;
+    }
+    .dmfc-opt {
+      justify-content: space-evenly;
+    }
+  }
   div {
     margin: 0.7rem 0;
     display: flex;
   }
   label {
-    width: 100px;
+    width: 35%;
   }
   label, button {
     font-family: v.$main-font;
@@ -31,6 +42,8 @@
     align-items: end;
     div {
       margin: 0.2rem 0;
+      width: 100%;
+      justify-content: space-between;
     }
     p {
       margin: 0.2rem 0;
@@ -46,6 +59,9 @@
       align-items: center;
       width: 300px;
     }
+  }
+  .password {
+    width: 100%;
   }
   .error-message {
     color: red;
@@ -103,7 +119,7 @@
 
 @media screen and (min-width : 768px) {
   #connexion {
-    width: 45%;
+    width: 30%;
     align-items: center;
   }
   .form-btn {
@@ -120,11 +136,17 @@
 
 @media screen and (min-width : 1050px) {
   #connexion {
+    .login, .password, .leagueChoice, .leagueCreation, #passwordInput, .mailContainer, .dmfc-opt {
+      width: 85%;
+    }
+    form .dmfc-opt {
+      justify-content: flex-start;
+    }
     input, select {
       width: 300px
     }
     form {
-      width: 70%;
+      width: 100%;
     }
   }
 }

@@ -66,7 +66,6 @@ function Profil() {
   
     dispatch(saveFavoriteTeam(selectedTeam));
     localStorage.setItem('favoriteTeam', selectedTeam);
-
   };
 
   const handleSubmit = async (event, paramName) => {
@@ -84,24 +83,26 @@ function Profil() {
         password: password,
         team: team,
       };
-      console.log(updatedUserData)
-      if (pseudo !== loggedUser.username) {
-        toast.warning('Afin de changer de pseudo, vous allez être déconnecté !', toastWarning);
-        setTimeout(() => {
-          document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-          document.cookie = `userInfos=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-          dispatch(updateUsername(pseudo));
-          dispatch(resetStore());
-          navigate('/');
-        }, 2005);
-      } else {
-        const updateComplete = dispatch(updateUserProfile(updatedUserData));
-        if (updateComplete) {
-          toast.success(`${paramName} mis à jour avec succès`, toastSucess) 
-        }
+
+    console.log(updatedUserData)
+    if (pseudo !== loggedUser.username) {
+      toast.warning('Afin de changer de pseudo, vous allez être déconnecté !', toastWarning);
+      setTimeout(() => {
+        document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+        document.cookie = `userInfos=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+        dispatch(updateUsername(pseudo));
+        dispatch(resetStore());
+        navigate('/');
+      }, 2005);
+    } else {
+      const updateComplete = dispatch(updateUserProfile(updatedUserData));
+      if (updateComplete) {
+        toast.success(`${paramName} mis à jour avec succès`, toastSucess) 
       }
     }
-  };
+  }
+};
+
   const handleLeagueChange = event => {
     event.preventDefault();
     dispatch(updateUserProfile({ league: league }));
@@ -157,9 +158,9 @@ function Profil() {
           </div>
         </div>
         <div>
-          <div className="special-input">
+          <div className="password-input">
             <Input label="Mot de Passe:" htmlFor="mot de passe" id="password" type="password" name="password" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
-            <Strength password={password} />
+            {password && <Strength password={password} />}
           </div>
           <div className="form-btn">
           <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Soumettre</button>

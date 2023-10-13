@@ -9,6 +9,8 @@ import Wrapper from '../Wrapper/Wrapper';
 import Retour from '../Retour/Retour';
 import LoadElmt from '../Loader/LoadElmt';
 
+import { Link } from 'react-router-dom';
+
 import { userByUsername } from '../../Utils/filters/usersFilter';
 import { countBonusBookie, countBonusScore, countRoundPlayed, countWinningTeam, goodPrediction } from '../../Utils/stats/roundStats';
 import { averageScore, scoreMax } from '../../Utils/stats/calcStats';
@@ -21,29 +23,8 @@ const GeneralStats = () => {
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.datas.allUsers);
   const isLoading = useSelector((state) => state.datas.isLoadingSR);
-  const {0 : {id, title, score, position, team}} = userByUsername(usersList, playerName);
+  const {0 : {id, title, username,score, position, team}} = userByUsername(usersList, playerName);
 
-  const [playerIndex, setPlayerIndex] = useState(0);
-
-  const currentPlayer = usersList[playerIndex];
-  const username = currentPlayer ? currentPlayer.username : '';
-  
-  const nextPlayer = () => {
-    if (playerIndex < usersList.length - 1) {
-      setPlayerIndex(playerIndex + 1);
-    } else {
-      setPlayerIndex(0);
-    }
-  };
-
-  const previousPlayer = () => {
-    if (playerIndex > 0) {
-      setPlayerIndex(playerIndex - 1);
-    } else {
-      setPlayerIndex(usersList.length - 1);
-    }
-  };
-  
   const roundsList = useSelector((state) => state.datas.rounds);
   const predictionsList = useSelector((state) => state.datas.SRPrediction);
   const loggedUser = useSelector((state) => state.user.loggedUser)
@@ -56,7 +37,37 @@ const GeneralStats = () => {
 
   const averageRoundScore = averageScore(roundsList.length, totalWinScore, totalBonusScore, totalBookieScore);
   const maxPoints = scoreMax(roundsList);
-  const playedRound = countRoundPlayed(roundsList, validatedPrediction);
+  const playedRound = countRoundPlayed(roundsList, validatedPrediction);  
+
+  const [playerIndex, setPlayerIndex] = useState(0);
+
+  const userDataList = usersList.map((user) => ({
+    title: user.title,
+    score: user.score,
+    position: user.position,
+    team: user.team,
+    username: user.username,
+  }));
+
+  const nextPlayerIndex = (playerIndex + 1) % userDataList.length;
+  const previousPlayerIndex = (playerIndex - 1 + userDataList.length) % userDataList.length;
+
+  useEffect(() => {
+    const index = userDataList.findIndex((user) => user.username === playerName);
+    if (index !== -1) {
+      setPlayerIndex(index);
+    }
+  }, [playerName, userDataList]);
+
+  const nextPlayer = () => {
+    const nextIndex = (playerIndex + 1) % userDataList.length;
+    setPlayerIndex(nextIndex);
+  };
+
+  const previousPlayer = () => {
+    const previousIndex = (playerIndex - 1 + userDataList.length) % userDataList.length;
+    setPlayerIndex(previousIndex);
+  };
 
   useEffect(() => {
     dispatch(getSRPrediction(id));
@@ -91,8 +102,12 @@ const GeneralStats = () => {
           <Retour where="au classement" link="/rankings" />
         </div>
         <div className='arrow'>
-        <button className='arrow-right' onClick={previousPlayer}>&lt;</button>
-        <button className='arrow-left' onClick={nextPlayer}>&gt;</button>
+          <Link to={`/player/${userDataList[previousPlayerIndex].username}`}>
+            <button className='arrow-right' onClick={previousPlayer}>&lt;</button>
+          </Link>
+          <Link to={`/player/${userDataList[nextPlayerIndex].username}`}>
+            <button className='arrow-left' onClick={nextPlayer}>&gt;</button>
+          </Link>
         </div>
       </Wrapper>
     </Page>

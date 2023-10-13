@@ -114,10 +114,10 @@ const App = () => {
               <Route path='/scores/SR' element={rounds.length == 0 ? <EmptyBet /> : <BetResult />} />
               <Route path='/league-management' element={<LeagueManagement />} />
             </Route>
-            <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
-            <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
             <Route path='/roundsStat' element={<RoundStats />} />
           </Route>
+          <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
+          <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/Error403' element={<Error403 />} />
           <Route path='*' element={<Error404 />} />

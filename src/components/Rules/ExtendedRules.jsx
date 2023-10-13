@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import Page from '../Page/Page';
 import Wrapper from "../Wrapper/Wrapper";
 import Retour from '../Retour/Retour'
 import './Rules.scss';
@@ -8,6 +9,7 @@ import './Rules.scss';
 const ExtendedRules = ({ isLogged }) => {
 
   return (
+    <Page>
       <Wrapper name="rules" >
         <h2>Bienvenue dans le DMFC Game</h2>
         <p>Ici on pronostique sur les saisons de NBA en groupe d'amis (ou ennemis) sans enjeux autre que la bonne humeur, la convivialité et une pointe de moquerie...</p>
@@ -28,6 +30,7 @@ const ExtendedRules = ({ isLogged }) => {
             {!isLogged && <Retour where="à la page de connexion" link="/login" />}
           </div>
       </Wrapper>
+    </Page>
   )}
 
   ExtendedRules.propTypes = {

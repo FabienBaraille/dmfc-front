@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import Page from '../Page/Page';
 import { createBet, updateBet } from '../../actions/bet';
 import { unableBet } from '../../Utils/filters/predictionFilter';
 import { transformDate } from "../../Utils/stats/calcDate";
@@ -41,56 +42,58 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
     ))
   }
   return (
-    <form className="match" onSubmit={handleSubmit} id={id}>
-      <div className="teams">
-        <div className="visitor">
-          <input 
-            type="radio" 
-            id="0" 
-            name='winning-team' 
-            defaultChecked={predictStatus !== 'Not done' ? prediction.predictedWinnigTeam === team[0].name : false} 
-            disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')}
-            onChange={(event) => setWinTeam(event.target.id)}
-          />
-          <label htmlFor="visitor" >
-            {team[0].trigram}
-          </label>
+    <Page>
+      <form className="match" onSubmit={handleSubmit} id={id}>
+        <div className="teams">
+          <div className="visitor">
+            <input 
+              type="radio" 
+              id="0" 
+              name='winning-team' 
+              defaultChecked={predictStatus !== 'Not done' ? prediction.predictedWinnigTeam === team[0].name : false} 
+              disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')}
+              onChange={(event) => setWinTeam(event.target.id)}
+            />
+            <label htmlFor="visitor" >
+              {team[0].trigram}
+            </label>
+          </div>
+          <div className='at-logo'> </div>
+          <div className="home-team">
+            <label htmlFor="home-team" >
+              {team[1].trigram}
+            </label>
+            <input 
+              type="radio" 
+              id="1" 
+              name='winning-team' 
+              defaultChecked={predictStatus !== 'Not done' ? prediction.predictedWinnigTeam === team[1].name : false} 
+              disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} 
+              onChange={(event) => setWinTeam(event.target.id)}
+            />
+          </div>
         </div>
-        <div className='at-logo'> </div>
-        <div className="home-team">
-          <label htmlFor="home-team" >
-            {team[1].trigram}
-          </label>
-          <input 
-            type="radio" 
-            id="1" 
-            name='winning-team' 
-            defaultChecked={predictStatus !== 'Not done' ? prediction.predictedWinnigTeam === team[1].name : false} 
-            disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} 
-            onChange={(event) => setWinTeam(event.target.id)}
-          />
-        </div>
-      </div>
-      <div>
-        <label htmlFor="diff">Diff</label>
-        <input 
-          type="number" 
-          id="diff" 
-          onChange={(event) => setWinDif(event.target.value)} 
-          defaultValue={winDif} 
-          disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} />
-      </div>
-      <div className="match_timer">
-        <h5>Match Time :</h5>
-        <p>{transformedDate}</p>
-      </div>
-      {currentDate < matchDate && predictStatus !== 'Validated' && predictStatus !== 'Published' && 
         <div>
-          <button type="submit" onClick={() => setButton('Saved')} >Sauvegarder</button>
-          <button type="submit" onClick={() => setButton('Validated')} >Valider</button>
-        </div>}
-      {(currentDate > matchDate || predictStatus == 'Validated' || predictStatus == 'Published') && <h5>{unableMessage}</h5>}
-    </form>
+          <label htmlFor="diff">Diff</label>
+          <input 
+            type="number" 
+            id="diff" 
+            onChange={(event) => setWinDif(event.target.value)} 
+            defaultValue={winDif} 
+            disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} />
+        </div>
+        <div className="match_timer">
+          <h5>Match Time :</h5>
+          <p>{transformedDate}</p>
+        </div>
+        {currentDate < matchDate && predictStatus !== 'Validated' && predictStatus !== 'Published' && 
+          <div>
+            <button type="submit" onClick={() => setButton('Saved')} >Sauvegarder</button>
+            <button type="submit" onClick={() => setButton('Validated')} >Valider</button>
+          </div>}
+        {(currentDate > matchDate || predictStatus == 'Validated' || predictStatus == 'Published') && <h5>{unableMessage}</h5>}
+      </form>
+    </Page>
   )
 };
 

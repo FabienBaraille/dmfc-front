@@ -1,11 +1,12 @@
 export const GET_USERS_LIST = 'GET_USERS_LIST';
 export const SET_USERS_LIST = 'SET_USERS_LIST';
+export const SET_IS_LOADING_START = 'SET_IS_LOADING_START'
 export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const SET_IS_LOADING_SR = 'SET_IS_LOADING_SR';
+export const GET_DATAS_START = 'GET_DATAS_START'
 export const GET_ALL_LEAGUE = 'GET_ALL_LEAGUE';
 export const SET_ALL_LEAGUE = 'SET_ALL_LEAGUE';
 export const SET_ALL_TEAMS = 'SET_ALL_TEAMS';
-export const GET_ALL_TEAMS = 'GET_ALL_TEAMS';
 export const GET_SR_PREDICTION = 'GET_SR_PREDICTION';
 export const SET_SR_PREDICTION = 'SET_SR_PREDICTION';
 export const GET_ROUNDS = 'GET_ROUNDS';
@@ -14,7 +15,6 @@ export const GET_LEAGUE = 'GET_LEAGUE';
 export const SET_LEAGUE = 'SET_LEAGUE';
 export const POST_LEAGUE_CHANGE = 'POST_LEAGUE_CHANGE';
 export const LEAGUE_CREATION_MODE = 'LEAGUE_CREATION_MODE';
-export const GET_SEASON = 'GET_SEASON';
 export const SET_SEASON = 'SET_SEASON';
 export const SET_TITLE = 'SET_TITLE';
 export const SET_FOCUS = 'SET_FOCUS';
@@ -29,11 +29,18 @@ export const setUsersList = (list) => ({
   type: SET_USERS_LIST,
   list,
 });
+export const setIsLoadingStart = (isLoadingStart) => ({
+  type: SET_IS_LOADING_START,
+  isLoadingStart
+});
 export const setIsLoading = () => ({
   type: SET_IS_LOADING,
 });
 export const setIsLoadingSR = () => ({
   type: SET_IS_LOADING_SR,
+});
+export const getDatasStart = () => ({
+  type: GET_DATAS_START,
 });
 export const getAllLeague = () => ({
   type: GET_ALL_LEAGUE,
@@ -42,9 +49,7 @@ export const setAllLeague = (leaguesList) => ({
   type: SET_ALL_LEAGUE,
   leaguesList
 });
-export const getAllTeams = () => ({
-  type: GET_ALL_TEAMS,
-});
+
 export const setAllTeams = (teamsList) => ({
   type: SET_ALL_TEAMS,
   teamsList
@@ -83,9 +88,7 @@ export const setLeagueCreationMode = (leagueCreation) => ({
   type: LEAGUE_CREATION_MODE,
   leagueCreation,
 });
-export const getSeason = () => ({
-  type: GET_SEASON,
-});
+
 export const setSeason = (seasonInfos) => ({
   type: SET_SEASON,
   seasonInfos

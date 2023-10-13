@@ -1,13 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useSelector } from 'react-redux';
 import Wrapper from '../Wrapper/Wrapper';
+import { transformDate } from '../../Utils/stats/calcDate';
 
 const SeasonInfos = () => {
+  const {year, startSeason, startPlayoff, Comment} = useSelector((state) => state.datas.allSeasons[state.datas.allSeasons.length-1]);
+  
   return (
-    <Wrapper name={"seasoninfos"}>
-      <h2>Saison 2023-2024</h2>
-      <h3>Début de la saison : 24/10/2023</h3>
-      <h3>Début de finales : 06/06/2024</h3>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur laboriosam doloremque at, aliquam fugiat sit dicta libero deleniti numquam ipsum repellendus nihil tempora, vel deserunt iste molestias. Esse, rerum at.</p>
+    <Wrapper name={"season-infos"}>
+      <h2>Saison {year}</h2>
+      <h4 className='middle-title'>Début de la saison : {transformDate(startSeason, 'news')}</h4>
+      <h4 className='middle-title'>Début de finales : {transformDate(startPlayoff, 'news')}</h4>
+      <p>{Comment}</p>
     </Wrapper>
   )};
 export default SeasonInfos;

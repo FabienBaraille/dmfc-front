@@ -5,6 +5,7 @@ import Wrapper from "../Wrapper/Wrapper"
 import BetTpl  from "./BetMatch";
 import Input from "../Utils/Input";
 import LoadElmt from "../Loader/LoadElmt";
+import Page from '../Page/Page';
 
 import { addBetToList, createGame, createRound, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
 import { toggleCreationMode } from "../../actions/bet";
@@ -77,47 +78,49 @@ const RsBetCreation = () => {
     )
   }
   return (
-    <Wrapper name="rsbetcreation">
-      <div className="round-choice">
-        <h4>Pronostique saison régulière</h4>
-        {!roundCreationMode &&
-          <>
-            <p>Sélectionne un round dans lequel créer des matchs.</p>
-            <RoundSelector />
-          </>
-        }
-      </div>
-      <form onSubmit={handleSubmit}>
-        {betList.length == 0 ?
-          <>
-            <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Création d'un nouveau round" : "Round existant"}</button>
-            {roundCreationMode &&
-              <div className="round-creation">
-                <Input 
-                  label="Nom du Round :" 
-                  htmlFor="roundName" 
-                  id="roundName" 
-                  type="text" 
-                  placeholder="Nom du round"
-                  value={roundName}
-                  onChange={handleInput}
-                />
-                <p>Phase :</p>
-                <select id="roundCat" placeholder="Catégorie Round" onChange={handleInput} value={roundCat} >
-                  <option value='SR'>SR</option>
-                  <option value='PO' disabled>PO</option>
-                </select>
-              </div>
-            }
-          </>
-        : null }
-        {roundNumber !== '' &&  betList}
-        {(!roundCreationMode && roundNumber !== '') && <button type="button" className="addBet" onClick={handleAddBet}>Ajouter un match</button> }
-        {(betList.length !== 0 || roundCreationMode) ?
-            <button type="submit">Créer {roundCreationMode ? 'le round' : 'le(s) match(s)' }</button>
-        : null}
-      </form>
-    </Wrapper>
+    <Page>
+      <Wrapper name="rsbetcreation">
+        <div className="round-choice">
+          <h4>Pronostique saison régulière</h4>
+          {!roundCreationMode &&
+            <>
+              <p>Sélectionne un round dans lequel créer des matchs.</p>
+              <RoundSelector />
+            </>
+          }
+        </div>
+        <form onSubmit={handleSubmit}>
+          {betList.length == 0 ?
+            <>
+              <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Création d'un nouveau round" : "Round existant"}</button>
+              {roundCreationMode &&
+                <div className="round-creation">
+                  <Input 
+                    label="Nom du Round :" 
+                    htmlFor="roundName" 
+                    id="roundName" 
+                    type="text" 
+                    placeholder="Nom du round"
+                    value={roundName}
+                    onChange={handleInput}
+                  />
+                  <p>Phase :</p>
+                  <select id="roundCat" placeholder="Catégorie Round" onChange={handleInput} value={roundCat} >
+                    <option value='SR'>SR</option>
+                    <option value='PO' disabled>PO</option>
+                  </select>
+                </div>
+              }
+            </>
+          : null }
+          {roundNumber !== '' &&  betList}
+          {(!roundCreationMode && roundNumber !== '') && <button type="button" className="addBet" onClick={handleAddBet}>Ajouter un match</button> }
+          {(betList.length !== 0 || roundCreationMode) ?
+              <button type="submit">Créer {roundCreationMode ? 'le round' : 'le(s) match(s)' }</button>
+          : null}
+        </form>
+      </Wrapper>
+    </Page>
   )
 };
 

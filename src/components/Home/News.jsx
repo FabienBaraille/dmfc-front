@@ -5,7 +5,8 @@ import { getNews, postNewsChange, postNewsCreation, setNews, setNewsCreationMode
 import Input from '../Utils/Input';
 
 const News = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  
   const userRole = useSelector((state) => state.user.loggedUser.roles[0]);
   const newsCreation = useSelector((state) => state.datas.newsCreation);
   const news = useSelector((state) => state.datas.news);

@@ -6,8 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { getCookies } from "../../Utils/cookies/getCookies";
 
 import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
-import { getAllLeague, getLeague, getRounds, getSeason, getAllTeams, getUsersList } from "../../actions/datas";
-import { getNews, postNewsCreation, setNews } from "../../actions/news";
+import { getAllLeague, getDatasStart } from "../../actions/datas";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
 import PlayerRoute from "./ProtectedRoute/PlayerRoute";
@@ -39,7 +38,6 @@ import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
 
 import 'react-toastify/dist/ReactToastify.css';
-import './App.scss';
 
 const App = () => {
 
@@ -55,13 +53,10 @@ const App = () => {
       const userInfos = getCookies('userInfos');
       dispatch(setUserInfos(JSON.parse(userInfos)));
     }
-    document.documentElement.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
   }, []);
 
   const isLoading = useSelector((state) => state.datas.isLoading);
+  const isLoadingStart = useSelector((state) => state.datas.isLoadingStart);
   const targetKick = useSelector((state) => state.datas.targetKick);
   const isLogged = useSelector((state) => state.user.isLogged);
   const isCreated = useSelector((state) => state.user.created);
@@ -77,12 +72,7 @@ const App = () => {
         navigate('/profil');
       } else {
         navigate('/');
-        dispatch(getAllTeams());
-        dispatch(getUsersList());
-        dispatch(getNews());
-        dispatch(getRounds());
-        dispatch(getLeague());
-        dispatch(getSeason());
+        dispatch(getDatasStart());
       }
     } else {
       navigate('/login');
@@ -90,7 +80,7 @@ const App = () => {
     }
   }, [isLogged, isCreated]);
 
-  if (isLoading) {
+  if (isLoading || isLoadingStart) {
     return (
       <LoadElmt />
     )
@@ -124,10 +114,10 @@ const App = () => {
               <Route path='/scores/SR' element={rounds.length == 0 ? <EmptyBet /> : <BetResult />} />
               <Route path='/league-management' element={<LeagueManagement />} />
             </Route>
-            <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
-            <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
             <Route path='/roundsStat' element={<RoundStats />} />
           </Route>
+          <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
+          <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/Error403' element={<Error403 />} />
           <Route path='*' element={<Error404 />} />

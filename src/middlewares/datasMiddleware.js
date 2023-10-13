@@ -3,12 +3,10 @@ import axios from 'redaxios';
 import { 
   GET_USERS_LIST,
   GET_ALL_LEAGUE,
-  GET_ALL_TEAMS,
   GET_SR_PREDICTION,
   GET_ROUNDS,
   GET_LEAGUE,
   POST_LEAGUE_CHANGE,
-  GET_SEASON,
   UPDATE_PLAYER_BY_DMFC,
   setUsersList,
   setAllLeague,
@@ -22,6 +20,8 @@ import {
   setSeason,
   getUsersList,
   setFocusedInputId,
+  GET_DATAS_START,
+  setIsLoadingStart,
 } from "../actions/datas";
 
 import {
@@ -47,6 +47,41 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    case GET_DATAS_START:
+      store.dispatch(setIsLoadingStart(true));
+      try {
+        const [ data1, data2, data3, data4, data5, data6 ] =  await axios.all([
+          axios.get(`/api/seasons/`), 
+          axios.get(`/api/teams`),
+          axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`),
+          axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/news`),
+          axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/round`),
+          axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}`)
+        ]);
+        store.dispatch(setSeason(data1.data));
+        store.dispatch(setAllTeams(data2.data));
+        store.dispatch(setUsersList(data3.data));
+        if (data4.data.length > 0) {
+          store.dispatch(setNews('newsTitle', data4.data[0].title));
+          store.dispatch(setNews('news', data4.data[0].description));
+          store.dispatch(setNews('newsId', data4.data[0].id));
+        }
+        store.dispatch(setRounds(data5.data));
+        store.dispatch(setLeague('leagueName', data6.data.leagueName));
+        store.dispatch(setLeague('leagueDescription', data6.data.leagueDescription));
+        // pas besoin ailleurs
+        // await store.dispatch(getSeason());
+        // await store.dispatch(getAllTeams());
+        // besoin ailleurs
+        // await store.dispatch(getUsersList());
+        // await store.dispatch(getNews());
+        // await store.dispatch(getRounds());
+        // await store.dispatch(getLeague());
+        store.dispatch(setIsLoadingStart(false));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
     // Action qui va faire la requête pour récupérer toutes les leagues
     case GET_ALL_LEAGUE:
       store.dispatch(setIsLoading());
@@ -61,16 +96,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-    // Action qui va faire la requête pour récupérer toutes les teams
-    case GET_ALL_TEAMS:
-      store.dispatch(setIsLoading())
-      try {
-        const { data } = await axios.get(`/api/teams`);
-        store.dispatch(setAllTeams(data));
-        } catch (error) {
-          console.log(error);
-        }
-      break;
     // Action qui va faire la requête pour récupérer toutes les prédictions d'un joueur suivant son id
     case GET_SR_PREDICTION:
       store.dispatch(setIsLoadingSR());
@@ -106,9 +131,11 @@ const datasMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoading());
       try {
         const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/news`);
-        store.dispatch(setNews('newsTitle', data[0].title));
-        store.dispatch(setNews('news', data[0].description));
-        store.dispatch(setNews('newsId', data[0].id));
+        if (data.length > 0) {
+          store.dispatch(setNews('newsTitle', data[0].title));
+          store.dispatch(setNews('news', data[0].description));
+          store.dispatch(setNews('newsId', data[0].id));
+        }
       } catch (error) {
         console.log(error);
       }
@@ -144,21 +171,11 @@ const datasMiddleware = (store) => (next) => async (action) => {
       try {
         const { data } = await axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}`);
       store.dispatch(setLeague('leagueName', data.leagueName));
-      store.dispatch(setLeague('leagueDescription', data.leagueDescription))
+      store.dispatch(setLeague('leagueDescription', data.leagueDescription));
       } catch (error) {
         console.log(error);
       }
     break;
-    // Action qui va faire la requête pour récupérer toutes les leagues
-    case GET_SEASON:
-      store.dispatch(setIsLoading());
-      try {
-        const { data } = await axios.get(`/api/seasons/`);
-        store.dispatch(setSeason(data));
-        } catch (error) {
-          console.log(error);
-        }
-      break;
     // Action qui permet de modifier une league
     case POST_LEAGUE_CHANGE:
       store.dispatch(setIsLoading());

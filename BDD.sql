@@ -41,8 +41,9 @@ INSERT INTO `game` (`id`, `round_id`, `date_and_time_of_match`, `visitor_score`,
 (31,	17,	'2023-10-24 13:20:00',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-10 10:19:54',	NULL),
 (32,	17,	'2023-10-10 10:10:00',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-10 10:30:35',	NULL),
 (33,	17,	'2023-10-19 13:30:00',	52,	17,	'New York Knicks',	1.5,	1.2,	'2023-10-10 13:30:50',	'2023-10-10 15:53:31'),
-(34,	19,	'2023-10-18 15:58:00',	85,	60,	'New York Knicks',	1.5,	1.2,	'2023-10-10 15:59:01',	'2023-10-11 10:16:08'),
-(35,	19,	'2023-10-18 15:58:00',	50,	85,	'Cleveland Cavaliers',	1.5,	1.2,	'2023-10-10 15:59:02',	'2023-10-11 08:54:10');
+(34,	19,	'2023-10-18 15:58:00',	85,	60,	'New York Knicks',	1.5,	1.2,	'2023-10-10 15:59:01',	'2023-10-11 18:52:50'),
+(35,	19,	'2023-10-18 15:58:00',	50,	85,	'Cleveland Cavaliers',	1.5,	1.2,	'2023-10-10 15:59:02',	'2023-10-11 08:54:10'),
+(36,	22,	'2023-10-27 16:45:00',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-11 16:45:24',	NULL);
 
 INSERT INTO `game_team` (`game_id`, `team_id`) VALUES
 (1,	1),
@@ -108,7 +109,9 @@ INSERT INTO `game_team` (`game_id`, `team_id`) VALUES
 (34,	2),
 (34,	3),
 (35,	4),
-(35,	5);
+(35,	5),
+(36,	4),
+(36,	8);
 
 INSERT INTO `leaderboard` (`id`, `user_id`, `season_id`, `final_score`, `final_rank`, `created_at`, `updated_at`) VALUES
 (1,	4,	1,	29,	5,	'2023-10-03 09:33:45',	NULL),
@@ -132,15 +135,18 @@ INSERT INTO `league` (`id`, `league_name`, `league_description`, `created_at`, `
 (7,	'coucheculotte',	NULL,	'2023-10-03 15:52:29',	NULL),
 (8,	'coucheculotte2',	NULL,	'2023-10-03 15:54:40',	NULL),
 (9,	'coucheculotte3',	NULL,	'2023-10-03 15:56:13',	NULL),
-(10,	'Ligue test',	NULL,	'2023-10-09 20:39:54',	NULL),
-(11,	'Ligue vide',	NULL,	'2023-10-11 15:22:37',	NULL);
+(10,	'Ligue des fous',	'Est ce que ça marchera jusqu\'au bout ???',	'2023-10-09 20:39:54',	'2023-10-11 16:44:24'),
+(11,	'Ligue vide',	NULL,	'2023-10-11 15:22:37',	NULL),
+(12,	'Max League !',	NULL,	'2023-10-11 16:46:55',	NULL),
+(13,	'Max League !',	NULL,	'2023-10-11 16:47:09',	NULL),
+(14,	'Les nazes',	NULL,	'2023-10-12 14:29:35',	NULL);
 
 
 INSERT INTO `news` (`id`, `league_id`, `title`, `description`, `created_at`, `updated_at`) VALUES
 (1,	1,	'Début de saison pour les jusiciers',	'Aujord\'hui c\'est démo !',	'2023-10-03 09:33:45',	'2023-10-10 10:18:33'),
 (2,	2,	'Début de saison pour les Pompons',	'C\'est un nouveau jour pour nous !',	'2023-10-03 09:33:45',	NULL),
 (3,	2,	'test',	'blabla',	'2023-10-04 11:21:37',	NULL),
-(4,	10,	'C\'est fou !',	'Binvenue dans ta nouvelle ligue !',	'2023-10-10 20:26:49',	NULL);
+(4,	10,	'C\'est fou !',	'Test',	'2023-10-10 20:26:49',	'2023-10-11 16:42:58');
 
 INSERT INTO `round` (`id`, `season_id`, `league_id`, `user_id`, `name`, `category`, `created_at`, `updated_at`) VALUES
 (1,	1,	1,	2,	'round1',	'Saison Régulière',	'2023-10-03 09:33:45',	NULL),
@@ -163,7 +169,11 @@ INSERT INTO `round` (`id`, `season_id`, `league_id`, `user_id`, `name`, `categor
 (18,	1,	10,	25,	'blabla',	'saison_Reguliere',	'2023-10-10 12:55:43',	NULL),
 (19,	1,	10,	25,	'blabla2',	'saison_Reguliere',	'2023-10-10 12:55:56',	NULL),
 (20,	1,	10,	25,	'Test 2',	'saison_Reguliere',	'2023-10-11 09:15:01',	NULL),
-(21,	1,	11,	30,	'Round 1',	'saison_Reguliere',	'2023-10-11 15:27:41',	NULL);
+(21,	1,	11,	30,	'Round 1',	'saison_Reguliere',	'2023-10-11 15:27:41',	NULL),
+(22,	1,	10,	25,	'oui ou non',	'saison_Reguliere',	'2023-10-11 16:45:09',	NULL),
+(23,	1,	13,	32,	'test max',	'saison_Reguliere',	'2023-10-11 16:47:47',	NULL),
+(24,	1,	10,	25,	'test max',	'saison_Reguliere',	'2023-10-11 16:48:26',	NULL),
+(25,	1,	10,	25,	'blllaedskjfh',	'saison_Reguliere',	'2023-10-12 10:26:05',	NULL);
 
 INSERT INTO `season` (`id`, `year`, `created_at`, `updated_at`) VALUES
 (1,	'2023-2024',	'2023-10-03 09:33:45',	NULL);
@@ -280,61 +290,75 @@ INSERT INTO `srprediction` (`id`, `user_id`, `game_id`, `predicted_winnig_team`,
 (112,	26,	34,	'New York Knicks',	'25',	'Validated',	10,	20,	10,	'2023-10-10 16:00:35',	NULL),
 (113,	26,	35,	'Toronto Raptors',	'25',	'Validated',	0,	0,	0,	'2023-10-10 16:00:39',	NULL),
 (114,	27,	34,	'Boston Celtics',	'10',	'Validated',	0,	0,	0,	'2023-10-10 16:01:05',	NULL),
-(115,	27,	35,	'Cleveland Cavaliers',	'10',	'Validated',	10,	0,	0,	'2023-10-10 16:01:08',	NULL);
+(115,	27,	35,	'Cleveland Cavaliers',	'10',	'Validated',	10,	0,	0,	'2023-10-10 16:01:08',	NULL),
+(116,	26,	36,	'Toronto Raptors',	'25',	'Validated',	0,	0,	0,	'2023-10-11 16:45:59',	'2023-10-11 16:46:03');
 
-INSERT INTO `team` (`id`, `trigram`, `name`, `conference`, `logo`, `nb_selected_home`, `nb_selected_away`, `ranking`, `created_at`, `updated_at`) VALUES
-(1,	'CHA',	'Charlotte Hornets',	'Eastern',	'/CHA_1988.png',	2,	3,	NULL,	'2023-10-03 09:33:45',	NULL),
-(2,	'NYK',	'New York Knicks',	'Eastern',	'/NYK_1946.png',	0,	2,	NULL,	'2023-10-03 09:33:45',	NULL),
-(3,	'BOS',	'Boston Celtics',	'Eastern',	'/BKN_2013.png',	4,	1,	NULL,	'2023-10-03 09:33:45',	NULL),
-(4,	'TOR',	'Toronto Raptors',	'Eastern',	'/TOR_1995.png',	0,	3,	NULL,	'2023-10-03 09:33:45',	NULL),
-(5,	'CLE',	'Cleveland Cavaliers',	'Eastern',	'/CLE_1970.png',	4,	4,	NULL,	'2023-10-03 09:33:45',	NULL),
-(6,	'MIA',	'Miami Heat',	'Eastern',	'/MIA_1988.png',	4,	5,	NULL,	'2023-10-03 09:33:45',	NULL),
-(7,	'LAC',	'LA Clippers',	'Western',	'/LAC_1984.png',	4,	6,	NULL,	'2023-10-03 09:33:45',	NULL),
-(8,	'PHX',	'Phoenix Suns',	'Western',	'/PHX_1968.png',	4,	3,	NULL,	'2023-10-03 09:33:45',	NULL),
-(9,	'ATL',	'Atlanta Hawks',	'Eastern',	'/ATL_1968.png',	5,	2,	NULL,	'2023-10-03 09:33:45',	NULL),
-(10,	'CLE',	'Cleveland Cavaliers',	'Eastern',	'/CLE_1970.png',	5,	3,	NULL,	'2023-10-03 09:33:45',	NULL),
-(11,	'DAL',	'Dallas Mavericks',	'Western',	'/DAL_1980.png',	1,	3,	NULL,	'2023-10-03 09:33:45',	NULL),
-(12,	'LAL',	'Los Angeles Lakers',	'Western',	'/LAL_1960.png',	4,	3,	NULL,	'2023-10-03 09:33:45',	NULL),
-(13,	'MIA',	'Miami Heat',	'Eastern',	'/MIA_1988.png',	4,	1,	NULL,	'2023-10-03 09:33:45',	NULL),
-(14,	'MIL',	'Milwaukee Bucks',	'Eastern',	'/MIL_1969.png',	4,	2,	NULL,	'2023-10-03 09:33:45',	NULL),
-(15,	'DAL',	'Dallas Mavericks',	'Western',	'/DAL_1980.png',	3,	5,	NULL,	'2023-10-03 09:33:45',	NULL),
-(16,	'POR',	'Portland Trail Blazers',	'Western',	'/POR_1970.png',	4,	5,	NULL,	'2023-10-03 09:33:45',	NULL),
-(17,	'CHA',	'Charlotte Hornets',	'Eastern',	'/CHA_1988.png',	3,	3,	NULL,	'2023-10-03 09:33:45',	NULL),
-(18,	'NYK',	'New York Knicks',	'Eastern',	'/NYK_1946.png',	0,	1,	NULL,	'2023-10-03 09:33:45',	NULL),
-(19,	'PHI',	'Philadelphia 76ers',	'Eastern',	'/PHI_1963.png',	3,	0,	NULL,	'2023-10-03 09:33:45',	NULL),
-(20,	'TOR',	'Toronto Raptors',	'Eastern',	'/TOR_1995.png',	1,	6,	NULL,	'2023-10-03 09:33:45',	NULL);
+INSERT INTO `team` (`id`, `trigram`, `name`, `conference`, `logo`, `ranking`, `created_at`, `updated_at`) VALUES
+(1, 'ATL', 'Atlanta Hawks', 'Eastern', '/ATL_1968.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(2,	'BOS', 'Boston Celtics', 'Eastern',	'/BOS_1947.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(3, 'BKN','Brooklyn Nets',	'Eastern',	'/BKN_2013.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(4, 'CHA', 'Charlotte Hornets',	'Eastern',	'/CHA_1988.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(5,	'CHI', 'Chicago Bulls',	'Eastern',	'/CHI_1967.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(6, 'CLE', 'Cleveland Cavaliers',	'Eastern',	'/CLE_1970.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(7, 'DAL', 'Dallas Mavericks',		'Western',	'/DAL_1980.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(8,	'DEN', 'Denver Nuggets',	'Western',	'/DEN_1974.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(9, 'DET', 'Detroit Pistons',	'Eastern',	'/DET_1958.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(10, 'GSW', 'Golden State Warriors',	'Western',	'/GSW_1971.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(11, 'HOU', 'Houston Rockets',	'Western',	'/HOU_1972.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(12, 'IND', 'Indiana Pacers',	'Eastern',	'/IND_1967.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(13, 'LAC', 'Los Angeles Clippers',	'Western',	'/LAC_1984.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(14, 'LAL', 'Los Angeles Lakers',	'Western',	'/LAL_1960.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(15, 'MEM', 'Memphis Grizzlies',	'Western',	'/MEM_2001.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(16, 'MIA', 'Miami Heat',	'Eastern',	'/MIA_1988.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(17, 'MIL', 'Milwaukee Bucks',	'Eastern',	'/MIL_1969.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(18, 'MIN', 'Minnesota Timberwolves',	'Western',	'/MIN_1989.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(19, 'NOP', 'New Orleans Pelicans',	'Western',	'/NOP_2013.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(20, 'NYK', 'New York Knicks',	'Eastern',	'/NYK_1946.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(21, 'OKC', 'Oklahoma City Thunder',	'Western',	'/OKC_2008.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(22, 'ORL', 'Orlando Magic',	'Eastern',	'/ORL_1989.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(23, 'PHI', 'Philadelphia 76ers',	'Eastern',	'/PHI_1963.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(24, 'PHX', 'Phoenix Suns',		'Western',	'/PHX_1968.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(25, 'POR', 'Portland Trail Blazers',		'Western',	'/POR_1970.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(26, 'SAC', 'Sacramento Kings',		'Western',	'/SAC_1985.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(27, 'SAS', 'San Antonio Spurs',	'Western',	'/SAS_1976.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(28, 'TOR', 'Toronto Raptors',	'Eastern',	'/TOR_1995.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(29, 'UTA', 'Utah Jazz',	'Western',	'/UTA_1979.png', NULL,	'2023-10-03 09:33:45',	NULL),
+(30,'WAS', 'Washington Wizards',	'Eastern',	'/WAS_1998.png', NULL,	'2023-10-03 09:33:45',	NULL);
 
-INSERT INTO `user` (`id`, `team_id`, `league_id`, `username`, `password`, `email`, `roles`, `title`, `score`, `old_position`, `position`, `season_played`, `created_at`, `updated_at`) VALUES
-(1,	NULL,	1,	'admin',	'admin',	'admin@admin.com',	'[\"ROLE_ADMIN\"]',	'C\'est moi, Fabien! Le super Admin',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 09:33:45',	NULL),
-(2,	NULL,	1,	'DMFC',	'$2y$13$hk8mp4s3BhTxc.bXZFO90eB9liKi.xJKQNNyF8uwrwFYVFHMQB6Cy',	'dmfc@dmfc.com',	'[\"ROLE_DMFC\"]',	'C\'est moi, le maître du jeu',	NULL,	NULL,	NULL,	3,	'2023-10-03 09:33:45',	NULL),
-(3,	NULL,	2,	'DMFC2',	'dmfc2',	'dmfc2@dmfc2.com',	'[\"ROLE_DMFC\"]',	'C\'est moi, le maître du jeu N°2',	NULL,	NULL,	NULL,	3,	'2023-10-03 09:33:45',	NULL),
-(4,	12,	1,	'joueur1',	'$2y$13$hk8mp4s3BhTxc.bXZFO90eB9liKi.xJKQNNyF8uwrwFYVFHMQB6Cy',	'joueur1@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 1',	29,	2,	1,	3,	'2023-10-03 09:33:45',	NULL),
-(5,	2,	1,	'joueur2',	'joueur2',	'joueur2@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 2',	30,	4,	5,	3,	'2023-10-03 09:33:45',	NULL),
-(6,	15,	1,	'joueur3',	'$2y$13$hk8mp4s3BhTxc.bXZFO90eB9liKi.xJKQNNyF8uwrwFYVFHMQB6Cy',	'joueur3@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 3',	48,	4,	4,	3,	'2023-10-03 09:33:45',	NULL),
-(7,	2,	1,	'joueur4',	'joueur4',	'joueur4@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 4',	23,	3,	3,	3,	'2023-10-03 09:33:45',	NULL),
-(8,	7,	1,	'joueur5',	'joueur5',	'joueur5@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 5',	17,	1,	5,	3,	'2023-10-03 09:33:45',	NULL),
-(9,	NULL,	2,	'joueur6',	'joueur6',	'joueur6@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 6',	26,	2,	4,	3,	'2023-10-03 09:33:45',	NULL),
-(10,	NULL,	2,	'joueur7',	'joueur7',	'joueur7@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 7',	13,	3,	1,	3,	'2023-10-03 09:33:45',	NULL),
-(11,	NULL,	2,	'joueur8',	'joueur8',	'joueur8@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 8',	45,	3,	4,	3,	'2023-10-03 09:33:45',	NULL),
-(12,	NULL,	2,	'joueur9',	'joueur9',	'joueur9@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 9',	36,	3,	1,	3,	'2023-10-03 09:33:45',	NULL),
-(13,	NULL,	2,	'joueur10',	'joueur10',	'joueur10@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 10',	28,	1,	1,	3,	'2023-10-03 09:33:45',	NULL),
-(14,	13,	1,	'Maxime',	'$2y$13$ogTLdvDEkiVcjJag2tK.EOhZKrs4VotRlV/Zc9iSHD5szhbTXgMZu',	'm@m.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 09:35:40',	NULL),
-(15,	5,	1,	'Fabien',	'$2y$13$hk8mp4s3BhTxc.bXZFO90eB9liKi.xJKQNNyF8uwrwFYVFHMQB6Cy',	'f@f.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 09:39:34',	NULL),
-(16,	NULL,	3,	'FabienDMFC',	'$2y$13$UyIg8MV1t7PN/zpz1TuYe.RQk.qrHqYfgS87Rw4BQMooVzUJBEjBC',	'dmfc@d.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 10:00:04',	NULL),
-(17,	NULL,	4,	'DMFCfront',	'$2y$13$KQ0AGnyCoAdnWD2ThKyGeOaCF.BCNmx45V7Qi82z.ttTonKmQOaQ2',	't@t.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 10:00:07',	NULL),
-(18,	NULL,	3,	'Charli',	'$2y$13$lqBNRLryavn6PB3cJ0tvTuOlBXeYSI4uOzyHi66d8gSJtexlMndwG',	'charlirussell2491@gmail.com',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 10:20:34',	NULL),
-(19,	NULL,	3,	'Charli91',	'$2y$13$0lgA87anSOpuBnM3YqYKv..8MLA9fTWvTss0V5VmjNJJ2wmjdLd8K',	'charlotte.russell@oclock.school',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 10:21:35',	NULL),
-(20,	NULL,	5,	'FabDMFC',	'$2y$13$NppCo3dz.sTNtlN8/uP2feJLQW5m4v4z2CMtzeV5fDyD3x4wiH9gS',	'aezad@adzad.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 13:40:31',	NULL),
-(21,	NULL,	6,	'SuperDMFC',	'$2y$13$5p1v05YGZGEexJFrfVbFROCFj1BlEqcSlLY.Z92G26nh.VGy/JATe',	'sd@pp.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 15:29:46',	NULL),
-(22,	NULL,	7,	'Gaspard',	'$2y$13$ULB.OLRaQvkS5LJzr/LFtODKUkBpzMWcTBVe8dq31SHy3tiMrgYUq',	'qsd@xn--sdkjh-fra.efgz',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 15:52:30',	NULL),
-(23,	NULL,	8,	'Gaspard2',	'$2y$13$wTuKRjPSeyUoNVYcRv55oO/krruUZl4P1uVwgsKwCMwTE1pPiXNya',	'qsdaze@azedl.frr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 15:54:41',	NULL),
-(24,	NULL,	9,	'Gaspard3',	'$2y$13$ydcVxpE0pgo6EQFOhJlJXuZpAQIrjK0PgdpB.WELPIJZk4tEHXTPi',	'qsde@azedl.frr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-03 15:56:14',	NULL),
-(25,	NULL,	10,	'DMFCTest',	'$2y$13$HKAvCoV8psHkCVXzo.tC9OyOFqUp.mnM06M7l93y5z0qD67vvOg9.',	'dm@fc.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-09 20:39:55',	NULL),
-(26,	NULL,	10,	'Quentin',	'$2y$13$7g35xLvJDcFqwWs24FPQwur2K/ZwU12GWGjKHLcdAGuh49U3lCSdO',	'q@r.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	90,	NULL,	NULL,	NULL,	'2023-10-09 20:42:09',	NULL),
-(27,	NULL,	10,	'Fabien2',	'$2y$13$nMzWwLSOkqkEKW2mbqjYt.X6xzrt9MCDzMe/QXk7nwQqGd42Z1BIG',	'f2@f.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	10,	NULL,	NULL,	NULL,	'2023-10-10 15:57:00',	NULL),
-(28,	NULL,	10,	'charli25',	'$2y$13$FznJPC5RwHfsrsVNVH5biOLcmKICobrJatagot7QCKuBOyaVmj1vK',	'c@c.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-11 09:38:14',	NULL),
-(29,	NULL,	NULL,	'Tony25',	'$2y$13$xv/WdkZvbKNhDc5w.qr7ruGfrsvooNTC4mPgcQpo0txy4mur/0EG6',	't25@t.fr',	'[\"ROLE_JOUEUR_NA\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-11 09:53:31',	NULL),
-(30,	NULL,	11,	'DMFCVide',	'$2y$13$tN0ohEQIY6Y2j11DjgcTFeSzWV2om9P/SDoqS4rbPJ5AuVuwJGOlS',	'dm@dm.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-11 15:22:38',	NULL),
-(31,	NULL,	11,	'fabienTest',	'$2y$13$JqE02QoOgi/Apf4tVwFRXuG8gFwseo3KmXOJvGna1NyXjbfwOd4r.',	'ft@f.fr',	'[\"ROLE_JOUEUR_NA\"]',	NULL,	NULL,	NULL,	NULL,	NULL,	'2023-10-11 15:52:39',	NULL);
+INSERT INTO `user` (`id`, `team_id`, `league_id`, `username`, `password`, `email`, `roles`, `title`, `score`, `old_position`, `season_played`, `created_at`, `updated_at`) VALUES
+(1,	NULL,	1,	'admin',	'admin',	'admin@admin.com',	'[\"ROLE_ADMIN\"]',	'C\'est moi, Fabien! Le super Admin',	NULL,	NULL,	NULL,	'2023-10-03 09:33:45',	NULL),
+(2,	NULL,	1,	'DMFC',	'$2y$13$hk8mp4s3BhTxc.bXZFO90eB9liKi.xJKQNNyF8uwrwFYVFHMQB6Cy',	'dmfc@dmfc.com',	'[\"ROLE_DMFC\"]',	'C\'est moi, le maître du jeu',	NULL,	NULL,	3,	'2023-10-03 09:33:45',	NULL),
+(3,	NULL,	2,	'DMFC2',	'dmfc2',	'dmfc2@dmfc2.com',	'[\"ROLE_DMFC\"]',	'C\'est moi, le maître du jeu N°2',	NULL,	NULL,	3,	'2023-10-03 09:33:45',	NULL),
+(4,	12,	1,	'joueur1',	'$2y$13$hk8mp4s3BhTxc.bXZFO90eB9liKi.xJKQNNyF8uwrwFYVFHMQB6Cy',	'joueur1@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 1',	29,	2, 3,	'2023-10-03 09:33:45',	NULL),
+(5,	2,	1,	'joueur2',	'joueur2',	'joueur2@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 2',	30,	4,	3,	'2023-10-03 09:33:45',	NULL),
+(6,	15,	1,	'joueur3',	'$2y$13$hk8mp4s3BhTxc.bXZFO90eB9liKi.xJKQNNyF8uwrwFYVFHMQB6Cy',	'joueur3@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 3',	48,	4,	3,	'2023-10-03 09:33:45',	NULL),
+(7,	2,	1,	'joueur4',	'joueur4',	'joueur4@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 4',	23,	3,	3,	'2023-10-03 09:33:45',	NULL),
+(8,	7,	1,	'joueur5',	'joueur5',	'joueur5@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 5',	17,	1,	3,	'2023-10-03 09:33:45',	NULL),
+(9,	NULL,	2,	'joueur6',	'joueur6',	'joueur6@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 6',	26,	2,	3,	'2023-10-03 09:33:45',	NULL),
+(10,	NULL,	2,	'joueur7',	'joueur7',	'joueur7@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 7',	13,	3,	3,	'2023-10-03 09:33:45',	NULL),
+(11,	NULL,	2,	'joueur8',	'joueur8',	'joueur8@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 8',	45,	3,	3,	'2023-10-03 09:33:45',	NULL),
+(12,	NULL,	2,	'joueur9',	'joueur9',	'joueur9@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 9',	36,	3,	3,	'2023-10-03 09:33:45',	NULL),
+(13,	NULL,	2,	'joueur10',	'joueur10',	'joueur10@example.com',	'[\"ROLE_JOUEUR\"]',	'C\'est moi, le joueur 10',	28,	1,	3,	'2023-10-03 09:33:45',	NULL),
+(14,	13,	1,	'Maxime',	'$2y$13$ogTLdvDEkiVcjJag2tK.EOhZKrs4VotRlV/Zc9iSHD5szhbTXgMZu',	'm@m.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 09:35:40',	NULL),
+(15,	5,	1,	'Fabien',	'$2y$13$hk8mp4s3BhTxc.bXZFO90eB9liKi.xJKQNNyF8uwrwFYVFHMQB6Cy',	'f@f.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 09:39:34',	NULL),
+(16,	NULL,	3,	'FabienDMFC',	'$2y$13$UyIg8MV1t7PN/zpz1TuYe.RQk.qrHqYfgS87Rw4BQMooVzUJBEjBC',	'dmfc@d.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 10:00:04',	NULL),
+(17,	NULL,	4,	'DMFCfront',	'$2y$13$KQ0AGnyCoAdnWD2ThKyGeOaCF.BCNmx45V7Qi82z.ttTonKmQOaQ2',	't@t.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 10:00:07',	NULL),
+(18,	NULL,	3,	'Charli',	'$2y$13$lqBNRLryavn6PB3cJ0tvTuOlBXeYSI4uOzyHi66d8gSJtexlMndwG',	'charlirussell2491@gmail.com',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 10:20:34',	NULL),
+(19,	NULL,	3,	'Charli91',	'$2y$13$0lgA87anSOpuBnM3YqYKv..8MLA9fTWvTss0V5VmjNJJ2wmjdLd8K',	'charlotte.russell@oclock.school',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 10:21:35',	NULL),
+(20,	NULL,	5,	'FabDMFC',	'$2y$13$NppCo3dz.sTNtlN8/uP2feJLQW5m4v4z2CMtzeV5fDyD3x4wiH9gS',	'aezad@adzad.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 13:40:31',	NULL),
+(21,	NULL,	6,	'SuperDMFC',	'$2y$13$5p1v05YGZGEexJFrfVbFROCFj1BlEqcSlLY.Z92G26nh.VGy/JATe',	'sd@pp.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 15:29:46',	NULL),
+(22,	NULL,	7,	'Gaspard',	'$2y$13$ULB.OLRaQvkS5LJzr/LFtODKUkBpzMWcTBVe8dq31SHy3tiMrgYUq',	'qsd@xn--sdkjh-fra.efgz',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 15:52:30',	NULL),
+(23,	NULL,	8,	'Gaspard2',	'$2y$13$wTuKRjPSeyUoNVYcRv55oO/krruUZl4P1uVwgsKwCMwTE1pPiXNya',	'qsdaze@azedl.frr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 15:54:41',	NULL),
+(24,	NULL,	9,	'Gaspard3',	'$2y$13$ydcVxpE0pgo6EQFOhJlJXuZpAQIrjK0PgdpB.WELPIJZk4tEHXTPi',	'qsde@azedl.frr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-03 15:56:14',	NULL),
+(25,	NULL,	10,	'DMFCTest',	'$2y$13$HKAvCoV8psHkCVXzo.tC9OyOFqUp.mnM06M7l93y5z0qD67vvOg9.',	'dm@fc.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-09 20:39:55',	NULL),
+(26,	16,	10,	'Quentin',	'$2y$13$7g35xLvJDcFqwWs24FPQwur2K/ZwU12GWGjKHLcdAGuh49U3lCSdO',	'qt@r.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	90,	1,	NULL,	'2023-10-09 20:42:09',	'2023-10-12 10:48:33'),
+(27,	9,	10,	'Fabien25',	'$2y$13$dZdYjh8a111ZAxByUKiGj.AFkM4n8bnn/acK3DUkCQATVFsp4spzy',	'f25@f.fr',	'[\"ROLE_JOUEUR\"]',	'Test',	10,	2,	NULL,	'2023-10-10 15:57:00',	'2023-10-12 12:33:24'),
+(28,	NULL,	10,	'charli25',	'$2y$13$FznJPC5RwHfsrsVNVH5biOLcmKICobrJatagot7QCKuBOyaVmj1vK',	'c@c.fr',	'[\"ROLE_JOUEUR\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-11 09:38:14',	'2023-10-12 13:26:23'),
+(29,	NULL,	NULL,	'Tony25',	'$2y$13$xv/WdkZvbKNhDc5w.qr7ruGfrsvooNTC4mPgcQpo0txy4mur/0EG6',	't25@t.fr',	'[\"ROLE_JOUEUR_NA\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-11 09:53:31',	NULL),
+(30,	NULL,	11,	'DMFCVide',	'$2y$13$tN0ohEQIY6Y2j11DjgcTFeSzWV2om9P/SDoqS4rbPJ5AuVuwJGOlS',	'dm@dm.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-11 15:22:38',	NULL),
+(31,	NULL,	11,	'fabienTest',	'$2y$13$JqE02QoOgi/Apf4tVwFRXuG8gFwseo3KmXOJvGna1NyXjbfwOd4r.',	'ft@f.fr',	'[\"ROLE_JOUEUR_NA\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-11 15:52:39',	NULL),
+(32,	NULL,	13,	'maxime2023',	'$2y$13$Yl4F/kkJ5GhV3mU/q4d7S.tR3d2q98Coowh/paOJVYEVRrrHyYvWi',	'max@j.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-11 16:47:10',	NULL),
+(33,	NULL,	NULL,	'maxTo',	'$2y$13$yctJbzxpDb3k8HEoanHh0.NgHHBV48OZlFvQFYT0z9hWMEBR0cgFK',	'mt@tt.fr',	'[\"ROLE_JOUEUR_NA\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-11 16:49:02',	NULL),
+(34,	NULL,	14,	'Batard',	'$2y$13$za88v/7TH4O8dIsmSgemQOnERyBqdsFjqevXqCJoaTNAf1WzLHPwC',	'ba@mm.fr',	'[\"ROLE_DMFC\"]',	NULL,	NULL,	NULL,	NULL,	'2023-10-12 14:29:36',	NULL);
 
--- 2023-10-11 14:37:12
+-- 2023-10-12 12:37:42

@@ -5,6 +5,7 @@ import { checkLogin, createLeague, createUser, setErrorMessage, setInputValue, s
 
 import Wrapper from "../Wrapper/Wrapper";
 import Input from "../Utils/Input";
+import Page from '../Page/Page';
 
 import './Connexion.scss';
 import Strength from "./AddOn/Strength";
@@ -63,16 +64,17 @@ const Connexion = () => {
   }
 
   return (
-    <Wrapper name="connexion">
-      <h2>Connexion</h2>
-      <form onSubmit={handleSubmit}>
-          <Input label="Login :" htmlFor="pseudo" id="pseudo" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo" isRequired={true}/>
-          {isCreationMode &&
-            <div className="special-input">
-              <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com" isRequired={true}/>
-              {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
-            </div>
-          }
+    <Page>
+      <Wrapper name="connexion">
+        <h2>Connexion</h2>
+        <form onSubmit={handleSubmit}>
+            <Input label="Login :" htmlFor="pseudo" id="pseudo" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo" isRequired={true}/>
+            {isCreationMode &&
+              <div className="special-input">
+                <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com" isRequired={true}/>
+                {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
+              </div>
+            }
           <div className="special-input" id="passwordInput">
             <Input label="Mot de passe :" htmlFor="password" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
             {(isCreationMode && password !== "") && <Strength password={password} /> }
@@ -120,6 +122,7 @@ const Connexion = () => {
       </form>
       {errorMessage !== '' && <p className="error-message">{errorMessage}</p>}
     </Wrapper>
+  </Page>
   )
 };
 

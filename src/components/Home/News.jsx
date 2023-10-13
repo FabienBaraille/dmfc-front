@@ -1,9 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useDispatch, useSelector } from 'react-redux';
 import Wrapper from '../Wrapper/Wrapper';
-import { postNewsChange, postNewsCreation, setNews, setNewsCreationMode } from '../../actions/news';
+import { getNews, postNewsChange, postNewsCreation, setNews, setNewsCreationMode } from '../../actions/news';
 import Input from '../Utils/Input';
-
 
 const News = () => {
   const dispatch = useDispatch()

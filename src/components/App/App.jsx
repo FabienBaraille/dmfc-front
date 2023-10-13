@@ -7,7 +7,7 @@ import { getCookies } from "../../Utils/cookies/getCookies";
 
 import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getLeague, getRounds, getSeason, getAllTeams, getUsersList } from "../../actions/datas";
-import { getNews } from "../../actions/news";
+import { getNews, postNewsCreation, setNews } from "../../actions/news";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
 import PlayerRoute from "./ProtectedRoute/PlayerRoute";
@@ -68,6 +68,7 @@ const App = () => {
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible);
   const rounds = useSelector((state) => state.datas.rounds);
   const userRole = useSelector((state) => state.user.loggedUser);
+  const newsId = useSelector((state) => state.datas.newsId);
 
   useEffect(() => {
     dispatch(getAllLeague());

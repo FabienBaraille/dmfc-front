@@ -77,6 +77,11 @@
     label, input, select  {
       margin-right: 1em;
     }
+  .password-input {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
   }
 };
 

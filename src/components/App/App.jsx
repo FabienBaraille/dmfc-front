@@ -36,6 +36,7 @@ import LeagueManagement from "../LeagueManagement/LeagueManagement";
 import Modal from "../Utils/Modal/Modal";
 import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
+import CheatSheets from '../CheatSheets/CheatSheets';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -117,6 +118,7 @@ const App = () => {
             </Route>
             <Route path='/roundsStat' element={<RoundStats />} />
           </Route>
+          <Route path='/cheatsheets' element={<CheatSheets />} />
           <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
           <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
           <Route path='/logout' element={<Logout />} />

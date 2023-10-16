@@ -46,9 +46,7 @@ const CheatSheets = () => {
     <Wrapper>
       <h2>Cheat Sheets</h2>
       <p className="paragraph">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates aperiam suscipit ratione debitis quas odit,
-        architecto veritatis accusamus numquam at voluptatibus facilis, culpa iste omnis, eveniet consectetur velit magni
-        itaque?
+        Tu trouveras ici en ensemble de liens te permettant de glaner des informations utiles pour t'aider dans tes pronostics
       </p>
         <div className='titles'>
           <h2>Roster</h2>
@@ -59,38 +57,38 @@ const CheatSheets = () => {
               <div className="roster-east">
                 <button className='pop-up-click' onClick={toggleRosterPopUp}>EAST</button>
                 {isRosterPopUpOpen && (
-                <div className='pop-up-container'>
-                  <button className='close-button' onClick={toggleRosterPopUp}>X</button>
+                  <div className='pop-up-container'>
+                    <button className='close-button' onClick={toggleRosterPopUp}>X</button>
                     <ul>
-                        <div className='left-column-re'>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hawks/roster')}>ATL</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/celtics/roster')}>BOS</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/nets/roste')}>BKN</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hornets/roster')}>CHA</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bulls/roster')}>CHI</a></li>
-                        </div>
-                      </ul>
-                      <ul>
-                        <div className='middle-column-re'>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/cavaliers/roster')}>CLE</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pistons/roster')}>DET</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pacers/roster')}>IND</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/heat/roster')}>MIA</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bucks/roster')}>MIL</a></li>
-                        </div>
-                      </ul>
-                      <ul>
-                        <div className='right-column-re'>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/knicks/roster?icmp=int_knicks_roster_parent_nav_190514')}>NYK</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/magic/roster')}>ORL</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/sixers/roster')}>PHI</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/raptors/roster')}>TOR</a></li>
-                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/wizards/roster')}>WAS</a></li>
-                        </div>
-                      </ul>
+                      <div className='left-column-re'>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hawks/roster')}>ATL</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/celtics/roster')}>BOS</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/nets/roste')}>BKN</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hornets/roster')}>CHA</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bulls/roster')}>CHI</a></li>
+                      </div>
+                    </ul>
+                    <ul>
+                      <div className='middle-column-re'>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/cavaliers/roster')}>CLE</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pistons/roster')}>DET</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pacers/roster')}>IND</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/heat/roster')}>MIA</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bucks/roster')}>MIL</a></li>
+                      </div>
+                    </ul>
+                    <ul>
+                      <div className='right-column-re'>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/knicks/roster?icmp=int_knicks_roster_parent_nav_190514')}>NYK</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/magic/roster')}>ORL</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/sixers/roster')}>PHI</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/raptors/roster')}>TOR</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/wizards/roster')}>WAS</a></li>
+                      </div>
+                    </ul>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
               <div className="roster-west">
                 <button className='pop-up-click' onClick={toggleRosterWestPopUp}>WEST</button>
                 {isRosterWestPopUpOpen && (

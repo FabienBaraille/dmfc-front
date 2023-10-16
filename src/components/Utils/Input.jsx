@@ -10,22 +10,24 @@ const Input = ({label, htmlFor, type, value, id, className = null, onChange = nu
   return (
     <div className={className}>
       <label htmlFor={htmlFor}>{label}</label>
-      <input 
-        name={inputName}
-        type={id !== 'password' ? type : hide ? type : 'text'}
-        id={id} 
-        onChange={onChange} 
-        defaultValue={value}
-        placeholder={placeholder}
-        required={isRequired}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
-      {id === 'password' && 
-        <span onClick={() => setHide(!hide)}>
-          <div className={hide ? 'eye-open' : 'eye-close'}></div>
-        </span>
-      }
+      <div className='input-field'>
+        <input 
+          name={inputName}
+          type={id !== 'password' ? type : hide ? type : 'text'}
+          id={id} 
+          onChange={onChange} 
+          defaultValue={value}
+          placeholder={placeholder}
+          required={isRequired}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+        {id === 'password' && 
+          <span onClick={() => setHide(!hide)}>
+            <div className={hide ? 'eye-open' : 'eye-close'}></div>
+          </span>
+        }
+      </div>
     </div>
   )
 };

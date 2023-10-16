@@ -11,16 +11,13 @@
       justify-content: space-between;
       align-items: center;
     }
-    .dmfc-opt {
-      justify-content: space-evenly;
-    }
   }
   div {
     margin: 0.7rem 0;
     display: flex;
   }
   label {
-    width: 35%;
+    width: 40%;
   }
   label, button {
     font-family: v.$main-font;
@@ -38,12 +35,10 @@
     width: 200px;
   }
   .special-input {
-    flex-direction: column;
-    align-items: end;
     div {
       margin: 0.2rem 0;
       width: 100%;
-      justify-content: space-between;
+      align-items: center;
     }
     p {
       margin: 0.2rem 0;
@@ -56,8 +51,10 @@
       top: 33px;
       right: 0px;
       flex-wrap: nowrap;
-      align-items: center;
-      width: 300px;
+      width: 200px;
+    }
+    p {
+      margin-right: 5px;
     }
   }
   .password {
@@ -94,6 +91,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 0;
     button {
       width: 70%;
       margin: 0.3rem 0;
@@ -105,22 +103,31 @@
         color: v.$nav-back;
       }
     }
+    .forgotten {
+      margin-top: 10px;
+      font-size: 1rem;
+      text-decoration: underline;
+      color: rgb(194, 0, 0);
+      text-shadow: 0 0 2px v.$shadow;
+    }
   }
 }
-#logout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  button {
-    margin-top: 30px;
+  #logout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    button {
+      margin-top: 30px;
   }
 }
 
 @media screen and (min-width : 768px) {
   #connexion {
-    width: 30%;
-    align-items: center;
+    width: 45%;
+    .login, .password, .leagueChoice, .leagueCreation, #passwordInput, .mailContainer, .dmfc-opt {
+      width: 85%;
+    }
   }
   .form-btn {
     width: 280px;
@@ -130,23 +137,6 @@
     button {
       width: fit-content;
       padding: 0 10px;
-    }
-  }
-}
-
-@media screen and (min-width : 1050px) {
-  #connexion {
-    .login, .password, .leagueChoice, .leagueCreation, #passwordInput, .mailContainer, .dmfc-opt {
-      width: 85%;
-    }
-    form .dmfc-opt {
-      justify-content: flex-start;
-    }
-    input, select {
-      width: 300px
-    }
-    form {
-      width: 100%;
     }
   }
 }

@@ -38,7 +38,7 @@ const PlayerBet = () => {
   }
   return (
     <Wrapper name="player_bet">
-    <h2>Pronostique SR</h2>
+    <h2>Pronostics SR</h2>
     <h2>{`${rounds[rounds.length-1].name}`}</h2>
       <div className="player_bet">
         {betList}

@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { getCookies } from "../../Utils/cookies/getCookies";
 
-import { setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
+import { setInputValue, setIsCreated, setIsLogged, setUserInfos, toggleCreationMode } from "../../actions/user";
 import { getAllLeague, getDatasStart } from "../../actions/datas";
 
 import DMFCRoute from "./ProtectedRoute/DMFCRoute";
@@ -74,6 +74,7 @@ const App = () => {
         navigate('/profil');
       } else {
         navigate('/');
+        dispatch(setInputValue('password', ''));
         dispatch(getDatasStart());
       }
     } else {
@@ -117,8 +118,8 @@ const App = () => {
               <Route path='/league-management' element={<LeagueManagement />} />
             </Route>
             <Route path='/roundsStat' element={<RoundStats />} />
+            <Route path='/cheatsheets' element={<CheatSheets />} />
           </Route>
-          <Route path='/cheatsheets' element={<CheatSheets />} />
           <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
           <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
           <Route path='/logout' element={<Logout />} />

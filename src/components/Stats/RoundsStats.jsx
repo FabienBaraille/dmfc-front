@@ -25,7 +25,7 @@ const RoundStats = () => {
           return (
             <div key={id} className="bet_result player-stat">
               <h5>{`Match ${index+1}`} </h5>
-              <p>Pas de pronostique non réalisé</p>
+              <p>Pas de pronostic</p>
             </div>
           )
         }

@@ -1,4 +1,4 @@
-@use '../../styles/variables' as v;
+@use '/src/styles/variables' as v;
 
 .paragraph {
   line-height: 1.5em;
@@ -20,7 +20,7 @@
 }
 .pop-up-boxes {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
 }
 .pop-up-click {
   border: 1px solid v.$shadow;
@@ -30,33 +30,14 @@
   display: block;
   gap: 12em;
   margin: 1.5em;
-
-  .left-column-re, .left-column-rw, .left-column-se, .left-column-sw {
+  .column {
     display: flex;
-    align-self: flex-start;
-    margin: 0.2em;
-  }
-
-  .middle-column-re, .middle-column-rw, .middle-column-se, .middle-column-sw {
-    display: flex;
-    align-self: center;
-    margin: 0.2em;
-
-  }
-  .right-column-re, .right-column-rw, .right-column-se, .right-column-sw {
-    display: flex;
-    align-self: flex-end;
-    margin: 0.2em;
-  }
-
-
-  .left-column-re, .left-column-rw, .left-column-se, .left-column-sw,
-  .middle-column-re, .middle-column-rw, .middle-column-se, .middle-column-sw, 
-  .right-column-re, .right-column-rw, .right-column-se, .right-column-sw {
+    justify-content: space-between;
     li {
       a {
         display: block;
-        padding: 5px 10px;
+        padding: 3px;
+        width: 45px;
         border: 1px solid v.$shadow;
         margin-bottom: 5px;
         text-align: center;
@@ -68,5 +49,14 @@
       }
     }
   }
+}
 
+@media screen and (min-width : 768px) {
+  .pop-up-boxes {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .rosters, .schedules {
+    width: 45%;
+  }
 }

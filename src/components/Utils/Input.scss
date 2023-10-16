@@ -10,11 +10,16 @@
 
 .password {
   align-items: center;
+  
+}
+.input-field {
+  justify-content: flex-end;
+  position: relative;
   span {
     position: absolute;
     right: 5px;
     div {
-      width: 20px;
+      height: 20px;
     }
   }
 }

@@ -1,7 +1,6 @@
 @use '../../styles/variables' as v;
 
 #profil-page {
-  margin-top: 3em;
   width: 90%
 };
 
@@ -28,11 +27,13 @@
 .change-info {
   display: flex;
   line-height: 1em;
+  align-items: center;
   div {
     margin: 0.2rem 0;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+    width: auto;
     label {
       font-family: v.$main-font;
       font-size: 1.1rem;
@@ -59,11 +60,19 @@
         color: v.$orange;
         border: unset;
         width: fit-content;
+        font-size: 1rem;
         &:hover {
           background: v.$orange;
           color: v.$nav-back;
         }
       }
+    }
+  }
+  .wrapper-strength {
+    flex-direction: row;
+    justify-content: center;
+    p {
+      margin-right: 5px;
     }
   }
 };
@@ -72,58 +81,43 @@
 @media screen and (min-width: 768px) {
   .change-info {
     div {
-      flex-direction: row;
+      flex-flow: row nowrap;
+      width: auto;
+      justify-content: space-between;
+    }
+    .changeContainer, .inputContainer {
+      width: 90%;
+    }
+    input {
+      width: 250px;
     }
     label, input, select  {
       margin-right: 1em;
     }
-  .password-input {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-  }
-  }
-};
-
-@media screen and (min-width: 1024px) {
-  #profil-page, #profil-change {
-    max-height: 100vh;
-    margin-top: 3em;
-  }
-  #profil-change {
-    width: fit-content;
-    .changeContainer {
-      width: 100%;
+    .password-input {
       display: flex;
-      justify-content: space-between;
-    }
-    .inputContainer {
-      width: 81%;
-      place-content: space-between;
+      flex-direction: column;
+      align-items: end;
     }
     #passwordInput {
       position: relative;
       .wrapper-strength{
         position: absolute;
-        top: 28px;
-        right: 105px;
+        top: 38px;
+        right: 100px;
         flex-wrap: nowrap;
-        align-items: center;
+        width: 200px;
+      }
+      p {
+        margin-right: 5px;
+      }
+      span {
+        right: 20px;
+        top: unset;
       }
     }
   }
-  #profil-page {
-    width: fit-content;
-    min-width: 25%;
-  }
-  .profil {
-    align-self: flex-start;
-    line-height: 3em;
-  }
-  .change-info {
-    line-height: 3em;
-    div {
-      align-items: baseline;
-    }
+  .password {
+    position: relative;
   }
 };

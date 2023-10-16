@@ -44,16 +44,16 @@ const Strength = ({password}) => {
   };
   return (
     <div className="wrapper-strength">
+      {password && (
+          <p className={`pwd-label label strength-${initPwdChecker().val}`}>
+            <strong>{initPwdChecker().val} </strong>
+          </p>
+      )}
         <progress
           className={`pwd-checker-bar strength-${initPwdChecker().val}`}
           value={initPwdChecker().strength}
           max="4"
         />
-        {password && (
-            <p className={`pwd-label label strength-${initPwdChecker().val}`}>
-              <strong>{initPwdChecker().val} </strong>
-            </p>
-        )}
     </div>
   );
 };

@@ -1,4 +1,5 @@
-@use '/src/styles/variables' as v;
+@use '../../styles/variables' as v;
+
 
 .paragraph {
   line-height: 1.5em;
@@ -8,14 +9,14 @@
 }
 .titles {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .usefull-links {
   margin-top: 1em;
 }
 .links {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 .pop-up-boxes {
@@ -24,39 +25,78 @@
 }
 .pop-up-click {
   border: 1px solid v.$shadow;
-  background-color: v.$orange-clear;
+  color: v.$orange;
+  background-color: v.$nav-back;
+  padding: 0.6em;
 }
 .roster-east, .roster-west, .schedules-east, .schedules-west{
   display: block;
-  gap: 12em;
   margin: 1.5em;
-  .column {
+
+  .left-column-re, .left-column-rw, .left-column-se, .left-column-sw {
     display: flex;
-    justify-content: space-between;
+    align-self: flex-start;
+    margin: 0.2em;
+  }
+  .middle-column-re, .middle-column-rw, .middle-column-se, .middle-column-sw {
+    display: flex;
+    align-self: center;
+    margin: 0.2em;
+  }
+  .right-column-re, .right-column-rw, .right-column-se, .right-column-sw {
+    display: flex;
+    align-self: flex-end;
+    margin: 0.2em;
+  }
+
+  .left-column-re, .left-column-rw, .left-column-se, .left-column-sw,
+  .middle-column-re, .middle-column-rw, .middle-column-se, .middle-column-sw, 
+  .right-column-re, .right-column-rw, .right-column-se, .right-column-sw {
     li {
       a {
         display: block;
-        padding: 3px;
-        width: 45px;
+        padding: 0.5em 0.75em;
         border: 1px solid v.$shadow;
-        margin-bottom: 5px;
+        margin-bottom: 0.3em;
         text-align: center;
         text-decoration: none;
         color: v.$orange;
         background-color: v.$nav-back;
-        border-radius: 4px;
+        border-radius: 0.3em;
         cursor: pointer;
+        font-family: v.$main-font;
       }
     }
   }
 }
-
-@media screen and (min-width : 768px) {
-  .pop-up-boxes {
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  .rosters, .schedules {
-    width: 45%;
+.pop-up-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: v.$shadow-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; 
+.close-button {
+  position: sticky;
+  background: transparent;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: v.$orange;
+  right: 0.5em;
+  top: 19em;
+  font-family: "Days One";
   }
 }
+
+@media screen and (min-width : 768px) {
+  .pop-up-click {
+    padding-right: 1.2em;
+  }
+  }
+

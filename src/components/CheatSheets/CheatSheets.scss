@@ -12,7 +12,7 @@
   justify-content: space-evenly;
 }
 .usefull-links {
-  margin-top: 1em;
+  margin: 1em;
 }
 .links {
   display: flex;
@@ -81,6 +81,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1; 
+  caret-color: v.$orange;
 .close-button {
   position: sticky;
   background: transparent;

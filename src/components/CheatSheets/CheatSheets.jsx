@@ -44,13 +44,13 @@ const CheatSheets = () => {
 
   return (
     <Wrapper>
-      <h2>Cheat Sheets</h2>
+      <h2>Infos NBA</h2>
       <p className="paragraph">
-        Tu trouveras ici en ensemble de liens te permettant de glaner des informations utiles pour t'aider dans tes pronostics
+        Tu trouveras ici un ensemble de liens te permettant de rassembler des informations utiles pour t'aider dans tes pronostics.
       </p>
         <div className='titles'>
           <h2>Roster</h2>
-          <h2>Schedules</h2>
+          <h2>Calendriers</h2>
         </div>
         <div className='pop-up-boxes'>
             <div className="rosters">
@@ -201,12 +201,7 @@ const CheatSheets = () => {
           </div>
         </div>
         <h3 className ='usefull-links'>Liens Utiles</h3> 
-          <div className='links'>  
-            <div>
-              <a onClick={() => openLinkInNewWindow('https://ldlcasvel.com/billetterie/calendrier/')}>
-                <h4>Asvel</h4>
-              </a>
-            </div>
+          <div className='links'>
             <div>
               <a onClick={() => openLinkInNewWindow('https://www.youtube.com/channel/UCcMGbm0EYWh1SZZ8MsM75tw')}>
                 <h4>NBA Extra</h4>

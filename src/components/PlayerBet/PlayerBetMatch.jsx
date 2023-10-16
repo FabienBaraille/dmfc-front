@@ -77,7 +77,8 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
           <input 
             type="number" 
             id="diff" 
-            onChange={(event) => setWinDif(event.target.value)} 
+            onChange={(event) => setWinDif(event.target.value)}
+            min="0"
             defaultValue={winDif} 
             disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} />
         </div>

@@ -25,15 +25,21 @@ const RoundStats = () => {
           return (
             <div key={id} className="bet_result player-stat">
               <h5>{`Match ${index+1}`} </h5>
-              <p>Pas de pronostic</p>
+              <p>Le pronostic n'a pas été réalisé</p>
             </div>
           )
         }
       }) :
-      <Wrapper name="player-stat">
-        <p>Pas de match pour ce round</p>
-      </Wrapper>;
+      <p>Pas de match pour ce round</p>;
 
+  if (allPrediction.length === 0) {
+    return (
+        <Wrapper name='no-history'>
+          <h5>Sans pronostics, pas de stats !</h5>
+          <p>Commence par jouer !</p>
+        </Wrapper>
+    )
+  }
   return (
       <div className='rounds-stats'>
         <Wrapper name='round-history'>

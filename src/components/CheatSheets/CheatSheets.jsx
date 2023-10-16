@@ -11,18 +11,30 @@ const CheatSheets = () => {
 
   const toggleRosterPopUp = () => {
     setRosterPopUpOpen(!isRosterPopUpOpen);
+    setSchedulesPopUpOpen(false);
+    setRosterWestPopUpOpen(false);
+    setSchedulesWestPopUpOpen(false);
   };
 
   const toggleSchedulesPopUp = () => {
-    setSchedulesPopUpOpen(!isSchedulesPopUpOpen)
+    setSchedulesPopUpOpen(!isSchedulesPopUpOpen);
+    setRosterPopUpOpen(false);
+    setRosterWestPopUpOpen(false);
+    setSchedulesWestPopUpOpen(false);
   };
 
   const toggleRosterWestPopUp = () => {
     setRosterWestPopUpOpen(!isRosterWestPopUpOpen);
+    setRosterPopUpOpen(false);
+    setSchedulesPopUpOpen(false);
+    setSchedulesWestPopUpOpen(false);
   };
 
   const toggleSchedulesWestPopUp = () => {
     setSchedulesWestPopUpOpen(!isSchedulesWestPopUpOpen);
+    setRosterPopUpOpen(false);
+    setSchedulesPopUpOpen(false);
+    setRosterWestPopUpOpen(false);
   };
  
 
@@ -45,43 +57,45 @@ const CheatSheets = () => {
         <div className='pop-up-boxes'>
             <div className="rosters">
               <div className="roster-east">
-                <h5 className='pop-up-click' onClick={toggleRosterPopUp}>EAST</h5>
+                <button className='pop-up-click' onClick={toggleRosterPopUp}>EAST</button>
                 {isRosterPopUpOpen && (
-                  <div>
-                  <ul>
-                      <div className='left-column-re'>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hawks/roster')}>ATL</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/celtics/roster')}>BOS</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/nets/roste')}>BKN</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hornets/roster')}>CHA</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bulls/roster')}>CHI</a></li>
-                      </div>
-                    </ul>
+                <div className='pop-up-container'>
+                  <button className='close-button' onClick={toggleRosterPopUp}>X</button>
                     <ul>
-                      <div className='middle-column-re'>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/cavaliers/roster')}>CLE</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pistons/roster')}>DET</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pacers/roster')}>IND</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/heat/roster')}>MIA</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bucks/roster')}>MIL</a></li>
-                      </div>
-                    </ul>
-                    <ul>
-                      <div className='right-column-re'>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/knicks/roster?icmp=int_knicks_roster_parent_nav_190514')}>NYK</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/magic/roster')}>ORL</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/sixers/roster')}>PHI</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/raptors/roster')}>TOR</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/wizards/roster')}>WAS</a></li>
-                      </div>
-                    </ul>
-                  </div>
-                )}
+                        <div className='left-column-re'>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hawks/roster')}>ATL</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/celtics/roster')}>BOS</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/nets/roste')}>BKN</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hornets/roster')}>CHA</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bulls/roster')}>CHI</a></li>
+                        </div>
+                      </ul>
+                      <ul>
+                        <div className='middle-column-re'>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/cavaliers/roster')}>CLE</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pistons/roster')}>DET</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pacers/roster')}>IND</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/heat/roster')}>MIA</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bucks/roster')}>MIL</a></li>
+                        </div>
+                      </ul>
+                      <ul>
+                        <div className='right-column-re'>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/knicks/roster?icmp=int_knicks_roster_parent_nav_190514')}>NYK</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/magic/roster')}>ORL</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/sixers/roster')}>PHI</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/raptors/roster')}>TOR</a></li>
+                          <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/wizards/roster')}>WAS</a></li>
+                        </div>
+                      </ul>
               </div>
+            )}
+          </div>
               <div className="roster-west">
-                <h5 className='pop-up-click' onClick={toggleRosterWestPopUp}>WEST</h5>
+                <button className='pop-up-click' onClick={toggleRosterWestPopUp}>WEST</button>
                 {isRosterWestPopUpOpen && (
-                  <div>
+                  <div className='pop-up-container'>
+                    <button className='close-button' onClick={toggleRosterWestPopUp}>X</button>
                     <ul>
                       <div className='left-column-rw'>
                         <li><a onClick={() => openLinkInNewWindow('https://www.mavs.com/team/roster/')}>DAL</a></li>
@@ -116,9 +130,10 @@ const CheatSheets = () => {
           <div className='pop-up-boxes'>
             <div className="schedules">
               <div className="schedules-east">
-                <h5 className='pop-up-click' onClick={toggleSchedulesPopUp}>EAST</h5>
+                <button className='pop-up-click' onClick={toggleSchedulesPopUp}>EAST</button>
                 {isSchedulesPopUpOpen && (
-                  <div>
+                  <div className='pop-up-container'>
+                    <button className='close-button' onClick={toggleSchedulesPopUp}>X</button>
                     <ul>
                       <div className='left-column-se'>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hawks/schedule')}>ATL</a></li>
@@ -150,9 +165,10 @@ const CheatSheets = () => {
                 )}
               </div>
               <div className="schedules-west">
-                <h5 className='pop-up-click' onClick={toggleSchedulesWestPopUp}>WEST</h5>
+                <button className='pop-up-click' onClick={toggleSchedulesWestPopUp}>WEST</button>
                 {isSchedulesWestPopUpOpen && (
-                  <div>
+                  <div className='pop-up-container'>
+                <button className='close-button' onClick={toggleSchedulesWestPopUp}>X</button>
                     <ul>
                       <div className='left-column-sw'>
                         <li><a onClick={() => openLinkInNewWindow('https://www.mavs.com/schedule/full-schedule/')}>DAL</a></li>

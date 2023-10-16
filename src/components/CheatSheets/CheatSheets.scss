@@ -1,28 +1,6 @@
 @use '../../styles/variables' as v;
 
-.pop-up-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1; 
-.close-button {
-  position: absolute;
-  background: transparent;
-  border: none;
-  font-size: 1em;
-  cursor: pointer;
-  color: #FF7200;
-  right: 2em;
-  top: 23em;
-}
-}
+
 .paragraph {
   line-height: 1.5em;
   text-align: center;
@@ -31,7 +9,7 @@
 }
 .titles {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .usefull-links {
   margin-top: 1em;
@@ -49,6 +27,7 @@
   border: 1px solid v.$shadow;
   color: v.$orange;
   background-color: v.$nav-back;
+  padding: 0.6em;
 }
 .roster-east, .roster-west, .schedules-east, .schedules-west{
   display: block;
@@ -74,20 +53,50 @@
   .middle-column-re, .middle-column-rw, .middle-column-se, .middle-column-sw, 
   .right-column-re, .right-column-rw, .right-column-se, .right-column-sw {
     li {
-      overflow: hidden;
       a {
         display: block;
-        padding: 5px 10px;
+        padding: 0.5em 0.75em;
         border: 1px solid v.$shadow;
-        margin-bottom: 5px;
+        margin-bottom: 0.3em;
         text-align: center;
         text-decoration: none;
         color: v.$orange;
         background-color: v.$nav-back;
-        border-radius: 4px;
+        border-radius: 0.3em;
         cursor: pointer;
+        font-family: v.$main-font;
       }
     }
   }
-
 }
+.pop-up-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: v.$shadow-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; 
+.close-button {
+  position: sticky;
+  background: transparent;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: v.$orange;
+  right: 0.5em;
+  top: 19em;
+  font-family: "Days One";
+  }
+}
+
+@media screen and (min-width : 768px) {
+  .pop-up-click {
+    padding-right: 1.2em;
+  }
+  }
+

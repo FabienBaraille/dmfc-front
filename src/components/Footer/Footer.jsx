@@ -5,6 +5,7 @@ function Footer() {
     <>
       <div className="footer">
         <Link to="/rules">DMFC Rules</Link>
+        <Link to="/cheatsheets">Cheat Sheets</Link>
         <Link to="/terms-and-conditions">Conditions Générales</Link>
       </div>
     </>

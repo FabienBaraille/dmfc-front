@@ -5,7 +5,6 @@ import { checkLogin, createLeague, createUser, setErrorMessage, setInputValue, s
 
 import Wrapper from "../Wrapper/Wrapper";
 import Input from "../Utils/Input";
-import Page from '../Page/Page';
 
 import './Connexion.scss';
 import Strength from "./AddOn/Strength";
@@ -64,13 +63,12 @@ const Connexion = () => {
   }
 
   return (
-    <Page>
       <Wrapper name="connexion">
         <h2>Connexion</h2>
         <form onSubmit={handleSubmit}>
-            <Input label="Login :" htmlFor="pseudo" id="pseudo" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo" isRequired={true}/>
+            <Input label="Login :" htmlFor="pseudo" id="pseudo" className="login" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo" isRequired={true}/>
             {isCreationMode &&
-              <div className="special-input">
+              <div className="special-input mailContainer">
                 <Input label="Mail :" htmlFor="mail" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com" isRequired={true}/>
                 {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
               </div>
@@ -83,7 +81,7 @@ const Connexion = () => {
           {isCreationMode &&
             <>
               <div className="dmfc-opt">
-                <label htmlFor="dmfc">DMFC</label>
+                <label htmlFor="dmfc">DMFC :</label>
                 <input 
                   type="checkbox" 
                   id="DMFC" 
@@ -93,7 +91,7 @@ const Connexion = () => {
                 />
               </div>
               {!DMFC ? 
-              <div>
+              <div className="leagueChoice">
                 <label htmlFor="league">Ligue :</label>
                 <select 
                   id="league" 
@@ -105,7 +103,7 @@ const Connexion = () => {
                   {leagueOptions}
                 </select>
               </div> :
-              <Input label="Créer ma ligue :" htmlFor="league_name" id="league_name" type="league_name" onChange={handleInput} value={league_name} placeholder="Nom de la league"/>}
+              <Input label="Créer ma ligue :" htmlFor="league_name" id="league_name" className="leagueCreation" type="league_name" onChange={handleInput} value={league_name} placeholder="Nom de la league"/>}
             </>
           }
           <div className="form-btn">
@@ -122,7 +120,6 @@ const Connexion = () => {
       </form>
       {errorMessage !== '' && <p className="error-message">{errorMessage}</p>}
     </Wrapper>
-  </Page>
   )
 };
 

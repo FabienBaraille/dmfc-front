@@ -36,9 +36,11 @@ import LeagueManagement from "../LeagueManagement/LeagueManagement";
 import Modal from "../Utils/Modal/Modal";
 import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
+import CheatSheets from '../CheatSheets/CheatSheets';
 
 import 'react-toastify/dist/ReactToastify.css';
-import Page from "../Page/Page";
+
+import './App.scss'
 
 const App = () => {
 
@@ -64,7 +66,6 @@ const App = () => {
   const isConfirmationVisible = useSelector((state) => state.league.isConfirmationVisible);
   const rounds = useSelector((state) => state.datas.rounds);
   const userRole = useSelector((state) => state.user.loggedUser);
-  const newsId = useSelector((state) => state.datas.newsId);
 
   useEffect(() => {
     dispatch(getAllLeague());
@@ -103,7 +104,7 @@ const App = () => {
           <Route path='/profil' element={<Profil />} />
           <Route element={<PlayerNARoute />}>
             <Route path='/' element={<Home />} />
-            <Route path='/rankings' element={<Page><Rankings /></Page>} />
+            <Route path='/rankings' element={<Rankings />} />
             <Route path='/player/:playerName' element={<GeneralStats />} />
             <Route element={<PlayerRoute />}>
               {/* Rajouter ici les routes concernant que le joueur */}
@@ -117,6 +118,7 @@ const App = () => {
             </Route>
             <Route path='/roundsStat' element={<RoundStats />} />
           </Route>
+          <Route path='/cheatsheets' element={<CheatSheets />} />
           <Route path='/rules' element={<ExtendedRules isLogged={isLogged} />} />
           <Route path='/terms-and-conditions' element={<Terms isLogged={isLogged} />} />
           <Route path='/logout' element={<Logout />} />

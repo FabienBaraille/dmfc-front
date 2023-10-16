@@ -21,7 +21,7 @@
 }
 .pop-up-boxes {
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
 }
 .pop-up-click {
   border: 1px solid v.$shadow;
@@ -98,5 +98,4 @@
   .pop-up-click {
     padding-right: 1.2em;
   }
-  }
-
+}

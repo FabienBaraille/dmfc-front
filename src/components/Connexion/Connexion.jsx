@@ -114,8 +114,7 @@ const Connexion = () => {
               >
               {isCreationMode ? "J'ai déjà un compte" : "Créer un compte"}
             </button>
-            {/* {!isCreationMode && <button type="button">J'ai oublié mon mot de passe</button>} */}
-            {/* Faire formulaire rappel identifiant */}
+            {!isCreationMode && <a className="forgotten" href="https://api.dmfc-game.fr/public/reset-password">Mot de passe oublié</a>}
           </div>
       </form>
       {errorMessage !== '' && <p className="error-message">{errorMessage}</p>}

@@ -27,7 +27,7 @@
   border: 1px solid v.$shadow;
   color: v.$orange;
   background-color: v.$nav-back;
-  padding: 0.6em;
+  width: 100px;
 }
 .roster-east, .roster-west, .schedules-east, .schedules-west{
   display: block;
@@ -80,21 +80,24 @@
   justify-content: center;
   align-items: center;
   z-index: 1; 
-.close-button {
-  position: sticky;
-  background: transparent;
-  border: none;
-  font-size: 1.2em;
-  cursor: pointer;
-  color: v.$orange;
-  right: 0.5em;
-  top: 19em;
-  font-family: "Days One";
+  .close-button {
+    position: fixed;
+    background: transparent;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: v.$orange;
+    right: 0.5em;
+    top: 90px;
+    font-family: "Days One";
   }
 }
 
 @media screen and (min-width : 768px) {
-  .pop-up-click {
-    padding-right: 1.2em;
+  .pop-up-container {
+    .close-button {
+      position: sticky;
+      top: 15em;
+    }
   }
 }

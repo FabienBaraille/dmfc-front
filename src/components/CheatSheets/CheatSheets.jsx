@@ -48,12 +48,9 @@ const CheatSheets = () => {
       <p className="paragraph">
         Tu trouveras ici un ensemble de liens te permettant de rassembler des informations utiles pour t'aider dans tes pronostics.
       </p>
-        <div className='titles'>
-          <h2>Roster</h2>
-          <h2>Calendriers</h2>
-        </div>
         <div className='pop-up-boxes'>
             <div className="rosters">
+              <h2>Roster</h2>
               <div className="roster-east">
                 <button className='pop-up-click' onClick={toggleRosterPopUp}>EAST</button>
                 {isRosterPopUpOpen && (
@@ -125,8 +122,8 @@ const CheatSheets = () => {
                 )}
               </div>
             </div>
-          <div className='pop-up-boxes'>
             <div className="schedules">
+              <h2>Calendrier</h2>
               <div className="schedules-east">
                 <button className='pop-up-click' onClick={toggleSchedulesPopUp}>EAST</button>
                 {isSchedulesPopUpOpen && (
@@ -198,7 +195,6 @@ const CheatSheets = () => {
                 )}
               </div>
             </div>
-          </div>
         </div>
         <h3 className ='usefull-links'>Liens Utiles</h3> 
           <div className='links'>

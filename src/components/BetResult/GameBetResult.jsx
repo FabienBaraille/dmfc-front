@@ -29,7 +29,7 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
   }
 
   return (
-      <form className="bet_result" onSubmit={handleSubmit}>
+      <form className="bet_result" onSubmit={handleSubmit} id={gameId}>
         <div className="team-result">
           <p>{`${team[0].trigram} - ${team[0].name}`}</p>
           <div className="score">

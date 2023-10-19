@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import './Navbar.scss';
-import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);

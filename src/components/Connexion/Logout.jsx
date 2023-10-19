@@ -9,9 +9,9 @@ const Logout = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
+    dispatch(resetStore());
     document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
     document.cookie = `userInfos=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-    dispatch(resetStore());
   }
 
   return (

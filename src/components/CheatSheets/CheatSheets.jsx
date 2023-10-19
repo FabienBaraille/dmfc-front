@@ -1,5 +1,7 @@
-import Wrapper from '../Wrapper/Wrapper';
 import { useState } from "react";
+
+import Wrapper from '../Wrapper/Wrapper';
+
 import './CheatSheets.scss';
 
 const CheatSheets = () => {

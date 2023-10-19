@@ -1,14 +1,12 @@
-import { NavLink, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { NavLink, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { getSRPrediction } from '../../actions/datas';
 
 import Wrapper from '../Wrapper/Wrapper';
 import Retour from '../Retour/Retour';
 import LoadElmt from '../Loader/LoadElmt';
 
-import { Link } from 'react-router-dom';
+import { getSRPrediction } from '../../actions/datas';
 
 import { userByUsername } from '../../Utils/filters/usersFilter';
 import { countBonusBookie, countBonusScore, countRoundPlayed, countWinningTeam, goodPrediction } from '../../Utils/stats/roundStats';

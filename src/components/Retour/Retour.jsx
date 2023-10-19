@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import './Retour.scss';
 
 function Retour ({ where, link }) {

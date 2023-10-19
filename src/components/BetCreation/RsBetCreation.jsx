@@ -1,18 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Wrapper from "../Wrapper/Wrapper"
 import BetTpl  from "./BetMatch";
 import Input from "../Utils/Input";
 import LoadElmt from "../Loader/LoadElmt";
+import RoundSelector from "./Element/RoundSelector";
 
 import { addBetToList, createGame, createRound, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
 import { toggleCreationMode } from "../../actions/bet";
 import { transformDate } from "../../Utils/stats/calcDate";
 
 import './RsBetCreation.scss';
-import { useEffect } from "react";
-import RoundSelector from "./Element/RoundSelector";
 
 const RsBetCreation = () => {
 
@@ -81,10 +81,7 @@ const RsBetCreation = () => {
         <div className="round-choice">
           <h4>Pronostic saison régulière</h4>
           {!roundCreationMode &&
-            <>
-              <p>Sélectionne un round dans lequel créer des matchs.</p>
-              <RoundSelector />
-            </>
+            <RoundSelector />
           }
         </div>
         <form onSubmit={handleSubmit}>
@@ -95,7 +92,6 @@ const RsBetCreation = () => {
                 <div className="round-creation">
                   <Input 
                     label="Nom du Round :" 
-                    htmlFor="roundName" 
                     id="roundName" 
                     type="text" 
                     placeholder="Nom du round"

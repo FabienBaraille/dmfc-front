@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useDispatch, useSelector } from 'react-redux';
+
 import Wrapper from '../Wrapper/Wrapper';
-import { getNews, postNewsChange, postNewsCreation, setNews, setNewsCreationMode } from '../../actions/news';
 import Input from '../Utils/Input';
+
+import { postNewsChange, postNewsCreation, setNews, setNewsCreationMode } from '../../actions/news';
 
 const News = () => {
   const dispatch = useDispatch();
@@ -33,8 +35,8 @@ const News = () => {
       {(userRole === 'ROLE_DMFC' && !newsCreation) && <button className='homeEditBtn' type="button" onClick={handleCreationMode}>{newsTitle == '' ? "Créer" : "Editer"}</button>}
       {newsCreation ?
         <form onSubmit={handleSubmit}>
-          <Input htmlFor={"newsTitle"} id={"newsTitle"} label='Titre :' value={newsTitle} className={"newsTitle-container"} onChange={handleNewsChange}/>
-          <Input htmlFor={"news"} type={"textarea"} id={"news"} label='Actus :' value={news} className={"news-container"} onChange={handleNewsChange}/>
+          <Input id="newsTitle" label='Titre :' value={newsTitle} className="newsTitle-container" onChange={handleNewsChange}/>
+          <Input type="textarea" id="news" label='Actus :' value={news} className="news-container" onChange={handleNewsChange}/>
           <button type='submit'>Valider</button>
           <p>Pensez à validez vos changements !</p>
         </form>         

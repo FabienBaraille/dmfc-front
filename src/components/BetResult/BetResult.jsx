@@ -1,5 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Wrapper from "../Wrapper/Wrapper";
+import GameBetResult from "./GameBetResult";
+import RoundSelector from "../BetCreation/Element/RoundSelector";
+import LoadElmt from "../Loader/LoadElmt";
 
 import {
   getAllPredictions,
@@ -13,16 +18,12 @@ import {
   updateBetPoints,
   updatePlayerScore
 } from "../../actions/bet";
-
-import Wrapper from "../Wrapper/Wrapper";
-import GameBetResult from "./GameBetResult";
-import RoundSelector from "../BetCreation/Element/RoundSelector";
-import LoadElmt from "../Loader/LoadElmt";
-
-import './BetResult.scss';
 import { getUsersList } from "../../actions/datas";
+
 import { positionFinder } from "../../Utils/filters/usersFilter";
 import { calcBetPoint } from "../../Utils/stats/calcStats";
+
+import './BetResult.scss';
 
 const BetResult = () => {
 
@@ -82,10 +83,14 @@ const BetResult = () => {
   const gamesToEdit = games.map(({id, ...rest}) => <GameBetResult key={id} gameId={id} {...rest} />);
 
   const calculatePoints = () =>  {
-    predictionByGame.forEach(({id, predictedWinnigTeam, predictedPointDifference, validationStatus}) => {
-      const updateInfos = calcBetPoint(updatedGame, predictedWinnigTeam, predictedPointDifference, validationStatus);
-      dispatch(updateBetPoints(id, updateInfos));
-    })
+    if (predictionByGame.length > 0) {
+      predictionByGame.forEach(({id, predictedWinnigTeam, predictedPointDifference, validationStatus}) => {
+        const updateInfos = calcBetPoint(updatedGame, predictedWinnigTeam, predictedPointDifference, validationStatus);
+        dispatch(updateBetPoints(id, updateInfos));
+      })
+    } else {
+      dispatch(setIsLoadingGame(false));
+    }
   }
 
   const updateScore = () => {

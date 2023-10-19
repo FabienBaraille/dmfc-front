@@ -6,7 +6,7 @@ import clipartLogo from '../../assets/design/clipart1224.png';
 
 import './Header.scss';
 
-function Header() {
+const Header = () => {
   const isLogged = useSelector((state) => state.user.isLogged);
 
   return (

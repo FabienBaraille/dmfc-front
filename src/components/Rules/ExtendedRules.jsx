@@ -1,10 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import PropTypes from 'prop-types';
 
 import Wrapper from "../Wrapper/Wrapper";
-import Retour from '../Retour/Retour'
+import Retour from '../Retour/Retour';
+
 import './Rules.scss';
 
-/* eslint-disable react/no-unescaped-entities */
 const ExtendedRules = ({ isLogged }) => {
 
   return (

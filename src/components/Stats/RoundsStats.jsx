@@ -1,9 +1,10 @@
-import { predictionByGameId } from '../../Utils/filters/predictionFilter';
-
 import { useSelector } from 'react-redux';
+
 import Wrapper from '../Wrapper/Wrapper';
 import ResultElmt from './Element/ResultElmt';
 import RoundSelector from '../BetCreation/Element/RoundSelector';
+
+import { predictionByGameId } from '../../Utils/filters/predictionFilter';
 
 import './RoundsStats.scss';
 

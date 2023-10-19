@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import { setInputValueBet } from "../../../actions/bet";
 
 const RoundSelector = () => {
@@ -19,13 +20,16 @@ const RoundSelector = () => {
   return (
     <>
       {roundOptions.length === 0 ? 
-      <h3>Créer un nouveau round pour commencer !</h3>
+        <h3>Créer un nouveau round pour commencer !</h3>
         :
-      <select id="roundNumber" value={roundNumber} onChange={handleInput}>
-        <option value='' defaultValue={roundNumber === ''} disabled hidden>Choisir le Round</option>
-        {roundOptions}
-      </select>      
-      }  
+        <>
+          <p>Sélectionne un round dans lequel créer des matchs.</p>
+          <select id="roundNumber" value={roundNumber} onChange={handleInput}>
+            <option value='' defaultValue={roundNumber === ''} disabled hidden>Choisir le Round</option>
+            {roundOptions}
+          </select>
+        </>
+      }
     </>
   )}
 

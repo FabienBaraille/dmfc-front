@@ -1,6 +1,5 @@
 import axios from 'redaxios';
 
-// Import de la fonction permettant de récupérer les cookies
 import { 
   CREATE_BET,
   CREATE_GAME,
@@ -24,10 +23,14 @@ import {
   setUpdatedMessage,
   toggleCreationMode
 } from '../actions/bet';
+
 import { getRounds, getSRPrediction } from '../actions/datas';
 
 const betMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
+    /**
+     * Action to get all games infos by a round ID
+     */
     case GET_GAMES_ROUND:
       store.dispatch(setIsLoadingBet(true));
       try {
@@ -37,6 +40,9 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    /**
+     * Action to create et bet made by a player
+     */
     case CREATE_BET:
       store.dispatch(setIsLoadingBet(true));
       try {
@@ -57,6 +63,9 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    /**
+     * Action to update a bet by a player
+     */
     case UPDATE_BET:
       store.dispatch(setIsLoadingBet(true));
       try {
@@ -73,6 +82,9 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    /**
+     * Action to create a round by the DMFC
+     */
     case CREATE_ROUND: {
       store.dispatch(setIsLoadingBet(true));
       try {
@@ -93,6 +105,9 @@ const betMiddleware = (store) => (next) => async (action) => {
       }
     }
     break;
+    /**
+     * Action to create a match by the DMFC
+     */
     case CREATE_GAME: {
       store.dispatch(setIsLoadingGame(true));
       try {
@@ -110,6 +125,9 @@ const betMiddleware = (store) => (next) => async (action) => {
       }
     }
     break;
+    /**
+     * Action to update the score of a match by the DMFC
+     */
     case UPDATE_GAME: {
       store.dispatch(setIsLoadingBet(true));
       try {
@@ -129,6 +147,9 @@ const betMiddleware = (store) => (next) => async (action) => {
       }
     }
     break;
+    /**
+     * Action to get all predictions done for a match
+     */
     case GET_PREDICTION_BY_GAME:
       store.dispatch(setIsLoadingBet(true));
       try {
@@ -138,6 +159,9 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    /**
+     * Action to update the points earned with a bet
+     */
     case UPDATE_BET_POINTS:
       store.dispatch(setIsLoadingBet(true));
       try {
@@ -150,6 +174,9 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    /**
+     * Action to get all predictions made by a player
+     */
     case GET_ALL_PREDICTIONS:
       store.dispatch(setIsLoadingBet(true));
       try {
@@ -159,6 +186,9 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
+    /**
+     * Action to update player score and oldPosition
+     */
     case UPDATE_PLAYER_SCORE:
       store.dispatch(setIsLoadingBet(true));
       try {

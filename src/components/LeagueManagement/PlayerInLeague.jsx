@@ -1,12 +1,13 @@
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
+
 import Input from "../Utils/Input";
 import Wrapper from "../Wrapper/Wrapper";
+
 import { updatePlayerByDmfc, setFocusedInputId, setTitle, setModalFunction } from "../../actions/datas";
-import { Link } from "react-router-dom";
 import { toggleConfirmationModal } from "../../actions/league";
 import { setTargetKick } from '../../actions/user';
-
 
 const PlayerInLeague = ({players}) => {
   const dispatch = useDispatch();

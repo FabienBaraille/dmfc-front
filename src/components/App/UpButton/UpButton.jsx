@@ -2,6 +2,9 @@ import { useRef } from 'react';
 
 import './UpButton.scss';
 
+/**
+ * Component of a button that will appear when the user scroll down and go to the top when click on
+ */
 const UpButton = () => {
   const BtnRef = useRef(null);
 

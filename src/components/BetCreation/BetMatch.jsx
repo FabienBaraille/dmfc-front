@@ -1,7 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { betToRemove } from "../../actions/bet";
-import Input from "../Utils/Input";
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Input from "../Utils/Input";
+
+import { betToRemove } from "../../actions/bet";
 
 const BetMatch = () => {
 
@@ -34,8 +37,7 @@ const BetMatch = () => {
       <Input 
         inputName="deadline"
         label="Deadline :"
-        htmlFor="pronostic_limit"
-        id="pronostic_limit"
+        id="pronostic-limit"
         type="datetime-local"
         value={matchDate}
         onChange={event => setMatchDate(event.target.value)} 

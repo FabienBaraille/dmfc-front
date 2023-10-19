@@ -1,4 +1,5 @@
 import clipartLogo from '../../assets/design/clipart1224.png';
+
 import 'react-toastify/dist/ReactToastify.css';
 import './toastsuccess.scss'
 

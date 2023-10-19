@@ -1,15 +1,17 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import LoadElmt from "../Loader/LoadElmt";
 import Wrapper from "../Wrapper/Wrapper";
 import PlayerBetMatch from "./PlayerBetMatch";
 
-import './PlayerBet.scss';
-import { useEffect } from "react";
 import { getGamesRound } from "../../actions/bet";
 import { getSRPrediction } from "../../actions/datas";
+
 import { predictedGame } from "../../Utils/filters/gamesFilter";
 import { predictionByGameId } from "../../Utils/filters/predictionFilter";
+
+import './PlayerBet.scss';
 
 const PlayerBet = () => {
 

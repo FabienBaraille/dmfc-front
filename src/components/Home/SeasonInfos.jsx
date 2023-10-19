@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useSelector } from 'react-redux';
+
 import Wrapper from '../Wrapper/Wrapper';
+
 import { transformDate } from '../../Utils/stats/calcDate';
 
 const SeasonInfos = () => {

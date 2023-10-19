@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import Wrapper from "../Wrapper/Wrapper";
+import Input from "../Utils/Input";
 
 import { postLeagueChange, setLeague, setLeagueCreationMode } from "../../actions/datas";
-import Input from "../Utils/Input";
 
 
 const LeagueTitle = () => {
@@ -36,7 +37,7 @@ const LeagueTitle = () => {
     {leagueCreation ?
       <>      
       <form onSubmit={handleSubmit}>
-        <Input htmlFor={"leagueName"} id={"leagueName"} value={leagueName} onChange={handleLeagueChange}  />
+        <Input id="leagueName" value={leagueName} onChange={handleLeagueChange}  />
           <textarea id="leagueDescription" onChange={handleLeagueChange} defaultValue={leagueDescription}/>
           <button type="submit">Valider</button>
           <p>Pensez à validez vos changements !</p>

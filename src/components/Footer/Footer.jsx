@@ -1,6 +1,8 @@
-import './Footer.scss'
-import { Link } from "react-router-dom"
-function Footer() {
+import { Link } from "react-router-dom";
+
+import './Footer.scss';
+
+const Footer = () => {
   return (
     <>
       <div className="footer">

@@ -104,15 +104,16 @@ const App = () => {
           } />
           <Route path='/profil' element={<Profil />} />
           <Route element={<PlayerNARoute />}>
+            {/* Route protected for player and DMFC role only */}
             <Route path='/' element={<Home />} />
             <Route path='/rankings' element={<Rankings />} />
             <Route path='/player/:playerName' element={<GeneralStats />} />
             <Route element={<PlayerRoute />}>
-              {/* Rajouter ici les routes concernant que le joueur */}
+              {/* Route protected for player role only */}
               <Route path='/player-bet' element={<PlayerBet />} />
             </Route>
             <Route element={<DMFCRoute />}>
-              {/* Rajouter ici les routes concernant uniquement le DMFC */}
+              {/* Route protected for DMFC role only */}
               <Route path='/creation/SR' element={<RsBetCreation />} />
               <Route path='/scores/SR' element={rounds.length == 0 ? <EmptyBet /> : <BetResult />} />
               <Route path='/league-management' element={<LeagueManagement />} />

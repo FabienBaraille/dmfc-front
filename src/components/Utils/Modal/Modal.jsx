@@ -1,9 +1,10 @@
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import './Modal.scss'
-import { useDispatch, useSelector } from 'react-redux';
 import { toggleConfirmationModal } from '../../../actions/league';
 import { setFocusedInputId, setModalSentence } from '../../../actions/datas';
+
+import './Modal.scss';
 
 const Modal = ({player}) => {
   const dispatch = useDispatch();

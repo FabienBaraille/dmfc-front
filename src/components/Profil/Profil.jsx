@@ -4,13 +4,14 @@ import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-import { updateUserProfile, setInputValue, setMailError, resetStore, updateUsername } from '../../actions/user';
-import { verifyMail } from "../../Utils/filters/usersFilter";
-
 import { toastSucess, toastWarning } from "../Toast/ToastSuccess";
 import Wrapper from '../Wrapper/Wrapper';
 import Input from "../Utils/Input";
 import Strength from "../Connexion/AddOn/Strength";
+
+import { updateUserProfile, setInputValue, setMailError, resetStore, updateUsername } from '../../actions/user';
+
+import { verifyMail } from "../../Utils/filters/usersFilter";
 
 import './Profil.scss';
 
@@ -55,7 +56,7 @@ function Profil() {
       isErrorMail = verifyMail(email);
       dispatch(setMailError(isErrorMail));
     }
-    if (!isErrorMail) {
+    if (!isErrorMail && pseudo !== '' && email !== '') {
       const updatedUserData = {
         username: pseudo,
         email: email,
@@ -65,10 +66,10 @@ function Profil() {
       if (pseudo !== loggedUser.username) {
         toast.warning('Afin de changer de pseudo, vous allez être déconnecté !', toastWarning);
         setTimeout(() => {
-          document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-          document.cookie = `userInfos=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
           dispatch(updateUsername(pseudo));
           dispatch(resetStore());
+          document.cookie = `isLogged=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+          document.cookie = `userInfos=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
           navigate('/');
         }, 2005);
       } else {
@@ -128,21 +129,21 @@ function Profil() {
         <form className="change-info" onSubmit={handleSubmit}>
           <h3>Changer mes Infos</h3>
           <div className="changeContainer">
-              <Input label="Email :" htmlFor="email" id="email" type="email" className="inputContainer" value={email} onChange={handleInput} placeholder="changer ton email" isRequired={true}/>
+              <Input label="Email :" id="email" type="email" className="inputContainer" value={email} onChange={handleInput} placeholder="changer ton email" isRequired={true}/>
               {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
             <div className="form-btn">
               <button type="submit" onClick={(event) => handleSubmit(event, 'email')}>Changer</button>
             </div>
           </div>
           <div className="changeContainer" id="passwordInput">
-              <Input className='password inputContainer' label="Mot de Passe :" htmlFor="mot de passe" id="password" type="password" value={password} onChange={handleInput} placeholder="mot de passe"/>
+              <Input className='password inputContainer' label="Mot de Passe :" id="password" type="password" value={password} onChange={handleInput} placeholder="mot de passe"/>
               {password !== "" && <Strength password={password} />}
             <div className="form-btn">
               <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Changer</button>
             </div>
           </div>
           <div className="changeContainer">
-            <Input label="Pseudo :" htmlFor="pseudo" id="pseudo" type="text" className="inputContainer" value={pseudo} onChange={handleInput} placeholder="change ton pseudo"/>
+            <Input label="Pseudo :" id="pseudo" type="text" className="inputContainer" value={pseudo} onChange={handleInput} placeholder="change ton pseudo"/>
             <div className="form-btn">
               <button type="submit" onClick={(event) => handleSubmit(event, 'pseudo')}>Changer</button>
             </div>

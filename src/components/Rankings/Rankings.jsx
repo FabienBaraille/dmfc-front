@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { positionDisplay } from '../../Utils/display/positionDisplay';
-
 import Wrapper from '../Wrapper/Wrapper';
+
+import { positionDisplay } from '../../Utils/display/positionDisplay';
 
 import './Rankings.scss';
 

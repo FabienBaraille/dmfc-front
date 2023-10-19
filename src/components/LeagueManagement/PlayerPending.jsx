@@ -1,8 +1,10 @@
-import PropTypes from 'prop-types';
 import { useDispatch } from "react-redux";
-import Wrapper from "../Wrapper/Wrapper";
-import { toggleConfirmationModal } from "../../actions/league";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
+
+import Wrapper from "../Wrapper/Wrapper";
+
+import { toggleConfirmationModal } from "../../actions/league";
 import { setTargetKick } from '../../actions/user';
 import { setFocusedInputId, setModalFunction, setModalSentence, updatePlayerByDmfc } from '../../actions/datas';
 

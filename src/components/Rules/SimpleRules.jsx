@@ -1,8 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import Wrapper from "../Wrapper/Wrapper";
 
 import './Rules.scss';
 
-/* eslint-disable react/no-unescaped-entities */
 const SimpleRules = () => {
   return (
     <Wrapper name="rules" >

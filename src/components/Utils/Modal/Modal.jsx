@@ -30,8 +30,8 @@ const Modal = ({player}) => {
         {modalSentence ? 
           <p>Confirmer l'ajout de {player} à la ligue ?</p>
             :
-          <p>Voulez-vous vraiment sortir {player} de la ligue ?</p>
-        }        
+          <p>Veux-tu vraiment sortir {player} de la ligue ?</p>
+        }
         <button className="confirm-button" id="confirmRefuser" onClick={handleAccept}>Oui</button>
         <button className="cancel-button" id="cancelRefuser" onClick={handleCancel}>Annuler</button>
       </div>

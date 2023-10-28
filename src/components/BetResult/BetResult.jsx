@@ -83,9 +83,12 @@ const BetResult = () => {
   const gamesToEdit = games.map(({id, ...rest}) => <GameBetResult key={id} gameId={id} {...rest} />);
 
   const calculatePoints = () =>  {
+    // Before starting the update, we verify if there is prediction made for the game
     if (predictionByGame.length > 0) {
+      // we made a loop on the prediction array where we calculate point and update database
       predictionByGame.forEach(({id, predictedWinnigTeam, predictedPointDifference, validationStatus}) => {
         const updateInfos = calcBetPoint(updatedGame, predictedWinnigTeam, predictedPointDifference, validationStatus);
+        // Action dispatch to update database with an API request
         dispatch(updateBetPoints(id, updateInfos));
       })
     } else {

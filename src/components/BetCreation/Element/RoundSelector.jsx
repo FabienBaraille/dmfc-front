@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 
+import PropTypes from "prop-types";
+
 import { setInputValueBet } from "../../../actions/bet";
 
-const RoundSelector = () => {
+const RoundSelector = ({isCreationMatch = false}) => {
   const dispatch = useDispatch();
   const roundsList = useSelector((state) => state.datas.rounds);
   const roundNumber = useSelector((state) => state.bet.roundNumber);
@@ -23,7 +25,7 @@ const RoundSelector = () => {
         <h3>Créer un nouveau round pour commencer !</h3>
         :
         <>
-          <p>Sélectionne un round dans lequel créer des matchs.</p>
+          {isCreationMatch && <p>Sélectionne un round dans lequel créer des matchs.</p>}
           <select id="roundNumber" value={roundNumber} onChange={handleInput}>
             <option value='' defaultValue={roundNumber === ''} disabled hidden>Choisir le Round</option>
             {roundOptions}
@@ -32,5 +34,7 @@ const RoundSelector = () => {
       }
     </>
   )}
-
+RoundSelector.propTypes = {
+  isCreationMatch: PropTypes.bool,
+}
 export default RoundSelector;

@@ -66,12 +66,10 @@ const Connexion = () => {
         <form onSubmit={handleSubmit}>
             <Input label="Login :" id="pseudo" className="login" type="text" onChange={handleInput} value={pseudo} placeholder="Pseudo" isRequired={true}/>
             {isCreationMode &&
-              <>
-                <div className="special-input mailContainer">
-                  <Input label="Mail :" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com" isRequired={true}/>
-                </div>
+              <div className="special-input mailContainer">
+                <Input label="Mail :" id="email" type="email" onChange={handleInput} value={email} placeholder="exemple@email.com" isRequired={true}/>
                 {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}
-              </>
+              </div>
             }
           <div className="special-input" id="passwordInput">
             <Input className='password' label="Mot de passe :" id="password" type="password" onChange={handleInput} value={password} placeholder="Mot de passe" isRequired={true} />
@@ -114,6 +112,7 @@ const Connexion = () => {
                 isRequired={true} />}
             </>
           }
+          {errorMessage !== '' && <p className="error-message">{errorMessage}</p>}
           <div className="form-btn">
             <button type="submit">{isCreationMode ? "Créer" : "Connexion"} </button>
             <button 
@@ -125,7 +124,6 @@ const Connexion = () => {
             {!isCreationMode && <a className="forgotten" href="https://api.dmfc-game.fr/public/reset-password">Mot de passe oublié</a>}
           </div>
       </form>
-      {errorMessage !== '' && <p className="error-message">{errorMessage}</p>}
     </Wrapper>
   )
 };

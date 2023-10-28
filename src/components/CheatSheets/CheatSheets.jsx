@@ -62,7 +62,7 @@ const CheatSheets = () => {
                       <div className='left-column-re'>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hawks/roster')}>ATL</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/celtics/roster')}>BOS</a></li>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/nets/roste')}>BKN</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/nets/roster')}>BKN</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/hornets/roster')}>CHA</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/bulls/roster')}>CHI</a></li>
                       </div>
@@ -78,7 +78,7 @@ const CheatSheets = () => {
                     </ul>
                     <ul>
                       <div className='right-column-re'>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/knicks/roster?icmp=int_knicks_roster_parent_nav_190514')}>NYK</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/knicks/roster')}>NYK</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/magic/roster')}>ORL</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/sixers/roster')}>PHI</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/raptors/roster')}>TOR</a></li>
@@ -104,7 +104,7 @@ const CheatSheets = () => {
                     </ul>
                     <ul>
                       <div className='middle-column-rw'>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/lakers/team/roster-coaches?ls=nav_team')}>LAL</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/lakers/team/roster')}>LAL</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/grizzlies/roster')}>MEM</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/timberwolves/roster')}>MIN</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pelicans/roster')}>NOP</a></li>
@@ -177,7 +177,7 @@ const CheatSheets = () => {
                     </ul>
                     <ul>
                       <div className='middle-column-sw'>
-                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/lakers/schedule?ls=nav_schedule')}>LAL</a></li>
+                        <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/lakers/schedule')}>LAL</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/grizzlies/schedule')}>EM</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/timberwolves/schedule')}>MIN</a></li>
                         <li><a onClick={() => openLinkInNewWindow('https://www.nba.com/pelicans/schedule')}>NOP</a></li>

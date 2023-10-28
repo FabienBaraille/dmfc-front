@@ -7,7 +7,7 @@
   width: 90%;
   form {
     width: 100%;
-    .login, .password, .leagueChoice, .leagueCreation {
+    div {
       justify-content: space-between;
       align-items: center;
     }
@@ -63,6 +63,7 @@
   .error-message {
     color: red;
     text-shadow: 0 0 2px v.$shadow;
+    margin-top: 1.3rem;
   }
   .dmfc-opt {
     align-items: center;

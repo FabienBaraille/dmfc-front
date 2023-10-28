@@ -60,8 +60,7 @@ const authMiddelware = (store) => (next) => async (action) => {
         );
         store.dispatch(getUser(store.getState().user.pseudo), data.token);
       } catch (error) {
-        console.log(error);
-        store.dispatch(setErrorMessage('Pseudo ou Mot de passe erroné'));
+        store.dispatch(setErrorMessage(error.data.message));
       }
     }
     break;

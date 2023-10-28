@@ -17,15 +17,8 @@ import './RsBetCreation.scss';
 const RsBetCreation = () => {
 
   const dispatch = useDispatch();
-  const isCreatedMatch = useSelector((state) => state.bet.isCreatedMatch);
-  
-  const betList = useSelector((state) => state.bet.betList);
-  const roundCreationMode = useSelector((state) => state.bet.roundCreationMode);
-  const roundName = useSelector((state) => state.bet.roundName);
-  const roundCat = useSelector((state) => state.bet.roundCat);
-  const roundNumber = useSelector((state) => state.bet.roundNumber);
-  const isLoadingGame = useSelector((state) => state.bet.isLoadingGame);
-  
+  const {isCreatedMatch, betList, roundCreationMode, roundName, roundCat, roundNumber, isLoadingGame} = useSelector((state) => state.bet);
+
   useEffect(() => {
     if (!isLoadingGame && isCreatedMatch) {
       setTimeout(() => {
@@ -62,7 +55,9 @@ const RsBetCreation = () => {
       const homeTeamId = homeTeams[index];
       const deadline = deadlines[index];
       const transformedDeadline = transformDate(deadline, 'create');
-      dispatch(createGame(transformedDeadline, [homeTeamId, visitorId]))
+      if (visitorId !== homeTeamId) {
+        dispatch(createGame(transformedDeadline, [homeTeamId, visitorId]));
+      }
     })
     }
   }
@@ -81,7 +76,7 @@ const RsBetCreation = () => {
         <div className="round-choice">
           <h4>Pronostic saison régulière</h4>
           {!roundCreationMode &&
-            <RoundSelector />
+            <RoundSelector isCreationMatch={true}/>
           }
         </div>
         <form onSubmit={handleSubmit}>

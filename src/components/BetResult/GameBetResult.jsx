@@ -2,20 +2,19 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import Input from "../Utils/Input";
-
 import { updateGame } from '../../actions/bet';
 
 const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, team}) => {
 
   const dispatch = useDispatch();
-
+  // As the component is used multiple time in the same page
+  // we use "useState" hook to make a controlled input
   const [visitorPoints, setVisitorPoints] = useState(visitorScore);
   const [homePoints, setHomePoints] = useState(homeScore);
   const [visitorCote, setVisitorCote] = useState(visitorOdd);
   const [homeCote, setHomeCote] = useState(homeOdd);
-
+  // Fonction treating the submission
   const handleSubmit = event => {
     event.preventDefault();
     const winner = visitorPoints > homePoints ? team[0].name : team[1].name;
@@ -35,16 +34,42 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
         <div className="team-result">
           <p>{`${team[0].trigram} - ${team[0].name}`}</p>
           <div className="score">
-            <Input label="Score" id="score" placeholder="000" type="number" value={visitorPoints} onChange={(event) => setVisitorPoints(event.target.value)}/>
-            <Input label="Cote bookie" placeholder="0.00" id="bookie1" value={visitorCote} onChange={(event) => setVisitorCote(event.target.value)}/>
+            <Input 
+              label="Score" 
+              id="score" 
+              placeholder="000" 
+              type="number" 
+              value={visitorPoints} 
+              onChange={(event) => setVisitorPoints(event.target.value)}
+            />
+            <Input 
+              label="Cote bookie" 
+              placeholder="0.00" 
+              id="bookie1" 
+              value={visitorCote} 
+              onChange={(event) => setVisitorCote(event.target.value)}
+            />
           </div>
         </div>
         <div className="at">@</div>
         <div className="team-result">
           <p>{`${team[1].trigram} - ${team[1].name}`}</p>
           <div className="score">
-            <Input label="Score" id="score" placeholder="000" type="number" value={homePoints} onChange={(event) => setHomePoints(event.target.value)} />
-            <Input label="Cote bookie" placeholder="0.00" id="bookie2" value={homeCote} onChange={(event) => setHomeCote(event.target.value)}/>
+            <Input 
+              label="Score" 
+              id="score" 
+              placeholder="000" 
+              type="number" 
+              value={homePoints} 
+              onChange={(event) => setHomePoints(event.target.value)}
+            />
+            <Input 
+              label="Cote bookie" 
+              placeholder="0.00" 
+              id="bookie2" 
+              value={homeCote} 
+              onChange={(event) => setHomeCote(event.target.value)}
+            />
           </div>
         </div>
         <button type="submit">Valider</button>

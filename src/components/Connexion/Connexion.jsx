@@ -5,7 +5,7 @@ import Wrapper from "../Wrapper/Wrapper";
 import Input from "../Utils/Input";
 import Strength from "./AddOn/Strength";
 
-import { checkLogin, createLeague, createUser, setErrorMessage, setInputValue, setMailError, setPasswordError, toggleCreationMode } from "../../actions/user";
+import { checkLogin, createDmfc, createUser, setErrorMessage, setInputValue, setMailError, setPasswordError, toggleCreationMode } from "../../actions/user";
 import { verifyMail, verifyPassword } from "../../Utils/filters/usersFilter";
 
 import './Connexion.scss';
@@ -44,7 +44,7 @@ const Connexion = () => {
         if (!isErrorMail && !isErrorPassword) {
           if (DMFC) {
             if (!league_name !== '') {
-              dispatch(createLeague());
+              dispatch(createDmfc());
             } else {
               dispatch(setErrorMessage('Veuillez renseigner tous les champs'));
             }

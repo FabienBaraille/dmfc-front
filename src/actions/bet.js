@@ -24,7 +24,8 @@ export const SET_COUNT_BET = 'SET_COUNT_BET';
 export const RESET_COUNT_BET = 'RESET_COUNT_BET';
 export const RESET_SCORE_UPDATE = 'RESET_SCORE_UPDATE';
 export const UPDATE_PLAYER_SCORE = 'UPDATE_PLAYER_SCORE';
-export const SET_UPDATED_MESSAGE = 'SET_UPDATED_MESSAGE'
+export const SET_UPDATED_MESSAGE = 'SET_UPDATED_MESSAGE';
+export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 
 export const setCountUpdate = () => ({
   type: SET_COUNT_BET,
@@ -150,4 +151,8 @@ export const updatePlayerScore = (playerId, playerScore, playerOldPosition) => (
 export const setUpdatedMessage = (message) => ({
   type: SET_UPDATED_MESSAGE,
   message
+});
+export const setErrorMessage = (message) => ({
+  type: SET_ERROR_MESSAGE,
+  message 
 });

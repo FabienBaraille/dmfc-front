@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'redaxios';
 
 import { 
@@ -14,6 +15,7 @@ import {
   getPredictionByGame,
   setAllPredictions,
   setCountUpdate,
+  setErrorMessage,
   setGamesRound,
   setIsCreatedMatch,
   setIsLoadingBet,
@@ -171,7 +173,7 @@ const betMiddleware = (store) => (next) => async (action) => {
         store.dispatch(setCountUpdate());
         store.dispatch(setIsLoadingBet(false));
       } catch (error) {
-        console.log(error);
+        store.dispatch(setErrorMessage(error.data.message));
       }
     break;
     /**
@@ -183,7 +185,7 @@ const betMiddleware = (store) => (next) => async (action) => {
         const { data } = await axios.get(`/api/srprediction/${action.playerId}`);
         store.dispatch(setAllPredictions(data));
       } catch (error) {
-        console.log(error);
+        store.dispatch(setErrorMessage(error.data.message));
       }
     break;
     /**
@@ -201,7 +203,7 @@ const betMiddleware = (store) => (next) => async (action) => {
         store.dispatch(setUpdatedMessage(data.message));
         store.dispatch(setIsLoadingBet(false));
       } catch (error) {
-        console.log(error);
+        store.dispatch(setErrorMessage(error.data.message));
       }
     break;
     default:

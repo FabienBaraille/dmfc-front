@@ -1,8 +1,7 @@
 import axios from 'redaxios';
 
-import { CHECK_LOGIN, CREATE_LEAGUE, CREATE_USER, createUser, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos, UPDATE_USER_PROFILE, UPDATE_USERNAME, updateUserProfile } from "../actions/user";
+import { CHECK_LOGIN, CREATE_DMFC, CREATE_USER, GET_USER, getUser, setErrorMessage, setIsCreated, setIsLogged, setUserInfos, UPDATE_USER_PROFILE, UPDATE_USERNAME, updateUserProfile } from "../actions/user";
 
-import { roleName } from '../Utils/filters/usersFilter';
 import { getUsersList } from '../actions/datas';
 
 axios.defaults.baseURL = 'http://localhost:8000';
@@ -12,7 +11,6 @@ const authMiddelware = (store) => (next) => async (action) => {
   switch (action.type) {
     case CREATE_USER: {
       const leagueId = action.leagueId ? action.leagueId : store.getState().user.league !== 'Pas de ligue' ? store.getState().user.league : null;
-      const roles = roleName(store.getState().user.DMFC);
       try {
         const { data } = await axios.post(
           `/api/user/new`,
@@ -20,7 +18,7 @@ const authMiddelware = (store) => (next) => async (action) => {
             username: store.getState().user.pseudo,
             email: store.getState().user.email,
             password: store.getState().user.password,
-            roles: roles,
+            roles: ['ROLE_JOUEUR_NA'],
             league: leagueId,
           },
           { 
@@ -33,18 +31,22 @@ const authMiddelware = (store) => (next) => async (action) => {
       }
     }
     break;
-    case CREATE_LEAGUE: {
+    case CREATE_DMFC: {
       try {
         const { data } = await axios.post(
-          `/api/league/new`,
+          `/api/user/new/dmfc`,
           {
+            username: store.getState().user.pseudo,
+            email: store.getState().user.email,
+            password: store.getState().user.password,
+            roles: ['ROLE_DMFC'],
             leagueName: store.getState().user.league_name,
           },
           { 
             withCredentials: false
           }
         )
-        store.dispatch(createUser(data.id));
+        store.dispatch(setIsCreated(true));
       } catch (error) {
         store.dispatch(setErrorMessage(error.data.error));
       }

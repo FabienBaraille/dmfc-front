@@ -55,6 +55,7 @@ const RsBetCreation = () => {
       const homeTeamId = homeTeams[index];
       const deadline = deadlines[index];
       const transformedDeadline = transformDate(deadline, 'create');
+      // Finir de traiter une erreur si 2 équipes sont identiques
       if (visitorId !== homeTeamId) {
         dispatch(createGame(transformedDeadline, [homeTeamId, visitorId]));
       }

@@ -1,12 +1,12 @@
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import Loader from "./Loader";
+import './Loader.scss';
 
 const LoadElmt = () => {
   return (
     <>
       <Header />
-      <Loader />
+      <div className="loader" />
       <Footer />
     </>
   )};

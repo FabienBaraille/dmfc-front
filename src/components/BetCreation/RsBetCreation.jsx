@@ -73,6 +73,7 @@ const RsBetCreation = () => {
     )
   }
   return (
+    <>
       <Wrapper name="rsbetcreation">
         <div className="round-choice">
           <h4>Pronostic saison régulière</h4>
@@ -110,6 +111,8 @@ const RsBetCreation = () => {
           : null}
         </form>
       </Wrapper>
+      {(!roundCreationMode ) && <Wrapper></Wrapper>}
+    </>
   )
 };
 

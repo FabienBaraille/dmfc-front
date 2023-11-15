@@ -43,7 +43,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
     <div className='page'>
       <form className="match" onSubmit={handleSubmit} id={id}>
         <div className="teams">
-          <div className="visitor">
+          <div className="team-detail">
             <input 
               type="radio" 
               id="0" 
@@ -53,14 +53,12 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
               onChange={(event) => setWinTeam(event.target.id)}
             />
             <label htmlFor="visitor" >
-              {team[0].trigram}
+              {`${team[0].trigram} - ${team[0].name}`}
             </label>
+            <img className='small-logo' src={`/src/assets/logos/${team[0].logo}`} alt="" />
           </div>
           <div className='at-logo'> </div>
-          <div className="home-team">
-            <label htmlFor="home-team" >
-              {team[1].trigram}
-            </label>
+          <div className="team-detail">
             <input 
               type="radio" 
               id="1" 
@@ -69,6 +67,10 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
               disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} 
               onChange={(event) => setWinTeam(event.target.id)}
             />
+            <label htmlFor="home-team" >
+              {`${team[1].trigram} - ${team[1].name}`}
+            </label>
+            <img className='small-logo' src={`/src/assets/logos/${team[1].logo}`} alt="" />
           </div>
         </div>
         <div>

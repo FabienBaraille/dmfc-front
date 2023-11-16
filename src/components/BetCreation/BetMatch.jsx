@@ -29,7 +29,7 @@ const BetMatch = () => {
         <option defaultValue={true} disabled hidden>Choisir l'équipe visiteur</option>
         {teamsOptions}
       </select>
-      <div className='at-logo'> </div>
+      <div className="at">@</div>
       <select name="home-team">
         <option defaultValue={true} disabled hidden>Choisir l'équipe recevant</option>
         {teamsOptions}

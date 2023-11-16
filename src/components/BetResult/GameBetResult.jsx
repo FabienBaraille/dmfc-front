@@ -28,7 +28,6 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
       )
     );
   }
-  console.log(team[0])
   return (
       <form className="bet_result" onSubmit={handleSubmit} id={gameId}>
         <div className="team-result">

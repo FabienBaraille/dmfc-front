@@ -7,8 +7,9 @@ import BetTpl  from "./BetMatch";
 import Input from "../Utils/Input";
 import LoadElmt from "../Loader/LoadElmt";
 import RoundSelector from "./Element/RoundSelector";
+import CreatedMatch from "./CreatedMatch";
 
-import { addBetToList, createGame, createRound, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
+import { addBetToList, createGame, createRound, getGamesRound, setDeleteMessage, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
 import { toggleCreationMode } from "../../actions/bet";
 import { transformDate } from "../../Utils/stats/calcDate";
 
@@ -17,19 +18,29 @@ import './RsBetCreation.scss';
 const RsBetCreation = () => {
 
   const dispatch = useDispatch();
-  const {isCreatedMatch, betList, roundCreationMode, roundName, roundCat, roundNumber, isLoadingGame} = useSelector((state) => state.bet);
-
+  const {isCreatedMatch, betList, roundCreationMode, roundName, roundCat, roundNumber, isLoadingGame, games, isPred, deleteMessage} = useSelector((state) => state.bet);
   useEffect(() => {
     if (!isLoadingGame && isCreatedMatch) {
       setTimeout(() => {
         dispatch(addBetToList([]));
-        dispatch(setInputValueBet('roundNumber', ''));
+        // dispatch(setInputValueBet('roundNumber', ''));
         dispatch(setIsCreatedMatch(false));
       }, 1500);
     }
-  }, [isCreatedMatch])
+    if (!isLoadingGame && deleteMessage) {
+      setTimeout(() => {
+        dispatch(setDeleteMessage(''));
+        dispatch(getGamesRound(roundNumber));
+      }, 1500);
+    }
+    if (roundNumber !== '') {
+      dispatch(getGamesRound(roundNumber));
+    }
+  }, [isCreatedMatch, roundNumber, deleteMessage])
 
   const betTpl = BetTpl()
+
+  const createdGames = games.map(({id, ...rest}) => <CreatedMatch key={id} gameId={id} {...rest} isPredicted={isPred[id]} />);
 
   const handleAddBet = () => {
     dispatch(addBetToList(betTpl))
@@ -72,8 +83,15 @@ const RsBetCreation = () => {
       </Wrapper>
     )
   }
+  if (deleteMessage) {
+    return (
+      <Wrapper>
+        <h2>{deleteMessage}</h2>
+      </Wrapper>
+    )
+  }
   return (
-    <>
+    <section className="dmfc-creation">
       <Wrapper name="rsbetcreation">
         <div className="round-choice">
           <h4>Pronostic saison régulière</h4>
@@ -111,8 +129,12 @@ const RsBetCreation = () => {
           : null}
         </form>
       </Wrapper>
-      {(!roundCreationMode ) && <Wrapper></Wrapper>}
-    </>
+      {(!roundCreationMode && games.length !== 0 ) && 
+        <Wrapper name={"created-game"}>
+          <h4>Liste des matchs du round</h4>
+          {createdGames}
+        </Wrapper>}
+    </section>
   )
 };
 

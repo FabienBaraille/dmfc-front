@@ -4,11 +4,14 @@ export const TOGGLE_CREATION_MODE_BET = 'TOGGLE_CREATION_MODE_BET';
 export const SET_IS_LOADING_BET = 'SET_IS_LOADING_BET';
 export const GET_GAMES_ROUND = 'GET_GAMES_ROUND';
 export const SET_GAMES_ROUND = 'SET_GAMES_ROUND';
+export const SET_IS_PRED = 'SET_IS_PRED';
 export const CREATE_BET = 'CREATE_BET';
 export const UPDATE_BET = 'UPDATE_BET';
 export const CREATE_ROUND = 'CREATE_ROUND';
 export const SET_INPUT_VALUE_BET = 'SET_INPUT_VALUE_BET';
 export const CREATE_GAME = 'CREATE_GAME';
+export const DELETE_GAME = 'DELETE_GAME';
+export const SET_DELETE_MESSAGE = 'SET_DELETE_MESSAGE';
 export const SET_IS_LOADING_GAME = 'SET_IS_LOADING_GAME';
 export const SET_IS_CREATED_MATCH = 'SET_IS_CREATED_MATCH';
 export const UPDATE_GAME = 'UPDATE_GAME';
@@ -85,6 +88,10 @@ export const setGamesRound = (gamesList) => ({
   type: SET_GAMES_ROUND,
   gamesList 
 });
+export const setIsPred = (predList) => ({
+  type: SET_IS_PRED,
+  predList 
+});
 export const createBet = (winningTeam, winningDif, matchId, status) => ({
   type: CREATE_BET,
   winningTeam,
@@ -100,7 +107,14 @@ export const createGame = (date, teams) => ({
   date,
   teams
 });
-
+export const deleteGame = (gameId) => ({
+  type: DELETE_GAME,
+  gameId
+});
+export const setDeleteMessage = (message) => ({
+  type: SET_DELETE_MESSAGE,
+  message
+});
 export const updateBet = (winningTeam, winningDif, betId, status) => ({
   type: UPDATE_BET,
   winningTeam,

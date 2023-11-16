@@ -5,6 +5,7 @@ import {
   CREATE_BET,
   CREATE_GAME,
   CREATE_ROUND,
+  DELETE_GAME,
   GET_ALL_PREDICTIONS,
   GET_GAMES_ROUND,
   GET_PREDICTION_BY_GAME,
@@ -15,11 +16,13 @@ import {
   getPredictionByGame,
   setAllPredictions,
   setCountUpdate,
+  setDeleteMessage,
   setErrorMessage,
   setGamesRound,
   setIsCreatedMatch,
   setIsLoadingBet,
   setIsLoadingGame,
+  setIsPred,
   setPredictionByGame,
   setUpdatedGame,
   setUpdatedMessage,
@@ -37,7 +40,8 @@ const betMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.get(`/api/games/round/${action.roundId}`);
-        store.dispatch(setGamesRound(data));
+        store.dispatch(setGamesRound(data[0]));
+        store.dispatch(setIsPred(data[1]));
       } catch (error) {
         console.log(error);
       }
@@ -124,6 +128,19 @@ const betMiddleware = (store) => (next) => async (action) => {
         store.dispatch(setIsCreatedMatch(true));
       } catch (error) {
         console.log(error);
+      }
+    }
+    break;
+    /**
+     * Action to delete a match
+     */
+    case DELETE_GAME: {
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.delete(`/api/game/${action.gameId}`);
+        store.dispatch(setDeleteMessage(data.message));
+      } catch (error) {
+        store.dispatch(setDeleteMessage(error.data.message));
       }
     }
     break;

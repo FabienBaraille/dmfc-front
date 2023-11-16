@@ -71,6 +71,10 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
           </div>
           <div className='at'>@</div>
           <div className="team-detail">
+            <img className='small-logo' src={`/src/assets/logos/${team[1].logo}`} alt="" />
+            <label htmlFor="home-team" >
+              {`${team[1].trigram} - ${team[1].name}`}
+            </label>
             <input 
               type="radio" 
               id="1" 
@@ -84,10 +88,6 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
                 }
               }}
             />
-            <label htmlFor="home-team" >
-              {`${team[1].trigram} - ${team[1].name}`}
-            </label>
-            <img className='small-logo' src={`/src/assets/logos/${team[1].logo}`} alt="" />
           </div>
         </div>
         <div>

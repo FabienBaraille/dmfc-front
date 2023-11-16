@@ -34,14 +34,14 @@ const Rankings = () => {
     <Wrapper name={'rankings'}>
       <h2>Classement Général</h2>
       {playerList.length === 0 ? 
-      <h3>Il n'y à actuellement personne dans la ligue</h3>
+      <h3>Il n'y a actuellement personne dans la ligue</h3>
         :
       <table className="ranking-table">
         <thead>
           <tr>
             <th colSpan={2}>Classement</th>
-            <th>Nom du Joueur</th>
-            <th>Score actuel</th>
+            <th>Joueur</th>
+            <th>Score</th>
           </tr>
         </thead>
         <tbody>

@@ -63,8 +63,9 @@ function Profil() {
         password: password,
         team: team,
       };
+      // Need to manage the case of a username already used before logout
       if (pseudo !== loggedUser.username) {
-        toast.warning('Afin de changer de pseudo, vous allez être déconnecté !', toastWarning);
+        toast.warning('Afin de changer de pseudo, tu vas être déconnecté !', toastWarning);
         setTimeout(() => {
           dispatch(updateUsername(pseudo));
           dispatch(resetStore());
@@ -89,7 +90,7 @@ function Profil() {
     if (loggedUser.league_id === null) {
       return (
         <Wrapper name="profil-page">
-          <h3>Vous n'avez pas de ligue, merci d'en choisir une pour pouvoir jouer.</h3>
+          <h3>Tu n'as pas de ligue, merci d'en choisir une pour pouvoir jouer.</h3>
           <form onSubmit={handleLeagueChange}>
             <label htmlFor="league">Ligue :</label>
             <select 
@@ -127,7 +128,7 @@ function Profil() {
       </Wrapper>
       <Wrapper name="profil-change">
         <form className="change-info" onSubmit={handleSubmit}>
-          <h3>Changer mes Infos</h3>
+          <h3>Modifier mon profil</h3>
           <div className="changeContainer">
               <Input label="Email :" id="email" type="email" className="inputContainer" value={email} onChange={handleInput} placeholder="changer ton email" isRequired={true}/>
               {mailError && <p className="error-message">Le format du mail n'est pas correct.</p>}

@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import axios from 'redaxios';
 
 import { 
   CREATE_BET,
   CREATE_GAME,
   CREATE_ROUND,
+  DELETE_GAME,
   GET_ALL_PREDICTIONS,
   GET_GAMES_ROUND,
   GET_PREDICTION_BY_GAME,
@@ -14,10 +16,13 @@ import {
   getPredictionByGame,
   setAllPredictions,
   setCountUpdate,
+  setDeleteMessage,
+  setErrorMessage,
   setGamesRound,
   setIsCreatedMatch,
   setIsLoadingBet,
   setIsLoadingGame,
+  setIsPred,
   setPredictionByGame,
   setUpdatedGame,
   setUpdatedMessage,
@@ -28,60 +33,6 @@ import { getRounds, getSRPrediction } from '../actions/datas';
 
 const betMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
-    /**
-     * Action to get all games infos by a round ID
-     */
-    case GET_GAMES_ROUND:
-      store.dispatch(setIsLoadingBet(true));
-      try {
-        const { data } = await axios.get(`/api/games/round/${action.roundId}`);
-        store.dispatch(setGamesRound(data));
-      } catch (error) {
-        console.log(error);
-      }
-    break;
-    /**
-     * Action to create et bet made by a player
-     */
-    case CREATE_BET:
-      store.dispatch(setIsLoadingBet(true));
-      try {
-        const { data } = await axios.post(`/api/srprediction/new`,
-          {
-            gameId: action.matchId,
-            validation_status: action.status,
-            predicted_winnig_team: action.winningTeam,
-            predicted_point_difference: action.winningDif,
-            point_scored: 0,
-            bonus_points_erned: 0,
-            bonus_bookie: 0,
-          }
-        );
-        store.dispatch(setIsLoadingBet(false));
-        store.dispatch(getSRPrediction(store.getState().user.loggedUser.id));
-      } catch (error) {
-        console.log(error);
-      }
-    break;
-    /**
-     * Action to update a bet by a player
-     */
-    case UPDATE_BET:
-      store.dispatch(setIsLoadingBet(true));
-      try {
-        const { data } = await axios.put(`/api/prediction/update/${action.betId}`,
-          {
-            validation_status: action.status,
-            predicted_winnig_team: action.winningTeam,
-            predicted_point_difference: action.winningDif,
-          }
-        );
-        store.dispatch(setIsLoadingBet(false));
-        store.dispatch(getSRPrediction(store.getState().user.loggedUser.id));
-      } catch (error) {
-        console.log(error);
-      }
-    break;
     /**
      * Action to create a round by the DMFC
      */
@@ -129,25 +80,91 @@ const betMiddleware = (store) => (next) => async (action) => {
      * Action to update the score of a match by the DMFC
      */
     case UPDATE_GAME: {
-      store.dispatch(setIsLoadingBet(true));
+      !action.isUpdate ? store.dispatch(setIsLoadingBet(true)) : store.dispatch(setIsLoadingGame(true));
       try {
         const { data } = await axios.put(`/api/game/${action.gameId}`,
-          {
-            homeScore: action.homeScore,
-            visitorScore: action.visitorScore,
-            homeOdd: action.homeOdd,
-            visitorOdd: action.visitorOdd,
-            winner: action.winner
-          }
+         action.body
         );
-        store.dispatch(setUpdatedGame(data.game));
-        store.dispatch(getPredictionByGame(action.gameId));
+        if (!action.isUpdate) {
+          store.dispatch(setUpdatedGame(data.game));
+          store.dispatch(getPredictionByGame(action.gameId));
+        } else {
+          store.dispatch(setDeleteMessage(data.message));
+        }
       } catch (error) {
         console.log(error);
       }
     }
     break;
     /**
+     * Action to delete a match
+     */
+    case DELETE_GAME: {
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.delete(`/api/game/${action.gameId}`);
+        store.dispatch(setDeleteMessage(data.message));
+      } catch (error) {
+        store.dispatch(setDeleteMessage(error.data.message));
+      }
+    }
+    break;
+    /**
+     * Action to get all games infos by a round ID
+     */
+    case GET_GAMES_ROUND:
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.get(`/api/games/round/${action.roundId}`);
+        store.dispatch(setGamesRound(data[0]));
+        store.dispatch(setIsPred(data[1]));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    /**
+     * Action to create et bet made by a player
+     */
+    case CREATE_BET:
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.post(`/api/srprediction/new`,
+          {
+            gameId: action.matchId,
+            validation_status: action.status,
+            predicted_winnig_team: action.winningTeam,
+            predicted_point_difference: action.winningDif,
+            point_scored: 0,
+            bonus_points_erned: 0,
+            bonus_bookie: 0,
+          }
+        );
+        store.dispatch(setIsLoadingBet(false));
+        store.dispatch(getSRPrediction(store.getState().user.loggedUser.id));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    /**
+     * Action to update a bet by a player
+     */
+    case UPDATE_BET:
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.put(`/api/prediction/update/${action.betId}`,
+          {
+            validation_status: action.status,
+            predicted_winnig_team: action.winningTeam,
+            predicted_point_difference: action.winningDif,
+          }
+        );
+        store.dispatch(setIsLoadingBet(false));
+        store.dispatch(getSRPrediction(store.getState().user.loggedUser.id));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+        /**
      * Action to get all predictions done for a match
      */
     case GET_PREDICTION_BY_GAME:
@@ -171,7 +188,7 @@ const betMiddleware = (store) => (next) => async (action) => {
         store.dispatch(setCountUpdate());
         store.dispatch(setIsLoadingBet(false));
       } catch (error) {
-        console.log(error);
+        store.dispatch(setErrorMessage(error.data.message));
       }
     break;
     /**
@@ -183,7 +200,7 @@ const betMiddleware = (store) => (next) => async (action) => {
         const { data } = await axios.get(`/api/srprediction/${action.playerId}`);
         store.dispatch(setAllPredictions(data));
       } catch (error) {
-        console.log(error);
+        store.dispatch(setErrorMessage(error.data.message));
       }
     break;
     /**
@@ -201,7 +218,7 @@ const betMiddleware = (store) => (next) => async (action) => {
         store.dispatch(setUpdatedMessage(data.message));
         store.dispatch(setIsLoadingBet(false));
       } catch (error) {
-        console.log(error);
+        store.dispatch(setErrorMessage(error.data.message));
       }
     break;
     default:

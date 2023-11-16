@@ -8,7 +8,7 @@ import { postNewsChange, postNewsCreation, setNews, setNewsCreationMode } from '
 
 const News = () => {
   const dispatch = useDispatch();
-  
+
   const userRole = useSelector((state) => state.user.loggedUser.roles[0]);
   const newsCreation = useSelector((state) => state.datas.newsCreation);
   const news = useSelector((state) => state.datas.news);
@@ -18,17 +18,14 @@ const News = () => {
   const handleCreationMode = () => {
     newsCreation ? dispatch(setNewsCreationMode(false)) : dispatch(setNewsCreationMode(true));
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     newsId === 0 ? dispatch(postNewsCreation()) : dispatch(postNewsChange());
     dispatch(setNewsCreationMode(false));
   };
-
   const handleNewsChange = (event) => {
     dispatch(setNews(event.target.id, event.target.value));
   };
-  
   return (
     <Wrapper name='news'>
       <h2>Fil d'actus</h2>
@@ -39,11 +36,11 @@ const News = () => {
           <Input type="textarea" id="news" label='Actus :' value={news} className="news-container" onChange={handleNewsChange}/>
           <button type='submit'>Valider</button>
           <p>Pensez à validez vos changements !</p>
-        </form>         
+        </form>
         :
         <>
-          <h3>{newsTitle}</h3>
-          <p>{news}</p>
+          <h3>{newsTitle !== '' ? newsTitle : "Bienvenue sur ton fil d'actu"}</h3>
+          <p>{news !== '' ? news : "Le début de ton aventure en tant que DMFC, tu peux créer ici ta première news !"}</p>
         </>
       }
     </Wrapper>

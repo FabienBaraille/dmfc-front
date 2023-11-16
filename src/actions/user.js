@@ -2,7 +2,7 @@ export const SET_INPUT_VALUE = 'SET_INPUT_VALUE';
 export const TOGGLE_CREATION_MODE = 'TOGGLE_CREATION_MODE';
 export const CHECK_LOGIN = 'CHECK_LOGIN';
 export const CREATE_USER = 'CREATE_USER';
-export const CREATE_LEAGUE = 'CREATE_LEAGUE';
+export const CREATE_DMFC = 'CREATE_DMFC';
 export const GET_USER = 'GET_USER';
 export const GET_CURRENT_USER = 'GET_CURRENT_USER';
 export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
@@ -34,8 +34,8 @@ export const createUser = (leagueId = null) => ({
   type: CREATE_USER,
   leagueId
 });
-export const createLeague = () => ({
-  type: CREATE_LEAGUE,
+export const createDmfc = () => ({
+  type: CREATE_DMFC,
 });
 export const getUser = (username) => ({
   type: GET_USER,

@@ -7,8 +7,9 @@ import BetTpl  from "./BetMatch";
 import Input from "../Utils/Input";
 import LoadElmt from "../Loader/LoadElmt";
 import RoundSelector from "./Element/RoundSelector";
+import CreatedMatch from "./CreatedMatch";
 
-import { addBetToList, createGame, createRound, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
+import { addBetToList, createGame, createRound, getGamesRound, setDeleteMessage, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
 import { toggleCreationMode } from "../../actions/bet";
 import { transformDate } from "../../Utils/stats/calcDate";
 
@@ -17,26 +18,28 @@ import './RsBetCreation.scss';
 const RsBetCreation = () => {
 
   const dispatch = useDispatch();
-  const isCreatedMatch = useSelector((state) => state.bet.isCreatedMatch);
-  
-  const betList = useSelector((state) => state.bet.betList);
-  const roundCreationMode = useSelector((state) => state.bet.roundCreationMode);
-  const roundName = useSelector((state) => state.bet.roundName);
-  const roundCat = useSelector((state) => state.bet.roundCat);
-  const roundNumber = useSelector((state) => state.bet.roundNumber);
-  const isLoadingGame = useSelector((state) => state.bet.isLoadingGame);
-  
+  const {isCreatedMatch, betList, roundCreationMode, roundName, roundCat, roundNumber, isLoadingGame, games, isPred, deleteMessage} = useSelector((state) => state.bet);
   useEffect(() => {
     if (!isLoadingGame && isCreatedMatch) {
       setTimeout(() => {
-        dispatch(addBetToList([]));
-        dispatch(setInputValueBet('roundNumber', ''));
+        dispatch(setInputValueBet('betList', []));
         dispatch(setIsCreatedMatch(false));
       }, 1500);
     }
-  }, [isCreatedMatch])
+    if (!isLoadingGame && deleteMessage) {
+      setTimeout(() => {
+        dispatch(setDeleteMessage(''));
+        dispatch(getGamesRound(roundNumber));
+      }, 1500);
+    }
+    if (roundNumber !== '') {
+      dispatch(getGamesRound(roundNumber));
+    }
+  }, [isCreatedMatch, roundNumber, deleteMessage])
 
   const betTpl = BetTpl()
+
+  const createdGames = games.map(({id, ...rest}) => <CreatedMatch key={id} gameId={id} {...rest} isPredicted={isPred[id]} />);
 
   const handleAddBet = () => {
     dispatch(addBetToList(betTpl))
@@ -62,7 +65,10 @@ const RsBetCreation = () => {
       const homeTeamId = homeTeams[index];
       const deadline = deadlines[index];
       const transformedDeadline = transformDate(deadline, 'create');
-      dispatch(createGame(transformedDeadline, [homeTeamId, visitorId]))
+      // Finir de traiter une erreur si 2 équipes sont identiques
+      if (visitorId !== homeTeamId) {
+        dispatch(createGame(transformedDeadline, [homeTeamId, visitorId]));
+      }
     })
     }
   }
@@ -76,33 +82,44 @@ const RsBetCreation = () => {
       </Wrapper>
     )
   }
+  if (deleteMessage) {
+    return (
+      <Wrapper>
+        <h2>{deleteMessage}</h2>
+      </Wrapper>
+    )
+  }
   return (
+    <section className="dmfc-creation">
       <Wrapper name="rsbetcreation">
         <div className="round-choice">
           <h4>Pronostic saison régulière</h4>
           {!roundCreationMode &&
-            <RoundSelector />
+            <RoundSelector isCreationMatch={true}/>
           }
         </div>
         <form onSubmit={handleSubmit}>
           {betList.length == 0 ?
             <>
-              <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Création d'un nouveau round" : "Round existant"}</button>
+              <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Nouveau round" : "Round existant"}</button>
               {roundCreationMode &&
                 <div className="round-creation">
                   <Input 
-                    label="Nom du Round :" 
+                    label="Nom du Round" 
                     id="roundName" 
                     type="text" 
                     placeholder="Nom du round"
                     value={roundName}
                     onChange={handleInput}
                   />
-                  <p>Phase :</p>
-                  <select id="roundCat" placeholder="Catégorie Round" onChange={handleInput} value={roundCat} >
-                    <option value='SR'>SR</option>
-                    <option value='PO' disabled>PO</option>
-                  </select>
+                  <div className="input-field">
+                    <label>Phase</label>
+                    <select id="roundCat" placeholder="Catégorie Round" onChange={handleInput} value={roundCat} >
+                      <option value='SR'>SR</option>
+                      <option value='PO' disabled>PO</option>
+                    </select>
+                  </div>
+                  
                 </div>
               }
             </>
@@ -114,6 +131,12 @@ const RsBetCreation = () => {
           : null}
         </form>
       </Wrapper>
+      {(!roundCreationMode && games.length !== 0 ) && 
+        <Wrapper name={"created-game"}>
+          <h4>Liste des matchs du round</h4>
+          {createdGames}
+        </Wrapper>}
+    </section>
   )
 };
 

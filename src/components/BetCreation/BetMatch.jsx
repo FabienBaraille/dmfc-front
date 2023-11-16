@@ -15,7 +15,7 @@ const BetMatch = () => {
   const betListNumber = useSelector((state) => state.bet.betNumber);
   const teamsList = useSelector((state) => state.datas.allTeams);
 
-  const teamsOptions = teamsList.map(({id, trigram, name}, index) => <option key={`${index}team${id}`} value={id}>{trigram} - {name}</option> );  
+  const teamsOptions = teamsList.map(({id, trigram, name}, index) => <option key={`${index}team${id}`} value={id}>{trigram} - {name}</option> );
 
   const handleDelete = (event) => {
     event.preventDefault()
@@ -29,7 +29,7 @@ const BetMatch = () => {
         <option defaultValue={true} disabled hidden>Choisir l'équipe visiteur</option>
         {teamsOptions}
       </select>
-      <div className='at-logo'> </div>
+      <div className="at">@</div>
       <select name="home-team">
         <option defaultValue={true} disabled hidden>Choisir l'équipe recevant</option>
         {teamsOptions}

@@ -7,7 +7,7 @@ const Input = ({label, type, value, id, className = null, onChange = null, place
   const [hide, setHide] = useState(true);
   
   return (
-    <div className={`input-field ${className}`}>
+    <div className={`input-field ${className !== null ? className : ''}`}>
       <label htmlFor={id}>{label}</label>
       <input 
         name={inputName}

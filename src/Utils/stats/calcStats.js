@@ -10,21 +10,28 @@ export const scoreMax = (roundsList) => {
   return countMatch*20;
 }
 
-export const calcBetPoint = (updatedGame, predictedWinnigTeam, predictedPointDifference, validationStatus) => {
+export const calcBetPoint = (updatedGame, predictedWinningTeam, predictedPointDifference, validationStatus) => {
   const {winner, visitorScore, homeScore, visitorOdd, homeOdd, team} = updatedGame;
   let teamEarnedPoints = 0;
   let diffEarnedPoints = 0;
   let bookiesEarnedPoints = 0;
+  // Check the status of the pronostic
   if (validationStatus !== "Saved") {
-    teamEarnedPoints = predictedWinnigTeam === winner ? 10 : 0;
+    // If the predicted winning team is the good one -> 10 pts
+    teamEarnedPoints = predictedWinningTeam === winner ? 10 : 0;
     const predictedPts = parseInt(predictedPointDifference);
-    diffEarnedPoints = predictedPts === Math.abs(visitorScore - homeScore) ? 20 : Math.abs(Math.abs(visitorScore - homeScore) - predictedWinnigTeam) <= 5 ? 10 : 0;
-    if (visitorOdd !== 0 && homeOdd !== 0) {
-      const bookiesChoice = visitorOdd > homeOdd ? team[0].name : team[1].name;
-      bookiesEarnedPoints = (predictedWinnigTeam === bookiesChoice && predictedWinnigTeam === updatedGame.winner) ? 10 : 0;
+    if (teamEarnedPoints !== 0) {
+      // If the predicted winning team is the good one and difference points too -> 20 pts more
+      diffEarnedPoints = predictedPts === Math.abs(visitorScore - homeScore) ?
+      20 : 
+      Math.abs(Math.abs(visitorScore - homeScore) - predictedWinningTeam) <= 5 ? 10 : 0;
+      if (visitorOdd !== 0 && homeOdd !== 0) {
+        // If the predicted winning team is the good one and bookie ok with you -> 10 pts more
+        const bookiesChoice = visitorOdd < homeOdd ? team[0].name : team[1].name;
+        bookiesEarnedPoints = predictedWinningTeam === bookiesChoice ? 10 : 0;
+      }
     }
   }
-  
   return {
     pointScored: teamEarnedPoints,
     bonusPointsErned: diffEarnedPoints,

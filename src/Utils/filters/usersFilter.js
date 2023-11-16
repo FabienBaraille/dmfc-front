@@ -6,13 +6,10 @@ export const userByUsername = (array, username) => {
   return array.filter((user) => user.username == username)
 };
 
-export const roleName = (DMFC) => {
-  return DMFC ? ['ROLE_DMFC'] : ['ROLE_JOUEUR_NA'];
-};
-
 export const positionFinder = (usersList, userId) => {
   let position = 0;
   usersList.forEach(({id}, index) => {
+    // For each user of the global list we check the given id
     if (id === userId) {
       position = index;
     }

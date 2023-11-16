@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <div className='globalNews'>
         <SeasonInfos />
-        <News/>        
+        <News/>
       </div>
       <Rankings />
     </>

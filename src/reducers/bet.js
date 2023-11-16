@@ -14,7 +14,9 @@ import {
   SET_COUNT_BET,
   RESET_COUNT_BET,
   SET_UPDATED_MESSAGE,
-  RESET_SCORE_UPDATE
+  RESET_SCORE_UPDATE,
+  SET_IS_PRED,
+  SET_DELETE_MESSAGE
 } from "../actions/bet";
 
 const initialState = {
@@ -27,6 +29,7 @@ const initialState = {
   'isUpdated': false,
   'updatedMessage': '',
   'games': [],
+  'isPred': [],
   'roundName': '',
   'roundCat': 'SR',
   'roundNumber': '',
@@ -34,7 +37,8 @@ const initialState = {
   'updatedGame': {},
   'allPredictions': [],
   'countBet': 0,
-  'countPred': 0
+  'countPred': 0,
+  'deleteMessage': ''
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -67,6 +71,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         games: action.gamesList,
         isLoading: false,
+      }
+    case SET_IS_PRED:
+      return {
+        ...state,
+        isPred: action.predList,
       }
     case SET_COUNT_BET:
       return {
@@ -118,6 +127,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         updatedGame: action.gameInfos,
         isLoading: false
+      }
+    case SET_DELETE_MESSAGE:
+      return {
+        ...state,
+        deleteMessage: action.message,
+        isLoadingGame: false
       }
     case SET_ALL_PREDICTIONS:
       return {

@@ -3,11 +3,11 @@
 
 /* roboto-regular - latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; 
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: url('/src/assets/fonts/roboto-v30-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/src/assets/fonts/roboto-v30-latin-regular.woff2') format('woff2');
 }
 /* roboto-700 - latin */
 @font-face {
@@ -54,13 +54,17 @@ body {
   }
   main {
     margin: 7em 0 3em;
-    .at-logo {
-      content: url('/src/assets/design/at-sign.svg');
-      margin: 0 15px;
-    }
   }
   a {
     cursor: pointer;
+  }
+  .error-message {
+    color: red;
+    text-shadow: 0 0 2px v.$shadow;
+    margin: 0.5rem 0;
+  }
+  .small-logo{
+    width: 2.7rem;
   }
 }
 
@@ -69,3 +73,4 @@ body {
     margin-top: 11em;
   }
 }
+

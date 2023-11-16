@@ -4,11 +4,14 @@ export const TOGGLE_CREATION_MODE_BET = 'TOGGLE_CREATION_MODE_BET';
 export const SET_IS_LOADING_BET = 'SET_IS_LOADING_BET';
 export const GET_GAMES_ROUND = 'GET_GAMES_ROUND';
 export const SET_GAMES_ROUND = 'SET_GAMES_ROUND';
+export const SET_IS_PRED = 'SET_IS_PRED';
 export const CREATE_BET = 'CREATE_BET';
 export const UPDATE_BET = 'UPDATE_BET';
 export const CREATE_ROUND = 'CREATE_ROUND';
 export const SET_INPUT_VALUE_BET = 'SET_INPUT_VALUE_BET';
 export const CREATE_GAME = 'CREATE_GAME';
+export const DELETE_GAME = 'DELETE_GAME';
+export const SET_DELETE_MESSAGE = 'SET_DELETE_MESSAGE';
 export const SET_IS_LOADING_GAME = 'SET_IS_LOADING_GAME';
 export const SET_IS_CREATED_MATCH = 'SET_IS_CREATED_MATCH';
 export const UPDATE_GAME = 'UPDATE_GAME';
@@ -24,7 +27,8 @@ export const SET_COUNT_BET = 'SET_COUNT_BET';
 export const RESET_COUNT_BET = 'RESET_COUNT_BET';
 export const RESET_SCORE_UPDATE = 'RESET_SCORE_UPDATE';
 export const UPDATE_PLAYER_SCORE = 'UPDATE_PLAYER_SCORE';
-export const SET_UPDATED_MESSAGE = 'SET_UPDATED_MESSAGE'
+export const SET_UPDATED_MESSAGE = 'SET_UPDATED_MESSAGE';
+export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 
 export const setCountUpdate = () => ({
   type: SET_COUNT_BET,
@@ -84,6 +88,10 @@ export const setGamesRound = (gamesList) => ({
   type: SET_GAMES_ROUND,
   gamesList 
 });
+export const setIsPred = (predList) => ({
+  type: SET_IS_PRED,
+  predList 
+});
 export const createBet = (winningTeam, winningDif, matchId, status) => ({
   type: CREATE_BET,
   winningTeam,
@@ -99,7 +107,14 @@ export const createGame = (date, teams) => ({
   date,
   teams
 });
-
+export const deleteGame = (gameId) => ({
+  type: DELETE_GAME,
+  gameId
+});
+export const setDeleteMessage = (message) => ({
+  type: SET_DELETE_MESSAGE,
+  message
+});
 export const updateBet = (winningTeam, winningDif, betId, status) => ({
   type: UPDATE_BET,
   winningTeam,
@@ -107,14 +122,11 @@ export const updateBet = (winningTeam, winningDif, betId, status) => ({
   betId,
   status
 });
-export const updateGame = (gameId, visitorScore, homeScore, visitorOdd, homeOdd, winner) => ({
+export const updateGame = (gameId, body, isUpdate = false) => ({
   type: UPDATE_GAME,
   gameId,
-  visitorScore,
-  homeScore,
-  visitorOdd,
-  homeOdd,
-  winner
+  body,
+  isUpdate
 });
 export const setPredictionByGame = (predictionInfos) => ({
   type: SET_PREDICTION_BY_GAME,
@@ -150,4 +162,8 @@ export const updatePlayerScore = (playerId, playerScore, playerOldPosition) => (
 export const setUpdatedMessage = (message) => ({
   type: SET_UPDATED_MESSAGE,
   message
+});
+export const setErrorMessage = (message) => ({
+  type: SET_ERROR_MESSAGE,
+  message 
 });

@@ -122,14 +122,11 @@ export const updateBet = (winningTeam, winningDif, betId, status) => ({
   betId,
   status
 });
-export const updateGame = (gameId, visitorScore, homeScore, visitorOdd, homeOdd, winner) => ({
+export const updateGame = (gameId, body, isUpdate = false) => ({
   type: UPDATE_GAME,
   gameId,
-  visitorScore,
-  homeScore,
-  visitorOdd,
-  homeOdd,
-  winner
+  body,
+  isUpdate
 });
 export const setPredictionByGame = (predictionInfos) => ({
   type: SET_PREDICTION_BY_GAME,

@@ -6,15 +6,16 @@
 }
 .match {
   font-family: v.$main-font;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+  display: grid;
   padding: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 1.1rem;
   border-collapse: collapse;
   h5 {
     margin-top: 10px;
+  }
+  .button-groupe {
+    align-self: end;
   }
 }
 .match_timer {
@@ -29,7 +30,8 @@
     -moz-appearance: none;
     -ms-appearance: none;
     height: 25px;
-    width: 25px;
+    min-width: 25px;
+    margin-right: 10px;
     background: v.$cell-back;
     box-shadow: 0 0 2px 2px v.$shadow;
     border-radius: 100%;
@@ -81,6 +83,6 @@ button {
   }
   .match {
     min-width: 20%;
-    height: 340px;
+    height: 370px;
   }
 }

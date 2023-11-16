@@ -40,8 +40,8 @@ const Rankings = () => {
         <thead>
           <tr>
             <th colSpan={2}>Classement</th>
-            <th>Nom du Joueur</th>
-            <th>Score actuel</th>
+            <th>Joueur</th>
+            <th>Score</th>
           </tr>
         </thead>
         <tbody>

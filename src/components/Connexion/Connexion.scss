@@ -60,19 +60,14 @@
   .password {
     width: 100%;
   }
-  .error-message {
-    color: red;
-    text-shadow: 0 0 2px v.$shadow;
-    margin-top: 1.3rem;
-  }
   .dmfc-opt {
     align-items: center;
     input[type="checkbox"] {
       -webkit-appearance: none;
       -moz-appearance: none;
       -ms-appearance: none;
-      height: 15px;
-      width: 15px;
+      height: 20px;
+      width: 20px;
       border-radius: 100%;
     }
     input[type="checkbox"]:checked {
@@ -81,8 +76,8 @@
         content: url(/src/assets/design/basketball-solid.svg);
         filter: invert(43%) sepia(15%) saturate(5000%) hue-rotate(346deg) ;
         position: absolute;
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
         margin: -5px -5px;
       }
     }

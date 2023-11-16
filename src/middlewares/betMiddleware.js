@@ -34,6 +34,82 @@ import { getRounds, getSRPrediction } from '../actions/datas';
 const betMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     /**
+     * Action to create a round by the DMFC
+     */
+    case CREATE_ROUND: {
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.post(`/api/round/new`,
+          {
+            season: store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].id,
+            name: store.getState().bet.roundName,
+            category: store.getState().bet.roundCat,
+            user: store.getState().user.loggedUser.id,
+            league: store.getState().user.loggedUser.league_id.id
+          }
+        );
+        store.dispatch(setIsLoadingBet(false));
+        store.dispatch(getRounds());
+        store.dispatch(toggleCreationMode(false));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    break;
+    /**
+     * Action to create a match by the DMFC
+     */
+    case CREATE_GAME: {
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.post(`/api/game/new`,
+          {
+            dateAndTimeOfMatch : action.date,
+            round : store.getState().bet.roundNumber,
+            teams : action.teams,
+          }
+        );
+        store.dispatch(setIsLoadingGame(false));
+        store.dispatch(setIsCreatedMatch(true));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    break;
+    /**
+     * Action to update the score of a match by the DMFC
+     */
+    case UPDATE_GAME: {
+      !action.isUpdate ? store.dispatch(setIsLoadingBet(true)) : store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.put(`/api/game/${action.gameId}`,
+         action.body
+        );
+        if (!action.isUpdate) {
+          store.dispatch(setUpdatedGame(data.game));
+          store.dispatch(getPredictionByGame(action.gameId));
+        } else {
+          store.dispatch(setDeleteMessage(data.message));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    break;
+    /**
+     * Action to delete a match
+     */
+    case DELETE_GAME: {
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.delete(`/api/game/${action.gameId}`);
+        store.dispatch(setDeleteMessage(data.message));
+      } catch (error) {
+        store.dispatch(setDeleteMessage(error.data.message));
+      }
+    }
+    break;
+    /**
      * Action to get all games infos by a round ID
      */
     case GET_GAMES_ROUND:
@@ -88,85 +164,7 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-    /**
-     * Action to create a round by the DMFC
-     */
-    case CREATE_ROUND: {
-      store.dispatch(setIsLoadingBet(true));
-      try {
-        const { data } = await axios.post(`/api/round/new`,
-          {
-            season: store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].id,
-            name: store.getState().bet.roundName,
-            category: store.getState().bet.roundCat,
-            user: store.getState().user.loggedUser.id,
-            league: store.getState().user.loggedUser.league_id.id
-          }
-        );
-        store.dispatch(setIsLoadingBet(false));
-        store.dispatch(getRounds());
-        store.dispatch(toggleCreationMode(false));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    break;
-    /**
-     * Action to create a match by the DMFC
-     */
-    case CREATE_GAME: {
-      store.dispatch(setIsLoadingGame(true));
-      try {
-        const { data } = await axios.post(`/api/game/new`,
-          {
-            dateAndTimeOfMatch : action.date,
-            round : store.getState().bet.roundNumber,
-            teams : action.teams,
-          }
-        );
-        store.dispatch(setIsLoadingGame(false));
-        store.dispatch(setIsCreatedMatch(true));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    break;
-    /**
-     * Action to delete a match
-     */
-    case DELETE_GAME: {
-      store.dispatch(setIsLoadingGame(true));
-      try {
-        const { data } = await axios.delete(`/api/game/${action.gameId}`);
-        store.dispatch(setDeleteMessage(data.message));
-      } catch (error) {
-        store.dispatch(setDeleteMessage(error.data.message));
-      }
-    }
-    break;
-    /**
-     * Action to update the score of a match by the DMFC
-     */
-    case UPDATE_GAME: {
-      store.dispatch(setIsLoadingBet(true));
-      try {
-        const { data } = await axios.put(`/api/game/${action.gameId}`,
-          {
-            homeScore: action.homeScore,
-            visitorScore: action.visitorScore,
-            homeOdd: action.homeOdd,
-            visitorOdd: action.visitorOdd,
-            winner: action.winner
-          }
-        );
-        store.dispatch(setUpdatedGame(data.game));
-        store.dispatch(getPredictionByGame(action.gameId));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    break;
-    /**
+        /**
      * Action to get all predictions done for a match
      */
     case GET_PREDICTION_BY_GAME:

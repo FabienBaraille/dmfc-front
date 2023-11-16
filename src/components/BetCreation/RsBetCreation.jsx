@@ -22,8 +22,7 @@ const RsBetCreation = () => {
   useEffect(() => {
     if (!isLoadingGame && isCreatedMatch) {
       setTimeout(() => {
-        dispatch(addBetToList([]));
-        // dispatch(setInputValueBet('roundNumber', ''));
+        dispatch(setInputValueBet('betList', []));
         dispatch(setIsCreatedMatch(false));
       }, 1500);
     }
@@ -102,22 +101,25 @@ const RsBetCreation = () => {
         <form onSubmit={handleSubmit}>
           {betList.length == 0 ?
             <>
-              <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Création d'un nouveau round" : "Round existant"}</button>
+              <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Nouveau round" : "Round existant"}</button>
               {roundCreationMode &&
                 <div className="round-creation">
                   <Input 
-                    label="Nom du Round :" 
+                    label="Nom du Round" 
                     id="roundName" 
                     type="text" 
                     placeholder="Nom du round"
                     value={roundName}
                     onChange={handleInput}
                   />
-                  <p>Phase :</p>
-                  <select id="roundCat" placeholder="Catégorie Round" onChange={handleInput} value={roundCat} >
-                    <option value='SR'>SR</option>
-                    <option value='PO' disabled>PO</option>
-                  </select>
+                  <div className="input-field">
+                    <label>Phase</label>
+                    <select id="roundCat" placeholder="Catégorie Round" onChange={handleInput} value={roundCat} >
+                      <option value='SR'>SR</option>
+                      <option value='PO' disabled>PO</option>
+                    </select>
+                  </div>
+                  
                 </div>
               }
             </>

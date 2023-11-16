@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteGame } from '../../actions/bet';
+
+import { deleteGame, updateGame } from '../../actions/bet';
 
 import { transformDate } from '../../Utils/stats/calcDate';
+import Input from '../Utils/Input';
 
 const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted}) => {
 
@@ -14,8 +16,29 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted}) => {
   const matchDate = new Date(dateAndTimeOfMatch);
   const transformedDate = transformDate(matchDate, 'bet');
 
+  const [newMatchDate, setNewMatchDate] = useState(dateAndTimeOfMatch.slice(0, 16));
+  const [newVisitor, setNewVisitor] = useState(team[0].id);
+  const [newHome, setNewHome] = useState(team[1].id);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const teamsList = useSelector((state) => state.datas.allTeams);
+
+  const teamsOptions = teamsList.map(({id, trigram, name}, index) => <option key={`${index}team${id}`} value={id} disabled={newVisitor === newHome} >{trigram} - {name}</option> );
+
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    if (newVisitor != newHome) {
+      const body = {
+        dateAndTimeOfMatch : newMatchDate,
+        teams : [newHome, newVisitor]
+      }
+      dispatch(updateGame(gameId, body, true));
+    } else {
+      setErrorMessage('Les équipes doivent être différentes !');
+    }
+  }
   const handleDelete = (event) => {
-    event.preventDefault;
+    event.preventDefault();
     dispatch(deleteGame(gameId));
   }
   if (!isEdited) {
@@ -48,9 +71,52 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted}) => {
       </div>
     )
   } else {
-    // Copier/Coder BetMatch
     return (
-      <div>a éditer</div>
+      <div className='edit-match'>
+        <form className="existing-match" onSubmit={handleUpdate}>
+          <select name="visitor" defaultValue={newVisitor} onChange={(event) => {
+              setNewVisitor(event.target.value);
+              if (errorMessage !== '') {
+                setErrorMessage('');
+              }
+            }
+          }>
+            {teamsOptions}
+          </select>
+          <div className="at">@</div>
+          <select name="home-team" defaultValue={newHome} onChange={(event) => {
+              setNewHome(event.target.value);
+              if (errorMessage !== '') {
+                setErrorMessage('');
+              }
+            }
+          }>
+            {teamsOptions}
+          </select>
+          <Input
+            inputName="deadline"
+            label="Deadline :"
+            id="pronostic-limit"
+            type="datetime-local"
+            value={newMatchDate}
+            onChange={event => setNewMatchDate(event.target.value)} 
+            isRequired={true}
+          />
+          {errorMessage !== '' && <p className='error-message'>{errorMessage}</p> }
+          <button type="submit" >
+            Valider
+          </button>
+        </form>
+        <button type='button' onClick={() => {
+            setIsEdited(!isEdited);
+            setNewVisitor(team[0].id);
+            setNewHome(team[1].id);
+            setNewMatchDate(dateAndTimeOfMatch.slice(0, 16));
+          }
+        }>
+          Annuler
+        </button>
+      </div>
     )
   }
   

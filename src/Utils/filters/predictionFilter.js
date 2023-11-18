@@ -9,6 +9,6 @@ export const unableBet = (currentDate, gameDate, predictionStatus) => {
       return 'Deadline passée';
     }
   } else {
-    return 'Pronostique déjà validé' ;
+    return 'Pronostic déjà validé' ;
   }
 }

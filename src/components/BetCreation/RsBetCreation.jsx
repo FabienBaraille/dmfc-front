@@ -79,7 +79,7 @@ const RsBetCreation = () => {
   return (
       <Wrapper name="rsbetcreation">
         <div className="round-choice">
-          <h4>Pronostique saison régulière</h4>
+          <h4>Pronostic saison régulière</h4>
           {!roundCreationMode &&
             <>
               <p>Sélectionne un round dans lequel créer des matchs.</p>

@@ -119,7 +119,7 @@ function Profil() {
           <h3>Profil</h3>
           <p>Email: <span className="perso">{loggedUser.email}</span></p>
           <p>Pseudo: <span className="perso">{loggedUser.username}</span></p>
-          <p>Score: <span className="perso">{loggedUser.score || 'NULL'}</span></p>
+          <p>Score: <span className="perso">{loggedUser.score ? loggedUser.score : 0}</span></p>
           <p>Ma Ligue: <span className="perso">{loggedUser.league_id.leagueName}</span></p>
           <p>Équipe Préférée: <span className="perso">{loggedUser.team !== null ? loggedUser.team.name : 'Non choisi'}</span></p>
         </div>
@@ -135,7 +135,7 @@ function Profil() {
             </div>
           </div>
           <div className="changeContainer" id="passwordInput">
-              <Input className='password' label="Mot de Passe :" htmlFor="mot de passe" id="password" type="password" className="inputContainer" value={password} onChange={handleInput} placeholder="changer ton mot de passe"/>
+              <Input className='password inputContainer' label="Mot de Passe :" htmlFor="mot de passe" id="password" type="password" value={password} onChange={handleInput} placeholder="mot de passe"/>
               {password !== "" && <Strength password={password} />}
             <div className="form-btn">
               <button type="submit" onClick={(event) => handleSubmit(event, 'mot de passe')}>Changer</button>
@@ -148,11 +148,13 @@ function Profil() {
             </div>
           </div>
           <div className="changeContainer">
-            <label>Équipe Préférée : </label>
-            <select name="team" id="team" onChange={handleInput} value={team}>
-              <option value="">Changer ta équipe préférée</option>
-              {teamOptions}
-            </select>
+            <div className="inputContainer">
+              <label>Équipe Préférée : </label>
+              <select name="team" id="team" onChange={handleInput} value={team}>
+                <option value="">Changer ta équipe préférée</option>
+                {teamOptions}
+              </select>
+            </div>
             <div className="form-btn">
               <button type="submit" onClick={(event) => handleSubmit(event, 'équipe préférée')}>Changer</button>
             </div>

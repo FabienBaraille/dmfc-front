@@ -1,7 +1,7 @@
 {
-  "name": "vite-project",
+  "name": "dmfc-project",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -34,5 +34,17 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "vite": "^4.4.5",
     "vitest": "^0.34.5"
-  }
+  },
+  "description": "The DMFC project is the final project for Oclock formation, done by 6 people for a client who want to organize a bet tournament on NBA seasons.",
+  "main": "vite.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [
+    "DMFC",
+    "NBA",
+    "bet"
+  ],
+  "author": "ML, TB, QR, CR, QD, FB",
+  "license": "ISC"
 }

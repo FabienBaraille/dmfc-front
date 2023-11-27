@@ -12,6 +12,7 @@ const Strength = ({password}) => {
         pwdCheck += 1;
       }
     });
+    if (password.length < 8) {pwdCheck = 1}
     switch (pwdCheck) {
       case 0:
         return {

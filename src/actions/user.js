@@ -69,9 +69,9 @@ export const setMailError = (isError) => ({
   type: SET_MAIL_ERROR,
   isError
 });
-export const setPasswordError = (isError) => ({
+export const setPasswordError = (passwordErrorMessage) => ({
   type: SET_PASSWORD_ERROR,
-  isError
+  passwordErrorMessage
 });
 export const setTargetKick = (username) => ({
   type: SET_TARGET_KICK,

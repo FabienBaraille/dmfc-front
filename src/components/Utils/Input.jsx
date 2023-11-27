@@ -11,7 +11,7 @@ const Input = ({label, type, value, id, className = null, onChange = null, place
       <label htmlFor={id}>{label}</label>
       <input 
         name={inputName}
-        type={id !== 'password' ? type : hide ? type : 'text'}
+        type={(id !== 'password' && id !== 'password2') ? type : hide ? type : 'text'}
         id={id} 
         onChange={onChange} 
         defaultValue={value}
@@ -20,8 +20,9 @@ const Input = ({label, type, value, id, className = null, onChange = null, place
         onFocus={onFocus}
         onBlur={onBlur}
         min="0"
+        spellCheck="false"
       />
-      {id === 'password' && 
+      {(id === 'password' || id === 'password2') && 
         <span onClick={() => setHide(!hide)}>
           <div className={hide ? 'eye-open' : 'eye-close'}></div>
         </span>

@@ -125,7 +125,7 @@ const Connexion = () => {
                 />
               </div>
               {DMFC && <Input 
-                label="Créer ma ligue :"
+                label="Nom de ta ligue :"
                 id="league_name"
                 className="leagueCreation"
                 type="league_name"

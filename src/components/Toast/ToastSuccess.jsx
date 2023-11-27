@@ -18,7 +18,7 @@ export const toastWarning = {
   theme: "dark",
   closeOnClick: true,
   pauseOnHover: true,
-  autoClose: 2000, 
+  autoClose: 3000, 
   progressBar: true,
   icon: <img src={clipartLogo} alt="Success Icon" width="24" height="24" />,
   };

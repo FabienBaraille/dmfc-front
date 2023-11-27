@@ -41,7 +41,7 @@ const LeagueTitle = () => {
       :
       <>
         <h3>{leagueName}</h3>
-        <p>{leagueDescription === null ? "Bienvue dans ta ligue, tu peux ajouter ici une description": {leagueDescription}}</p>
+        <p>{leagueDescription === null ? "Bienvue dans ta ligue, tu peux ajouter ici une description": leagueDescription}</p>
       </>
     }
     </Wrapper>

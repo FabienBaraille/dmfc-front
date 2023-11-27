@@ -17,7 +17,8 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
   // Fonction treating the submission
   const handleSubmit = event => {
     event.preventDefault();
-    const winner = visitorPoints > homePoints ? team[0].name : team[1].name;
+    const winner = parseInt(visitorPoints) > parseInt(homePoints) ? team[0].name : team[1].name;
+    console.log(visitorPoints, homePoints, winner);
     const body = {
       homeScore: parseInt(homePoints),
       visitorScore: parseInt(visitorPoints),
@@ -31,6 +32,7 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
       )
     );
   }
+  console.log(visitorPoints, homePoints);
   return (
       <form className="bet_result" onSubmit={handleSubmit} id={gameId}>
         <div className="team-result">

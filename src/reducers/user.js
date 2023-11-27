@@ -4,6 +4,7 @@ const initialState = {
   'pseudo': '',
   'email': '',
   'password': '',
+  'password2': '',
   'DMFC': false,
   'league_name': '',
   'league': 'Pas de ligue',
@@ -14,7 +15,7 @@ const initialState = {
   'errorMessage': '',
   'team': '',
   'mailError': false,
-  'passwordError': false,
+  'passwordError': '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -65,7 +66,7 @@ const reducer = (state = initialState, action = {}) => {
     case SET_PASSWORD_ERROR:
       return {
         ...state,
-        passwordError: action.isError
+        passwordError: action.passwordErrorMessage
       }
     default:
       return state;

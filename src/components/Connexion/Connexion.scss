@@ -10,6 +10,7 @@
     div {
       justify-content: space-between;
       align-items: center;
+      width: 100%;
     }
   }
   div {
@@ -34,6 +35,14 @@
     box-shadow: 0 0 2px 2px v.$shadow;
     width: 200px;
   }
+  .validation-btn:disabled {
+    color: v.$cell-back;
+    &:hover {
+      background-color: v.$nav-back;
+      color: v.$cell-back;
+      cursor: default;
+    }
+  }
   .special-input {
     div {
       margin: 0.2rem 0;
@@ -42,6 +51,9 @@
     }
     p {
       margin: 0.2rem 0;
+    }
+    .password {
+      margin-bottom: 1rem;
     }
   }
   #passwordInput {
@@ -60,9 +72,13 @@
   .password {
     width: 100%;
   }
-  .dmfc-opt {
+  .role-opt, .dmfc-opt {
+    display: flex;
+    flex-direction: column;
+  }
+  .check-opt {
     align-items: center;
-    input[type="checkbox"] {
+    input[type="radio"] {
       -webkit-appearance: none;
       -moz-appearance: none;
       -ms-appearance: none;
@@ -70,7 +86,7 @@
       width: 20px;
       border-radius: 100%;
     }
-    input[type="checkbox"]:checked {
+    input[type="radio"]:checked {
       background: black;
       &:before {
         content: url(/src/assets/design/basketball-solid.svg);

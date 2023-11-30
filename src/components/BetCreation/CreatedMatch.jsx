@@ -6,8 +6,9 @@ import { deleteGame, updateGame } from '../../actions/bet';
 
 import { transformDate } from '../../Utils/stats/calcDate';
 import Input from '../Utils/Input';
+import { sortTeams } from '../../Utils/filters/teamFilter';
 
-const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted}) => {
+const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted, teamOrder}) => {
 
   const dispatch = useDispatch();
 
@@ -16,21 +17,23 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted}) => {
   const matchDate = new Date(dateAndTimeOfMatch);
   const transformedDate = transformDate(matchDate, 'bet');
 
+  const orederedTeams = sortTeams(team, teamOrder);
+
   const [newMatchDate, setNewMatchDate] = useState(dateAndTimeOfMatch.slice(0, 16));
-  const [newVisitor, setNewVisitor] = useState(team[0].id);
-  const [newHome, setNewHome] = useState(team[1].id);
+  const [newVisitor, setNewVisitor] = useState(orederedTeams[0].id);
+  const [newHome, setNewHome] = useState(orederedTeams[1].id);
   const [errorMessage, setErrorMessage] = useState('');
 
   const teamsList = useSelector((state) => state.datas.allTeams);
 
-  const teamsOptions = teamsList.map(({id, trigram, name}, index) => <option key={`${index}team${id}`} value={id} disabled={newVisitor === newHome} >{trigram} - {name}</option> );
+  const teamsOptions = teamsList.map(({selectedAway, selectedHome, teams: {id, trigram, name}}, index) => <option key={`${index}team${id}`} value={id} disabled={newVisitor === newHome} >{trigram} - {name} - V:{selectedAway} - H:{selectedHome}</option> );
 
   const handleUpdate = (event) => {
     event.preventDefault();
     if (newVisitor != newHome) {
       const body = {
         dateAndTimeOfMatch : newMatchDate,
-        teams : [newHome, newVisitor]
+        teams : [newVisitor, newHome]
       }
       dispatch(updateGame(gameId, body, true));
     } else {
@@ -47,13 +50,13 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted}) => {
         <div className='match-infos'>
           <div className="bloc-infos">
             <div className='teams-infos'>
-              <p><img className='small-logo visitor-logo' src={`/assets/logos/${team[0].logo}`} alt="" />{team[0].trigram}</p>
-              <p>{team[0].name}</p>
+              <p><img className='small-logo visitor-logo' src={`/src/assets/logos/${orederedTeams[0].logo}`} alt="" />{orederedTeams[0].trigram}</p>
+              <p>{orederedTeams[0].name}</p>
             </div>
             <div className="at">@</div>
             <div className='teams-infos'>
-              <p>{team[1].trigram}<img className='small-logo home-logo' src={`/assets/logos/${team[1].logo}`} alt="" /></p>
-              <p>{team[1].name}</p>
+              <p>{orederedTeams[1].trigram}<img className='small-logo home-logo' src={`/src/assets/logos/${orederedTeams[1].logo}`} alt="" /></p>
+              <p>{orederedTeams[1].name}</p>
             </div>
           </div>
           <div className="bloc-infos">
@@ -109,8 +112,8 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted}) => {
         </form>
         <button type='button' onClick={() => {
             setIsEdited(!isEdited);
-            setNewVisitor(team[0].id);
-            setNewHome(team[1].id);
+            setNewVisitor(orederedTeams[0].id);
+            setNewHome(orederedTeams[1].id);
             setNewMatchDate(dateAndTimeOfMatch.slice(0, 16));
           }
         }>
@@ -126,5 +129,6 @@ CreatedMatch.propTypes = {
   dateAndTimeOfMatch: PropTypes.string,
   team: PropTypes.array,
   isPredicted: PropTypes.bool,
+  teamOrder: PropTypes.array,
 }
 export default CreatedMatch;

@@ -15,7 +15,7 @@ const BetMatch = () => {
   const betListNumber = useSelector((state) => state.bet.betNumber);
   const teamsList = useSelector((state) => state.datas.allTeams);
 
-  const teamsOptions = teamsList.map(({id, trigram, name}, index) => <option key={`${index}team${id}`} value={id}>{trigram} - {name}</option> );
+  const teamsOptions = teamsList.map(({selectedAway, selectedHome, teams: {id, trigram, name}}, index) => <option key={`${index}team${id}`} value={id}>{trigram} - {name} - V:{selectedAway} - H:{selectedHome}</option> );
 
   const handleDelete = (event) => {
     event.preventDefault()

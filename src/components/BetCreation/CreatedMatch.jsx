@@ -50,12 +50,12 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted, teamOrder}
         <div className='match-infos'>
           <div className="bloc-infos">
             <div className='teams-infos'>
-              <p><img className='small-logo visitor-logo' src={`/src/assets/logos/${orederedTeams[0].logo}`} alt="" />{orederedTeams[0].trigram}</p>
+              <p><img className='small-logo visitor-logo' src={`/assets/logos/${orederedTeams[0].logo}`} alt="" />{orederedTeams[0].trigram}</p>
               <p>{orederedTeams[0].name}</p>
             </div>
             <div className="at">@</div>
             <div className='teams-infos'>
-              <p>{orederedTeams[1].trigram}<img className='small-logo home-logo' src={`/src/assets/logos/${orederedTeams[1].logo}`} alt="" /></p>
+              <p>{orederedTeams[1].trigram}<img className='small-logo home-logo' src={`/assets/logos/${orederedTeams[1].logo}`} alt="" /></p>
               <p>{orederedTeams[1].name}</p>
             </div>
           </div>

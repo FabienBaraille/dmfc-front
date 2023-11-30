@@ -138,7 +138,7 @@ const Connexion = () => {
           }
           {errorMessage !== '' && <p className="error-message">{errorMessage}</p>}
           <div className="form-btn">
-            <button className="validation-btn" type="submit" disabled={password2 !== password} >{isCreationMode ? "Créer" : "Connexion"} </button>
+            <button className="validation-btn" type="submit" disabled={isCreationMode ? password2 !== password : false} >{isCreationMode ? "Créer" : "Connexion"} </button>
             <button 
               type="button" 
               onClick={() => dispatch(toggleCreationMode(!isCreationMode))}

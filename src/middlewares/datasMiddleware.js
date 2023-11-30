@@ -22,6 +22,7 @@ import {
   setFocusedInputId,
   GET_DATAS_START,
   setIsLoadingStart,
+  GET_ALL_TEAMS,
 } from "../actions/datas";
 
 import {
@@ -33,6 +34,7 @@ import {
 } from '../actions/news';
 
 import { usersSortByScore } from '../Utils/filters/usersFilter';
+import { setIsLoadingGame } from '../actions/bet';
 
 
 const datasMiddleware = (store) => (next) => async (action) => {
@@ -52,7 +54,7 @@ const datasMiddleware = (store) => (next) => async (action) => {
       try {
         const [ data1, data2, data3, data4, data5, data6 ] =  await axios.all([
           axios.get(`/api/seasons/`), 
-          axios.get(`/api/teams`),
+          axios.get(`/api/selections/${store.getState().user.loggedUser.league_id.id}`),
           axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/users`),
           axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/news`),
           axios.get(`/api/league/${store.getState().user.loggedUser.league_id.id}/round`),
@@ -70,6 +72,16 @@ const datasMiddleware = (store) => (next) => async (action) => {
         store.dispatch(setLeague('leagueName', data6.data.leagueName));
         store.dispatch(setLeague('leagueDescription', data6.data.leagueDescription));
         store.dispatch(setIsLoadingStart(false));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    case GET_ALL_TEAMS:
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.get(`/api/selections/${store.getState().user.loggedUser.league_id.id}`);
+        store.dispatch(setAllTeams(data));
+        store.dispatch(setIsLoadingGame(false));
       } catch (error) {
         console.log(error);
       }

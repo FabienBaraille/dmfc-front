@@ -32,7 +32,7 @@ function Profil() {
     dispatch(setInputValue('email', loggedUser.email));
   }, []);
 
-  const teamOptions = teamsList.map(({ id, name }) => {
+  const teamOptions = teamsList.map(({teams: {id,  name}}) => {
     return (
       <option key={id} value={id}>
         {name}

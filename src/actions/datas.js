@@ -13,6 +13,7 @@ export const GET_ROUNDS = 'GET_ROUNDS';
 export const SET_ROUNDS = 'SET_ROUNDS';
 export const GET_LEAGUE = 'GET_LEAGUE';
 export const SET_LEAGUE = 'SET_LEAGUE';
+export const GET_ALL_TEAMS = 'GET_ALL_TEAMS';
 export const POST_LEAGUE_CHANGE = 'POST_LEAGUE_CHANGE';
 export const LEAGUE_CREATION_MODE = 'LEAGUE_CREATION_MODE';
 export const SET_SEASON = 'SET_SEASON';
@@ -41,6 +42,9 @@ export const setIsLoadingSR = () => ({
 });
 export const getDatasStart = () => ({
   type: GET_DATAS_START,
+});
+export const getAllTeams = () => ({
+  type: GET_ALL_TEAMS,
 });
 export const getAllLeague = () => ({
   type: GET_ALL_LEAGUE,

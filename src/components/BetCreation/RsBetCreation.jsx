@@ -10,6 +10,7 @@ import RoundSelector from "./Element/RoundSelector";
 import CreatedMatch from "./CreatedMatch";
 
 import { addBetToList, createGame, createRound, getGamesRound, setDeleteMessage, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
+import { getAllTeams } from "../../actions/datas";
 import { toggleCreationMode } from "../../actions/bet";
 import { transformDate } from "../../Utils/stats/calcDate";
 
@@ -22,12 +23,14 @@ const RsBetCreation = () => {
   useEffect(() => {
     if (!isLoadingGame && isCreatedMatch) {
       setTimeout(() => {
+        dispatch(getAllTeams());
         dispatch(setInputValueBet('betList', []));
         dispatch(setIsCreatedMatch(false));
       }, 1500);
     }
     if (!isLoadingGame && deleteMessage) {
       setTimeout(() => {
+        dispatch(getAllTeams());
         dispatch(setDeleteMessage(''));
         dispatch(getGamesRound(roundNumber));
       }, 1500);
@@ -67,7 +70,7 @@ const RsBetCreation = () => {
       const transformedDeadline = transformDate(deadline, 'create');
       // Finir de traiter une erreur si 2 équipes sont identiques
       if (visitorId !== homeTeamId) {
-        dispatch(createGame(transformedDeadline, [homeTeamId, visitorId]));
+        dispatch(createGame(transformedDeadline, [visitorId, homeTeamId]));
       }
     })
     }

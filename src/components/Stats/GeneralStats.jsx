@@ -83,7 +83,7 @@ const GeneralStats = () => {
         <h3>Stats de {username}</h3>
         <h4>Titre : {title ? title : "Pas de titre"}</h4>
         <div className='team-infos'>
-          <h4>{team ? team.name : "Pas d'équipe favorite"} - </h4><img className='logo' src={team ? `/assets/logos/${team.logo}` : ''} alt="" />
+          <h4>{team ? team.name : "Pas d'équipe favorite"} - </h4><img className='logo' src={team ? `/src/assets/logos/${team.logo}` : ''} alt="" />
         </div>
       </div>
       <div className='prediction-stats'>

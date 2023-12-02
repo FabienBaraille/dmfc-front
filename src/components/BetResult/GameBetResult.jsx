@@ -34,7 +34,7 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
   return (
       <form className="bet_result" onSubmit={handleSubmit} id={gameId}>
         <div className="team-result">
-          <p><img className='small-logo' src={`/assets/logos/${team[0].logo}`} alt="" />{` - ${team[0].trigram} - ${team[0].name}`}</p>
+          <p><img className='small-logo' src={`/src/assets/logos/${team[0].logo}`} alt="" />{` - ${team[0].trigram} - ${team[0].name}`}</p>
           <div className="score">
             <Input 
               label="Score" 
@@ -55,7 +55,7 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
         </div>
         <div className="at">@</div>
         <div className="team-result">
-          <p>{`${team[1].trigram} - ${team[1].name} - `}<img className='small-logo' src={`/assets/logos/${team[1].logo}`} alt="" /></p>
+          <p>{`${team[1].trigram} - ${team[1].name} - `}<img className='small-logo' src={`/src/assets/logos/${team[1].logo}`} alt="" /></p>
           <div className="score">
             <Input 
               label="Score" 

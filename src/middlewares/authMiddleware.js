@@ -4,7 +4,8 @@ import { CHECK_LOGIN, CREATE_DMFC, CREATE_USER, GET_USER, getUser, setErrorMessa
 
 import { getUsersList } from '../actions/datas';
 
-axios.defaults.baseURL = 'https://api.dmfc-game.fr/public';
+// axios.defaults.baseURL = 'https://api.dmfc-game.fr/public';
+axios.defaults.baseURL = 'http://localhost:8000';
 axios.defaults.withCredentials = true;
 
 const authMiddelware = (store) => (next) => async (action) => {

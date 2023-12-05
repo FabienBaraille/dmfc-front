@@ -10,6 +10,7 @@ import { getSRPrediction } from "../../actions/datas";
 
 import { predictedGame } from "../../Utils/filters/gamesFilter";
 import { predictionByGameId } from "../../Utils/filters/predictionFilter";
+import { phaseFilter } from "../../Utils/filters/roundFilter";
 
 import './PlayerBet.scss';
 
@@ -18,7 +19,7 @@ const PlayerBet = () => {
   const dispatch = useDispatch();
 
   const loggedUserId = useSelector((state) => state.user.loggedUser.id);
-  const rounds = useSelector((state) => state.datas.rounds);
+  const rounds = phaseFilter(useSelector((state) => state.datas.rounds), 'SR');
   const isLoadingBet = useSelector((state) => state.bet.isLoading);
   const isLoadingSR = useSelector((state) => state.datas.isLoadingSR);
   const gamesOfRound = useSelector((state) => state.bet.games);

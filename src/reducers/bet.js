@@ -16,12 +16,14 @@ import {
   SET_UPDATED_MESSAGE,
   RESET_SCORE_UPDATE,
   SET_IS_PRED,
-  SET_DELETE_MESSAGE
+  SET_DELETE_MESSAGE,
+  SET_TOP_TEN
 } from "../actions/bet";
 
 const initialState = {
   'betList': [],
   'betNumber': 0,
+  'toptenDate': 'now',
   'roundCreationMode': false,
   'isLoading': true,
   'isLoadingGame': false,
@@ -29,9 +31,9 @@ const initialState = {
   'isUpdated': false,
   'updatedMessage': '',
   'games': [],
+  'toptens': [],
   'isPred': [],
   'roundName': '',
-  'roundCat': 'SR',
   'roundNumber': '',
   'predictionByGame': [],
   'updatedGame': {},
@@ -71,6 +73,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         games: action.gamesList,
         isLoading: false,
+      }
+    case SET_TOP_TEN:
+      return {
+        ...state,
+        toptens: action.datas,
+        isLoadingGame: false
       }
     case SET_IS_PRED:
       return {

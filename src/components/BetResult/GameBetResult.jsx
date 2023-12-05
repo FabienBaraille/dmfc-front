@@ -38,7 +38,7 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
           <div className="score">
             <Input 
               label="Score" 
-              id="score" 
+              id="scoreV" 
               placeholder="000" 
               type="number" 
               value={visitorPoints} 
@@ -59,7 +59,7 @@ const GameBetResult = ({gameId, visitorScore, homeScore, visitorOdd, homeOdd, te
           <div className="score">
             <Input 
               label="Score" 
-              id="score" 
+              id="scoreH" 
               placeholder="000" 
               type="number" 
               value={homePoints} 

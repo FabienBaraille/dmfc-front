@@ -151,7 +151,7 @@ function Profil() {
           </div>
           <div className="changeContainer">
             <div className="inputContainer">
-              <label>Équipe Préférée : </label>
+              <label htmlFor="team">Équipe Préférée : </label>
               <select name="team" id="team" onChange={handleInput} value={team}>
                 <option value="">Changer ta équipe préférée</option>
                 {teamOptions}

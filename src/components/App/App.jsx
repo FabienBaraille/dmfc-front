@@ -37,6 +37,7 @@ import Modal from "../Utils/Modal/Modal";
 import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
 import CheatSheets from '../CheatSheets/CheatSheets';
+import TopTen from "../TopTen/TopTen.jsx";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -117,6 +118,7 @@ const App = () => {
               <Route path='/creation/SR' element={<RsBetCreation />} />
               <Route path='/scores/SR' element={rounds.length == 0 ? <EmptyBet /> : <BetResult />} />
               <Route path='/league-management' element={<LeagueManagement />} />
+              <Route path='/topten' element={<TopTen />} />
             </Route>
             <Route path='/roundsStat' element={<RoundStats />} />
             <Route path='/cheatsheets' element={<CheatSheets />} />

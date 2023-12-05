@@ -29,6 +29,10 @@ export const RESET_SCORE_UPDATE = 'RESET_SCORE_UPDATE';
 export const UPDATE_PLAYER_SCORE = 'UPDATE_PLAYER_SCORE';
 export const SET_UPDATED_MESSAGE = 'SET_UPDATED_MESSAGE';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
+export const GET_TOP_TEN = 'GET_TOP_TEN';
+export const SET_TOP_TEN = 'SET_TOP_TEN';
+export const CREATE_TOP_TEN = 'CREATE_TOP_TEN';
+export const UPDATE_TOP_TEN = 'UPDATE_TOP_TEN';
 
 export const setCountUpdate = () => ({
   type: SET_COUNT_BET,
@@ -99,8 +103,9 @@ export const createBet = (winningTeam, winningDif, matchId, status) => ({
   matchId,
   status,
 });
-export const createRound = () => ({
+export const createRound = (phase) => ({
   type: CREATE_ROUND,
+  phase
 });
 export const createGame = (date, teams) => ({
   type: CREATE_GAME,
@@ -166,4 +171,22 @@ export const setUpdatedMessage = (message) => ({
 export const setErrorMessage = (message) => ({
   type: SET_ERROR_MESSAGE,
   message 
+});
+
+export const getTopTen = (roundId) => ({
+  type: GET_TOP_TEN,
+  roundId 
+});
+export const setTopTen = (datas) => ({
+  type: SET_TOP_TEN,
+  datas
+});
+export const createTopTen = (date) => ({
+  type: CREATE_TOP_TEN,
+  date
+});
+export const updateTopTen = (toptenId, body) => ({
+  type: UPDATE_TOP_TEN,
+  toptenId,
+  body 
 });

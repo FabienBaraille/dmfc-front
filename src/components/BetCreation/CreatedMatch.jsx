@@ -17,16 +17,17 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted, teamOrder 
   const matchDate = new Date(dateAndTimeOfMatch);
   const transformedDate = transformDate(matchDate, 'bet');
 
-  const orederedTeams = sortTeams(team, teamOrder);
+  const orderedTeams = sortTeams(team, teamOrder);
 
   const [newMatchDate, setNewMatchDate] = useState(dateAndTimeOfMatch.slice(0, 16));
-  const [newVisitor, setNewVisitor] = useState(orederedTeams[0].id);
-  const [newHome, setNewHome] = useState(orederedTeams[1].id);
+  const [newVisitor, setNewVisitor] = useState(orderedTeams[0].id);
+  const [newHome, setNewHome] = useState(orderedTeams[1].id);
   const [errorMessage, setErrorMessage] = useState('');
 
   const teamsList = useSelector((state) => state.datas.allTeams);
 
-  const teamsOptions = teamsList.map(({selectedAway, selectedHome, teams: {id, trigram, name}}, index) => <option key={`${index}team${id}`} value={id} disabled={newVisitor === newHome} >{trigram} - {name} - V:{selectedAway} - H:{selectedHome}</option> );
+  const teamsOptionsVisitor = teamsList.map(({selectedAway, selectedHome, teams: {id, trigram, name}}, index) => <option key={`${index}team${id}`} value={id} disabled={id === newHome} >{trigram} - {name} - V:{selectedAway} - H:{selectedHome}</option> );
+  const teamsOptionsHome = teamsList.map(({selectedAway, selectedHome, teams: {id, trigram, name}}, index) => <option key={`${index}team${id}`} value={id} disabled={newVisitor === id} >{trigram} - {name} - V:{selectedAway} - H:{selectedHome}</option> );
 
   const handleUpdate = (event) => {
     event.preventDefault();
@@ -50,13 +51,13 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted, teamOrder 
         <div className='match-infos'>
           <div className="bloc-infos">
             <div className='teams-infos'>
-              <p><img className='small-logo visitor-logo' src={`/src/assets/logos/${orederedTeams[0].logo}`} alt="" />{orederedTeams[0].trigram}</p>
-              <p>{orederedTeams[0].name}</p>
+              <p><img className='small-logo visitor-logo' src={`/src/assets/logos/${orderedTeams[0].logo}`} alt="" />{orderedTeams[0].trigram}</p>
+              <p>{orderedTeams[0].name}</p>
             </div>
             <div className="at">@</div>
             <div className='teams-infos'>
-              <p>{orederedTeams[1].trigram}<img className='small-logo home-logo' src={`/src/assets/logos/${orederedTeams[1].logo}`} alt="" /></p>
-              <p>{orederedTeams[1].name}</p>
+              <p>{orderedTeams[1].trigram}<img className='small-logo home-logo' src={`/src/assets/logos/${orderedTeams[1].logo}`} alt="" /></p>
+              <p>{orderedTeams[1].name}</p>
             </div>
           </div>
           <div className="bloc-infos">
@@ -84,7 +85,7 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted, teamOrder 
               }
             }
           }>
-            {teamsOptions}
+            {teamsOptionsVisitor}
           </select>
           <div className="at">@</div>
           <select name="home-team" defaultValue={newHome} onChange={(event) => {
@@ -94,7 +95,7 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted, teamOrder 
               }
             }
           }>
-            {teamsOptions}
+            {teamsOptionsHome}
           </select>
           <Input
             inputName="deadline"
@@ -112,8 +113,8 @@ const CreatedMatch = ({gameId, dateAndTimeOfMatch, team, isPredicted, teamOrder 
         </form>
         <button type='button' onClick={() => {
             setIsEdited(!isEdited);
-            setNewVisitor(orederedTeams[0].id);
-            setNewHome(orederedTeams[1].id);
+            setNewVisitor(orderedTeams[0].id);
+            setNewHome(orderedTeams[1].id);
             setNewMatchDate(dateAndTimeOfMatch.slice(0, 16));
           }
         }>

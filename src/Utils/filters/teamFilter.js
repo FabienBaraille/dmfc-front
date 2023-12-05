@@ -5,3 +5,8 @@ export const teamByTrigram = (array, trigram) => {
 export const sortTeams = (teams, order) => {
   return order !== null ? [teams[0].id == order[0] ? teams[0] : teams[1], teams[0].id == order[1] ? teams[0] : teams[1]] : [teams[0], teams[1]];
 }
+
+export const teamLogo = (array, teamId) => {
+  const team = array.find(({id}) => id == teamId);
+  return team.logo;
+}

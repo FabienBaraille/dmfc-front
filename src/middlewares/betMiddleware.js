@@ -5,14 +5,17 @@ import {
   CREATE_BET,
   CREATE_GAME,
   CREATE_ROUND,
+  CREATE_TOP_TEN,
   DELETE_GAME,
   GET_ALL_PREDICTIONS,
   GET_GAMES_ROUND,
   GET_PREDICTION_BY_GAME,
+  GET_TOP_TEN,
   UPDATE_BET,
   UPDATE_BET_POINTS,
   UPDATE_GAME,
   UPDATE_PLAYER_SCORE,
+  UPDATE_TOP_TEN,
   getPredictionByGame,
   setAllPredictions,
   setCountUpdate,
@@ -23,7 +26,9 @@ import {
   setIsLoadingBet,
   setIsLoadingGame,
   setIsPred,
+  setIsUpdated,
   setPredictionByGame,
+  setTopTen,
   setUpdatedGame,
   setUpdatedMessage,
   toggleCreationMode
@@ -37,18 +42,18 @@ const betMiddleware = (store) => (next) => async (action) => {
      * Action to create a round by the DMFC
      */
     case CREATE_ROUND: {
-      store.dispatch(setIsLoadingBet(true));
+      store.dispatch(setIsLoadingGame(true));
       try {
         const { data } = await axios.post(`/api/round/new`,
           {
             season: store.getState().datas.allSeasons[store.getState().datas.allSeasons.length - 1].id,
             name: store.getState().bet.roundName,
-            category: store.getState().bet.roundCat,
+            category: action.phase,
             user: store.getState().user.loggedUser.id,
             league: store.getState().user.loggedUser.league_id.id
           }
         );
-        store.dispatch(setIsLoadingBet(false));
+        store.dispatch(setIsLoadingGame(false));
         store.dispatch(getRounds());
         store.dispatch(toggleCreationMode(false));
       } catch (error) {
@@ -121,6 +126,43 @@ const betMiddleware = (store) => (next) => async (action) => {
       } catch (error) {
         console.log(error);
       }
+    break;
+    case GET_TOP_TEN:
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.get(`/api/topten/round/${action.roundId}`);
+        store.dispatch(setTopTen(data));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    case CREATE_TOP_TEN:{
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.post(`/api/topten/new`,
+          {
+            round : store.getState().bet.roundNumber,
+            deadline : action.date,
+          }
+        );
+        store.dispatch(setTopTen(data));
+        store.dispatch(setIsCreatedMatch(true));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    break;
+    case UPDATE_TOP_TEN: {
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.put(`/api/topten/${action.toptenId}`, 
+          action.body
+        )
+        store.dispatch(setIsLoadingGame(false));
+      } catch (error) {
+        console.log(error);
+      }
+    }
     break;
     /**
      * Action to create et bet made by a player

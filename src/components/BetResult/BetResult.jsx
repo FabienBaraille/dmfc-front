@@ -21,6 +21,7 @@ import {
 import { getUsersList } from "../../actions/datas";
 
 import { positionFinder } from "../../Utils/filters/usersFilter";
+import { phaseFilter } from "../../Utils/filters/roundFilter";
 import { calcBetPoint } from "../../Utils/stats/calcStats";
 
 import './BetResult.scss';
@@ -29,7 +30,7 @@ const BetResult = () => {
 
   const dispatch = useDispatch();
 
-  const roundsList = useSelector((state) => state.datas.rounds);
+  const roundsList = phaseFilter(useSelector((state) => state.datas.rounds), 'SR');
   const allUsers = useSelector((state) => state.datas.allUsers);
 
   const {
@@ -146,7 +147,7 @@ const BetResult = () => {
       <Wrapper name="bet_result">
         <h2>Saisie des résultats</h2>
         <p>Sélectionne le round :</p>
-        <RoundSelector />
+        <RoundSelector phase={"SR"} />
         {gamesToEdit}
       </Wrapper>
   )

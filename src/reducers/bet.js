@@ -23,7 +23,7 @@ import {
 const initialState = {
   'betList': [],
   'betNumber': 0,
-  'toptenDate': 'now',
+  'toptenDate': '',
   'roundCreationMode': false,
   'isLoading': true,
   'isLoadingGame': false,

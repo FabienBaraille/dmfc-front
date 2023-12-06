@@ -10,3 +10,13 @@ export const teamLogo = (array, teamId) => {
   const team = array.find(({id}) => id == teamId);
   return team.logo;
 }
+
+export const teamsByConf = (array, conf) => {
+  const newArray = [];
+  array.forEach(element => {
+    if (element.teams.conference === conf) {
+      newArray.push(element.teams);
+    }
+  });
+  return newArray;
+}

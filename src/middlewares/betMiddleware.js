@@ -22,6 +22,7 @@ import {
   setDeleteMessage,
   setErrorMessage,
   setGamesRound,
+  setInputValueBet,
   setIsCreatedMatch,
   setIsLoadingBet,
   setIsLoadingGame,
@@ -132,6 +133,11 @@ const betMiddleware = (store) => (next) => async (action) => {
       try {
         const { data } = await axios.get(`/api/topten/round/${action.roundId}`);
         store.dispatch(setTopTen(data));
+        if (data.length !== 0) {
+          store.dispatch(setInputValueBet('toptenDate', data[0].deadline.slice(0, 16)))
+        } else {
+          store.dispatch(setInputValueBet('toptenDate', ''))
+        }
       } catch (error) {
         console.log(error);
       }

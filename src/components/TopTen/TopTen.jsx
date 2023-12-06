@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RoundSelector from '../BetCreation/Element/RoundSelector';
@@ -5,20 +6,32 @@ import Wrapper from '../Wrapper/Wrapper';
 import Input from '../Utils/Input';
 import LoadElmt from '../Loader/LoadElmt';
 
-import { createRound, createTopTen, getTopTen, setInputValueBet, toggleCreationMode } from '../../actions/bet';
+import { createRound, createTopTen, getTopTen, setInputValueBet, toggleCreationMode, updateTopTen } from '../../actions/bet';
+import { transformDate } from '../../Utils/stats/calcDate';
+import { phaseFilter, toptenId } from '../../Utils/filters/roundFilter';
 
 import './TopTen.scss';
-import { useEffect } from 'react';
-import { transformDate } from '../../Utils/stats/calcDate';
-import TopTenList from './TopTenList';
-import { phaseFilter } from '../../Utils/filters/roundFilter';
+import TopTenList from '../TopTen/TopTenList';
+import { teamsByConf } from '../../Utils/filters/teamFilter';
 
 const TopTen = () => {
+
+  // Ajouter message d'update pour récupérer de nouveau les toptens
 
   const dispatch = useDispatch();
 
   const {isLoadingGame, roundCreationMode, roundName, roundNumber, toptens, toptenDate} = useSelector((state) => state.bet);
+  const {allTeams} = useSelector((state) => state.datas);
+
+  const eastTeams = teamsByConf(allTeams, 'Eastern');
+  const westTeams = teamsByConf(allTeams, 'Western');
+
   const rounds = phaseFilter(useSelector((state) => state.datas.rounds), 'TOP');
+
+  const eastTopId = toptenId(rounds, 'Eastern');
+  const westTopId = toptenId(rounds, 'Western');
+
+  const isUpdate = toptens.length !== 0;
 
   useEffect(() => {
     if (roundNumber !== '') {
@@ -40,11 +53,18 @@ const TopTen = () => {
     dispatch(createRound('TOP'));
   }
 
-  const handleCreateTop = (event) => {
+  const handleCreateUpdateTop = (event) => {
     event.preventDefault();
-    if (toptenDate !== 'now') {
+    if (toptenDate !== '' && !isUpdate) {
       const transformedDate = transformDate(toptenDate, 'create');
       dispatch(createTopTen(transformedDate));
+    }
+    if (isUpdate) {
+      const newDate = transformDate(toptenDate, 'create');
+      const body = {
+        "deadline": newDate
+    };
+    dispatch(updateTopTen(roundNumber, body));
     }
   }
 
@@ -83,25 +103,27 @@ const TopTen = () => {
         </form>
       </Wrapper>
       {(roundNumber !== '' && !roundCreationMode) &&
-        <>
-            {toptens.length === 0 &&
-              <Wrapper name="topten-list">
-                <h5>{`Les tops 10 n'existent pas encore`}</h5>
-                <form onSubmit={handleCreateTop}>
-                  <Input 
-                    inputName="deadline"
-                    label="Deadline :"
-                    id="pronostic-limit"
-                    type="datetime-local"
-                    value={toptenDate}
-                    onChange={event => dispatch(setInputValueBet('toptenDate', event.target.value))} 
-                    isRequired={true}
-                  />
-                  <button type="submit" >Créer les tops 10</button>
-                </form>
-              </Wrapper>
-            }
-        </>
+        <Wrapper name="topten-deadline">
+          <h5>{isUpdate === 0 ? "Les tops 10 n'existent pas encore" : "Tu peux éditer la deadline"}</h5>
+          <form onSubmit={handleCreateUpdateTop}>
+            <Input 
+              inputName="deadline"
+              label="Deadline :"
+              id="pronostic-limit"
+              type="datetime-local"
+              value={toptenDate}
+              onChange={event => dispatch(setInputValueBet('toptenDate', event.target.value))} 
+              isRequired={true}
+            />
+            <button type="submit" >{isUpdate === 0 ? "Créer les tops 10" : "Mettre à jour la deadline"}</button>
+          </form>
+        </Wrapper>
+      }
+      {(rounds.length !== 0 && !roundCreationMode && isUpdate) &&
+        <div className='topten-all'>
+          <TopTenList topten={isUpdate ? toptens[0] : ''} teams={eastTeams} idsList={eastTopId} conference={'Est'} />
+          <TopTenList topten={isUpdate ? toptens[1] : ''} teams={westTeams} idsList={westTopId} conference={'Ouest'} />
+        </div>
       }
     </section>
   )

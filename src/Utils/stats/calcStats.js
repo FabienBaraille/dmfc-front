@@ -7,7 +7,7 @@ export const scoreMax = (roundsList) => {
   roundsList.forEach(round => {
     countMatch += round.games.length
   });
-  return countMatch*20;
+  return countMatch*5;
 }
 
 export const calcBetPoint = (updatedGame, predictedWinningTeam, predictedPointDifference, validationStatus) => {

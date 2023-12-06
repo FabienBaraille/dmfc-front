@@ -3,55 +3,46 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 import Wrapper from "../Wrapper/Wrapper";
-import Input from "../Utils/Input";
 
 import { updateTopTen } from "../../actions/bet";
 
-import { transformDate } from "../../Utils/stats/calcDate";
 import InputTop from "./InputTop";
 
-const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
+const TopTenList = ({topten, teams, idsList, conference}) => {
 
   const dispatch = useDispatch();
 
-  const [newDeadline, setNewDeadline] = useState(deadline.slice(0, 16));
-  const [team1, setTeam1] = useState(results.length !== 0 && !isNaN(parseInt(results[0])) ? parseInt(results[0]) : team[0].id);
-  const [team2, setTeam2] = useState(results.length !== 0 && !isNaN(parseInt(results[1])) ? parseInt(results[1]) : team[0].id);
-  const [team3, setTeam3] = useState(results.length !== 0 && !isNaN(parseInt(results[2])) ? parseInt(results[2]) : team[0].id);
-  const [team4, setTeam4] = useState(results.length !== 0 && !isNaN(parseInt(results[3])) ? parseInt(results[3]) : team[0].id);
-  const [team5, setTeam5] = useState(results.length !== 0 && !isNaN(parseInt(results[4])) ? parseInt(results[4]) : team[0].id);
-  const [team6, setTeam6] = useState(results.length !== 0 && !isNaN(parseInt(results[5])) ? parseInt(results[5]) : team[0].id);
-  const [team7, setTeam7] = useState(results.length !== 0 && !isNaN(parseInt(results[6])) ? parseInt(results[6]) : team[0].id);
-  const [team8, setTeam8] = useState(results.length !== 0 && !isNaN(parseInt(results[7])) ? parseInt(results[7]) : team[0].id);
-  const [team9, setTeam9] = useState(results.length !== 0 && !isNaN(parseInt(results[8])) ? parseInt(results[8]) : team[0].id);
-  const [team10, setTeam10] = useState(results.length !== 0 && !isNaN(parseInt(results[9])) ? parseInt(results[9]) : team[0].id);
+  const teamInfo = topten !== '' ? topten.team : teams;
+  const results = topten !== '' ? topten.results : [];
+
+  const [team1, setTeam1] = useState(results.length !== 0 && !isNaN(parseInt(results[0])) ? parseInt(results[0]) : teams[0].id);
+  const [team2, setTeam2] = useState(results.length !== 0 && !isNaN(parseInt(results[1])) ? parseInt(results[1]) : teams[0].id);
+  const [team3, setTeam3] = useState(results.length !== 0 && !isNaN(parseInt(results[2])) ? parseInt(results[2]) : teams[0].id);
+  const [team4, setTeam4] = useState(results.length !== 0 && !isNaN(parseInt(results[3])) ? parseInt(results[3]) : teams[0].id);
+  const [team5, setTeam5] = useState(results.length !== 0 && !isNaN(parseInt(results[4])) ? parseInt(results[4]) : teams[0].id);
+  const [team6, setTeam6] = useState(results.length !== 0 && !isNaN(parseInt(results[5])) ? parseInt(results[5]) : teams[0].id);
+  const [team7, setTeam7] = useState(results.length !== 0 && !isNaN(parseInt(results[6])) ? parseInt(results[6]) : teams[0].id);
+  const [team8, setTeam8] = useState(results.length !== 0 && !isNaN(parseInt(results[7])) ? parseInt(results[7]) : teams[0].id);
+  const [team9, setTeam9] = useState(results.length !== 0 && !isNaN(parseInt(results[8])) ? parseInt(results[8]) : teams[0].id);
+  const [team10, setTeam10] = useState(results.length !== 0 && !isNaN(parseInt(results[9])) ? parseInt(results[9]) : teams[0].id);
 
   const newResult = [team1, team2, team3, team4, team5, team6, team7, team8, team9, team10];
 
   const handleUpdate = (event) => {
     event.preventDefault();
-    const newDate = transformDate(newDeadline, 'create');
     const body = {
-      "results": newResult,
-      "deadline": newDate
+      "results": newResult
     };
-    dispatch(updateTopTen(id, body));
+    idsList.forEach(id => {
+      dispatch(updateTopTen(id, body));
+    });
   }
   return (
     <Wrapper name="topten-list">
-      <h5>{`Top 10 Conférence ${conference === 'Eastern' ? 'Est' : 'Ouest'}`}</h5>
+      <h5>{`Top 10 Conférence ${conference}`}</h5>
       <form onSubmit={handleUpdate}>
-        <Input 
-          inputName="deadline"
-          label="Deadline :"
-          id="pronostic-limit"
-          type="datetime-local"
-          value={newDeadline}
-          onChange={event => setNewDeadline('toptenDate', event.target.value)} 
-          isRequired={true}
-        />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="first"
           label="1er :"
           change={(event) => setTeam1(parseInt(event.target.value))}
@@ -59,7 +50,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="second"
           label="2ème :"
           change={(event) => setTeam2(parseInt(event.target.value))}
@@ -67,7 +58,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="third"
           label="3ème :"
           change={(event) => setTeam3(parseInt(event.target.value))}
@@ -75,7 +66,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="forth"
           label="4ème :"
           change={(event) => setTeam4(parseInt(event.target.value))}
@@ -83,7 +74,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="fifth"
           label="5ème :"
           change={(event) => setTeam5(parseInt(event.target.value))}
@@ -91,7 +82,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="sixth"
           label="6ème :"
           change={(event) => setTeam6(parseInt(event.target.value))}
@@ -99,7 +90,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="seventh"
           label="7ème :"
           change={(event) => setTeam7(parseInt(event.target.value))}
@@ -107,7 +98,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="eigth"
           label="8ème :"
           change={(event) => setTeam8(parseInt(event.target.value))}
@@ -115,7 +106,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="ninth"
           label="9ème :"
           change={(event) => setTeam9(parseInt(event.target.value))}
@@ -123,7 +114,7 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
           test={newResult}
         />
         <InputTop 
-          team={team}
+          team={teamInfo}
           name="tenth"
           label="10ème :"
           change={(event) => setTeam10(parseInt(event.target.value))}
@@ -136,6 +127,12 @@ const TopTenList = ({topten: {id, conference, deadline, team, results}}) => {
   )
 };
 TopTenList.propTypes = {
-  topten: PropTypes.object,
+  topten: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ]),
+  teams: PropTypes.array,
+  idsList: PropTypes.array,
+  conference: PropTypes.string
 }
 export default TopTenList;

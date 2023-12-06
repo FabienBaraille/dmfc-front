@@ -84,7 +84,7 @@ const TopTen = () => {
       </Wrapper>
       {(roundNumber !== '' && !roundCreationMode) &&
         <>
-            {toptens.length === 0 &&
+            {toptens.length === 0 ? 
               <Wrapper name="topten-list">
                 <h5>{`Les tops 10 n'existent pas encore`}</h5>
                 <form onSubmit={handleCreateTop}>
@@ -100,6 +100,11 @@ const TopTen = () => {
                   <button type="submit" >Créer les tops 10</button>
                 </form>
               </Wrapper>
+              :
+              <div className='topten-all'>
+                <TopTenList topten={toptens[0]} />
+                <TopTenList topten={toptens[1]} />
+              </div>
             }
         </>
       }

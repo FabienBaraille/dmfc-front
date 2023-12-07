@@ -22,6 +22,8 @@ export const SET_FOCUS = 'SET_FOCUS';
 export const UPDATE_PLAYER_BY_DMFC = 'UPDATE_PLAYER_BY_DMFC';
 export const SET_MODAL_FUNCTION = 'SET_MODAL_FUNCTION';
 export const SET_MODAL_SENTENCE = 'SET_MODAL_SENTENCE';
+export const GET_TOPTEN_BET = 'GET_TOPTEN_BET';
+export const SET_TOPTEN_BET = 'SET_TOPTEN_BET'
 
 export const getUsersList = () => ({
   type: GET_USERS_LIST,
@@ -116,4 +118,13 @@ export const setModalFunction = (func) => ({
 export const setModalSentence = (bool) => ({
   type: SET_MODAL_SENTENCE,
   bool,
+});
+
+export const getToptenBet = (id) => ({
+  type: GET_TOPTEN_BET,
+  id 
+});
+export const setToptenBet = (datas) => ({
+  type: SET_TOPTEN_BET,
+  datas 
 });

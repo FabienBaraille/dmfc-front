@@ -5,23 +5,23 @@ import RoundSelector from '../BetCreation/Element/RoundSelector';
 import Wrapper from '../Wrapper/Wrapper';
 import Input from '../Utils/Input';
 import LoadElmt from '../Loader/LoadElmt';
+import TopTenList from '../TopTen/TopTenList';
 
-import { createRound, createTopTen, getTopTen, setInputValueBet, toggleCreationMode, updateTopTen } from '../../actions/bet';
+import { createRound, createTopTen, getTopTen, setInputValueBet, setIsCreatedMatch, toggleCreationMode, updateTopTen } from '../../actions/bet';
+import { getRounds } from '../../actions/datas';
+
 import { transformDate } from '../../Utils/stats/calcDate';
 import { phaseFilter, toptenId } from '../../Utils/filters/roundFilter';
+import { teamsByConf } from '../../Utils/filters/teamFilter';
 
 import './TopTen.scss';
-import TopTenList from '../TopTen/TopTenList';
-import { teamsByConf } from '../../Utils/filters/teamFilter';
 
 const TopTen = () => {
 
-  // Ajouter message d'update pour récupérer de nouveau les toptens
-
   const dispatch = useDispatch();
 
-  const {isLoadingGame, roundCreationMode, roundName, roundNumber, toptens, toptenDate} = useSelector((state) => state.bet);
-  const {allTeams} = useSelector((state) => state.datas);
+  const {isCreatedMatch, isLoadingGame, roundCreationMode, roundName, roundNumber, toptens, toptenDate} = useSelector((state) => state.bet);
+  const {allTeams, isLoadingSR} = useSelector((state) => state.datas);
 
   const eastTeams = teamsByConf(allTeams, 'Eastern');
   const westTeams = teamsByConf(allTeams, 'Western');
@@ -40,7 +40,20 @@ const TopTen = () => {
       dispatch(setInputValueBet('roundNumber', rounds[rounds.length-1].id));
       dispatch(getTopTen(rounds[rounds.length-1].id));
     }
-  }, [roundNumber]);
+    if (!isLoadingGame && isCreatedMatch) {
+      if (!isUpdate) {
+        setTimeout(() => {
+          dispatch(getRounds());
+          dispatch(setIsCreatedMatch(false));
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          dispatch(getTopTen(roundNumber));
+          dispatch(setIsCreatedMatch(false));
+        }, 1500);
+      }
+    }
+  }, [roundNumber, isCreatedMatch]);
 
   const handleRoundCreation = () => {
     roundCreationMode ? dispatch(toggleCreationMode(false)) : dispatch(toggleCreationMode(true))
@@ -63,15 +76,25 @@ const TopTen = () => {
       const newDate = transformDate(toptenDate, 'create');
       const body = {
         "deadline": newDate
-    };
-    dispatch(updateTopTen(roundNumber, body));
+      };
+      toptens.forEach(({id}) => {
+        dispatch(updateTopTen(id, body));
+      });
     }
   }
 
-  if (isLoadingGame) {
+  if (isLoadingGame || isLoadingSR) {
     return <LoadElmt />
   }
-  
+
+  if (isCreatedMatch) {
+    return (
+      <Wrapper>
+        <h2>{isUpdate ? 'Mise à jour effecuée avec succès' : 'Tops 10 créés avec succès !'}</h2>
+      </Wrapper>
+    )
+  }
+
   return (
     <section className="dmfc-creation top-creation">
       <Wrapper name="rsbetcreation">
@@ -115,7 +138,7 @@ const TopTen = () => {
               onChange={event => dispatch(setInputValueBet('toptenDate', event.target.value))} 
               isRequired={true}
             />
-            <button type="submit" >{isUpdate === 0 ? "Créer les tops 10" : "Mettre à jour la deadline"}</button>
+            <button type="submit" >{!isUpdate ? "Créer les tops 10" : "Mettre à jour la deadline"}</button>
           </form>
         </Wrapper>
       }

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import { teamLogo } from "../../Utils/filters/teamFilter";
 
-const InputTop = ({team, name, label, change, value, test}) => {
+const InputTop = ({team, name, label, change, value, test, disabled}) => {
   const arrayTest = test.filter(teamId => teamId != value);
   const teamsList = team.map(({id, trigram, name}, index) => <option key={`${index}team${id}`} value={id} disabled={arrayTest.includes(id)} >{trigram} - {name}</option> );
   return (
@@ -13,6 +13,7 @@ const InputTop = ({team, name, label, change, value, test}) => {
         name={name}
         defaultValue={value}
         onChange={change}
+        disabled={disabled}
         >
       {teamsList}
       </select>
@@ -26,6 +27,7 @@ InputTop.propTypes = {
   name: PropTypes.string,
   change: PropTypes.func,
   value: PropTypes.number,
-  test: PropTypes.array
+  test: PropTypes.array,
+  disabled: PropTypes.bool
 }
 export default InputTop;

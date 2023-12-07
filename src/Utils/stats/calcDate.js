@@ -7,7 +7,7 @@ export const transformDate = (date, mode) => {
   const dateTransformed = mode === 'create' ?
     `${dateToTransform.getFullYear()}-${month}-${day}${dateToTransform.getHours()}:${minutes}:${second}` : 
     mode === 'news' ?
-    `${month}/${day}/${dateToTransform.getFullYear()}` : 
-    `${month} / ${day} / ${dateToTransform.getFullYear()} - ${dateToTransform.getHours()}:${minutes}`;
+    `${day}/${month}/${dateToTransform.getFullYear()}` : 
+    `${day}/${month}/${dateToTransform.getFullYear()} - ${dateToTransform.getHours()}:${minutes}`;
   return dateTransformed;
 }

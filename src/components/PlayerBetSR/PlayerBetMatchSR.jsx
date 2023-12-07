@@ -7,7 +7,7 @@ import { createBet, updateBet } from '../../actions/bet';
 import { unableBet } from '../../Utils/filters/predictionFilter';
 import { transformDate } from "../../Utils/stats/calcDate";
 
-const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, prediction }) => {
+const PlayerBetMatchSR = ({ id, dateAndTimeOfMatch, team, predictStatus, prediction }) => {
 
   const dispatch = useDispatch();
 
@@ -121,7 +121,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
   )
 };
 
-PlayerBetMatch.propTypes = {
+PlayerBetMatchSR.propTypes = {
   id: PropTypes.number,
   dateAndTimeOfMatch: PropTypes.string,
   team: PropTypes.array,
@@ -130,4 +130,4 @@ PlayerBetMatch.propTypes = {
   prediction: PropTypes.object,
 }
 
-export default PlayerBetMatch;
+export default PlayerBetMatchSR;

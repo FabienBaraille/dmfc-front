@@ -33,6 +33,8 @@ export const GET_TOP_TEN = 'GET_TOP_TEN';
 export const SET_TOP_TEN = 'SET_TOP_TEN';
 export const CREATE_TOP_TEN = 'CREATE_TOP_TEN';
 export const UPDATE_TOP_TEN = 'UPDATE_TOP_TEN';
+export const CREATE_BET_TOP = 'CREATE_BET_TOP';
+export const UPDATE_BET_TOP = 'UPDATE_BET_TOP';
 
 export const setCountUpdate = () => ({
   type: SET_COUNT_BET,
@@ -188,5 +190,14 @@ export const createTopTen = (date) => ({
 export const updateTopTen = (toptenId, body) => ({
   type: UPDATE_TOP_TEN,
   toptenId,
+  body 
+});
+export const createBetTop = (body) => ({
+  type: CREATE_BET_TOP,
+  body 
+});
+export const updateBetTop = (betTopId, body) => ({
+  type: UPDATE_BET_TOP,
+  betTopId,
   body 
 });

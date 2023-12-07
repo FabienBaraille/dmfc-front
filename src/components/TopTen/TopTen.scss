@@ -28,15 +28,13 @@
     #topten-deadline {
         width: 60%;
     }
-    .dmfc-creation {
-        .topten-all {
-            display: flex;
-        }
+    .topten-all {
+        display: flex;
+        justify-content: space-evenly;
     }
     .top-creation {
         #rsbetcreation {
             width: 60%;
         }
     }
-    
 }

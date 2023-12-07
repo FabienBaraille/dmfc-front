@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import LoadElmt from "../Loader/LoadElmt";
 import Wrapper from "../Wrapper/Wrapper";
-import PlayerBetMatch from "./PlayerBetMatch";
+import PlayerBetMatchSR from "./PlayerBetMatchSR";
 
 import { getGamesRound } from "../../actions/bet";
 import { getSRPrediction } from "../../actions/datas";
@@ -12,9 +12,9 @@ import { predictedGame } from "../../Utils/filters/gamesFilter";
 import { predictionByGameId } from "../../Utils/filters/predictionFilter";
 import { phaseFilter } from "../../Utils/filters/roundFilter";
 
-import './PlayerBet.scss';
+import './PlayerBetSR.scss';
 
-const PlayerBet = () => {
+const PlayerBetSR = () => {
 
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ const PlayerBet = () => {
   const betList = gamesOfRound.map(({ id, ...rest}) => {
     const predictStatus = predictedGame(id, predictionsList);
     const prediction = predictionByGameId(id, predictionsList);
-    return <PlayerBetMatch key={id} id={id} {...rest} predictStatus={predictStatus} prediction={prediction} />;
+    return <PlayerBetMatchSR key={id} id={id} {...rest} predictStatus={predictStatus} prediction={prediction} />;
   })
   
   if (isLoadingSR || isLoadingBet) {
@@ -41,8 +41,8 @@ const PlayerBet = () => {
   }
   return (
     <Wrapper name="player_bet">
-    <h2>Pronostics SR</h2>
-    <h2>{`${rounds[rounds.length-1].name}`}</h2>
+      <h2>Pronostics SR</h2>
+      <h2>{`${rounds[rounds.length-1].name}`}</h2>
       <div className="player_bet">
         {betList}
       </div>
@@ -50,5 +50,5 @@ const PlayerBet = () => {
   )
 };
 
-export default PlayerBet;
+export default PlayerBetSR;
 

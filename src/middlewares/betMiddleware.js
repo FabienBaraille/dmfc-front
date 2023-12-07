@@ -3,6 +3,7 @@ import axios from 'redaxios';
 
 import { 
   CREATE_BET,
+  CREATE_BET_TOP,
   CREATE_GAME,
   CREATE_ROUND,
   CREATE_TOP_TEN,
@@ -13,10 +14,12 @@ import {
   GET_TOP_TEN,
   UPDATE_BET,
   UPDATE_BET_POINTS,
+  UPDATE_BET_TOP,
   UPDATE_GAME,
   UPDATE_PLAYER_SCORE,
   UPDATE_TOP_TEN,
   getPredictionByGame,
+  getTopTen,
   setAllPredictions,
   setCountUpdate,
   setDeleteMessage,
@@ -35,7 +38,7 @@ import {
   toggleCreationMode
 } from '../actions/bet';
 
-import { getRounds, getSRPrediction } from '../actions/datas';
+import { getRounds, getSRPrediction, getToptenBet } from '../actions/datas';
 
 const betMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -54,6 +57,7 @@ const betMiddleware = (store) => (next) => async (action) => {
             league: store.getState().user.loggedUser.league_id.id
           }
         );
+        store.dispatch(setInputValueBet('roundNumber', data.id));
         store.dispatch(setIsLoadingGame(false));
         store.dispatch(getRounds());
         store.dispatch(toggleCreationMode(false));
@@ -128,50 +132,8 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-    case GET_TOP_TEN:
-      store.dispatch(setIsLoadingGame(true));
-      try {
-        const { data } = await axios.get(`/api/topten/round/${action.roundId}`);
-        store.dispatch(setTopTen(data));
-        if (data.length !== 0) {
-          store.dispatch(setInputValueBet('toptenDate', data[0].deadline.slice(0, 16)))
-        } else {
-          store.dispatch(setInputValueBet('toptenDate', ''))
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    break;
-    case CREATE_TOP_TEN:{
-      store.dispatch(setIsLoadingGame(true));
-      try {
-        const { data } = await axios.post(`/api/topten/new`,
-          {
-            round : store.getState().bet.roundNumber,
-            deadline : action.date,
-          }
-        );
-        store.dispatch(setTopTen(data));
-        store.dispatch(setIsCreatedMatch(true));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    break;
-    case UPDATE_TOP_TEN: {
-      store.dispatch(setIsLoadingGame(true));
-      try {
-        const { data } = await axios.put(`/api/topten/${action.toptenId}`, 
-          action.body
-        )
-        store.dispatch(setIsLoadingGame(false));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    break;
     /**
-     * Action to create et bet made by a player
+     * Action to create a SR bet by a player
      */
     case CREATE_BET:
       store.dispatch(setIsLoadingBet(true));
@@ -267,6 +229,88 @@ const betMiddleware = (store) => (next) => async (action) => {
         store.dispatch(setIsLoadingBet(false));
       } catch (error) {
         store.dispatch(setErrorMessage(error.data.message));
+      }
+    break;
+    /**
+     * Action to get the created Top ten for a round
+     */
+    case GET_TOP_TEN:
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.get(`/api/topten/round/${action.roundId}`);
+        store.dispatch(setTopTen(data));
+        if (data.length !== 0) {
+          store.dispatch(setInputValueBet('toptenDate', data[0].deadline.slice(0, 16)))
+        } else {
+          store.dispatch(setInputValueBet('toptenDate', ''))
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    /**
+     * Action to create top tens in a round
+     */
+    case CREATE_TOP_TEN:{
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.post(`/api/topten/new`,
+          {
+            round : store.getState().bet.roundNumber,
+            deadline : action.date,
+          }
+        );
+        store.dispatch(setTopTen(data));
+        store.dispatch(setIsCreatedMatch(true));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    break;
+    /**
+     * Action to top tens results by DMFC
+     */
+    case UPDATE_TOP_TEN: {
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.put(`/api/topten/${action.toptenId}`, 
+          action.body
+        )
+        store.dispatch(setIsLoadingGame(false));
+        store.dispatch(setIsCreatedMatch(true));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    break;
+    /**
+     * Action to create a top bet by a player
+     */
+    case CREATE_BET_TOP:
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.post(`/api/bettop/new`,
+          action.body
+        )
+        store.dispatch(setIsLoadingGame(false));
+        store.dispatch(getToptenBet(store.getState().user.loggedUser.id));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    /**
+     * Action to update a top bet
+     */
+    case UPDATE_BET_TOP:
+      store.dispatch(setIsLoadingGame(true));
+      try {
+        const { data } = await axios.put(`/api/bettop/${action.betTopId}`,
+          action.body
+        )
+        store.dispatch(setIsLoadingGame(false));
+        store.dispatch(getToptenBet(store.getState().user.loggedUser.id));
+      } catch (error) {
+        console.log(error);
       }
     break;
     default:

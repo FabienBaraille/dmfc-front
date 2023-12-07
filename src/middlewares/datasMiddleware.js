@@ -23,6 +23,8 @@ import {
   GET_DATAS_START,
   setIsLoadingStart,
   GET_ALL_TEAMS,
+  GET_TOPTEN_BET,
+  setToptenBet,
 } from "../actions/datas";
 
 import {
@@ -104,13 +106,22 @@ const datasMiddleware = (store) => (next) => async (action) => {
     case GET_SR_PREDICTION:
       store.dispatch(setIsLoadingSR());
       try {
-
         const { data } = await axios.get(`/api/srprediction/${action.id}`);
         const sortedList = usersSortByScore(data);
         store.dispatch(setSRPrediction(sortedList));
       } catch (error) {
         console.log(error);
       }
+    break;
+    case GET_TOPTEN_BET: {
+      store.dispatch(setIsLoadingSR());
+      try {
+        const { data } = await axios.get(`/api/bettop/player/${action.id}`);
+        store.dispatch(setToptenBet(data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
     break;
     // News
     // Action qui permet de mettre les news en BDD

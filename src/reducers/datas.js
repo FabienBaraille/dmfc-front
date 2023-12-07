@@ -15,6 +15,7 @@ import {
   SET_MODAL_FUNCTION,
   SET_MODAL_SENTENCE,
   SET_IS_LOADING_START,
+  SET_TOPTEN_BET,
 } from '../actions/datas';
 import { SET_TARGET_KICK } from "../actions/user";
 
@@ -23,9 +24,10 @@ const initialState = {
   'allLeague': [],
   'allTeams':[],
   'SRPrediction': [],
+  'topTenBet': [],
   'isLoadingStart': false,
   'isLoading': true,
-  'isLoadingSR': true,
+  'isLoadingSR': false,
   // News
   'newsCreation': false,
   'newsTitle': '',
@@ -89,6 +91,12 @@ const reducer = (state = initialState, action = {}) => {
         SRPrediction: action.prediction,
         isLoadingSR: false,
       }
+    case SET_TOPTEN_BET:
+      return {
+        ...state,
+        topTenBet: action.datas,
+        isLoadingSR: false,
+      }
     case NEWS_CREATION_MODE:
       return {
         ...state,
@@ -106,6 +114,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         rounds: action.roundsInfos,
         isLoading: false,
+        isLoadingSR: false
       }
     case SET_LEAGUE:
       return {

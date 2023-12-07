@@ -46,7 +46,8 @@ const Navbar = () => {
         {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/scores/SR" onClick={handleLinkClick}>Résultats</NavLink> }
         {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/topten" onClick={handleLinkClick}>Top 10</NavLink> }
         {userRole === 'ROLE_DMFC' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/league-management" onClick={handleLinkClick}>Ligue</NavLink> }
-        {userRole === 'ROLE_JOUEUR' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/player-bet"onClick={handleLinkClick}>Prono</NavLink> }
+        {userRole === 'ROLE_JOUEUR' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/player-bet-SR"onClick={handleLinkClick}>Prono SR</NavLink> }
+        {userRole === 'ROLE_JOUEUR' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/player-bet-TOP"onClick={handleLinkClick}>Prono TOP 10</NavLink> }
         {userRole !== 'ROLE_JOUEUR_NA' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/rankings"onClick={handleLinkClick}>Classement</NavLink> }
         {userRole === 'ROLE_JOUEUR' &&  <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to={`/player/${username}`} onClick={handleLinkClick}>Statistiques</NavLink> }
         {userRole !== 'ROLE_JOUEUR_NA' && <NavLink className={({ isActive }) =>isActive ? 'menu menu--active' : 'menu'} to="/cheatsheets"onClick={handleLinkClick}>Infos NBA</NavLink> }

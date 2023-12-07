@@ -1,19 +1,34 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import Wrapper from "../Wrapper/Wrapper";
 
-import { updateTopTen } from "../../actions/bet";
+import { createBetTop, updateBetTop, updateTopTen } from "../../actions/bet";
+import { unableBet } from "../../Utils/filters/predictionFilter";
 
 import InputTop from "./InputTop";
 
-const TopTenList = ({topten, teams, idsList, conference}) => {
+const TopTenList = ({topten = '', teams, idsList = [], conference, betTop = {}, isBet = false}) => {
 
   const dispatch = useDispatch();
+  const [button, setButton] = useState('');
+  const loggedUserId = useSelector((state) => state.user.loggedUser.id);
 
-  const teamInfo = topten !== '' ? topten.team : teams;
-  const results = topten !== '' ? topten.results : [];
+  const teamInfo = (topten !== '' && !isBet) ? topten.team : teams;
+  // Verify if betTop is an empty object
+  const isUpdate = Object.keys(betTop).length > 0;
+  const results = (topten !== '' && !isBet) ? topten.results : isUpdate ? betTop.predictedRanking : [];
+
+  const currentDate = new Date();
+  let unableMessage = '';
+  let deadlineTop = '';
+
+  if (isBet) {
+    deadlineTop = new Date(topten.deadline);
+    unableMessage = unableBet(currentDate, topten.deadline, betTop.validationStatus);
+  }
+  
 
   const [team1, setTeam1] = useState(results.length !== 0 && !isNaN(parseInt(results[0])) ? parseInt(results[0]) : teams[0].id);
   const [team2, setTeam2] = useState(results.length !== 0 && !isNaN(parseInt(results[1])) ? parseInt(results[1]) : teams[0].id);
@@ -28,19 +43,41 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
 
   const newResult = [team1, team2, team3, team4, team5, team6, team7, team8, team9, team10];
 
-  const handleUpdate = (event) => {
+  const disableSelect = isBet && (currentDate > deadlineTop || betTop.validationStatus == 'Validated' || betTop.validationStatus == 'Published');
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const body = {
-      "results": newResult
-    };
-    idsList.forEach(id => {
-      dispatch(updateTopTen(id, body));
-    });
+    if (!isBet) {
+      const body = {
+        "results": newResult
+      };
+      idsList.forEach(id => {
+        dispatch(updateTopTen(id, body));
+      });
+    } else if (!isUpdate) {
+      console.log('create Bet');
+      const body =
+      {
+        "user": loggedUserId,
+        "topten": topten.id,
+        "predictedRanking": newResult,
+        "validationStatus": button
+      }
+      dispatch(createBetTop(body));
+    } else {
+      const body =
+      {
+        "predictedRanking": newResult,
+        "validationStatus": button
+      }
+      dispatch(updateBetTop(betTop.id, body));
+    }
   }
+
   return (
     <Wrapper name="topten-list">
       <h5>{`Top 10 Conférence ${conference}`}</h5>
-      <form onSubmit={handleUpdate}>
+      <form onSubmit={handleSubmit}>
         <InputTop 
           team={teamInfo}
           name="first"
@@ -48,6 +85,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam1(parseInt(event.target.value))}
           value={team1}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -56,6 +94,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam2(parseInt(event.target.value))}
           value={team2}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -64,6 +103,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam3(parseInt(event.target.value))}
           value={team3}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -72,6 +112,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam4(parseInt(event.target.value))}
           value={team4}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -80,6 +121,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam5(parseInt(event.target.value))}
           value={team5}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -88,6 +130,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam6(parseInt(event.target.value))}
           value={team6}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -96,6 +139,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam7(parseInt(event.target.value))}
           value={team7}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -104,6 +148,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam8(parseInt(event.target.value))}
           value={team8}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -112,6 +157,7 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam9(parseInt(event.target.value))}
           value={team9}
           test={newResult}
+          disabled={disableSelect}
         />
         <InputTop 
           team={teamInfo}
@@ -120,8 +166,16 @@ const TopTenList = ({topten, teams, idsList, conference}) => {
           change={(event) => setTeam10(parseInt(event.target.value))}
           value={team10}
           test={newResult}
+          disabled={disableSelect}
         />
-        <button type="submit">Mettre à jour</button>
+        {!isBet && <button type="submit">Mettre à jour</button>}
+        {/* Reprendre le principe de bouton de playerbetmatch */}
+        {currentDate < deadlineTop && betTop.validationStatus !== 'Validated' && betTop.validationStatus !== 'Published' && 
+          <div className='button-group' >
+            <button type="submit" onClick={() => setButton('Saved')} >Sauvegarder</button>
+            <button type="submit" onClick={() => setButton('Validated')} >Valider</button>
+          </div>}
+        {(currentDate > deadlineTop || betTop.validationStatus == 'Validated' || betTop.validationStatus == 'Published') && <h5>{unableMessage}</h5>}
       </form>
     </Wrapper>
   )
@@ -133,6 +187,9 @@ TopTenList.propTypes = {
   ]),
   teams: PropTypes.array,
   idsList: PropTypes.array,
-  conference: PropTypes.string
+  conference: PropTypes.string,
+  betTop: PropTypes.object,
+  isBet: PropTypes.bool,
+  deadline: PropTypes.string
 }
 export default TopTenList;

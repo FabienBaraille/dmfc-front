@@ -26,7 +26,7 @@ import Connexion from '../Connexion/Connexion.jsx';
 import Terms from '../Terms/Terms.jsx';
 import RsBetCreation from '../BetCreation/RsBetCreation';
 import BetResult from "../BetResult/BetResult";
-import PlayerBet from "../PlayerBet/PlayerBet";
+import PlayerBetSR from "../PlayerBetSR/PlayerBetSR";
 import Profil from "../Profil/Profil";
 import Logout from "../Connexion/Logout";
 import Error404 from '../Error/Error404.jsx';
@@ -37,6 +37,8 @@ import Modal from "../Utils/Modal/Modal";
 import RoundStats from "../Stats/RoundsStats";
 import EmptyBet from "../BetResult/EmptyBet";
 import CheatSheets from '../CheatSheets/CheatSheets';
+import TopTen from "../TopTen/TopTen.jsx";
+import PlayerBetTop from "../PlayerBetTop/PlayerBetTop.jsx";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -110,13 +112,15 @@ const App = () => {
             <Route path='/player/:playerName' element={<GeneralStats />} />
             <Route element={<PlayerRoute />}>
               {/* Route protected for player role only */}
-              <Route path='/player-bet' element={<PlayerBet />} />
+              <Route path='/player-bet-SR' element={<PlayerBetSR />} />
+              <Route path='/player-bet-top' element={<PlayerBetTop />} />
             </Route>
             <Route element={<DMFCRoute />}>
               {/* Route protected for DMFC role only */}
               <Route path='/creation/SR' element={<RsBetCreation />} />
               <Route path='/scores/SR' element={rounds.length == 0 ? <EmptyBet /> : <BetResult />} />
               <Route path='/league-management' element={<LeagueManagement />} />
+              <Route path='/topten' element={<TopTen />} />
             </Route>
             <Route path='/roundsStat' element={<RoundStats />} />
             <Route path='/cheatsheets' element={<CheatSheets />} />

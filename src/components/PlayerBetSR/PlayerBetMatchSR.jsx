@@ -7,7 +7,7 @@ import { createBet, updateBet } from '../../actions/bet';
 import { unableBet } from '../../Utils/filters/predictionFilter';
 import { transformDate } from "../../Utils/stats/calcDate";
 
-const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, prediction }) => {
+const PlayerBetMatchSR = ({ id, dateAndTimeOfMatch, team, predictStatus, prediction }) => {
 
   const dispatch = useDispatch();
 
@@ -53,12 +53,12 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
           <div className="team-detail">
             <input 
               type="radio" 
-              id="0" 
+              id="visitor" 
               name='winning-team' 
               defaultChecked={predictStatus !== 'Not done' ? prediction.predictedWinnigTeam === team[0].name : false} 
               disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')}
-              onChange={(event) => {
-                setWinTeam(event.target.id);
+              onChange={() => {
+                setWinTeam(0);
                 if (warning) {
                   setWarning('');
                 }
@@ -72,17 +72,17 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
           <div className='at'>@</div>
           <div className="team-detail">
             <img className='small-logo' src={`/src/assets/logos/${team[1].logo}`} alt="" />
-            <label htmlFor="home-team" >
+            <label htmlFor="home" >
               {`${team[1].trigram} - ${team[1].name}`}
             </label>
             <input 
               type="radio" 
-              id="1" 
+              id="home" 
               name='winning-team' 
               defaultChecked={predictStatus !== 'Not done' ? prediction.predictedWinnigTeam === team[1].name : false} 
               disabled={(currentDate > matchDate || predictStatus === 'Published' || predictStatus === 'Validated')} 
-              onChange={(event) => {
-                setWinTeam(event.target.id);
+              onChange={() => {
+                setWinTeam(1);
                 if (warning) {
                   setWarning('');
                 }
@@ -121,7 +121,7 @@ const PlayerBetMatch = ({ id, dateAndTimeOfMatch, team, predictStatus, predictio
   )
 };
 
-PlayerBetMatch.propTypes = {
+PlayerBetMatchSR.propTypes = {
   id: PropTypes.number,
   dateAndTimeOfMatch: PropTypes.string,
   team: PropTypes.array,
@@ -130,4 +130,4 @@ PlayerBetMatch.propTypes = {
   prediction: PropTypes.object,
 }
 
-export default PlayerBetMatch;
+export default PlayerBetMatchSR;

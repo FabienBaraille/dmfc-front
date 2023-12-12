@@ -1,15 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from 'react-toastify';
 
-import Wrapper from "../Wrapper/Wrapper"
+import { toastSuccess } from "../Toast/ToastDMFC";
+import Wrapper from "../Wrapper/Wrapper";
 import BetTpl  from "./BetMatch";
 import Input from "../Utils/Input";
 import LoadElmt from "../Loader/LoadElmt";
 import RoundSelector from "./Element/RoundSelector";
 import CreatedMatch from "./CreatedMatch";
 
-import { addBetToList, createGame, createRound, getGamesRound, setDeleteMessage, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
+import { addBetToList, createGame, createRound, getGamesRound, setInputValueBet, setIsCreatedMatch, setIsCreatedRound, setIsDeleted, setIsUpdated } from "../../actions/bet";
 import { getAllTeams } from "../../actions/datas";
 import { toggleCreationMode } from "../../actions/bet";
 import { transformDate } from "../../Utils/stats/calcDate";
@@ -19,26 +21,56 @@ import './RsBetCreation.scss';
 const RsBetCreation = () => {
 
   const dispatch = useDispatch();
-  const {isCreatedMatch, betList, roundCreationMode, roundName, roundCat, roundNumber, isLoadingGame, games, isPred, deleteMessage} = useSelector((state) => state.bet);
+  const {
+    isCreatedMatch,
+    betList,
+    roundCreationMode,
+    roundName,
+    roundNumber,
+    isLoadingGame,
+    games,
+    isPred,
+    isDeleted,
+    isUpdated,
+    isCreatedRound
+  } = useSelector((state) => state.bet);
   useEffect(() => {
+    dispatch(setInputValueBet('roundNumber', ''));
+  }, []);
+
+  useEffect(() => {
+    if (!isLoadingGame && isCreatedRound) {
+      toast.success('Round avec succès.', toastSuccess);
+        setTimeout(() => {
+          dispatch(setIsCreatedRound(false));
+        }, 2001);
+    }
     if (!isLoadingGame && isCreatedMatch) {
+      toast.success('Match(s) créé(s) avec succès.', toastSuccess);
       setTimeout(() => {
         dispatch(getAllTeams());
         dispatch(setInputValueBet('betList', []));
         dispatch(setIsCreatedMatch(false));
-      }, 1500);
+      }, 2001);
     }
-    if (!isLoadingGame && deleteMessage) {
+    if (!isLoadingGame && isUpdated) {
+      toast.success('Match mis à jour avec succès', toastSuccess);
+      setTimeout(() => {
+        dispatch(setIsUpdated(false));
+      }, 2001);
+    }
+    if (!isLoadingGame && isDeleted) {
+      toast.success('Match supprimé avec succès', toastSuccess);
       setTimeout(() => {
         dispatch(getAllTeams());
-        dispatch(setDeleteMessage(''));
+        dispatch(setIsDeleted(false));
         dispatch(getGamesRound(roundNumber));
-      }, 1500);
+      }, 2001);
     }
     if (roundNumber !== '') {
       dispatch(getGamesRound(roundNumber));
     }
-  }, [isCreatedMatch, roundNumber, deleteMessage])
+  }, [isCreatedMatch, roundNumber, isDeleted, isUpdated, isCreatedRound])
 
   const betTpl = BetTpl()
 
@@ -57,7 +89,7 @@ const RsBetCreation = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (roundCreationMode) {
-      dispatch(createRound());
+      dispatch(createRound('SR'));
     } else {
     const formData = new FormData(event.currentTarget);
     const visitors = formData.getAll('visitor');
@@ -78,33 +110,22 @@ const RsBetCreation = () => {
   if (isLoadingGame) {
     return <LoadElmt />
   }
-  if (isCreatedMatch) {
-    return (
-      <Wrapper>
-        <h2>Match(s) créé(s) avec succès !</h2>
-      </Wrapper>
-    )
-  }
-  if (deleteMessage) {
-    return (
-      <Wrapper>
-        <h2>{deleteMessage}</h2>
-      </Wrapper>
-    )
-  }
+
   return (
     <section className="dmfc-creation">
       <Wrapper name="rsbetcreation">
         <div className="round-choice">
           <h4>Pronostic saison régulière</h4>
           {!roundCreationMode &&
-            <RoundSelector isCreationMatch={true}/>
+            <RoundSelector isCreationMatch={true} phase={"SR"} />
           }
         </div>
         <form onSubmit={handleSubmit}>
           {betList.length == 0 ?
             <>
-              <button type="button" onClick={handleRoundCreation}>{!roundCreationMode ? "Nouveau round" : "Round existant"}</button>
+              <button type="button" onClick={handleRoundCreation}>
+                {!roundCreationMode ? "Nouveau round" : "Round existant"}
+              </button>
               {roundCreationMode &&
                 <div className="round-creation">
                   <Input 
@@ -115,14 +136,6 @@ const RsBetCreation = () => {
                     value={roundName}
                     onChange={handleInput}
                   />
-                  <div className="input-field">
-                    <label>Phase</label>
-                    <select id="roundCat" placeholder="Catégorie Round" onChange={handleInput} value={roundCat} >
-                      <option value='SR'>SR</option>
-                      <option value='PO' disabled>PO</option>
-                    </select>
-                  </div>
-                  
                 </div>
               }
             </>
@@ -134,7 +147,7 @@ const RsBetCreation = () => {
           : null}
         </form>
       </Wrapper>
-      {(!roundCreationMode && games.length !== 0 ) && 
+      {(!roundCreationMode && games.length !== 0 && roundNumber != '') && 
         <Wrapper name={"created-game"}>
           <h4>Liste des matchs du round</h4>
           {createdGames}

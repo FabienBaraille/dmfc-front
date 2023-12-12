@@ -12,3 +12,9 @@ export const unableBet = (currentDate, gameDate, predictionStatus) => {
     return 'Pronostic déjà validé' ;
   }
 }
+
+export const betByTopId = (toptens, betTop, conference) => {
+  const {id} = toptens.find((topten) => topten.conference === conference);
+  const betDone = betTop.find((bet) => bet.topten.id == id)
+  return betDone ? betDone : {};
+}

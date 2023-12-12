@@ -15,7 +15,7 @@ const RoundStats = () => {
   const roundNumber = useSelector((state) => state.bet.roundNumber);
   const selectedRound = roundNumber !== '' ? allRounds.find(round => round.id === parseInt(roundNumber)) : allRounds[0];
 
-  const ofRound = (selectedRound.games.length !== 0) ?
+  const ofRound = (selectedRound && selectedRound.games.length !== 0) ?
       selectedRound.games.map (({id}, index) => {
         const filteredPrediction = predictionByGameId(id, allPrediction);
         if (filteredPrediction !== undefined) {
@@ -45,7 +45,7 @@ const RoundStats = () => {
       <div className='rounds-stats'>
         <Wrapper name='round-history'>
           <p>Sélectionne le round :</p>
-          <RoundSelector />
+          <RoundSelector phase="Stats" />
         </Wrapper>
         {roundNumber !== '' && <Wrapper>{ofRound}</Wrapper>}
       </div>

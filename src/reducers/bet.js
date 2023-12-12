@@ -13,32 +13,52 @@ import {
   SET_ALL_PREDICTIONS,
   SET_COUNT_BET,
   RESET_COUNT_BET,
-  SET_UPDATED_MESSAGE,
+  SET_UPDATED_MESSAGE_SCORE,
   RESET_SCORE_UPDATE,
   SET_IS_PRED,
-  SET_DELETE_MESSAGE
+  SET_IS_DELETED,
+  SET_TOP_TEN,
+
+  SET_IS_CREATED_ROUND,
+  SET_IS_BET,
+  SET_IS_CREATED_TOP,
+  SET_TOP_TEN_LIST,
+  SET_IS_LOADING_TOP,
+  RESET_COUNT_PRED,
+  SET_BET_TOP_TEN_LIST
 } from "../actions/bet";
 
 const initialState = {
   'betList': [],
   'betNumber': 0,
+  'toptenDate': '',
   'roundCreationMode': false,
-  'isLoading': true,
+  'isLoading': false,
   'isLoadingGame': false,
+  'isLoadingTop': false,
   'isCreatedMatch': false,
+  'isCreatedRound': false,
+  'isCreatedTop': false,
   'isUpdated': false,
-  'updatedMessage': '',
+  'isUpdateTop': false,
+  'isBet': false,
+  'betStatus': '',
+  'updatedMessageScore': '',
+  'countUpdate': 0,
   'games': [],
+  'toptens': [],
+  'toptenList': [],
+  'betTopTenList': [],
+  'updatedConf': '',
   'isPred': [],
   'roundName': '',
-  'roundCat': 'SR',
   'roundNumber': '',
   'predictionByGame': [],
   'updatedGame': {},
   'allPredictions': [],
   'countBet': 0,
   'countPred': 0,
-  'deleteMessage': ''
+  'isDeleted': false
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -72,6 +92,18 @@ const reducer = (state = initialState, action = {}) => {
         games: action.gamesList,
         isLoading: false,
       }
+    case SET_TOP_TEN:
+      return {
+        ...state,
+        toptens: action.datas,
+        isLoadingGame: false
+      }
+    case SET_TOP_TEN_LIST:
+      return {
+        ...state,
+        toptenList: [...state.toptenList, action.data],
+        updatedConf: action.data.conference
+      }
     case SET_IS_PRED:
       return {
         ...state,
@@ -85,15 +117,26 @@ const reducer = (state = initialState, action = {}) => {
     case RESET_COUNT_BET:
       return {
         ...state,
-        countBet: 0,
+        countBet: 0
+      }
+    case RESET_COUNT_PRED:
+      return {
+        ...state,
+        countPred: 0
       }
     case RESET_SCORE_UPDATE:
       return {
         ...state,
+        countBet: 0,
         countPred: 0,
+        countUpdate: 0,
+        updatedMessageScore: '',
         allPredictions: [],
         predictionByGame: [],
         updatedGame: {},
+        toptenList: [],
+        betTopTenList: [],
+        updatedConf: ''
       }
     case SET_INPUT_VALUE_BET:
       return {
@@ -105,10 +148,20 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoadingGame: action.isLoading
       }
+    case SET_IS_LOADING_TOP:
+      return {
+        ...state,
+        isLoadingTop: action.isLoading
+      }
     case SET_IS_CREATED_MATCH:
       return {
         ...state,
         isCreatedMatch: action.isCreated,
+      }
+    case SET_IS_CREATED_ROUND:
+      return {
+        ...state,
+        isCreatedRound: action.isCreated
       }
     case SET_IS_UPDATED:
       return {
@@ -128,10 +181,10 @@ const reducer = (state = initialState, action = {}) => {
         updatedGame: action.gameInfos,
         isLoading: false
       }
-    case SET_DELETE_MESSAGE:
+    case SET_IS_DELETED:
       return {
         ...state,
-        deleteMessage: action.message,
+        isDeleted: action.isDeleted,
         isLoadingGame: false
       }
     case SET_ALL_PREDICTIONS:
@@ -140,10 +193,29 @@ const reducer = (state = initialState, action = {}) => {
         allPredictions: [...state.allPredictions, action.predictionsInfos],
         countPred: state.countPred + 1
       }
-    case SET_UPDATED_MESSAGE:
+    case SET_UPDATED_MESSAGE_SCORE:
       return {
         ...state,
-        updatedMessage: action.message
+        updatedMessageScore: action.message,
+        countUpdate: state.countUpdate + 1
+      }
+    case SET_IS_BET:
+      return {
+        ...state,
+        isBet: action.isBet,
+        betStatus: action.status
+      }
+    case SET_IS_CREATED_TOP:
+      return {
+        ...state,
+        isCreatedTop: action.isCreated,
+        isUpdateTop: action.isUpdate
+      }
+    case SET_BET_TOP_TEN_LIST:
+      return {
+        ...state,
+        betTopTenList: [...state.betTopTenList, action.datas],
+        isUpdateTop: true
       }
     default:
       return state;

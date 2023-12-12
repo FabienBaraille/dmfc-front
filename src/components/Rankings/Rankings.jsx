@@ -12,7 +12,7 @@ const Rankings = () => {
   const usersList = useSelector((state) => state.datas.allUsers);
   const userPlaying = usersList.filter(({roles}) => !roles.includes('ROLE_ADMIN') && !roles.includes('ROLE_DMFC') && !roles.includes('ROLE_JOUEUR_NA'));
 
-  const playerList = userPlaying.map(({id, username, score, oldPosition} , index) => {
+  const playerList = userPlaying.map(({id, username, score, scoreTOP, oldPosition} , index) => {
     const changePos = oldPosition === null ? 0 : parseInt(oldPosition) - (index + 1);
     const posMark = positionDisplay(changePos);
 
@@ -25,7 +25,7 @@ const Rankings = () => {
             </Link>
           </th>}
           <th className="player"><Link to={`/player/${username}`}>{username}</Link></th>
-          <th><Link to={`/player/${username}`}>{score != null ? score : 0}</Link></th>
+          <th><Link to={`/player/${username}`}>{score != null ? score + scoreTOP : 0}</Link></th>
       </tr>
     )
   });
@@ -34,7 +34,7 @@ const Rankings = () => {
     <Wrapper name={'rankings'}>
       <h2>Classement Général</h2>
       {playerList.length === 0 ? 
-      <h3>Il n'y a actuellement personne dans la ligue</h3>
+      <h3>{`Il n'y a actuellement personne dans la ligue`}</h3>
         :
       <table className="ranking-table">
         <thead>

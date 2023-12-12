@@ -136,7 +136,6 @@ const datasMiddleware = (store) => (next) => async (action) => {
           }
         );
         store.dispatch(setNews('newsId', data.news.id));
-        console.log(data);
       } catch (error) {
         console.log(error);
       }

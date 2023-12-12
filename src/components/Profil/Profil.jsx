@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-import { toastSucess, toastWarning } from "../Toast/ToastSuccess";
+import { toastSuccess, toastWarning } from "../Toast/ToastDMFC";
 import Wrapper from '../Wrapper/Wrapper';
 import Input from "../Utils/Input";
 import Strength from "../Connexion/AddOn/Strength";
@@ -76,7 +76,7 @@ function Profil() {
       } else {
         const updateComplete = dispatch(updateUserProfile(updatedUserData));
         if (updateComplete) {
-          toast.success(`${paramName} mis à jour avec succès`, toastSucess) 
+          toast.success(`${paramName} mis à jour avec succès`, toastSuccess);
         }
       }
     }

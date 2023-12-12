@@ -8,8 +8,14 @@
   width: auto;
 }
 
-.Toastify__progress-bar {
+.Toastify__progress-bar--success {
+  background-color: green;
+}
+.Toastify__progress-bar--info {
   background-color: v.$orange;
+}
+.Toastify__progress-bar--warning {
+  background-color: red;
 }
 
 .Toastify__close-button {

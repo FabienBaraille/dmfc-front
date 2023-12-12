@@ -1,5 +1,5 @@
 export const usersSortByScore = (array) => {
-  return array.sort((user1, user2) => (user1.score < user2.score) ? 1 : (user1.score > user2.score) ? -1 : 0)
+  return array.sort((user1, user2) => ((user1.score + user1.scoreTOP + user1.scorePO) < (user2.score + user2.scoreTOP + user2.scorePO)) ? 1 : ((user1.score + user1.scoreTOP + user1.scorePO) > (user2.score + user2.scoreTOP + user2.scorePO)) ? -1 : 0)
 };
 
 export const userByUsername = (array, username) => {

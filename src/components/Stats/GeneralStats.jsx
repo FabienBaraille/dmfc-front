@@ -91,7 +91,7 @@ const GeneralStats = () => {
         <p>{`Nombre de round joué(s) : ${playedRound} / ${roundsList.length}`}</p>
         <h4>Score :</h4>
         <p>{`Score : ${score ? score : 0} / ${maxPoints}`}</p>
-        <p>{`Moyen par round : ${averageRoundScore.toFixed(2)}`}</p>
+        <p>{`Moyen par round : ${!isNaN(averageRoundScore) ? averageRoundScore.toFixed(2) : 0}`}</p>
         <p>{`Score équipe gagnante : ${totalWinScore}`}</p>
         <p>{`Bonus score : ${totalBonusScore}`}</p>
         <p>{`Bonus bookie : ${totalBookieScore}`}</p>

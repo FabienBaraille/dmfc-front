@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from 'react-toastify';
 
+import { toastSuccess } from "../Toast/ToastDMFC";
 import Wrapper from "../Wrapper/Wrapper";
 import BetTpl  from "./BetMatch";
 import Input from "../Utils/Input";
@@ -9,7 +11,7 @@ import LoadElmt from "../Loader/LoadElmt";
 import RoundSelector from "./Element/RoundSelector";
 import CreatedMatch from "./CreatedMatch";
 
-import { addBetToList, createGame, createRound, getGamesRound, setDeleteMessage, setInputValueBet, setIsCreatedMatch } from "../../actions/bet";
+import { addBetToList, createGame, createRound, getGamesRound, setInputValueBet, setIsCreatedMatch, setIsCreatedRound, setIsDeleted, setIsUpdated } from "../../actions/bet";
 import { getAllTeams } from "../../actions/datas";
 import { toggleCreationMode } from "../../actions/bet";
 import { transformDate } from "../../Utils/stats/calcDate";
@@ -19,29 +21,56 @@ import './RsBetCreation.scss';
 const RsBetCreation = () => {
 
   const dispatch = useDispatch();
-  const {isCreatedMatch, betList, roundCreationMode, roundName, roundNumber, isLoadingGame, games, isPred, deleteMessage} = useSelector((state) => state.bet);
+  const {
+    isCreatedMatch,
+    betList,
+    roundCreationMode,
+    roundName,
+    roundNumber,
+    isLoadingGame,
+    games,
+    isPred,
+    isDeleted,
+    isUpdated,
+    isCreatedRound
+  } = useSelector((state) => state.bet);
   useEffect(() => {
     dispatch(setInputValueBet('roundNumber', ''));
   }, []);
+
   useEffect(() => {
+    if (!isLoadingGame && isCreatedRound) {
+      toast.success('Round avec succès.', toastSuccess);
+        setTimeout(() => {
+          dispatch(setIsCreatedRound(false));
+        }, 2001);
+    }
     if (!isLoadingGame && isCreatedMatch) {
+      toast.success('Match(s) créé(s) avec succès.', toastSuccess);
       setTimeout(() => {
         dispatch(getAllTeams());
         dispatch(setInputValueBet('betList', []));
         dispatch(setIsCreatedMatch(false));
-      }, 1500);
+      }, 2001);
     }
-    if (!isLoadingGame && deleteMessage) {
+    if (!isLoadingGame && isUpdated) {
+      toast.success('Match mis à jour avec succès', toastSuccess);
+      setTimeout(() => {
+        dispatch(setIsUpdated(false));
+      }, 2001);
+    }
+    if (!isLoadingGame && isDeleted) {
+      toast.success('Match supprimé avec succès', toastSuccess);
       setTimeout(() => {
         dispatch(getAllTeams());
-        dispatch(setDeleteMessage(''));
+        dispatch(setIsDeleted(false));
         dispatch(getGamesRound(roundNumber));
-      }, 1500);
+      }, 2001);
     }
     if (roundNumber !== '') {
       dispatch(getGamesRound(roundNumber));
     }
-  }, [isCreatedMatch, roundNumber, deleteMessage])
+  }, [isCreatedMatch, roundNumber, isDeleted, isUpdated, isCreatedRound])
 
   const betTpl = BetTpl()
 
@@ -81,20 +110,7 @@ const RsBetCreation = () => {
   if (isLoadingGame) {
     return <LoadElmt />
   }
-  if (isCreatedMatch) {
-    return (
-      <Wrapper>
-        <h2>Match(s) créé(s) avec succès !</h2>
-      </Wrapper>
-    )
-  }
-  if (deleteMessage) {
-    return (
-      <Wrapper>
-        <h2>{deleteMessage}</h2>
-      </Wrapper>
-    )
-  }
+
   return (
     <section className="dmfc-creation">
       <Wrapper name="rsbetcreation">

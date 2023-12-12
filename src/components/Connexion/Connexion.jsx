@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Wrapper from "../Wrapper/Wrapper";
 import Input from "../Utils/Input";
 import Strength from "./AddOn/Strength";
-import { toastWarning } from "../Toast/ToastSuccess";
+import { toastWarning } from "../Toast/ToastDMFC";
 
 import { checkLogin, createDmfc, createUser, setErrorMessage, setInputValue, setMailError, setPasswordError, toggleCreationMode } from "../../actions/user";
 import { verifyMail, verifyPassword } from "../../Utils/filters/usersFilter";

@@ -1,5 +1,5 @@
 export const phaseFilter = (roundList, phase) => {
-    return roundList.filter(round => round.category === phase);
+    return phase !== "Stats" ? roundList.filter(round => round.category === phase) : roundList;
 }
 
 export const toptenId = (array, conf) => {

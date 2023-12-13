@@ -46,9 +46,12 @@ export const setIsLoadingTop = (isLoading) => ({
 export const SET_IS_CREATED_MATCH = 'SET_IS_CREATED_MATCH';
 export const SET_IS_CREATED_ROUND = 'SET_IS_CREATED_ROUND';
 export const SET_IS_CREATED_TOP = 'SET_IS_CREATED_TOP';
-export const SET_IS_UPDATED = 'SET_IS_UPDATED';
+export const SET_IS_UPDATED = 'SET_IS_UPDATED'
+export const SET_IS_UPDATED_RESULTS = 'SET_IS_UPDATED_RESULTS';
+export const SET_IS_UPDATED_BET = 'SET_IS_UPDATED_BET'
 export const SET_IS_DELETED = 'SET_IS_DELETED';
 export const SET_IS_BET = 'SET_IS_BET';
+export const RESET_IS_ALL_GET = 'RESET_IS_ALL_GET';
 
 export const setIsCreatedMatch = (isCreated) => ({
   type: SET_IS_CREATED_MATCH,
@@ -67,6 +70,14 @@ export const setIsUpdated = (isUpdated) => ({
   type: SET_IS_UPDATED,
   isUpdated
 });
+export const setIsUpdatedResults = (isUpdated) => ({
+  type: SET_IS_UPDATED_RESULTS,
+  isUpdated
+});
+export const setIsUpdatedBet = (isUpdated) => ({
+  type: SET_IS_UPDATED_BET,
+  isUpdated
+});
 export const setIsDeleted = (isDeleted) => ({
   type: SET_IS_DELETED,
   isDeleted
@@ -75,6 +86,9 @@ export const setIsBet = (isBet, status) => ({
   type: SET_IS_BET,
   isBet,
   status 
+});
+export const resetIsAllGet = () => ({
+  type: RESET_IS_ALL_GET,
 });
 
 export const SET_UPDATED_GAME = 'SET_UPDATED_GAME';
@@ -101,9 +115,8 @@ export const createRound = (phase) => ({
   type: CREATE_ROUND,
   phase
 });
-export const updatePlayerScore = (playerId, body) => ({
+export const updatePlayerScore = (body) => ({
   type: UPDATE_PLAYER_SCORE,
-  playerId,
   body
 });
 
@@ -119,8 +132,6 @@ export const DELETE_GAME = 'DELETE_GAME';
 export const CREATE_BET = 'CREATE_BET';
 export const UPDATE_BET = 'UPDATE_BET';
 export const UPDATE_BET_POINTS = 'UPDATE_BET_POINTS';
-export const SET_COUNT_BET = 'SET_COUNT_BET';
-export const RESET_COUNT_BET = 'RESET_COUNT_BET';
 export const RESET_COUNT_PRED = 'RESET_COUNT_PRED';
 export const RESET_GAME_ID = 'RESET_GAME_ID';
 export const RESET_SCORE_UPDATE = 'RESET_SCORE_UPDATE';
@@ -133,9 +144,9 @@ export const setGamesRound = (gamesList) => ({
   type: SET_GAMES_ROUND,
   gamesList 
 });
-export const getAllPredictions = (playerId) => ({
+export const getAllPredictions = (idsList) => ({
   type: GET_ALL_PREDICTIONS,
-  playerId
+  idsList
 });
 export const setAllPredictions = (predictionsInfos) => ({
   type: SET_ALL_PREDICTIONS,
@@ -178,16 +189,9 @@ export const updateBet = (winningTeam, winningDif, betId, status) => ({
   betId,
   status
 });
-export const updateBetPoints = (betId, updateInfos) => ({
+export const updateBetPoints = (body) => ({
   type: UPDATE_BET_POINTS,
-  betId,
-  updateInfos
-});
-export const setCountUpdate = () => ({
-  type: SET_COUNT_BET,
-});
-export const resetCountBet = () => ({
-  type: RESET_COUNT_BET,
+  body
 });
 export const resetCountPred = () => ({
   type: RESET_COUNT_PRED,
@@ -229,9 +233,8 @@ export const updateTopTen = (toptenId, body) => ({
   toptenId,
   body
 });
-export const updateTopResults = (toptenId, body) => ({
+export const updateTopResults = (body) => ({
   type: UPDATE_TOP_RESULTS,
-  toptenId,
   body
 });
 export const setTopTenList = (data) => ({

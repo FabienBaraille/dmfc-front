@@ -49,12 +49,11 @@ const TopTenList = ({topten = '', teams, idsList = [], conference, betTop = {}, 
     event.preventDefault();
     if (!isBet) {
       const body = {
-        "results": newResult
+        idsList: idsList,
+        results: newResult
       };
-      idsList.forEach(id => {
-        dispatch(setIsLoadingTop(true));
-        dispatch(updateTopResults(id, body, true));
-      });
+      dispatch(setIsLoadingTop(true));
+      dispatch(updateTopResults(body));
     } else if (!isUpdate) {
       const body =
       {

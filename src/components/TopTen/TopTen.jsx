@@ -57,7 +57,7 @@ const TopTen = () => {
     countBet,
     allPredictions,
     countPred,
-    countUpdate
+    updatedMessageScore
   } = useSelector((state) => state.bet);
   const {allTeams, isLoadingSR, allUsers} = useSelector((state) => state.datas);
 
@@ -95,6 +95,7 @@ const TopTen = () => {
         }, 2001);
       }
     }
+    // Calculate points starting
     if (isCreatedTop && isLoadingTop && ((updatedConf === 'Western' && toptenList.length === westTopId.length) || updatedConf === 'Eastern' && toptenList.length === eastTopId.length)) {
       dispatch(setIsLoadingTop(false));
       toast.success('Tops 10 mis à jour avec succès.', toastSuccess);
@@ -120,7 +121,7 @@ const TopTen = () => {
       updateScore();
       dispatch(setIsCreatedTop(false, false));
     }
-    if (countUpdate === userPlaying.length) {
+    if (updatedMessageScore !== '') {
       dispatch(setIsLoadingTop(false));
       toast.success('Scores recalculés avec succès, merci de ta patience.', toastSuccess);
       setTimeout(() => {
@@ -128,7 +129,7 @@ const TopTen = () => {
         dispatch(getUsersList());
       }, 2501);
     }
-  }, [roundNumber, isCreatedRound, isCreatedTop, toptenList, betTopTenList, countBet, countPred, countUpdate]);
+  }, [roundNumber, isCreatedRound, isCreatedTop, toptenList, betTopTenList, countBet, countPred, updatedMessageScore]);
 
   const calcBetPoints = () => {
     const results = toptenList.length != 0 ? toptenList[0].results : [];
@@ -144,17 +145,22 @@ const TopTen = () => {
   }
 
   const updateScore = () => {
+    const idsList = [];
+    const scoresTOP = [];
+    const oldPositions = [];
     betTopTenList.forEach((playerBets) => {
       if (playerBets.length != 0) {
-        const scoreTop = calcScoreTop(playerBets);
-        const oldPosition = positionFinder(userPlaying, playerBets[0].User.id);
-        const body = {
-          scoreTOP: scoreTop,
-          oldPosition: oldPosition
-        }
-        dispatch(updatePlayerScore(playerBets[0].User.id, body));
+        idsList.push(playerBets[0].User.id);
+        scoresTOP.push(calcScoreTop(playerBets));
+        oldPositions.push(positionFinder(userPlaying, playerBets[0].User.id));
       }
     })
+    const body = {
+      idsList: idsList,
+      scoresTOP: scoresTOP,
+      oldPositions: oldPositions
+    }
+    dispatch(updatePlayerScore(body));
   }
 
   const handleRoundCreation = () => {

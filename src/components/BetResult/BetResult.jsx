@@ -54,7 +54,7 @@ const BetResult = () => {
 
   useEffect(() => {
     // Check if a round is selected, if not the default round will be the last created
-    if (roundNumber === '') {
+    if (roundNumber === '' || !roundsList.includes(roundNumber)) {
       dispatch(setInputValueBet('roundNumber', roundsList[roundsList.length-1].id));
       dispatch(getGamesRound(roundsList[roundsList.length-1].id));
     } else {
@@ -86,7 +86,6 @@ const BetResult = () => {
     }
     // Ajouter le traitement d'erreur de mise à jour
     if (updatedMessageScore !== '') {
-      dispatch(setIsLoadingGame(false));
       toast.success('Scores recalculés avec succès, merci de ta patience.', toastSuccess);
       setTimeout(() => {
         dispatch(resetScoreUpdate());
@@ -114,7 +113,7 @@ const BetResult = () => {
       })
       const body = {
         idsList: idsList,
-        pointScore: pointScored,
+        pointScored: pointScored,
         bonusPointsErned: bonusPoints,
         bonusBookie: bonusBookie
       }

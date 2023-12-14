@@ -19,49 +19,54 @@ import {
   SET_IS_CREATED_ROUND,
   SET_IS_BET,
   SET_IS_CREATED_TOP,
-  SET_TOP_TEN_LIST,
   SET_IS_LOADING_TOP,
-  RESET_COUNT_PRED,
   SET_BET_TOP_TEN_LIST,
   SET_IS_UPDATED_RESULTS,
   SET_IS_UPDATED_BET,
-  RESET_IS_ALL_GET
+  RESET_IS_ALL_GET,
+  SET_IS_UPDATED_DEADLINE,
+  SET_TOP_TEN_RESULTS,
+  SET_IS_UPDATED_TOP
 } from "../actions/bet";
 
 const initialState = {
   'betList': [],
   'betNumber': 0,
-  'toptenDate': '',
   'roundCreationMode': false,
+  'toptenDate': '',
+  'betStatus': '',
 
   'isLoading': false,
   'isLoadingGame': false,
   'isLoadingTop': false,
 
-  'isCreatedMatch': false,
   'isCreatedRound': false,
+  'isCreatedMatch': false,
   'isCreatedTop': false,
+  'games': [],
 
   'isUpdated': false,
+  'updatedGame': {},
   'isUpdatedResults': false,
+  'predictionByGame': [],
   'isUpdatedBet': false,
-  'isUpdateTop': false,
-  'isBet': false,
+  'allPredictions': [],
   'isAllGet': false,
-
-  'betStatus': '',
   'updatedMessageScore': '',
-  'games': [],
+  
+  'isUpdatedDeadline': false,
+  'topResults': [],
+  'isUpdatedTop': false,
+
+  'isBet': false,
+
+  
   'toptens': [],
-  'toptenList': [],
   'betTopTenList': [],
   'updatedConf': '',
   'isPred': [],
   'roundName': '',
   'roundNumber': '',
-  'predictionByGame': [],
-  'updatedGame': {},
-  'allPredictions': [],
   'isDeleted': false
 };
 
@@ -73,66 +78,26 @@ const reducer = (state = initialState, action = {}) => {
         betList: [...state.betList, action.betTpl],
         betNumber: state.betNumber + 1
       }
-      
     case BET_TO_REMOVE: 
       return {
         ...state,
         betList: [...state.betList.filter(bet => bet.key !== action.idToRemove)]
       }
-    
     case TOGGLE_CREATION_MODE_BET:
       return {
         ...state,
         roundCreationMode: action.roundCreationMode
       }
-    case SET_IS_LOADING_BET:
-      return {
-        ...state,
-        isLoading: action.isLoading,
-      }
-    case SET_GAMES_ROUND:
-      return {
-        ...state,
-        games: action.gamesList,
-        isLoading: false,
-      }
-    case SET_TOP_TEN:
-      return {
-        ...state,
-        toptens: action.datas,
-        isLoadingGame: false
-      }
-    case SET_TOP_TEN_LIST:
-      return {
-        ...state,
-        toptenList: action.data,
-        updatedConf: action.data[0].conference
-      }
-    case SET_IS_PRED:
-      return {
-        ...state,
-        isPred: action.predList,
-      }
-    case RESET_COUNT_PRED:
-      return {
-        ...state,
-        countPred: 0
-      }
-    case RESET_SCORE_UPDATE:
-      return {
-        ...state,
-        updatedMessageScore: '',
-        allPredictions: [],
-        predictionByGame: [],
-        updatedGame: {},
-        toptenList: [],
-        betTopTenList: [],
-        updatedConf: ''
-      }
     case SET_INPUT_VALUE_BET:
       return {
         ...state,
         [action.inputName]: action.inputValue,
+      }
+
+    case SET_IS_LOADING_BET:
+      return {
+        ...state,
+        isLoading: action.isLoading,
       }
     case SET_IS_LOADING_GAME:
       return {
@@ -144,30 +109,49 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         isLoadingTop: action.isLoading
       }
-    case SET_IS_CREATED_MATCH:
-      return {
-        ...state,
-        isCreatedMatch: action.isCreated,
-      }
+
     case SET_IS_CREATED_ROUND:
       return {
         ...state,
         isCreatedRound: action.isCreated
       }
+    case SET_IS_CREATED_MATCH:
+      return {
+        ...state,
+        isCreatedMatch: action.isCreated,
+      }
+    case SET_IS_CREATED_TOP:
+      return {
+        ...state,
+        isCreatedTop: action.isCreated
+      }
+    case SET_GAMES_ROUND:
+      return {
+        ...state,
+        games: action.gamesList,
+        isLoading: false,
+      }
+
     case SET_IS_UPDATED:
       return {
         ...state,
         isUpdated: action.isUpdated
+      }
+    case SET_UPDATED_GAME:
+      return {
+        ...state,
+        updatedGame: action.gameInfos,
+        isLoading: false
       }
     case SET_IS_UPDATED_RESULTS:
       return {
         ...state,
         isUpdatedResults: action.isUpdated
       }
-    case SET_IS_UPDATED_BET:
+    case SET_IS_UPDATED_TOP:
       return {
         ...state,
-        isUpdatedBet: action.isUpdated
+        isUpdatedTop: action.isUpdated
       }
     case SET_PREDICTION_BY_GAME:
       return {
@@ -176,17 +160,10 @@ const reducer = (state = initialState, action = {}) => {
         isUpdatedResults: true,
         isLoading: false
       }
-    case SET_UPDATED_GAME:
+    case SET_IS_UPDATED_BET:
       return {
         ...state,
-        updatedGame: action.gameInfos,
-        isLoading: false
-      }
-    case SET_IS_DELETED:
-      return {
-        ...state,
-        isDeleted: action.isDeleted,
-        isLoadingGame: false
+        isUpdatedBet: action.isUpdated
       }
     case SET_ALL_PREDICTIONS:
       return {
@@ -194,32 +171,79 @@ const reducer = (state = initialState, action = {}) => {
         allPredictions: action.predictionsInfos,
         isAllGet: true,
       }
+    case RESET_IS_ALL_GET:
+      return {
+        ...state,
+        isAllGet: false
+      }
     case SET_UPDATED_MESSAGE_SCORE:
       return {
         ...state,
         updatedMessageScore: action.message
       }
+
+    // TOP TEN
+    case SET_IS_UPDATED_DEADLINE:
+      return {
+        ...state,
+        isUpdatedDeadline: action.isUpdated
+      }
+    case SET_TOP_TEN_RESULTS:
+      return {
+        ...state,
+        topResults: action.data,
+        updatedConf: action.conference,
+        isLoading: false
+      }
+    
+    case SET_TOP_TEN:
+      return {
+        ...state,
+        toptens: action.datas,
+        isLoadingGame: false
+      }
+    
+    case SET_IS_PRED:
+      return {
+        ...state,
+        isPred: action.predList,
+      }
+        
+    
+    
+    
+    
+
+    case SET_IS_DELETED:
+      return {
+        ...state,
+        isDeleted: action.isDeleted,
+        isLoadingGame: false
+      }
+
+    
     case SET_IS_BET:
       return {
         ...state,
         isBet: action.isBet,
         betStatus: action.status
       }
-    case SET_IS_CREATED_TOP:
-      return {
-        ...state,
-        isCreatedTop: action.isCreated,
-        isUpdateTop: action.isUpdate
-      }
+    
     case SET_BET_TOP_TEN_LIST:
       return {
         ...state,
         betTopTenList: [...state.betTopTenList, action.datas],
         isUpdateTop: true
       }
-    case RESET_IS_ALL_GET:
+
+    case RESET_SCORE_UPDATE:
       return {
-        isAllGet: false
+        ...state,
+        'isUpdated': false,
+        'updatedGame': {},
+        'predictionByGame': [],
+        'allPredictions': [],
+        'updatedMessageScore': ''
       }
     default:
       return state;

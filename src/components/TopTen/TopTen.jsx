@@ -12,15 +12,20 @@ import TopTenList from '../TopTen/TopTenList';
 import {
   createRound,
   createTopTen,
+  getBetTopByConference,
   getBetTopByPlayer,
-  getBetTopByTop,
   getTopTen,
-  resetCountPred,
+  resetIsAllGet,
   resetScoreUpdate,
   setInputValueBet,
   setIsCreatedRound,
   setIsCreatedTop,
+  setIsLoadingGame,
   setIsLoadingTop,
+  setIsUpdatedBet,
+  setIsUpdatedDeadline,
+  setIsUpdatedResults,
+  setIsUpdatedTop,
   toggleCreationMode,
   updateBetTopDMFC,
   updatePlayerScore,
@@ -45,18 +50,20 @@ const TopTen = () => {
     isLoadingTop,
     isCreatedRound,
     isCreatedTop,
-    isUpdateTop,
+    isUpdatedTop,
+    isUpdatedDeadline,
+    isUpdatedResults,
+    isUpdatedBet,
+    isAllGet,
     roundCreationMode,
     roundName,
     roundNumber,
     toptens,
     toptenDate,
     updatedConf,
-    toptenList,
-    betTopTenList,
-    countBet,
+    topResults,
+    predictionByGame,
     allPredictions,
-    countPred,
     updatedMessageScore
   } = useSelector((state) => state.bet);
   const {allTeams, isLoadingSR, allUsers} = useSelector((state) => state.datas);
@@ -87,68 +94,73 @@ const TopTen = () => {
       }, 2001);
     }
     if (!isLoadingGame && isCreatedTop) {
-      if (!isUpdateTop) {
-        toast.success('Tops 10 créés avec succès.', toastSuccess);
-        setTimeout(() => {
-          dispatch(getRounds());
-          dispatch(setIsCreatedTop(false, false));
-        }, 2001);
-      }
-    }
-    // Calculate points starting
-    if (isCreatedTop && isLoadingTop && ((updatedConf === 'Western' && toptenList.length === westTopId.length) || updatedConf === 'Eastern' && toptenList.length === eastTopId.length)) {
-      dispatch(setIsLoadingTop(false));
-      toast.success('Tops 10 mis à jour avec succès.', toastSuccess);
-      if (updatedConf === 'Western') {
-        westTopId.forEach((id) => dispatch(getBetTopByTop(id)));
-      } else {
-        eastTopId.forEach((id) => dispatch(getBetTopByTop(id)));
-      }
+      toast.success('Tops 10 créés avec succès.', toastSuccess);
       setTimeout(() => {
-        dispatch(setIsLoadingTop(true));
-        dispatch(getTopTen(roundNumber));
-        dispatch(setIsCreatedTop(false, false));
+        dispatch(getRounds());
+        dispatch(setIsCreatedTop(false));
       }, 2001);
     }
-    if (!isCreatedTop && (countPred === eastTopId.length || countPred === westTopId.length)) {
-      dispatch(resetCountPred());
+    if (isUpdatedDeadline) {
+      toast.success('La deadline a été mise à jour.', toastSuccess);
+        setTimeout(() => {
+          dispatch(getRounds());
+          dispatch(getTopTen(rounds[rounds.length-1].id));
+          dispatch(setIsUpdatedDeadline(false));
+        }, 2001);
+    }
+    // Calculate points starting
+    if (isUpdatedTop && topResults.length != 0) {
+      toast.success('Tops 10 mis à jour avec succès.', toastSuccess);
+      setTimeout(() => {
+        dispatch(getBetTopByConference(updatedConf));
+        dispatch(setIsUpdatedTop(false));
+      }, 2001);
+    }
+    if (predictionByGame.length > 0 && isUpdatedResults) {
+      dispatch(setIsUpdatedResults(false));
+      dispatch(setIsLoadingGame(true));
       calcBetPoints();
     }
-    if (!isCreatedTop && countPred === allPredictions.length && allPredictions.length != 0) {
-      userPlaying.forEach(({id}) => dispatch(getBetTopByPlayer(id)));
+    if (predictionByGame.length > 0 && isUpdatedBet) {
+      const idsList = [];
+      userPlaying.forEach(({id}) => idsList.push(id));
+      dispatch(getBetTopByPlayer(JSON.stringify(idsList)));
+      dispatch(setIsUpdatedBet(false));
     }
-    if (isUpdateTop && betTopTenList.length === userPlaying.length) {
+    if (allPredictions.length != 0 && isAllGet) {
       updateScore();
-      dispatch(setIsCreatedTop(false, false));
+      dispatch(resetIsAllGet());
     }
     if (updatedMessageScore !== '') {
-      dispatch(setIsLoadingTop(false));
+      dispatch(setIsLoadingGame(false));
       toast.success('Scores recalculés avec succès, merci de ta patience.', toastSuccess);
       setTimeout(() => {
         dispatch(resetScoreUpdate());
+        dispatch(getTopTen(roundNumber));
         dispatch(getUsersList());
       }, 2501);
     }
-  }, [roundNumber, isCreatedRound, isCreatedTop, toptenList, betTopTenList, countBet, countPred, updatedMessageScore]);
+  }, [roundNumber, isCreatedRound, isCreatedTop, isUpdatedTop, isUpdatedResults, isUpdatedBet, isAllGet, updatedMessageScore]);
 
   const calcBetPoints = () => {
-    const results = toptenList.length != 0 ? toptenList[0].results : [];
-    dispatch(setIsLoadingTop(false));
-    allPredictions.forEach((predictionsByTop) => {
-      if (predictionsByTop.length !== 0) {
-        predictionsByTop.forEach((prediction) => {
-          const pointsEarned = calcTopBetPoints(prediction.predictedRanking, results);
-          dispatch(updateBetTopDMFC(prediction.id, pointsEarned));
-        })
-      }
+    const idsList = [];
+    const pointsEarned = [];
+    predictionByGame.forEach((prediction) => {
+      idsList.push(prediction.id);
+      pointsEarned.push(calcTopBetPoints(prediction.predictedRanking, topResults));
     })
+    const body = {
+      idsList: idsList,
+      pointsEarned: pointsEarned
+    }
+    dispatch(updateBetTopDMFC(body));
   }
 
   const updateScore = () => {
     const idsList = [];
     const scoresTOP = [];
     const oldPositions = [];
-    betTopTenList.forEach((playerBets) => {
+    allPredictions.forEach((playerBets) => {
       if (playerBets.length != 0) {
         idsList.push(playerBets[0].User.id);
         scoresTOP.push(calcScoreTop(playerBets));

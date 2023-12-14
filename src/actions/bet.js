@@ -48,7 +48,8 @@ export const SET_IS_CREATED_ROUND = 'SET_IS_CREATED_ROUND';
 export const SET_IS_CREATED_TOP = 'SET_IS_CREATED_TOP';
 export const SET_IS_UPDATED = 'SET_IS_UPDATED'
 export const SET_IS_UPDATED_RESULTS = 'SET_IS_UPDATED_RESULTS';
-export const SET_IS_UPDATED_BET = 'SET_IS_UPDATED_BET'
+export const SET_IS_UPDATED_BET = 'SET_IS_UPDATED_BET';
+export const SET_IS_UPDATED_TOP = 'SET_IS_UPDATED_TOP'
 export const SET_IS_DELETED = 'SET_IS_DELETED';
 export const SET_IS_BET = 'SET_IS_BET';
 export const RESET_IS_ALL_GET = 'RESET_IS_ALL_GET';
@@ -61,10 +62,9 @@ export const setIsCreatedRound = (isCreated) => ({
   type: SET_IS_CREATED_ROUND,
   isCreated 
 });
-export const setIsCreatedTop = (isCreated, isUpdate) => ({
+export const setIsCreatedTop = (isCreated) => ({
   type: SET_IS_CREATED_TOP,
-  isCreated,
-  isUpdate
+  isCreated
 });
 export const setIsUpdated = (isUpdated) => ({
   type: SET_IS_UPDATED,
@@ -76,6 +76,10 @@ export const setIsUpdatedResults = (isUpdated) => ({
 });
 export const setIsUpdatedBet = (isUpdated) => ({
   type: SET_IS_UPDATED_BET,
+  isUpdated
+});
+export const setIsUpdatedTop = (isUpdated) => ({
+  type: SET_IS_UPDATED_TOP,
   isUpdated
 });
 export const setIsDeleted = (isDeleted) => ({
@@ -132,7 +136,6 @@ export const DELETE_GAME = 'DELETE_GAME';
 export const CREATE_BET = 'CREATE_BET';
 export const UPDATE_BET = 'UPDATE_BET';
 export const UPDATE_BET_POINTS = 'UPDATE_BET_POINTS';
-export const RESET_COUNT_PRED = 'RESET_COUNT_PRED';
 export const RESET_GAME_ID = 'RESET_GAME_ID';
 export const RESET_SCORE_UPDATE = 'RESET_SCORE_UPDATE';
 
@@ -193,9 +196,6 @@ export const updateBetPoints = (body) => ({
   type: UPDATE_BET_POINTS,
   body
 });
-export const resetCountPred = () => ({
-  type: RESET_COUNT_PRED,
-});
 export const resetGameId = () => ({
   type: RESET_GAME_ID,
 });
@@ -208,13 +208,14 @@ export const SET_TOP_TEN = 'SET_TOP_TEN';
 export const CREATE_TOP_TEN = 'CREATE_TOP_TEN';
 export const UPDATE_TOP_TEN = 'UPDATE_TOP_TEN';
 export const UPDATE_TOP_RESULTS = 'UPDATE_TOP_RESULTS';
-export const SET_TOP_TEN_LIST = 'SET_TOP_TEN_LIST';
+export const SET_TOP_TEN_RESULTS = 'SET_TOP_TEN_RESULTS';
 export const CREATE_BET_TOP = 'CREATE_BET_TOP';
 export const UPDATE_BET_TOP = 'UPDATE_BET_TOP';
 export const UPDATE_BET_TOP_DMFC = 'UPDATE_BET_TOP_DMFC';
-export const GET_BET_TOP_BY_TOP = 'GET_BET_TOP_BY_TOP';
+export const GET_BET_TOP_BY_CONFERENCE = 'GET_BET_TOP_BY_CONFERENCE';
 export const GET_BET_TOP_BY_PLAYER = 'GET_BET_TOP_BY_PLAYER';
-export const SET_BET_TOP_TEN_LIST = 'SET_BET_TOP_TEN_LIST'
+export const SET_BET_TOP_TEN_LIST = 'SET_BET_TOP_TEN_LIST';
+export const SET_IS_UPDATED_DEADLINE = 'SET_IS_UPDATED_DEADLINE';
 
 export const getTopTen = (roundId) => ({
   type: GET_TOP_TEN,
@@ -237,9 +238,10 @@ export const updateTopResults = (body) => ({
   type: UPDATE_TOP_RESULTS,
   body
 });
-export const setTopTenList = (data) => ({
-  type: SET_TOP_TEN_LIST,
-  data 
+export const setTopTenResults = (data, conference) => ({
+  type: SET_TOP_TEN_RESULTS,
+  data,
+  conference
 });
 export const createBetTop = (body, status) => ({
   type: CREATE_BET_TOP,
@@ -253,20 +255,23 @@ export const updateBetTop = (betTopId, body, status) => ({
   status
 });
 
-export const updateBetTopDMFC = (bettopId, pointsEarned) => ({
+export const updateBetTopDMFC = (body) => ({
   type: UPDATE_BET_TOP_DMFC,
-  bettopId,
-  pointsEarned
+  body
 });
-export const getBetTopByTop = (topId) => ({
-  type: GET_BET_TOP_BY_TOP,
-  topId 
+export const getBetTopByConference = (conference) => ({
+  type: GET_BET_TOP_BY_CONFERENCE,
+  conference
 });
-export const getBetTopByPlayer = (playerId) => ({
+export const getBetTopByPlayer = (idsList) => ({
   type: GET_BET_TOP_BY_PLAYER,
-  playerId 
+  idsList 
 });
 export const setBetTopTenList = (datas) => ({
   type: SET_BET_TOP_TEN_LIST,
   datas
+});
+export const setIsUpdatedDeadline = (isUpdated) => ({
+  type: SET_IS_UPDATED_DEADLINE,
+  isUpdated 
 });

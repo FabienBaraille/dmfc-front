@@ -37,13 +37,14 @@ import {
   setIsCreatedRound,
   setIsBet,
   setIsCreatedTop,
-  setTopTenList,
   UPDATE_TOP_RESULTS,
   UPDATE_BET_TOP_DMFC,
-  GET_BET_TOP_BY_TOP,
   GET_BET_TOP_BY_PLAYER,
-  setBetTopTenList,
-  setIsUpdatedBet
+  setIsUpdatedBet,
+  setIsUpdatedDeadline,
+  GET_BET_TOP_BY_CONFERENCE,
+  setTopTenResults,
+  setIsUpdatedTop
 } from '../actions/bet';
 
 import { getRounds, getSRPrediction, getToptenBet } from '../actions/datas';
@@ -121,6 +122,18 @@ const betMiddleware = (store) => (next) => async (action) => {
     }
     break;
     /**
+     * Action to get all predictions done for a match
+     */
+    case GET_PREDICTION_BY_GAME:
+      store.dispatch(setIsLoadingBet(true));
+      try {
+        const { data } = await axios.get(`/api/game/${action.gameId}/srprediction`);
+        store.dispatch(setPredictionByGame(data));
+      } catch (error) {
+        console.log(error);
+      }
+    break;
+    /**
      * Action to delete a match
      */
     case DELETE_GAME: {
@@ -192,24 +205,12 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-        /**
-     * Action to get all predictions done for a match
-     */
-    case GET_PREDICTION_BY_GAME:
-      store.dispatch(setIsLoadingBet(true));
-      try {
-        const { data } = await axios.get(`/api/game/${action.gameId}/srprediction`);
-        store.dispatch(setPredictionByGame(data));
-      } catch (error) {
-        console.log(error);
-      }
-    break;
     /**
      * Action to update the points earned with a bet
      */
     case UPDATE_BET_POINTS:
       try {
-        const { data } = await axios.put(
+        const { data } = await axios.patch(
           `/api/prediction/update/`,
           action.body,
         );
@@ -224,7 +225,6 @@ const betMiddleware = (store) => (next) => async (action) => {
     case GET_ALL_PREDICTIONS:
       try {
         const { data } = await axios.get(`/api/srpreditions/users/${action.idsList}`);
-        console.log(data);
         store.dispatch(setAllPredictions(data));
       } catch (error) {
         store.dispatch(setErrorMessage(error.data.message));
@@ -239,7 +239,6 @@ const betMiddleware = (store) => (next) => async (action) => {
           `/api/user/updateScore/`,
           action.body
         );
-        console.log(action.body);
         store.dispatch(setUpdatedMessageScore(data.message));
         store.dispatch(setIsLoadingGame(false));
       } catch (error) {
@@ -294,10 +293,7 @@ const betMiddleware = (store) => (next) => async (action) => {
           `/api/topten/${action.toptenId}`, 
           action.body
         )
-        if (action.isResult) {
-          store.dispatch(setTopTenList(data));
-        }
-        store.dispatch(setIsCreatedTop(true, true));
+        store.dispatch(setIsUpdatedDeadline(true));
         store.dispatch(setIsLoadingGame(false));
       } catch (error) {
         console.log(error);
@@ -308,13 +304,14 @@ const betMiddleware = (store) => (next) => async (action) => {
      * Action to top tens deadline by DMFC
      */
     case UPDATE_TOP_RESULTS: {
+      store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.put(
           `/api/topten/results/`, 
           action.body
         )
-        store.dispatch(setTopTenList(data));
-        store.dispatch(setIsCreatedTop(true, true));
+        store.dispatch(setTopTenResults(data[0].results, data[0].conference));
+        store.dispatch(setIsUpdatedTop(true));
       } catch (error) {
         console.log(error);
       }
@@ -354,31 +351,30 @@ const betMiddleware = (store) => (next) => async (action) => {
         console.log(error);
       }
     break;
-    case GET_BET_TOP_BY_TOP:
+    case GET_BET_TOP_BY_CONFERENCE:
+      store.dispatch(setIsLoadingBet(true));
       try {
-        const { data } = await axios.get(`/api/bettop/topten/${action.topId}`);
-        store.dispatch(setAllPredictions(data));
+        const { data } = await axios.get(`/api/bettop/conference/${action.conference}`);
+        store.dispatch(setPredictionByGame(data));
       } catch (error) {
         console.log(error);
       }
     break;
     case UPDATE_BET_TOP_DMFC:
-      store.dispatch(setIsLoadingGame(true));
       try {
         const { data } = await axios.put(
-          `/api/bettop/${action.bettopId}/DMFC`,
-          {
-            pointsEarned: action.pointsEarned
-          }
+          `/api/bettop/update/score/`,
+          action.body
         )
+        store.dispatch(setIsUpdatedBet(true));
       } catch (error) {
         console.log(error);
       }
     break;
     case GET_BET_TOP_BY_PLAYER:
       try {
-        const { data } = await axios.get(`/api/bettop/player/${action.playerId}`);
-        store.dispatch(setBetTopTenList(data));
+        const { data } = await axios.get(`/api/bettop/users/${action.idsList}`);
+        store.dispatch(setAllPredictions(data));
       } catch (error) {
         console.log(error);
       }

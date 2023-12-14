@@ -24,7 +24,7 @@ import {
 import { getUsersList } from "../../actions/datas";
 
 import { positionFinder } from "../../Utils/filters/usersFilter";
-import { phaseFilter } from "../../Utils/filters/roundFilter";
+import { isInclude, phaseFilter } from "../../Utils/filters/roundFilter";
 import { calcBetPoint } from "../../Utils/stats/calcStats";
 
 import './BetResult.scss';
@@ -43,9 +43,9 @@ const BetResult = () => {
     isLoadingGame,
     isUpdatedResults,
     isUpdatedBet,
+    isAllGet,
     predictionByGame,
     updatedGame,
-    isAllGet,
     allPredictions,
     updatedMessageScore
   } = useSelector((state) => state.bet);
@@ -54,7 +54,7 @@ const BetResult = () => {
 
   useEffect(() => {
     // Check if a round is selected, if not the default round will be the last created
-    if (roundNumber === '' || !roundsList.includes(roundNumber)) {
+    if (roundNumber === '' || isInclude(roundsList,roundNumber)) {
       dispatch(setInputValueBet('roundNumber', roundsList[roundsList.length-1].id));
       dispatch(getGamesRound(roundsList[roundsList.length-1].id));
     } else {

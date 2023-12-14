@@ -19,7 +19,6 @@ import {
   SET_IS_CREATED_ROUND,
   SET_IS_BET,
   SET_IS_CREATED_TOP,
-  SET_IS_LOADING_TOP,
   SET_BET_TOP_TEN_LIST,
   SET_IS_UPDATED_RESULTS,
   SET_IS_UPDATED_BET,
@@ -38,7 +37,6 @@ const initialState = {
 
   'isLoading': false,
   'isLoadingGame': false,
-  'isLoadingTop': false,
 
   'isCreatedRound': false,
   'isCreatedMatch': false,
@@ -59,8 +57,6 @@ const initialState = {
   'isUpdatedTop': false,
 
   'isBet': false,
-
-  
   'toptens': [],
   'betTopTenList': [],
   'updatedConf': '',
@@ -103,11 +99,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLoadingGame: action.isLoading
-      }
-    case SET_IS_LOADING_TOP:
-      return {
-        ...state,
-        isLoadingTop: action.isLoading
       }
 
     case SET_IS_CREATED_ROUND:
@@ -195,47 +186,35 @@ const reducer = (state = initialState, action = {}) => {
         updatedConf: action.conference,
         isLoading: false
       }
-    
     case SET_TOP_TEN:
       return {
         ...state,
         toptens: action.datas,
         isLoadingGame: false
       }
-    
     case SET_IS_PRED:
       return {
         ...state,
         isPred: action.predList,
       }
-        
-    
-    
-    
-    
-
     case SET_IS_DELETED:
       return {
         ...state,
         isDeleted: action.isDeleted,
         isLoadingGame: false
       }
-
-    
     case SET_IS_BET:
       return {
         ...state,
         isBet: action.isBet,
         betStatus: action.status
       }
-    
     case SET_BET_TOP_TEN_LIST:
       return {
         ...state,
         betTopTenList: [...state.betTopTenList, action.datas],
         isUpdateTop: true
       }
-
     case RESET_SCORE_UPDATE:
       return {
         ...state,
@@ -243,7 +222,9 @@ const reducer = (state = initialState, action = {}) => {
         'updatedGame': {},
         'predictionByGame': [],
         'allPredictions': [],
-        'updatedMessageScore': ''
+        'updatedMessageScore': '',
+        'updatedConf': '',
+        'topResults': []
       }
     default:
       return state;

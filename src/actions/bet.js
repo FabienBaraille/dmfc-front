@@ -28,7 +28,6 @@ export const betToRemove = (idToRemove) => ({
 
 export const SET_IS_LOADING_BET = 'SET_IS_LOADING_BET';
 export const SET_IS_LOADING_GAME = 'SET_IS_LOADING_GAME';
-export const SET_IS_LOADING_TOP = 'SET_IS_LOADING_TOP';
 
 export const setIsLoadingBet = (isLoading) => ({
   type: SET_IS_LOADING_BET,
@@ -37,10 +36,6 @@ export const setIsLoadingBet = (isLoading) => ({
 export const setIsLoadingGame = (isLoading) => ({
   type: SET_IS_LOADING_GAME,
   isLoading
-});
-export const setIsLoadingTop = (isLoading) => ({
-  type: SET_IS_LOADING_TOP,
-  isLoading 
 });
 
 export const SET_IS_CREATED_MATCH = 'SET_IS_CREATED_MATCH';
@@ -207,6 +202,7 @@ export const GET_TOP_TEN = 'GET_TOP_TEN';
 export const SET_TOP_TEN = 'SET_TOP_TEN';
 export const CREATE_TOP_TEN = 'CREATE_TOP_TEN';
 export const UPDATE_TOP_TEN = 'UPDATE_TOP_TEN';
+export const SET_IS_UPDATED_DEADLINE = 'SET_IS_UPDATED_DEADLINE';
 export const UPDATE_TOP_RESULTS = 'UPDATE_TOP_RESULTS';
 export const SET_TOP_TEN_RESULTS = 'SET_TOP_TEN_RESULTS';
 export const CREATE_BET_TOP = 'CREATE_BET_TOP';
@@ -215,7 +211,6 @@ export const UPDATE_BET_TOP_DMFC = 'UPDATE_BET_TOP_DMFC';
 export const GET_BET_TOP_BY_CONFERENCE = 'GET_BET_TOP_BY_CONFERENCE';
 export const GET_BET_TOP_BY_PLAYER = 'GET_BET_TOP_BY_PLAYER';
 export const SET_BET_TOP_TEN_LIST = 'SET_BET_TOP_TEN_LIST';
-export const SET_IS_UPDATED_DEADLINE = 'SET_IS_UPDATED_DEADLINE';
 
 export const getTopTen = (roundId) => ({
   type: GET_TOP_TEN,
@@ -233,6 +228,10 @@ export const updateTopTen = (toptenId, body) => ({
   type: UPDATE_TOP_TEN,
   toptenId,
   body
+});
+export const setIsUpdatedDeadline = (isUpdated) => ({
+  type: SET_IS_UPDATED_DEADLINE,
+  isUpdated 
 });
 export const updateTopResults = (body) => ({
   type: UPDATE_TOP_RESULTS,
@@ -254,7 +253,6 @@ export const updateBetTop = (betTopId, body, status) => ({
   body,
   status
 });
-
 export const updateBetTopDMFC = (body) => ({
   type: UPDATE_BET_TOP_DMFC,
   body
@@ -270,8 +268,4 @@ export const getBetTopByPlayer = (idsList) => ({
 export const setBetTopTenList = (datas) => ({
   type: SET_BET_TOP_TEN_LIST,
   datas
-});
-export const setIsUpdatedDeadline = (isUpdated) => ({
-  type: SET_IS_UPDATED_DEADLINE,
-  isUpdated 
 });

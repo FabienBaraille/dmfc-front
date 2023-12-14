@@ -21,7 +21,6 @@ import {
   setIsCreatedRound,
   setIsCreatedTop,
   setIsLoadingGame,
-  setIsLoadingTop,
   setIsUpdatedBet,
   setIsUpdatedDeadline,
   setIsUpdatedResults,
@@ -34,7 +33,7 @@ import {
 import { getRounds, getUsersList } from '../../actions/datas';
 
 import { transformDate } from '../../Utils/stats/calcDate';
-import { phaseFilter, toptenId } from '../../Utils/filters/roundFilter';
+import { isInclude, phaseFilter, toptenId } from '../../Utils/filters/roundFilter';
 import { teamsByConf } from '../../Utils/filters/teamFilter';
 
 import './TopTen.scss';
@@ -47,7 +46,6 @@ const TopTen = () => {
 
   const {
     isLoadingGame,
-    isLoadingTop,
     isCreatedRound,
     isCreatedTop,
     isUpdatedTop,
@@ -81,11 +79,11 @@ const TopTen = () => {
   const isUpdate = toptens.length !== 0;
 
   useEffect(() => {
-    if (roundNumber !== '') {
-      dispatch(getTopTen(roundNumber));
-    } else if (rounds.length != 0) {
+    if (roundNumber === '' || isInclude(rounds, roundNumber)) {
       dispatch(setInputValueBet('roundNumber', rounds[rounds.length-1].id));
       dispatch(getTopTen(rounds[rounds.length-1].id));
+    } else if (rounds.length != 0) {
+      dispatch(getTopTen(roundNumber));
     }
     if (!isLoadingGame && isCreatedRound) {
       toast.success('Round créé avec succès.', toastSuccess);
@@ -203,7 +201,7 @@ const TopTen = () => {
     }
   }
 
-  if (isLoadingGame || isLoadingSR || isLoadingTop) {
+  if (isLoadingGame || isLoadingSR) {
     return <LoadElmt />
   }
 

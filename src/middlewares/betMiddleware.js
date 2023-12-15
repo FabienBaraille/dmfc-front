@@ -191,7 +191,7 @@ const betMiddleware = (store) => (next) => async (action) => {
       store.dispatch(setIsLoadingBet(true));
       try {
         const { data } = await axios.put(
-          `/api/prediction/update/${action.betId}`,
+          `/api/srprediction/update/${action.betId}`,
           {
             validation_status: action.status,
             predicted_winnig_team: action.winningTeam,
@@ -211,7 +211,7 @@ const betMiddleware = (store) => (next) => async (action) => {
     case UPDATE_BET_POINTS:
       try {
         const { data } = await axios.patch(
-          `/api/prediction/update/`,
+          `/api/srprediction/update/`,
           action.body,
         );
         store.dispatch(setIsUpdatedBet(true));

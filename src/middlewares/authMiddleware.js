@@ -85,7 +85,9 @@ const authMiddelware = (store) => (next) => async (action) => {
           action.userData
         );
         store.dispatch(getUser(store.getState().user.loggedUser.username));
-        store.dispatch(getUsersList());
+        if (store.getState().user.loggedUser.roles[0] !== "ROLE_JOUEUR_NA") {
+          store.dispatch(getUsersList());
+        }
       } catch (error) {
         console.log(error);
       }

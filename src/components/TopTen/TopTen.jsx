@@ -79,7 +79,7 @@ const TopTen = () => {
   const isUpdate = toptens.length !== 0;
 
   useEffect(() => {
-    if (roundNumber === '' || isInclude(rounds, roundNumber)) {
+    if (rounds.length != 0 && (roundNumber === '' || isInclude(rounds, roundNumber))) {
       dispatch(setInputValueBet('roundNumber', rounds[rounds.length-1].id));
       dispatch(getTopTen(rounds[rounds.length-1].id));
     } else if (rounds.length != 0) {
@@ -145,7 +145,7 @@ const TopTen = () => {
     const pointsEarned = [];
     predictionByGame.forEach((prediction) => {
       idsList.push(prediction.id);
-      pointsEarned.push(calcTopBetPoints(prediction.predictedRanking, topResults));
+      pointsEarned.push(calcTopBetPoints(prediction.predictedRanking, prediction.validationStatus, topResults));
     })
     const body = {
       idsList: idsList,
@@ -200,6 +200,8 @@ const TopTen = () => {
       });
     }
   }
+
+  // if ()
 
   if (isLoadingGame || isLoadingSR) {
     return <LoadElmt />

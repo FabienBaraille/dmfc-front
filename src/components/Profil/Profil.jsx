@@ -91,17 +91,19 @@ function Profil() {
       return (
         <Wrapper name="profil-page">
           <h3>Tu n'as pas de ligue, merci d'en choisir une pour pouvoir jouer.</h3>
-          <form onSubmit={handleLeagueChange}>
-            <label htmlFor="league">Ligue :</label>
-            <select 
-              id="league" 
-              placeholder="Nom de la ligue" 
-              onChange={handleInput} 
-              value={league}
-              >
-              <option>Choisis ta ligue</option>
-              {leagueOptions}
-            </select>
+          <form className="league-selection" onSubmit={handleLeagueChange}>
+            <div>
+              <label htmlFor="league">Ligue :</label>
+              <select 
+                id="league" 
+                placeholder="Nom de la ligue" 
+                onChange={handleInput} 
+                value={league}
+                >
+                <option>Choisis ta ligue</option>
+                {leagueOptions}
+              </select>
+            </div>
             <button type="submit">Envoyer la demande</button>
           </form>
         </Wrapper>

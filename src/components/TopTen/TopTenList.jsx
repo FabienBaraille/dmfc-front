@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import Wrapper from "../Wrapper/Wrapper";
 
-import { createBetTop, setIsLoadingTop, updateBetTop, updateTopResults } from "../../actions/bet";
+import { createBetTop, updateBetTop, updateTopResults } from "../../actions/bet";
 import { unableBet } from "../../Utils/filters/predictionFilter";
 
 import InputTop from "./InputTop";
@@ -49,12 +49,10 @@ const TopTenList = ({topten = '', teams, idsList = [], conference, betTop = {}, 
     event.preventDefault();
     if (!isBet) {
       const body = {
-        "results": newResult
+        idsList: idsList,
+        results: newResult
       };
-      idsList.forEach(id => {
-        dispatch(setIsLoadingTop(true));
-        dispatch(updateTopResults(id, body, true));
-      });
+      dispatch(updateTopResults(body));
     } else if (!isUpdate) {
       const body =
       {

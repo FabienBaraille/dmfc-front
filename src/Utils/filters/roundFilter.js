@@ -15,3 +15,13 @@ export const toptenId = (array, conf) => {
     });
     return ids;
 }
+
+export const isInclude = (array, idToTest) => {
+    let isInRounds = true;
+    array.forEach(({id}) => {
+        if (id == idToTest) {
+            isInRounds = false;
+        }
+    })
+    return isInRounds;
+}

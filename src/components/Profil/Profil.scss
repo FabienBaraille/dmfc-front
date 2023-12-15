@@ -77,6 +77,21 @@
   }
 };
 
+.league-selection {
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    label {
+      margin-right: 10px;
+    }
+    select {
+      width: 80%;
+      margin: 20px 0;
+    }
+  }
+}
 
 @media screen and (min-width: 768px) {
   .change-info {

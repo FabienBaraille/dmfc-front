@@ -49,13 +49,15 @@ export const calcActualPosition = (playerList, playerName) => {
   return actualPosition;
 }
 
-export const calcTopBetPoints = (predicted, results) => {
+export const calcTopBetPoints = (predicted, status, results) => {
   let pointsEarned = 0;
-  predicted.forEach((teamId, index) => {
-    if (teamId == results[index]) {
-      pointsEarned ++
-    }
-  })
+  if (status !== "Saved") {
+    predicted.forEach((teamId, index) => {
+      if (teamId == results[index]) {
+        pointsEarned ++
+      }
+    })
+  }
   return pointsEarned;
 }
 
